@@ -28,6 +28,13 @@
             width: 100%; max-width: 500px; height: 100dvh;
             margin: 0 auto; box-sizing: border-box; padding: 12px;
             display: flex; flex-direction: column; position: relative;
+            transition: max-width 0.3s ease;
+        }
+
+        @media (min-width: 600px) {
+            .app-viewport.wide-view {
+                max-width: 850px;
+            }
         }
 
         .screen {
@@ -85,7 +92,6 @@
             font-weight: 700; line-height: 1.2;
         }
 
-        /* SECCIÓN NOVEDADES EN PANTALLA INICIAL */
         .home-novedades-section {
             background: #fff; padding: 10px; border-radius: var(--border-radius);
             border: 1px solid var(--pastel-pink); margin-top: 8px; flex-shrink: 0;
@@ -104,13 +110,15 @@
             font-weight: bold; font-size: 0.85rem; cursor: pointer;
         }
 
-        /* MODALIDAD HORIZONTAL */
-        .horizontal-container {
-            display: flex; flex-direction: row; gap: 6px;
-            width: 100%; height: 100%; align-items: center;
+        /* MODALIDAD EN GRANDE */
+        .modalidad-large-container {
+            display: flex; flex-direction: column; gap: 12px;
+            width: 100%; align-items: center; padding-bottom: 16px;
         }
-        .horizontal-container img {
-            width: 50%; max-height: 90%; object-fit: contain; border-radius: 8px; cursor: pointer;
+        .modalidad-large-container img {
+            width: 100%; height: auto; max-width: 100%;
+            border-radius: var(--border-radius); cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
 
         .fit-img {
@@ -135,12 +143,17 @@
         /* CALENDARIO AGENDA */
         .calendar-grid {
             display: grid; grid-template-columns: repeat(7, 1fr);
-            gap: 5px; text-align: center;
+            gap: 6px; text-align: center;
             font-family: 'Patrick Hand', cursive;
         }
 
+        @media (min-width: 600px) {
+            .calendar-grid { gap: 10px; }
+            .cal-day { min-height: 70px !important; font-size: 1.1rem !important; }
+        }
+
         .cal-day {
-            background: var(--pastel-pink); padding: 4px 0; border-radius: 10px;
+            background: var(--pastel-pink); padding: 6px 0; border-radius: 10px;
             cursor: pointer; border: 1px solid #f2c6be; font-weight: bold;
             font-size: 0.95rem; display: flex; flex-direction: column;
             align-items: center; min-height: 52px; justify-content: space-between;
@@ -169,6 +182,19 @@
             border-radius: 6px; margin-top: 4px; display: none; cursor: pointer;
         }
 
+        /* ESTILOS DE LISTA DE GESTIÓN EN CONFIG */
+        .crud-list-container {
+            margin-top: 6px; border-top: 1px dashed #e8d5d0; padding-top: 6px;
+        }
+        .crud-item {
+            display: flex; justify-content: space-between; align-items: center;
+            background: #faf8f5; border: 1px solid #eee; padding: 6px 8px;
+            border-radius: 6px; margin-bottom: 4px; font-size: 0.75rem;
+        }
+        .crud-actions { display: flex; gap: 4px; }
+        .btn-edit { background: #6b5b7b; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
+        .btn-delete { background: #e06d53; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
+
         /* DETALLE DEL DÍA A PANTALLA COMPLETA */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -178,7 +204,7 @@
         .modal-card-full {
             background: #fffdfa; width: 100%; height: 100dvh; padding: 14px;
             box-sizing: border-box; display: flex; flex-direction: column; gap: 8px;
-            overflow-y: auto; font-family: 'Patrick Hand', cursive;
+            overflow-y: auto; font-family: 'Patrick Hand', cursive; max-width: 850px; margin: 0 auto;
         }
 
         .modal-title {
@@ -254,7 +280,7 @@
 </head>
 <body>
 
-<div class="app-viewport">
+<div class="app-viewport" id="app-viewport">
 
     <!-- PANTALLA INICIAL -->
     <div id="screen-home" class="screen active">
@@ -271,25 +297,24 @@
             <div class="menu-card" onclick="nav('novedades')"><h2>Novedades</h2></div>
         </div>
 
-        <!-- SECCIÓN DINÁMICA DE NOVEDADES EN HOME -->
         <div class="home-novedades-section">
             <small style="font-weight:bold; color:var(--primary-dark);">📢 Novedades del Grupo:</small>
             <div id="home-novedades-list" style="margin-top:4px;">
-                <i style="font-size:0.75rem; color:#888;">No hay novedades publicadas aún.</i>
+                <i style="font-size:0.75rem; color:#888;">No hay novedades vigentes para hoy.</i>
             </div>
         </div>
 
         <button class="config-btn" onclick="nav('config')">⚙️ Configuración (Admin)</button>
     </div>
 
-    <!-- MODALIDAD (HORIZONTAL) -->
+    <!-- MODALIDAD -->
     <div id="screen-modalidad" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Modalidad</h2>
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
-            <div class="horizontal-container">
+            <div class="modalidad-large-container">
                 <img src="modalidad1.jpeg" alt="Modalidad 1" onclick="openZoomModal(this.src)">
                 <img src="modalidad2.jpeg" alt="Modalidad 2" onclick="openZoomModal(this.src)">
             </div>
@@ -384,18 +409,31 @@
                 <h3 style="margin: 0 0 8px 0; font-size: 0.9rem;">Cargar Material y Novedades</h3>
                 <div class="form-group"><label>Título o Mensaje:</label><input type="text" id="nov-titulo" placeholder="Ej: Link Zoom Jueves 3"></div>
                 <div class="form-group"><label>Enlace / YouTube / Recurso:</label><input type="text" id="nov-link" placeholder="https://..."></div>
-                <button class="btn-submit" onclick="publicarNovedad()">Publicar Novedad en Pantalla Inicial</button>
+                
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Vigencia Desde:</label>
+                        <input type="date" id="nov-desde">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Vigencia Hasta:</label>
+                        <input type="date" id="nov-hasta">
+                    </div>
+                </div>
+
+                <button class="btn-submit" onclick="publicarNovedad()">Publicar Novedad</button>
             </div>
         </div>
     </div>
 
-    <!-- CONFIGURACIÓN ADMIN -->
+    <!-- CONFIGURACIÓN ADMIN CON CONSULTA, EDICIÓN Y ELIMINACIÓN (CRUD) -->
     <div id="screen-config" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Configuración Admin</h2>
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
+            <!-- CALENDARIO -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Calendario y Horarios</h3>
                 <div style="display:flex; gap:6px;">
@@ -409,26 +447,39 @@
                 <button class="btn-submit" onclick="guardarConfigCalendario()">Actualizar Rangos</button>
             </div>
 
+            <!-- GESTIÓN INFUSIONES -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
-                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">ABM Infusiones / Pócimas</h3>
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Infusiones / Pócimas</h3>
                 <div class="form-group"><label>Nombre:</label><input type="text" id="inf-nombre"></div>
                 <div class="form-group"><label>Descripción / Preparación:</label><input type="text" id="inf-desc"></div>
                 <div class="form-group"><label>Efecto / Propiedad:</label><input type="text" id="inf-efecto"></div>
                 <div class="form-group"><label>Días de toma:</label><input type="text" id="inf-dias" placeholder="Ej: Todos, Lunes, Martes"></div>
-                <button class="btn-submit" onclick="agregarInfusion()">Guardar Infusión</button>
+                <button class="btn-submit" id="btn-save-inf" onclick="agregarInfusion()">Guardar Infusión</button>
+                
+                <div class="crud-list-container">
+                    <small style="font-weight:bold;">Infusiones Cargadas:</small>
+                    <div id="crud-infusiones-list"></div>
+                </div>
             </div>
 
+            <!-- GESTIÓN PODCASTS -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
-                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">ABM Podcasts</h3>
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Podcasts</h3>
                 <div class="form-group"><label>Nombre:</label><input type="text" id="pod-nombre"></div>
                 <div class="form-group"><label>Descripción:</label><input type="text" id="pod-desc"></div>
                 <div class="form-group"><label>Link Audio:</label><input type="text" id="pod-link" placeholder="https://..."></div>
                 <div class="form-group"><label>Días para escuchar:</label><input type="text" id="pod-dias" placeholder="Ej: Martes, Jueves, Sábado"></div>
-                <button class="btn-submit" onclick="agregarPodcast()">Guardar Podcast</button>
+                <button class="btn-submit" id="btn-save-pod" onclick="agregarPodcast()">Guardar Podcast</button>
+
+                <div class="crud-list-container">
+                    <small style="font-weight:bold;">Podcasts Cargados:</small>
+                    <div id="crud-podcasts-list"></div>
+                </div>
             </div>
 
+            <!-- GESTIÓN ACTIVIDADES -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
-                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">ABM Actividades</h3>
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Actividades</h3>
                 <div class="form-group"><label>Nombre Actividad:</label><input type="text" id="act-nombre"></div>
                 <div class="form-group">
                     <label>Día Asignado:</label>
@@ -439,7 +490,21 @@
                         <option value="Todos">Todos los días</option>
                     </select>
                 </div>
-                <button class="btn-submit" onclick="agregarActividadConfig()">Guardar Actividad</button>
+                <button class="btn-submit" id="btn-save-act" onclick="agregarActividadConfig()">Guardar Actividad</button>
+
+                <div class="crud-list-container">
+                    <small style="font-weight:bold;">Actividades Cargadas:</small>
+                    <div id="crud-actividades-list"></div>
+                </div>
+            </div>
+
+            <!-- GESTIÓN NOVEDADES -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Novedades</h3>
+                <div class="crud-list-container" style="border-top:none; padding-top:0;">
+                    <small style="font-weight:bold;">Novedades Publicadas:</small>
+                    <div id="crud-novedades-list"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -520,9 +585,15 @@
     ];
 
     let novedadesDB = [
-        { titulo: "Primer encuentro Zoom Jueves 3 - 20:00 hs", link: "https://zoom.us" }
+        { 
+            titulo: "Primer encuentro Zoom Jueves 3 - 20:00 hs", 
+            link: "https://zoom.us", 
+            desde: "2026-09-01", 
+            hasta: "2026-09-30" 
+        }
     ];
 
+    let editIndices = { inf: -1, pod: -1, act: -1 };
     let fotosPorFecha = {};
     let agendaGuardadaBD = {}; 
     let currentFechaKeyModal = "";
@@ -530,16 +601,210 @@
     function nav(screenId) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById('screen-' + screenId).classList.add('active');
+        
+        const viewport = document.getElementById('app-viewport');
+        if (screenId === 'agenda') {
+            viewport.classList.add('wide-view');
+        } else {
+            viewport.classList.remove('wide-view');
+        }
+
         if (screenId === 'pocimas') renderPocimasList();
+        if (screenId === 'home') renderHomeNovedades();
+        if (screenId === 'config') renderConfigLists();
     }
 
+    /* RENDER Y GESTIÓN EN PANTALLA CONFIGURACIÓN (CRUD) */
+    function renderConfigLists() {
+        // 1. Infusiones
+        const infBox = document.getElementById('crud-infusiones-list');
+        infBox.innerHTML = infusionesDB.map((item, idx) => `
+            <div class="crud-item">
+                <span><b>${item.nombre}</b> (${item.dias})</span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarInfusion(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="eliminarInfusion(${idx})">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+
+        // 2. Podcasts
+        const podBox = document.getElementById('crud-podcasts-list');
+        podBox.innerHTML = podcastsDB.map((item, idx) => `
+            <div class="crud-item">
+                <span><b>${item.nombre}</b> (${item.dias})</span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarPodcast(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="eliminarPodcast(${idx})">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+
+        // 3. Actividades
+        const actBox = document.getElementById('crud-actividades-list');
+        actBox.innerHTML = actividadesDB.map((item, idx) => `
+            <div class="crud-item">
+                <span><b>${item.nombre}</b> (${item.dia})</span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarActividad(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="eliminarActividad(${idx})">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+
+        // 4. Novedades
+        const novBox = document.getElementById('crud-novedades-list');
+        novBox.innerHTML = novedadesDB.map((item, idx) => `
+            <div class="crud-item">
+                <span><b>${item.titulo}</b></span>
+                <div class="crud-actions">
+                    <button class="btn-delete" onclick="eliminarNovedad(${idx})">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // OPERACIONES DE INFUSIONES
+    function agregarInfusion() {
+        const nombre = document.getElementById('inf-nombre').value;
+        const desc = document.getElementById('inf-desc').value;
+        const efecto = document.getElementById('inf-efecto').value;
+        const dias = document.getElementById('inf-dias').value || "Todos";
+
+        if (!nombre) return;
+
+        if (editIndices.inf >= 0) {
+            infusionesDB[editIndices.inf] = { nombre, desc, efecto, dias };
+            editIndices.inf = -1;
+            document.getElementById('btn-save-inf').innerText = "Guardar Infusión";
+        } else {
+            infusionesDB.push({ nombre, desc, efecto, dias });
+        }
+
+        limpiarInfForm();
+        renderConfigLists();
+    }
+
+    function editarInfusion(idx) {
+        const item = infusionesDB[idx];
+        document.getElementById('inf-nombre').value = item.nombre;
+        document.getElementById('inf-desc').value = item.desc;
+        document.getElementById('inf-efecto').value = item.efecto;
+        document.getElementById('inf-dias').value = item.dias;
+        editIndices.inf = idx;
+        document.getElementById('btn-save-inf').innerText = "Actualizar Infusión";
+    }
+
+    function eliminarInfusion(idx) {
+        infusionesDB.splice(idx, 1);
+        renderConfigLists();
+    }
+
+    function limpiarInfForm() {
+        document.getElementById('inf-nombre').value = '';
+        document.getElementById('inf-desc').value = '';
+        document.getElementById('inf-efecto').value = '';
+        document.getElementById('inf-dias').value = '';
+    }
+
+    // OPERACIONES DE PODCASTS
+    function agregarPodcast() {
+        const nombre = document.getElementById('pod-nombre').value;
+        const desc = document.getElementById('pod-desc').value;
+        const link = document.getElementById('pod-link').value || "#";
+        const dias = document.getElementById('pod-dias').value || "Todos";
+
+        if (!nombre) return;
+
+        if (editIndices.pod >= 0) {
+            podcastsDB[editIndices.pod] = { nombre, desc, link, dias };
+            editIndices.pod = -1;
+            document.getElementById('btn-save-pod').innerText = "Guardar Podcast";
+        } else {
+            podcastsDB.push({ nombre, desc, link, dias });
+        }
+
+        limpiarPodForm();
+        renderConfigLists();
+    }
+
+    function editarPodcast(idx) {
+        const item = podcastsDB[idx];
+        document.getElementById('pod-nombre').value = item.nombre;
+        document.getElementById('pod-desc').value = item.desc;
+        document.getElementById('pod-link').value = item.link;
+        document.getElementById('pod-dias').value = item.dias;
+        editIndices.pod = idx;
+        document.getElementById('btn-save-pod').innerText = "Actualizar Podcast";
+    }
+
+    function eliminarPodcast(idx) {
+        podcastsDB.splice(idx, 1);
+        renderConfigLists();
+    }
+
+    function limpiarPodForm() {
+        document.getElementById('pod-nombre').value = '';
+        document.getElementById('pod-desc').value = '';
+        document.getElementById('pod-link').value = '';
+        document.getElementById('pod-dias').value = '';
+    }
+
+    // OPERACIONES DE ACTIVIDADES
+    function agregarActividadConfig() {
+        const nombre = document.getElementById('act-nombre').value;
+        const dia = document.getElementById('act-dia').value;
+
+        if (!nombre) return;
+
+        if (editIndices.act >= 0) {
+            actividadesDB[editIndices.act] = { nombre, dia };
+            editIndices.act = -1;
+            document.getElementById('btn-save-act').innerText = "Guardar Actividad";
+        } else {
+            actividadesDB.push({ nombre, dia });
+        }
+
+        document.getElementById('act-nombre').value = '';
+        renderConfigLists();
+    }
+
+    function editarActividad(idx) {
+        const item = actividadesDB[idx];
+        document.getElementById('act-nombre').value = item.nombre;
+        document.getElementById('act-dia').value = item.dia;
+        editIndices.act = idx;
+        document.getElementById('btn-save-act').innerText = "Actualizar Actividad";
+    }
+
+    function eliminarActividad(idx) {
+        actividadesDB.splice(idx, 1);
+        renderConfigLists();
+    }
+
+    function eliminarNovedad(idx) {
+        novedadesDB.splice(idx, 1);
+        renderConfigLists();
+        renderHomeNovedades();
+    }
+
+    // OTROS MÉTODOS EXISTENTES
     function renderHomeNovedades() {
         const container = document.getElementById('home-novedades-list');
-        if (novedadesDB.length === 0) {
-            container.innerHTML = '<i style="font-size:0.75rem; color:#888;">No hay novedades publicadas aún.</i>';
+        const hoyStr = new Date().toISOString().split('T')[0];
+
+        const novVigentes = novedadesDB.filter(nov => {
+            const desdeOk = !nov.desde || hoyStr >= nov.desde;
+            const hastaOk = !nov.hasta || hoyStr <= nov.hasta;
+            return desdeOk && hastaOk;
+        });
+
+        if (novVigentes.length === 0) {
+            container.innerHTML = '<i style="font-size:0.75rem; color:#888;">No hay novedades vigentes para hoy.</i>';
             return;
         }
-        container.innerHTML = novedadesDB.map(nov => `
+
+        container.innerHTML = novVigentes.map(nov => `
             <div class="novedad-card-item">
                 <b>${nov.titulo}</b><br>
                 ${nov.link ? `<a href="${nov.link}" target="_blank" style="color:var(--primary-dark); font-weight:bold;">🔗 Ver Enlace / Recurso</a>` : ''}
@@ -550,13 +815,17 @@
     function publicarNovedad() {
         const titulo = document.getElementById('nov-titulo').value;
         const link = document.getElementById('nov-link').value;
+        const desde = document.getElementById('nov-desde').value;
+        const hasta = document.getElementById('nov-hasta').value;
 
         if (titulo) {
-            novedadesDB.push({ titulo, link });
+            novedadesDB.push({ titulo, link, desde, hasta });
             renderHomeNovedades();
-            alert('Novedad publicada en la Pantalla Inicial');
+            alert('Novedad cargada exitosamente');
             document.getElementById('nov-titulo').value = '';
             document.getElementById('nov-link').value = '';
+            document.getElementById('nov-desde').value = '';
+            document.getElementById('nov-hasta').value = '';
             nav('home');
         }
     }
@@ -732,49 +1001,6 @@
         document.getElementById('modal-agenda').style.display = 'none';
     }
 
-    function agregarInfusion() {
-        const nombre = document.getElementById('inf-nombre').value;
-        const desc = document.getElementById('inf-desc').value;
-        const efecto = document.getElementById('inf-efecto').value;
-        const dias = document.getElementById('inf-dias').value;
-
-        if (nombre) {
-            infusionesDB.push({ nombre, desc, efecto, dias: dias || "Todos" });
-            alert(`Infusión "${nombre}" agregada`);
-            document.getElementById('inf-nombre').value = '';
-            document.getElementById('inf-desc').value = '';
-            document.getElementById('inf-efecto').value = '';
-            document.getElementById('inf-dias').value = '';
-            renderPocimasList();
-        }
-    }
-
-    function agregarPodcast() {
-        const nombre = document.getElementById('pod-nombre').value;
-        const desc = document.getElementById('pod-desc').value;
-        const link = document.getElementById('pod-link').value;
-        const dias = document.getElementById('pod-dias').value;
-
-        if (nombre) {
-            podcastsDB.push({ nombre, desc, link: link || "#", dias: dias || "Todos" });
-            alert(`Podcast "${nombre}" guardado`);
-            document.getElementById('pod-nombre').value = '';
-            document.getElementById('pod-desc').value = '';
-            document.getElementById('pod-link').value = '';
-            document.getElementById('pod-dias').value = '';
-        }
-    }
-
-    function agregarActividadConfig() {
-        const nombre = document.getElementById('act-nombre').value;
-        const dia = document.getElementById('act-dia').value;
-        if (nombre) {
-            actividadesDB.push({ nombre, dia });
-            alert(`Actividad "${nombre}" agregada`);
-            document.getElementById('act-nombre').value = '';
-        }
-    }
-
     /* MOTOR DE ZOOM */
     let currentScale = 1;
     let initialDistance = 0;
@@ -829,6 +1055,7 @@
     initCalendar();
     renderPocimasList();
     renderHomeNovedades();
+    renderConfigLists();
 </script>
 
 </body>
