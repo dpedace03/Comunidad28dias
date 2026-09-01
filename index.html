@@ -62,7 +62,7 @@
             display: flex; align-items: center; justify-content: center; background: #fff;
         }
 
-        .welcome-img { width: 100%; height: 100%; object-fit: contain; display: block; }
+        .welcome-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
         .menu-grid-2col {
             flex: 1; display: grid; grid-template-columns: repeat(2, 1fr);
@@ -131,7 +131,7 @@
         .photo-box-input input { width: 100%; font-size: 0.65rem; margin-top: 4px; }
         
         .preview-img {
-            width: 100%; height: 60px; object-fit: cover;
+            width: 100%; height: 70px; object-fit: cover;
             border-radius: 6px; margin-top: 4px; display: none;
         }
 
@@ -174,6 +174,7 @@
         }
         .hour-label { font-size: 0.7rem; font-weight: bold; width: 55px; flex-shrink: 0; }
 
+        /* GALERÍA MODAL */
         .modal-photo-gallery {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 8px;
         }
@@ -189,7 +190,7 @@
     <!-- PANTALLA INICIAL -->
     <div id="screen-home" class="screen active">
         <div class="welcome-container">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='100%' height='100%' fill='%23faf7f2'/><rect x='20' y='20' width='360' height='360' rx='16' fill='%23ffffff' stroke='%23d8a48f' stroke-width='3'/><text x='50%' y='35%' font-family='Georgia, serif' font-size='22' fill='%234a3e56' text-anchor='middle' font-weight='bold'>NOS DOY LA</text><text x='50%' y='45%' font-family='Georgia, serif' font-size='26' fill='%23fa8072' text-anchor='middle' font-weight='bold'>BIENVENIDA</text><text x='50%' y='58%' font-family='sans-serif' font-size='14' fill='%236b5b7b' text-anchor='middle'>Comunidad de Mujeres 28 Días</text><text x='50%' y='68%' font-family='Georgia, serif' font-size='12' fill='%23888888' text-anchor='middle'>Guía y Coordinación: Andrea</text><path d='M160 300 Q200 270 240 300' stroke='%23fa8072' stroke-width='2' fill='none'/></svg>" alt="Bienvenida" class="welcome-img">
+            <img src="1-Bienvenida.jpeg" alt="Bienvenida" class="welcome-img">
         </div>
 
         <div class="menu-grid-2col">
@@ -212,8 +213,8 @@
         </div>
         <div class="screen-body">
             <div class="horizontal-container">
-                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='300' viewBox='0 0 200 300'><rect width='100%' height='100%' fill='%23fffef9' stroke='%23fa8072' stroke-width='2'/><text x='50%' y='20%' font-family='Georgia' font-size='14' fill='%234a3e56' text-anchor='middle' font-weight='bold'>MODALIDAD 1</text><text x='15' y='90' font-family='sans-serif' font-size='10' fill='%23555'>• Mensajes de texto</text><text x='15' y='120' font-family='sans-serif' font-size='10' fill='%23555'>• Consultas por el grupo</text><text x='15' y='150' font-family='sans-serif' font-size='10' fill='%23555'>• Sin audios</text><text x='15' y='180' font-family='sans-serif' font-size='10' fill='%23555'>• Respetar tiempos</text></svg>" alt="Modalidad 1">
-                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='300' viewBox='0 0 200 300'><rect width='100%' height='100%' fill='%23fffef9' stroke='%23fa8072' stroke-width='2'/><text x='50%' y='20%' font-family='Georgia' font-size='14' fill='%234a3e56' text-anchor='middle' font-weight='bold'>MODALIDAD 2</text><text x='15' y='90' font-family='sans-serif' font-size='10' fill='%23555'>• Videos de propuestas</text><text x='15' y='120' font-family='sans-serif' font-size='10' fill='%23555'>• Placas con tareas</text><text x='15' y='150' font-family='sans-serif' font-size='10' fill='%23555'>• Podcasts para caminatas</text><text x='15' y='180' font-family='sans-serif' font-size='10' fill='%23555'>• 3 Encuentros por Zoom</text></svg>" alt="Modalidad 2">
+                <img src="modalidad1.jpeg" alt="Modalidad 1">
+                <img src="modalidad2.jpeg" alt="Modalidad 2">
             </div>
         </div>
     </div>
@@ -225,8 +226,8 @@
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body" style="justify-content: center;">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'><rect width='100%' height='100%' fill='%23faf7f2' stroke='%236b5b7b' stroke-width='2'/><text x='50%' y='25%' font-family='Georgia' font-size='16' fill='%23fa8072' text-anchor='middle' font-weight='bold'>YUYOS DEL BIEN</text><text x='20' y='80' font-family='sans-serif' font-size='11' fill='%23333'>🍵 Manzanilla (Infusión): 2 tazas/día</text><text x='20' y='120' font-family='sans-serif' font-size='11' fill='%23333'>💧 Suico (Tintura): 20 gotas tarde</text><text x='20' y='160' font-family='sans-serif' font-size='11' fill='%23333'>🌿 Pasionaria (Tintura): 20 gotas tardecita</text></svg>" alt="Yuyos del Bien" class="fit-img" style="max-height: 55%;">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='120' viewBox='0 0 200 120'><rect width='100%' height='100%' fill='%23ffffff' stroke='%23fa8072' stroke-width='1'/><text x='50%' y='40%' font-family='sans-serif' font-size='11' fill='%236b5b7b' text-anchor='middle'>💧 AGUA SOLARIZADA</text><text x='50%' y='70%' font-family='sans-serif' font-size='9' fill='%23888' text-anchor='middle'>Botella Azul en Sol</text></svg>" alt="Yuyos" class="fit-img" style="max-height: 35%;">
+            <img src="yuyos del bien.jpeg" alt="Yuyos del Bien" class="fit-img" style="max-height: 55%;">
+            <img src="yuyos.jpeg" alt="Yuyos" class="fit-img" style="max-height: 35%;">
         </div>
     </div>
 
@@ -237,7 +238,7 @@
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body" style="justify-content: center;">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><rect width='100%' height='100%' fill='%23fffef9' stroke='%236b5b7b' stroke-width='2'/><text x='50%' y='25%' font-family='Georgia' font-size='18' fill='%234a3e56' text-anchor='middle' font-weight='bold'>NUESTRAS CAMINATAS</text><text x='50%' y='40%' font-family='sans-serif' font-size='30' text-anchor='middle'>🚶‍♀️🎧</text><text x='50%' y='60%' font-family='sans-serif' font-size='12' fill='%23fa8072' text-anchor='middle' font-weight='bold'>Martes, Jueves y Sábados</text><text x='50%' y='75%' font-family='sans-serif' font-size='10' fill='%23555' text-anchor='middle'>Acompañadas del podcast especial</text></svg>" alt="Caminatas" class="fit-img" style="max-height: 90%;">
+            <img src="Caminatas.jpeg" alt="Caminatas" class="fit-img" style="max-height: 90%;">
         </div>
     </div>
 
@@ -260,7 +261,7 @@
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='120' viewBox='0 0 300 120'><rect width='100%' height='100%' fill='%23fffef9' stroke='%23fa8072' stroke-width='2'/><text x='50%' y='40%' font-family='Georgia' font-size='16' fill='%234a3e56' text-anchor='middle' font-weight='bold'>REGISTRO FOTOGRÁFICO</text><text x='50%' y='70%' font-family='sans-serif' font-size='11' fill='%23fa8072' text-anchor='middle'>Testigo sagrado de la transformación</text></svg>" alt="Registro Fotográfico" class="fit-img" style="max-height: 25%;">
+            <img src="Registro fotografico.jpeg" alt="Registro Fotográfico" class="fit-img" style="max-height: 30%;">
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <div class="form-group">
                     <label>Fecha de la toma:</label>
@@ -283,7 +284,7 @@
                         <input type="file" accept="image/*" onchange="previewAndSave('entero', event)">
                     </div>
                 </div>
-                <button class="btn-submit" style="margin-top: 8px;" onclick="alert('Fotos guardadas correctamente')">Guardar Fotos</button>
+                <button class="btn-submit" style="margin-top: 8px;" onclick="alert('Registro Fotográfico actualizado con éxito')">Guardar Fotos</button>
             </div>
         </div>
     </div>
@@ -311,6 +312,7 @@
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
+            <!-- PARÁMETROS DE CALENDARIO -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Calendario y Horarios</h3>
                 <div style="display:flex; gap:6px;">
@@ -324,6 +326,7 @@
                 <button class="btn-submit" onclick="guardarConfigCalendario()">Actualizar Rangos</button>
             </div>
 
+            <!-- ABM INFUSIONES -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">ABM Infusiones / Pócimas</h3>
                 <div class="form-group"><label>Nombre:</label><input type="text" id="inf-nombre"></div>
@@ -333,6 +336,7 @@
                 <button class="btn-submit" onclick="agregarInfusion()">Guardar Infusión</button>
             </div>
 
+            <!-- ABM PODCAST -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">ABM Podcasts</h3>
                 <div class="form-group"><label>Nombre:</label><input type="text" id="pod-nombre"></div>
@@ -342,6 +346,7 @@
                 <button class="btn-submit" onclick="agregarPodcast()">Guardar Podcast</button>
             </div>
 
+            <!-- ABM ACTIVIDADES -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">ABM Actividades</h3>
                 <div class="form-group"><label>Nombre Actividad:</label><input type="text" id="act-nombre"></div>
@@ -366,6 +371,7 @@
     <div class="modal-card">
         <h2 class="modal-title" id="modal-date-title">Día de la semana</h2>
         
+        <!-- Galería de las 3 fotos si existen -->
         <div id="modal-gallery-box" style="display:none;">
             <small style="font-size: 0.65rem; color: var(--primary-dark); font-weight: bold;">Registro Fotográfico de esta fecha:</small>
             <div class="modal-photo-gallery" id="modal-photo-grid"></div>
@@ -390,48 +396,56 @@
 </div>
 
 <script>
-    let cfgCalendario = { diaInicio: 1, diaFin: 28, horaInicio: 7, horaFin: 21 };
+    // Estado Global Configurable
+    let cfgCalendario = {
+        diaInicio: 1,
+        diaFin: 28,
+        horaInicio: 7,
+        horaFin: 21
+    };
+
     let actividadesDB = [
         { nombre: "Caminata con Podcast", dia: "Martes" },
         { nombre: "Caminata con Podcast", dia: "Jueves" },
         { nombre: "Caminata con Podcast", dia: "Sábado" }
     ];
+
     let infusionesDB = [];
     let podcastsDB = [];
-    let fotosPorFecha = {};
+    let fotosPorFecha = {}; // Estrategia: { '2026-09-03': { rostro: 'url', medio: 'url', entero: 'url' } }
 
     function nav(screenId) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById('screen-' + screenId).classList.add('active');
     }
 
+    // Previsualizar y Guardar Fotos
     function previewAndSave(tipo, event) {
         const file = event.target.files[0];
         if (!file) return;
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const url = e.target.result;
-            const imgElement = document.getElementById('prev-' + tipo);
-            imgElement.src = url;
-            imgElement.style.display = 'block';
+        const url = URL.createObjectURL(file);
+        const imgElement = document.getElementById('prev-' + tipo);
+        imgElement.src = url;
+        imgElement.style.display = 'block';
 
-            const fecha = document.getElementById('foto-fecha').value || '2026-09-03';
-            if (!fotosPorFecha[fecha]) fotosPorFecha[fecha] = {};
-            fotosPorFecha[fecha][tipo] = url;
-        };
-        reader.readAsDataURL(file);
+        const fecha = document.getElementById('foto-fecha').value || '2026-09-03';
+        if (!fotosPorFecha[fecha]) fotosPorFecha[fecha] = {};
+        fotosPorFecha[fecha][tipo] = url;
     }
 
+    // Configuración de Calendario
     function guardarConfigCalendario() {
         cfgCalendario.diaInicio = parseInt(document.getElementById('cfg-dia-inicio').value) || 1;
         cfgCalendario.diaFin = parseInt(document.getElementById('cfg-dia-fin').value) || 28;
         cfgCalendario.horaInicio = parseInt(document.getElementById('cfg-hora-inicio').value) || 7;
         cfgCalendario.horaFin = parseInt(document.getElementById('cfg-hora-fin').value) || 21;
+        
         initCalendar();
-        alert('Calendario actualizado');
+        alert('Configuración de calendario actualizada');
     }
 
+    // Inicializar Calendario
     function initCalendar() {
         const grid = document.getElementById('calendar-grid');
         grid.innerHTML = '';
@@ -451,15 +465,18 @@
                 ${esCaminata ? '<span class="walk-icon">🚶‍♀️</span><a href="#" class="podcast-link" onclick="event.stopPropagation(); alert(\'Reproduciendo Podcast del día\');">Podcast</a>' : ''}
             `;
             
+            // Mapeo simulación fecha YYYY-MM-DD
             const fechaKey = `2026-09-${numDia < 10 ? '0' + numDia : numDia}`;
             dayBox.onclick = () => openAgendaModal(`${nombreDia} ${numDia} de septiembre`, nombreDia, fechaKey);
             grid.appendChild(dayBox);
         }
     }
 
+    // Modal de la Agenda Diaria
     function openAgendaModal(fechaTexto, nombreDia, fechaKey) {
         document.getElementById('modal-date-title').innerText = fechaTexto;
 
+        // 1. Cargar las 3 fotos si existen para la fecha
         const galleryBox = document.getElementById('modal-gallery-box');
         const photoGrid = document.getElementById('modal-photo-grid');
         photoGrid.innerHTML = '';
@@ -475,6 +492,7 @@
             galleryBox.style.display = 'none';
         }
 
+        // 2. Generar Filas de Horarios Parametrizados
         const hoursContainer = document.getElementById('hours-container');
         hoursContainer.innerHTML = '';
         for (let h = cfgCalendario.horaInicio; h <= cfgCalendario.horaFin; h++) {
@@ -485,6 +503,7 @@
             hoursContainer.appendChild(row);
         }
 
+        // 3. Actividades del ABM
         const select = document.getElementById('select-actividad-config');
         select.innerHTML = '<option value="">-- Seleccionar --</option>';
         actividadesDB.filter(a => a.dia === nombreDia || a.dia === "Todos").forEach(a => {
@@ -509,20 +528,29 @@
         document.getElementById('modal-agenda').style.display = 'none';
     }
 
+    // ABMs
     function agregarInfusion() {
         const nombre = document.getElementById('inf-nombre').value;
+        const desc = document.getElementById('inf-desc').value;
+        const efecto = document.getElementById('inf-efecto').value;
+        const dias = document.getElementById('inf-dias').value;
+
         if (nombre) {
-            infusionesDB.push({ nombre });
-            alert(`Infusión "${nombre}" agregada`);
+            infusionesDB.push({ nombre, desc, efecto, dias });
+            alert(`Infusión "${nombre}" agregada exitosamente`);
             document.getElementById('inf-nombre').value = '';
         }
     }
 
     function agregarPodcast() {
         const nombre = document.getElementById('pod-nombre').value;
+        const desc = document.getElementById('pod-desc').value;
+        const link = document.getElementById('pod-link').value;
+        const dias = document.getElementById('pod-dias').value;
+
         if (nombre) {
-            podcastsDB.push({ nombre });
-            alert(`Podcast "${nombre}" guardado`);
+            podcastsDB.push({ nombre, desc, link, dias });
+            alert(`Podcast "${nombre}" guardado exitosamente`);
             document.getElementById('pod-nombre').value = '';
         }
     }
@@ -537,6 +565,7 @@
         }
     }
 
+    // Inicio
     initCalendar();
 </script>
 
