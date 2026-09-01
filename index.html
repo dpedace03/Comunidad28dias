@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Comunidad de Mujeres 28 Días</title>
+    <style>
+        :root {
+            --bg-color: #faf7f2;
+            --card-bg: #ffffff;
+            --salmon: #fa8072;
+            --primary: #6b5b7b;
+            --primary-dark: #4a3e56;
+            --border-radius: 12px;
+        }
+
+        html, body {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; background-color: var(--bg-color);
+            font-family: 'Segoe UI', Georgia, serif; color: #333;
+        }
+
+        .app-viewport {
+            width: 100%; max-width: 500px; height: 100dvh;
+            margin: 0 auto; box-sizing: border-box; padding: 12px;
+            display: flex; flex-direction: column; position: relative;
+        }
+
+        .screen {
+            display: none; width: 100%; height: 100%;
+            flex-direction: column; box-sizing: border-box; overflow: hidden;
+        }
+
+        .screen.active { display: flex; }
+
+        .screen-header {
+            flex-shrink: 0; display: flex; align-items: center;
+            justify-content: space-between; margin-bottom: 8px;
+        }
+
+        .screen-title {
+            margin: 0; font-size: 1.1rem; color: var(--primary-dark);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+
+        .btn-back {
+            background: none; border: 1px solid var(--primary);
+            color: var(--primary); padding: 4px 12px; border-radius: 16px;
+            cursor: pointer; font-weight: bold; font-size: 0.8rem; flex-shrink: 0;
+        }
+
+        .screen-body {
+            flex: 1; display: flex; flex-direction: column; gap: 8px;
+            overflow-y: auto; scrollbar-width: none;
+        }
+        .screen-body::-webkit-scrollbar { display: none; }
+
+        /* PANTALLA INICIAL */
+        .welcome-container {
+            flex: 1.2; min-height: 0; border-radius: var(--border-radius);
+            overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex; align-items: center; justify-content: center; background: #fff;
+        }
+
+        .welcome-img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .menu-grid-2col {
+            flex: 1; display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 8px; margin-top: 8px;
+        }
+
+        .menu-card {
+            background: var(--card-bg); padding: 6px; border-radius: var(--border-radius);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04); cursor: pointer; text-align: center;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(250, 128, 114, 0.25);
+        }
+
+        .menu-card h2 {
+            margin: 0; color: var(--salmon); font-size: 0.85rem;
+            font-weight: 700; line-height: 1.2;
+        }
+
+        .config-btn {
+            flex-shrink: 0; margin-top: 8px; background: #eae5dc;
+            color: var(--primary-dark); border: none; padding: 8px;
+            width: 100%; border-radius: var(--border-radius);
+            font-weight: bold; font-size: 0.85rem; cursor: pointer;
+        }
+
+        /* MODALIDAD HORIZONTAL */
+        .horizontal-container {
+            display: flex; flex-direction: row; gap: 6px;
+            width: 100%; height: 100%; align-items: center;
+        }
+        .horizontal-container img {
+            width: 50%; max-height: 90%; object-fit: contain; border-radius: 8px;
+        }
+
+        .fit-img {
+            max-width: 100%; max-height: 45%; object-fit: contain;
+            border-radius: var(--border-radius); align-self: center;
+        }
+
+        /* CALENDARIO AGENDA */
+        .calendar-grid {
+            display: grid; grid-template-columns: repeat(7, 1fr);
+            gap: 4px; text-align: center;
+        }
+
+        .cal-day {
+            background: #fff; padding: 6px 0; border-radius: 6px;
+            cursor: pointer; border: 1px solid #eee; font-weight: bold;
+            font-size: 0.7rem; display: flex; flex-direction: column;
+            align-items: center; min-height: 50px; justify-content: space-between;
+        }
+
+        .cal-day:hover { background: var(--salmon); color: #fff; }
+        .walk-icon { font-size: 0.85rem; margin-top: 2px; }
+        .podcast-link { font-size: 0.6rem; color: var(--primary); text-decoration: underline; }
+
+        /* REGISTRO FOTOGRÁFICO CON PREVISUALIZACIÓN */
+        .photo-upload-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+        }
+        .photo-box-input {
+            background: #fff; border: 1px dashed var(--salmon);
+            padding: 6px; border-radius: 8px; text-align: center; font-size: 0.7rem;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .photo-box-input input { width: 100%; font-size: 0.65rem; margin-top: 4px; }
+        
+        .preview-img {
+            width: 100%; height: 60px; object-fit: cover;
+            border-radius: 6px; margin-top: 4px; display: none;
+        }
+
+        /* FORMULARIOS & MODAL */
+        .form-group { margin-bottom: 8px; }
+        .form-group label { display: block; font-size: 0.75rem; font-weight: bold; margin-bottom: 2px; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 0.8rem;
+        }
+
+        .btn-submit {
+            background: var(--primary); color: white; border: none;
+            padding: 8px; border-radius: 6px; width: 100%;
+            cursor: pointer; font-size: 0.85rem; font-weight: bold;
+        }
+
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 100;
+        }
+
+        .modal-card {
+            background: #fffef9; width: 85%; max-width: 380px; padding: 16px;
+            border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-left: 5px solid var(--salmon); max-height: 85vh; overflow-y: auto;
+        }
+
+        .modal-title {
+            font-family: 'Georgia', serif; font-size: 1.1rem;
+            color: var(--primary-dark); margin-top: 0; margin-bottom: 8px;
+        }
+
+        .hours-container {
+            max-height: 160px; overflow-y: auto; border: 1px solid #eee;
+            padding: 4px; border-radius: 6px; margin-bottom: 8px; background: #fff;
+        }
+
+        .hour-row {
+            display: flex; align-items: center; gap: 6px; margin-bottom: 4px;
+        }
+        .hour-label { font-size: 0.7rem; font-weight: bold; width: 55px; flex-shrink: 0; }
+
+        .modal-photo-gallery {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 8px;
+        }
+        .modal-photo-gallery img {
+            width: 100%; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid var(--salmon);
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-viewport">
+
+    <!-- PANTALLA INICIAL -->
+    <div id="screen-home" class="screen active">
+        <div class="welcome-container">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='100%' height='100%' fill='%23faf7f2'/><rect x='20' y='20' width='360' height='360' rx='16' fill='%23ffffff' stroke='%23d8a48f' stroke-width='3'/><text x='50%' y='35%' font-family='Georgia, serif' font-size='22' fill='%234a3e56' text-anchor='middle' font-weight='bold'>NOS DOY LA</text><text x='50%' y='45%' font-family='Georgia, serif' font-size='26' fill='%23fa8072' text-anchor='middle' font-weight='bold'>BIENVENIDA</text><text x='50%' y='58%' font-family='sans-serif' font-size='14' fill='%236b5b7b' text-anchor='middle'>Comunidad de Mujeres 28 Días</text><text x='50%' y='68%' font-family='Georgia, serif' font-size='12' fill='%23888888' text-anchor='middle'>Guía y Coordinación: Andrea</text><path d='M160 300 Q200 270 240 300' stroke='%23fa8072' stroke-width='2' fill='none'/></svg>" alt="Bienvenida" class="welcome-img">
+        </div>
+
+        <div class="menu-grid-2col">
+            <div class="menu-card" onclick="nav('modalidad')"><h2>Modalidad</h2></div>
+            <div class="menu-card" onclick="nav('pocimas')"><h2>Pócimas y Yuyos del Bien</h2></div>
+            <div class="menu-card" onclick="nav('caminatas')"><h2>Propuesta Diaria y Caminatas</h2></div>
+            <div class="menu-card" onclick="nav('agenda')"><h2>Mi Agenda Diaria y Sensaciones</h2></div>
+            <div class="menu-card" onclick="nav('registro')"><h2>Registro Fotográfico Inicial</h2></div>
+            <div class="menu-card" onclick="nav('novedades')"><h2>Novedades</h2></div>
+        </div>
+
+        <button class="config-btn" onclick="nav('config')">⚙️ Configuración (Admin)</button>
+    </div>
+
+    <!-- MODALIDAD (HORIZONTAL) -->
+    <div id="screen-modalidad" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Modalidad</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body">
+            <div class="horizontal-container">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='300' viewBox='0 0 200 300'><rect width='100%' height='100%' fill='%23fffef9' stroke='%23fa8072' stroke-width='2'/><text x='50%' y='20%' font-family='Georgia' font-size='14' fill='%234a3e56' text-anchor='middle' font-weight='bold'>MODALIDAD 1</text><text x='15' y='90' font-family='sans-serif' font-size='10' fill='%23555'>• Mensajes de texto</text><text x='15' y='120' font-family='sans-serif' font-size='10' fill='%23555'>• Consultas por el grupo</text><text x='15' y='150' font-family='sans-serif' font-size='10' fill='%23555'>• Sin audios</text><text x='15' y='180' font-family='sans-serif' font-size='10' fill='%23555'>• Respetar tiempos</text></svg>" alt="Modalidad 1">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='300' viewBox='0 0 200 300'><rect width='100%' height='100%' fill='%23fffef9' stroke='%23fa8072' stroke-width='2'/><text x='50%' y='20%' font-family='Georgia' font-size='14' fill='%234a3e56' text-anchor='middle' font-weight='bold'>MODALIDAD 2</text><text x='15' y='90' font-family='sans-serif' font-size='10' fill='%23555'>• Videos de propuestas</text><text x='15' y='120' font-family='sans-serif' font-size='10' fill='%23555'>• Placas con tareas</text><text x='15' y='150' font-family='sans-serif' font-size='10' fill='%23555'>• Podcasts para caminatas</text><text x='15' y='180' font-family='sans-serif' font-size='10' fill='%23555'>• 3 Encuentros por Zoom</text></svg>" alt="Modalidad 2">
+            </div>
+        </div>
+    </div>
+
+    <!-- PÓCIMAS Y YUYOS -->
+    <div id="screen-pocimas" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Pócimas y Yuyos del Bien</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body" style="justify-content: center;">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'><rect width='100%' height='100%' fill='%23faf7f2' stroke='%236b5b7b' stroke-width='2'/><text x='50%' y='25%' font-family='Georgia' font-size='16' fill='%23fa8072' text-anchor='middle' font-weight='bold'>YUYOS DEL BIEN</text><text x='20' y='80' font-family='sans-serif' font-size='11' fill='%23333'>🍵 Manzanilla (Infusión): 2 tazas/día</text><text x='20' y='120' font-family='sans-serif' font-size='11' fill='%23333'>💧 Suico (Tintura): 20 gotas tarde</text><text x='20' y='160' font-family='sans-serif' font-size='11' fill='%23333'>🌿 Pasionaria (Tintura): 20 gotas tardecita</text></svg>" alt="Yuyos del Bien" class="fit-img" style="max-height: 55%;">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='120' viewBox='0 0 200 120'><rect width='100%' height='100%' fill='%23ffffff' stroke='%23fa8072' stroke-width='1'/><text x='50%' y='40%' font-family='sans-serif' font-size='11' fill='%236b5b7b' text-anchor='middle'>💧 AGUA SOLARIZADA</text><text x='50%' y='70%' font-family='sans-serif' font-size='9' fill='%23888' text-anchor='middle'>Botella Azul en Sol</text></svg>" alt="Yuyos" class="fit-img" style="max-height: 35%;">
+        </div>
+    </div>
+
+    <!-- PROPUESTA DIARIA Y CAMINATAS -->
+    <div id="screen-caminatas" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Propuesta Diaria y Caminatas</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body" style="justify-content: center;">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><rect width='100%' height='100%' fill='%23fffef9' stroke='%236b5b7b' stroke-width='2'/><text x='50%' y='25%' font-family='Georgia' font-size='18' fill='%234a3e56' text-anchor='middle' font-weight='bold'>NUESTRAS CAMINATAS</text><text x='50%' y='40%' font-family='sans-serif' font-size='30' text-anchor='middle'>🚶‍♀️🎧</text><text x='50%' y='60%' font-family='sans-serif' font-size='12' fill='%23fa8072' text-anchor='middle' font-weight='bold'>Martes, Jueves y Sábados</text><text x='50%' y='75%' font-family='sans-serif' font-size='10' fill='%23555' text-anchor='middle'>Acompañadas del podcast especial</text></svg>" alt="Caminatas" class="fit-img" style="max-height: 90%;">
+        </div>
+    </div>
+
+    <!-- MI AGENDA DIARIA -->
+    <div id="screen-agenda" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Mi Agenda Diaria</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body">
+            <p style="font-size: 0.8rem; margin: 0;">Selecciona un día para gestionar tus actividades:</p>
+            <div class="calendar-grid" id="calendar-grid"></div>
+        </div>
+    </div>
+
+    <!-- REGISTRO FOTOGRÁFICO INICIAL -->
+    <div id="screen-registro" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Registro Fotográfico</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='120' viewBox='0 0 300 120'><rect width='100%' height='100%' fill='%23fffef9' stroke='%23fa8072' stroke-width='2'/><text x='50%' y='40%' font-family='Georgia' font-size='16' fill='%234a3e56' text-anchor='middle' font-weight='bold'>REGISTRO FOTOGRÁFICO</text><text x='50%' y='70%' font-family='sans-serif' font-size='11' fill='%23fa8072' text-anchor='middle'>Testigo sagrado de la transformación</text></svg>" alt="Registro Fotográfico" class="fit-img" style="max-height: 25%;">
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+                <div class="form-group">
+                    <label>Fecha de la toma:</label>
+                    <input type="date" id="foto-fecha">
+                </div>
+                <div class="photo-upload-grid">
+                    <div class="photo-box-input">
+                        <b>Rostro</b>
+                        <img id="prev-rostro" class="preview-img">
+                        <input type="file" accept="image/*" onchange="previewAndSave('rostro', event)">
+                    </div>
+                    <div class="photo-box-input">
+                        <b>Medio Cuerpo</b>
+                        <img id="prev-medio" class="preview-img">
+                        <input type="file" accept="image/*" onchange="previewAndSave('medio', event)">
+                    </div>
+                    <div class="photo-box-input">
+                        <b>Cuerpo Entero</b>
+                        <img id="prev-entero" class="preview-img">
+                        <input type="file" accept="image/*" onchange="previewAndSave('entero', event)">
+                    </div>
+                </div>
+                <button class="btn-submit" style="margin-top: 8px;" onclick="alert('Fotos guardadas correctamente')">Guardar Fotos</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOVEDADES -->
+    <div id="screen-novedades" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Novedades</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body">
+            <div style="background: #fff; padding: 12px; border-radius: var(--border-radius);">
+                <h3 style="margin: 0 0 8px 0; font-size: 0.9rem;">Cargar Material y Enlaces</h3>
+                <div class="form-group"><label>Foto / Archivo:</label><input type="file"></div>
+                <div class="form-group"><label>Enlace / YouTube:</label><input type="text" placeholder="https://..."></div>
+                <button class="btn-submit">Publicar Novedad</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONFIGURACIÓN ADMIN -->
+    <div id="screen-config" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Configuración Admin</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body">
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Calendario y Horarios</h3>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;"><label>Día Inicio:</label><input type="number" id="cfg-dia-inicio" value="1"></div>
+                    <div class="form-group" style="flex:1;"><label>Día Fin:</label><input type="number" id="cfg-dia-fin" value="28"></div>
+                </div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;"><label>Hora Inicio:</label><input type="number" id="cfg-hora-inicio" value="7"></div>
+                    <div class="form-group" style="flex:1;"><label>Hora Fin:</label><input type="number" id="cfg-hora-fin" value="21"></div>
+                </div>
+                <button class="btn-submit" onclick="guardarConfigCalendario()">Actualizar Rangos</button>
+            </div>
+
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">ABM Infusiones / Pócimas</h3>
+                <div class="form-group"><label>Nombre:</label><input type="text" id="inf-nombre"></div>
+                <div class="form-group"><label>Descripción / Preparación:</label><input type="text" id="inf-desc"></div>
+                <div class="form-group"><label>Efecto / Propiedad:</label><input type="text" id="inf-efecto"></div>
+                <div class="form-group"><label>Días de toma:</label><input type="text" id="inf-dias" placeholder="Ej: Todos, Lunes, Martes"></div>
+                <button class="btn-submit" onclick="agregarInfusion()">Guardar Infusión</button>
+            </div>
+
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">ABM Podcasts</h3>
+                <div class="form-group"><label>Nombre:</label><input type="text" id="pod-nombre"></div>
+                <div class="form-group"><label>Descripción:</label><input type="text" id="pod-desc"></div>
+                <div class="form-group"><label>Link Audio:</label><input type="text" id="pod-link" placeholder="https://..."></div>
+                <div class="form-group"><label>Días para escuchar:</label><input type="text" id="pod-dias" placeholder="Ej: Martes, Jueves, Sábado"></div>
+                <button class="btn-submit" onclick="agregarPodcast()">Guardar Podcast</button>
+            </div>
+
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">ABM Actividades</h3>
+                <div class="form-group"><label>Nombre Actividad:</label><input type="text" id="act-nombre"></div>
+                <div class="form-group">
+                    <label>Día Asignado:</label>
+                    <select id="act-dia">
+                        <option value="Martes">Martes</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Sábado">Sábado</option>
+                        <option value="Todos">Todos los días</option>
+                    </select>
+                </div>
+                <button class="btn-submit" onclick="agregarActividadConfig()">Guardar Actividad</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- MODAL AGENDA DIARIA -->
+<div class="modal-overlay" id="modal-agenda">
+    <div class="modal-card">
+        <h2 class="modal-title" id="modal-date-title">Día de la semana</h2>
+        
+        <div id="modal-gallery-box" style="display:none;">
+            <small style="font-size: 0.65rem; color: var(--primary-dark); font-weight: bold;">Registro Fotográfico de esta fecha:</small>
+            <div class="modal-photo-gallery" id="modal-photo-grid"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Seleccionar Actividad Configurada:</label>
+            <select id="select-actividad-config" onchange="cargarActividadEnHorario(this.value)">
+                <option value="">-- Seleccionar --</option>
+            </select>
+        </div>
+
+        <label style="font-size:0.75rem; font-weight:bold;">Horarios del día:</label>
+        <div class="hours-container" id="hours-container"></div>
+
+        <div class="form-group" style="margin-top:4px;">
+            <label>Notas / Sensaciones del día:</label>
+            <textarea id="modal-text" rows="2" placeholder="Escribe tus sensaciones aquí..."></textarea>
+        </div>
+        <button class="btn-submit" onclick="closeModal()">Guardar en Agenda</button>
+    </div>
+</div>
+
+<script>
+    let cfgCalendario = { diaInicio: 1, diaFin: 28, horaInicio: 7, horaFin: 21 };
+    let actividadesDB = [
+        { nombre: "Caminata con Podcast", dia: "Martes" },
+        { nombre: "Caminata con Podcast", dia: "Jueves" },
+        { nombre: "Caminata con Podcast", dia: "Sábado" }
+    ];
+    let infusionesDB = [];
+    let podcastsDB = [];
+    let fotosPorFecha = {};
+
+    function nav(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen-' + screenId).classList.add('active');
+    }
+
+    function previewAndSave(tipo, event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const url = e.target.result;
+            const imgElement = document.getElementById('prev-' + tipo);
+            imgElement.src = url;
+            imgElement.style.display = 'block';
+
+            const fecha = document.getElementById('foto-fecha').value || '2026-09-03';
+            if (!fotosPorFecha[fecha]) fotosPorFecha[fecha] = {};
+            fotosPorFecha[fecha][tipo] = url;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function guardarConfigCalendario() {
+        cfgCalendario.diaInicio = parseInt(document.getElementById('cfg-dia-inicio').value) || 1;
+        cfgCalendario.diaFin = parseInt(document.getElementById('cfg-dia-fin').value) || 28;
+        cfgCalendario.horaInicio = parseInt(document.getElementById('cfg-hora-inicio').value) || 7;
+        cfgCalendario.horaFin = parseInt(document.getElementById('cfg-hora-fin').value) || 21;
+        initCalendar();
+        alert('Calendario actualizado');
+    }
+
+    function initCalendar() {
+        const grid = document.getElementById('calendar-grid');
+        grid.innerHTML = '';
+        const diasSemana = ["Jueves", "Viernes", "Sábado", "Domingo", "Lunes", "Martes", "Miércoles"];
+        
+        for (let i = cfgCalendario.diaInicio; i <= cfgCalendario.diaFin; i++) {
+            const dayBox = document.createElement('div');
+            dayBox.className = 'cal-day';
+            
+            const numDia = (i + 2) % 30 || 30; 
+            const nombreDia = diasSemana[(i - 1) % 7];
+            const esCaminata = (nombreDia === "Martes" || nombreDia === "Jueves" || nombreDia === "Sábado");
+
+            dayBox.innerHTML = `
+                <span>D${i}</span>
+                <small style="font-size:0.6rem;">${nombreDia.substring(0,3)} ${numDia}</small>
+                ${esCaminata ? '<span class="walk-icon">🚶‍♀️</span><a href="#" class="podcast-link" onclick="event.stopPropagation(); alert(\'Reproduciendo Podcast del día\');">Podcast</a>' : ''}
+            `;
+            
+            const fechaKey = `2026-09-${numDia < 10 ? '0' + numDia : numDia}`;
+            dayBox.onclick = () => openAgendaModal(`${nombreDia} ${numDia} de septiembre`, nombreDia, fechaKey);
+            grid.appendChild(dayBox);
+        }
+    }
+
+    function openAgendaModal(fechaTexto, nombreDia, fechaKey) {
+        document.getElementById('modal-date-title').innerText = fechaTexto;
+
+        const galleryBox = document.getElementById('modal-gallery-box');
+        const photoGrid = document.getElementById('modal-photo-grid');
+        photoGrid.innerHTML = '';
+
+        if (fotosPorFecha[fechaKey] && Object.keys(fotosPorFecha[fechaKey]).length > 0) {
+            Object.values(fotosPorFecha[fechaKey]).forEach(srcUrl => {
+                const img = document.createElement('img');
+                img.src = srcUrl;
+                photoGrid.appendChild(img);
+            });
+            galleryBox.style.display = 'block';
+        } else {
+            galleryBox.style.display = 'none';
+        }
+
+        const hoursContainer = document.getElementById('hours-container');
+        hoursContainer.innerHTML = '';
+        for (let h = cfgCalendario.horaInicio; h <= cfgCalendario.horaFin; h++) {
+            const horaStr = `${h < 10 ? '0' + h : h}:00 hs`;
+            const row = document.createElement('div');
+            row.className = 'hour-row';
+            row.innerHTML = `<span class="hour-label">${horaStr}</span><input type="text" class="hour-input" placeholder="Actividad...">`;
+            hoursContainer.appendChild(row);
+        }
+
+        const select = document.getElementById('select-actividad-config');
+        select.innerHTML = '<option value="">-- Seleccionar --</option>';
+        actividadesDB.filter(a => a.dia === nombreDia || a.dia === "Todos").forEach(a => {
+            const opt = document.createElement('option');
+            opt.value = a.nombre;
+            opt.innerText = a.nombre;
+            select.appendChild(opt);
+        });
+
+        document.getElementById('modal-agenda').style.display = 'flex';
+    }
+
+    function cargarActividadEnHorario(valor) {
+        if (!valor) return;
+        const inputs = document.querySelectorAll('.hour-input');
+        if (inputs[0] && inputs[0].value === "") {
+            inputs[0].value = valor;
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('modal-agenda').style.display = 'none';
+    }
+
+    function agregarInfusion() {
+        const nombre = document.getElementById('inf-nombre').value;
+        if (nombre) {
+            infusionesDB.push({ nombre });
+            alert(`Infusión "${nombre}" agregada`);
+            document.getElementById('inf-nombre').value = '';
+        }
+    }
+
+    function agregarPodcast() {
+        const nombre = document.getElementById('pod-nombre').value;
+        if (nombre) {
+            podcastsDB.push({ nombre });
+            alert(`Podcast "${nombre}" guardado`);
+            document.getElementById('pod-nombre').value = '';
+        }
+    }
+
+    function agregarActividadConfig() {
+        const nombre = document.getElementById('act-nombre').value;
+        const dia = document.getElementById('act-dia').value;
+        if (nombre) {
+            actividadesDB.push({ nombre, dia });
+            alert(`Actividad "${nombre}" agregada`);
+            document.getElementById('act-nombre').value = '';
+        }
+    }
+
+    initCalendar();
+</script>
+
+</body>
+</html>
