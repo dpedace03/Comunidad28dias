@@ -16,6 +16,8 @@
             --primary: #826c7f;
             --primary-dark: #4a3e56;
             --border-radius: 14px;
+            --agenda-font-family: 'Patrick Hand', cursive;
+            --agenda-font-size: 1.15rem;
         }
 
         html, body {
@@ -32,9 +34,7 @@
         }
 
         @media (min-width: 600px) {
-            .app-viewport.wide-view {
-                max-width: 850px;
-            }
+            .app-viewport.wide-view { max-width: 850px; }
         }
 
         .screen {
@@ -101,7 +101,6 @@
             background: var(--pastel-pink); padding: 8px; border-radius: 8px;
             margin-bottom: 6px; font-size: 0.8rem; border-left: 3px solid var(--salmon);
         }
-        .novedad-card-item:last-child { margin-bottom: 0; }
 
         .config-btn {
             flex-shrink: 0; margin-top: 8px; background: #eae5dc;
@@ -135,57 +134,35 @@
             background: #fff; padding: 10px; border-radius: var(--border-radius);
             border: 1px solid rgba(244, 162, 145, 0.3); margin-top: 4px;
         }
-        .pocima-item-card {
-            border-bottom: 1px dashed #eee; padding: 4px 0; font-size: 0.75rem;
-        }
-        .pocima-item-card:last-child { border-bottom: none; }
+        .pocima-item-card { border-bottom: 1px dashed #eee; padding: 4px 0; font-size: 0.75rem; }
 
         /* CALENDARIO AGENDA */
         .calendar-grid {
             display: grid; grid-template-columns: repeat(7, 1fr);
             gap: 6px; text-align: center;
-            font-family: 'Patrick Hand', cursive;
+            font-family: var(--agenda-font-family);
         }
 
         @media (min-width: 600px) {
             .calendar-grid { gap: 10px; }
-            .cal-day { min-height: 70px !important; font-size: 1.1rem !important; }
+            .cal-day { min-height: 75px !important; }
         }
 
         .cal-day {
             background: var(--pastel-pink); padding: 6px 0; border-radius: 10px;
             cursor: pointer; border: 1px solid #f2c6be; font-weight: bold;
-            font-size: 0.95rem; display: flex; flex-direction: column;
-            align-items: center; min-height: 52px; justify-content: space-between;
-            color: var(--primary-dark);
-            transition: transform 0.1s, background-color 0.2s;
+            font-size: var(--agenda-font-size); display: flex; flex-direction: column;
+            align-items: center; min-height: 58px; justify-content: space-between;
+            color: var(--primary-dark); transition: transform 0.1s, background-color 0.2s;
         }
 
         .cal-day:nth-child(even) { background: var(--pastel-purple); border-color: #d8cbe5; }
         .cal-day:hover { transform: scale(1.03); background: var(--pastel-green); }
-        .walk-icon { font-size: 0.9rem; }
-        .podcast-link { font-size: 0.75rem; color: var(--primary); text-decoration: underline; }
+        .walk-icon { font-size: 1rem; }
+        .podcast-link { font-size: 0.8rem; color: var(--primary); text-decoration: underline; }
 
-        /* REGISTRO FOTOGRÁFICO CONTROLES */
-        .photo-upload-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
-        }
-        .photo-box-input {
-            background: #fff; border: 1px dashed var(--salmon);
-            padding: 6px; border-radius: 8px; text-align: center; font-size: 0.7rem;
-            display: flex; flex-direction: column; align-items: center;
-        }
-        .photo-box-input input { width: 100%; font-size: 0.65rem; margin-top: 4px; }
-        
-        .preview-img {
-            width: 100%; height: 50px; object-fit: cover;
-            border-radius: 6px; margin-top: 4px; display: none; cursor: pointer;
-        }
-
-        /* ESTILOS DE LISTA DE GESTIÓN EN CONFIG */
-        .crud-list-container {
-            margin-top: 6px; border-top: 1px dashed #e8d5d0; padding-top: 6px;
-        }
+        /* LISTAS CRUD */
+        .crud-list-container { margin-top: 6px; border-top: 1px dashed #e8d5d0; padding-top: 6px; }
         .crud-item {
             display: flex; justify-content: space-between; align-items: center;
             background: #faf8f5; border: 1px solid #eee; padding: 6px 8px;
@@ -195,7 +172,7 @@
         .btn-edit { background: #6b5b7b; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
         .btn-delete { background: #e06d53; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
 
-        /* DETALLE DEL DÍA A PANTALLA COMPLETA */
+        /* DETALLE DEL DÍA CON TEXTAREA EXPANDIBLE */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-color); justify-content: center; align-items: center; z-index: 200;
@@ -204,25 +181,19 @@
         .modal-card-full {
             background: #fffdfa; width: 100%; height: 100dvh; padding: 14px;
             box-sizing: border-box; display: flex; flex-direction: column; gap: 8px;
-            overflow-y: auto; font-family: 'Patrick Hand', cursive; max-width: 850px; margin: 0 auto;
+            overflow-y: auto; font-family: var(--agenda-font-family); max-width: 850px; margin: 0 auto;
         }
 
-        .modal-title {
-            font-family: 'Playfair Display', serif; font-size: 1.3rem;
-            color: var(--primary-dark); margin: 0;
-        }
+        .modal-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--primary-dark); margin: 0; }
 
-        .day-info-block {
-            background: #fff; border: 1px solid #f2c6be;
-            border-radius: 10px; padding: 8px; font-size: 0.85rem;
-        }
-        .day-info-block h4 { margin: 0 0 4px 0; color: var(--salmon); font-size: 0.9rem; }
+        .day-info-block { background: #fff; border: 1px solid #f2c6be; border-radius: 10px; padding: 8px; font-size: var(--agenda-font-size); }
+        .day-info-block h4 { margin: 0 0 4px 0; color: var(--salmon); font-size: 1rem; }
 
         .podcast-audio-link {
             display: inline-block; margin-top: 3px; padding: 4px 10px;
             background: var(--pastel-pink); color: var(--primary-dark);
             border-radius: 12px; text-decoration: none; font-weight: bold;
-            font-size: 0.85rem; border: 1px solid var(--salmon);
+            font-size: var(--agenda-font-size); border: 1px solid var(--salmon);
         }
 
         .hours-container {
@@ -230,23 +201,26 @@
             padding: 8px; border-radius: 12px; background: #fff8f6;
         }
 
-        .hour-row {
-            display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
-        }
-        .hour-label { font-size: 0.95rem; font-weight: bold; width: 65px; flex-shrink: 0; color: var(--primary-dark); }
+        .hour-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+        .hour-label { font-size: var(--agenda-font-size); font-weight: bold; width: 75px; flex-shrink: 0; color: var(--primary-dark); }
         .hour-input {
-            font-family: 'Patrick Hand', cursive; font-size: 1rem; color: #333;
+            font-family: var(--agenda-font-family); font-size: var(--agenda-font-size); color: #333;
             background: #ffffff; border: 1px solid #e8d5d0; border-radius: 8px; padding: 4px 8px; width: 100%;
         }
 
-        .modal-photo-gallery {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 4px;
-        }
-        .modal-photo-gallery img {
-            width: 100%; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid var(--salmon); cursor: pointer;
+        /* TEXTAREA DE NOTAS AUTO-EXPANSIBLE */
+        .expandable-textarea {
+            font-family: var(--agenda-font-family);
+            font-size: var(--agenda-font-size);
+            width: 100%; min-height: 50px; max-height: 200px;
+            border: 1px solid #ccc; border-radius: 6px; padding: 6px;
+            box-sizing: border-box; overflow-y: hidden; resize: none;
+            transition: height 0.15s ease;
         }
 
-        /* FORMULARIOS & BOTONES */
+        .modal-photo-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 4px; }
+        .modal-photo-gallery img { width: 100%; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid var(--salmon); cursor: pointer; }
+
         .form-group { margin-bottom: 8px; }
         .form-group label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 2px; }
         .form-group input, .form-group textarea, .form-group select {
@@ -256,26 +230,18 @@
         .btn-submit {
             background: var(--salmon); color: white; border: none;
             padding: 8px; border-radius: 8px; width: 100%;
-            cursor: pointer; font-size: 0.95rem; font-weight: bold; font-family: 'Patrick Hand', cursive;
+            cursor: pointer; font-size: 1rem; font-weight: bold; font-family: var(--agenda-font-family);
         }
 
-        /* MODAL DE ZOOM DE IMÁGENES */
+        /* ZOOM MODAL */
         .zoom-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.9); z-index: 300;
             justify-content: center; align-items: center; overflow: hidden; touch-action: none;
         }
 
-        .zoom-img-target {
-            max-width: 95%; max-height: 90%;
-            transition: transform 0.05s linear; transform-origin: center center;
-        }
-
-        .zoom-close-btn {
-            position: absolute; top: 15px; right: 15px; background: #fff; color: #000;
-            border: none; width: 36px; height: 36px; border-radius: 50%;
-            font-size: 1.2rem; font-weight: bold; cursor: pointer; z-index: 310;
-        }
+        .zoom-img-target { max-width: 95%; max-height: 90%; transition: transform 0.05s linear; transform-origin: center center; }
+        .zoom-close-btn { position: absolute; top: 15px; right: 15px; background: #fff; color: #000; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; font-weight: bold; cursor: pointer; z-index: 310; }
     </style>
 </head>
 <body>
@@ -307,7 +273,7 @@
         <button class="config-btn" onclick="nav('config')">⚙️ Configuración (Admin)</button>
     </div>
 
-    <!-- MODALIDAD -->
+    <!-- MODALIDAD CON ZOOM HABILITADO -->
     <div id="screen-modalidad" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Modalidad</h2>
@@ -351,14 +317,14 @@
         </div>
     </div>
 
-    <!-- MI AGENDA DIARIA -->
+    <!-- MI AGENDA DIARIA (MOSTRANDO TODOS LOS DÍAS SIEMPRE) -->
     <div id="screen-agenda" class="screen">
         <div class="screen-header">
             <h2 class="screen-title" style="font-family: 'Playfair Display', serif;">Mi Agenda Diaria</h2>
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
-            <p style="font-size: 0.85rem; margin: 0; font-family: 'Patrick Hand', cursive;">Selecciona un día para organizar tus rutinas:</p>
+            <p style="font-size: 1rem; margin: 0; font-family: var(--agenda-font-family);">Selecciona un día para organizar tus rutinas:</p>
             <div class="calendar-grid" id="calendar-grid"></div>
         </div>
     </div>
@@ -398,15 +364,15 @@
         </div>
     </div>
 
-    <!-- PANTALLA CARGAR NOVEDADES -->
+    <!-- PANTALLA NOVEDADES CON ABM INTEGRADO -->
     <div id="screen-novedades" class="screen">
         <div class="screen-header">
-            <h2 class="screen-title">Novedades</h2>
+            <h2 class="screen-title">Novedades (ABM)</h2>
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
             <div style="background: #fff; padding: 12px; border-radius: var(--border-radius);">
-                <h3 style="margin: 0 0 8px 0; font-size: 0.9rem;">Cargar Material y Novedades</h3>
+                <h3 style="margin: 0 0 8px 0; font-size: 0.9rem;">Cargar / Modificar Novedad</h3>
                 <div class="form-group"><label>Título o Mensaje:</label><input type="text" id="nov-titulo" placeholder="Ej: Link Zoom Jueves 3"></div>
                 <div class="form-group"><label>Enlace / YouTube / Recurso:</label><input type="text" id="nov-link" placeholder="https://..."></div>
                 
@@ -421,19 +387,46 @@
                     </div>
                 </div>
 
-                <button class="btn-submit" onclick="publicarNovedad()">Publicar Novedad</button>
+                <button class="btn-submit" id="btn-save-nov" onclick="publicarNovedad()">Publicar Novedad</button>
+            </div>
+
+            <!-- LISTADO ABM DE NOVEDADES -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); margin-top: 4px;">
+                <small style="font-weight:bold; color:var(--primary-dark);">Novedades Registradas:</small>
+                <div class="crud-list-container" id="novedades-abm-list" style="border-top:none;"></div>
             </div>
         </div>
     </div>
 
-    <!-- CONFIGURACIÓN ADMIN CON CONSULTA, EDICIÓN Y ELIMINACIÓN (CRUD) -->
+    <!-- CONFIGURACIÓN ADMIN -->
     <div id="screen-config" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Configuración Admin</h2>
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
-            <!-- CALENDARIO -->
+
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Estilo Visual de Mi Agenda</h3>
+                <div class="form-group">
+                    <label>Tipo de Letra / Fuente:</label>
+                    <select id="cfg-agenda-font" onchange="cambiarEstiloAgenda()">
+                        <option value="'Patrick Hand', cursive">Patrick Hand (Manuscrita / Amigable)</option>
+                        <option value="'Playfair Display', serif">Playfair Display (Elegante / Serif)</option>
+                        <option value="'Georgia', serif">Georgia (Clásica / Lectura)</option>
+                        <option value="'Segoe UI', sans-serif">Segoe UI (Moderna / Limpia)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tamaño de Letra:</label>
+                    <select id="cfg-agenda-size" onchange="cambiarEstiloAgenda()">
+                        <option value="1rem">Normal (1.0rem)</option>
+                        <option value="1.15rem" selected>Grande (1.15rem)</option>
+                        <option value="1.3rem">Muy Grande (1.30rem)</option>
+                    </select>
+                </div>
+            </div>
+
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Calendario y Horarios</h3>
                 <div style="display:flex; gap:6px;">
@@ -447,7 +440,6 @@
                 <button class="btn-submit" onclick="guardarConfigCalendario()">Actualizar Rangos</button>
             </div>
 
-            <!-- GESTIÓN INFUSIONES -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Infusiones / Pócimas</h3>
                 <div class="form-group"><label>Nombre:</label><input type="text" id="inf-nombre"></div>
@@ -462,7 +454,6 @@
                 </div>
             </div>
 
-            <!-- GESTIÓN PODCASTS -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Podcasts</h3>
                 <div class="form-group"><label>Nombre:</label><input type="text" id="pod-nombre"></div>
@@ -477,7 +468,6 @@
                 </div>
             </div>
 
-            <!-- GESTIÓN ACTIVIDADES -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Actividades</h3>
                 <div class="form-group"><label>Nombre Actividad:</label><input type="text" id="act-nombre"></div>
@@ -498,20 +488,12 @@
                 </div>
             </div>
 
-            <!-- GESTIÓN NOVEDADES -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
-                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Novedades</h3>
-                <div class="crud-list-container" style="border-top:none; padding-top:0;">
-                    <small style="font-weight:bold;">Novedades Publicadas:</small>
-                    <div id="crud-novedades-list"></div>
-                </div>
-            </div>
         </div>
     </div>
 
 </div>
 
-<!-- MODAL DETALLE DEL DÍA COMPLETO -->
+<!-- MODAL DETALLE DEL DÍA COMPLETO CON TEXTAREA AUTO-EXPANSIBLE -->
 <div class="modal-overlay" id="modal-agenda">
     <div class="modal-card-full">
         <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -520,7 +502,7 @@
         </div>
         
         <div id="modal-gallery-box" style="display:none;">
-            <small style="font-size: 0.8rem; color: var(--primary-dark); font-weight: bold;">Registro Fotográfico de esta fecha:</small>
+            <small style="font-size: 0.85rem; color: var(--primary-dark); font-weight: bold;">Registro Fotográfico de esta fecha:</small>
             <div class="modal-photo-gallery" id="modal-photo-grid"></div>
         </div>
 
@@ -540,18 +522,19 @@
         </div>
 
         <div class="form-group">
-            <label style="font-family:'Patrick Hand', cursive; font-size:0.95rem;">Seleccionar Actividad Configurada:</label>
-            <select id="select-actividad-config" style="font-family:'Patrick Hand', cursive; font-size:0.95rem;" onchange="cargarActividadEnHorario(this.value)">
+            <label style="font-family: var(--agenda-font-family); font-size: var(--agenda-font-size);">Seleccionar Actividad Configurada:</label>
+            <select id="select-actividad-config" style="font-family: var(--agenda-font-family); font-size: var(--agenda-font-size);" onchange="cargarActividadEnHorario(this.value)">
                 <option value="">-- Seleccionar --</option>
             </select>
         </div>
 
-        <label style="font-size:0.95rem; font-weight:bold; color:var(--primary-dark);">Horarios del día:</label>
+        <label style="font-size: var(--agenda-font-size); font-weight:bold; color:var(--primary-dark);">Horarios del día:</label>
         <div class="hours-container" id="hours-container"></div>
 
         <div class="form-group" style="margin-top:2px;">
-            <label style="font-family:'Patrick Hand', cursive; font-size:0.95rem;">Notas / Sensaciones del día:</label>
-            <textarea id="modal-text" rows="2" style="font-family:'Patrick Hand', cursive; font-size:0.95rem;" placeholder="Escribe tus sensaciones aquí..."></textarea>
+            <label style="font-family: var(--agenda-font-family); font-size: var(--agenda-font-size);">Notas / Sensaciones del día:</label>
+            <!-- TEXTAREA AUTO-EXPANSIBLE -->
+            <textarea id="modal-text" class="expandable-textarea" rows="2" placeholder="Escribe tus sensaciones aquí..." oninput="autoExpandTextarea(this)"></textarea>
         </div>
         <button class="btn-submit" onclick="guardarRegistroAgenda()">Guardar en Agenda</button>
     </div>
@@ -593,10 +576,24 @@
         }
     ];
 
-    let editIndices = { inf: -1, pod: -1, act: -1 };
+    let editIndices = { inf: -1, pod: -1, act: -1, nov: -1 };
     let fotosPorFecha = {};
     let agendaGuardadaBD = {}; 
     let currentFechaKeyModal = "";
+
+    function autoExpandTextarea(field) {
+        field.style.height = 'inherit';
+        const computed = window.getComputedStyle(field);
+        const height = field.scrollHeight + parseInt(computed.getPropertyValue('border-top-width'), 10) + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+        field.style.height = height + 'px';
+    }
+
+    function cambiarEstiloAgenda() {
+        const fontValue = document.getElementById('cfg-agenda-font').value;
+        const sizeValue = document.getElementById('cfg-agenda-size').value;
+        document.documentElement.style.setProperty('--agenda-font-family', fontValue);
+        document.documentElement.style.setProperty('--agenda-font-size', sizeValue);
+    }
 
     function nav(screenId) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -611,12 +608,96 @@
 
         if (screenId === 'pocimas') renderPocimasList();
         if (screenId === 'home') renderHomeNovedades();
+        if (screenId === 'novedades') renderNovedadesABMList();
         if (screenId === 'config') renderConfigLists();
     }
 
-    /* RENDER Y GESTIÓN EN PANTALLA CONFIGURACIÓN (CRUD) */
+    /* INICIALIZAR AGENDA CON TODOS LOS DÍAS SIEMPRE */
+    function initCalendar() {
+        const grid = document.getElementById('calendar-grid');
+        grid.innerHTML = '';
+        const diasSemana = ["Jueves", "Viernes", "Sábado", "Domingo", "Lunes", "Martes", "Miércoles"];
+        
+        for (let i = cfgCalendario.diaInicio; i <= cfgCalendario.diaFin; i++) {
+            const dayBox = document.createElement('div');
+            dayBox.className = 'cal-day';
+            
+            const numDia = (i + 2) % 30 || 30; 
+            const nombreDia = diasSemana[(i - 1) % 7];
+            const esCaminata = (nombreDia === "Martes" || nombreDia === "Jueves" || nombreDia === "Sábado");
+
+            // Se muestra siempre el número de día (D1, D2, etc.) en todos los casos
+            dayBox.innerHTML = `
+                <span>D${i}</span>
+                <small style="font-size:0.8rem;">${nombreDia.substring(0,3)} ${numDia}</small>
+                ${esCaminata ? '<span class="walk-icon">🚶‍♀️</span><a href="#" class="podcast-link" onclick="event.stopPropagation(); alert(\'Podcast asignado para hoy\');">Podcast</a>' : ''}
+            `;
+            
+            const fechaKey = `2026-09-${numDia < 10 ? '0' + numDia : numDia}`;
+            dayBox.onclick = () => openAgendaModal(`${nombreDia} ${numDia} de septiembre`, nombreDia, fechaKey);
+            grid.appendChild(dayBox);
+        }
+    }
+
+    /* ABM COMPLETO NOVEDADES */
+    function renderNovedadesABMList() {
+        const container = document.getElementById('novedades-abm-list');
+        container.innerHTML = novedadesDB.map((item, idx) => `
+            <div class="crud-item">
+                <span><b>${item.titulo}</b> (${item.desde || 'N/A'} - ${item.hasta || 'N/A'})</span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarNovedad(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="eliminarNovedad(${idx})">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function publicarNovedad() {
+        const titulo = document.getElementById('nov-titulo').value;
+        const link = document.getElementById('nov-link').value;
+        const desde = document.getElementById('nov-desde').value;
+        const hasta = document.getElementById('nov-hasta').value;
+
+        if (!titulo) return;
+
+        if (editIndices.nov >= 0) {
+            novedadesDB[editIndices.nov] = { titulo, link, desde, hasta };
+            editIndices.nov = -1;
+            document.getElementById('btn-save-nov').innerText = "Publicar Novedad";
+        } else {
+            novedadesDB.push({ titulo, link, desde, hasta });
+        }
+
+        document.getElementById('nov-titulo').value = '';
+        document.getElementById('nov-link').value = '';
+        document.getElementById('nov-desde').value = '';
+        document.getElementById('nov-hasta').value = '';
+
+        renderNovedadesABMList();
+        renderHomeNovedades();
+        alert('Novedad procesada con éxito');
+    }
+
+    function editarNovedad(idx) {
+        const item = novedadesDB[idx];
+        document.getElementById('nov-titulo').value = item.titulo;
+        document.getElementById('nov-link').value = item.link || '';
+        document.getElementById('nov-desde').value = item.desde || '';
+        document.getElementById('nov-hasta').value = item.hasta || '';
+        editIndices.nov = idx;
+        document.getElementById('btn-save-nov').innerText = "Actualizar Novedad";
+    }
+
+    function eliminarNovedad(idx) {
+        novedadesDB.splice(idx, 1);
+        renderNovedadesABMList();
+        renderHomeNovedades();
+        if (document.getElementById('screen-config').classList.contains('active')) renderConfigLists();
+    }
+
+    /* CRUD RESTO */
     function renderConfigLists() {
-        // 1. Infusiones
         const infBox = document.getElementById('crud-infusiones-list');
         infBox.innerHTML = infusionesDB.map((item, idx) => `
             <div class="crud-item">
@@ -628,7 +709,6 @@
             </div>
         `).join('');
 
-        // 2. Podcasts
         const podBox = document.getElementById('crud-podcasts-list');
         podBox.innerHTML = podcastsDB.map((item, idx) => `
             <div class="crud-item">
@@ -640,7 +720,6 @@
             </div>
         `).join('');
 
-        // 3. Actividades
         const actBox = document.getElementById('crud-actividades-list');
         actBox.innerHTML = actividadesDB.map((item, idx) => `
             <div class="crud-item">
@@ -651,20 +730,8 @@
                 </div>
             </div>
         `).join('');
-
-        // 4. Novedades
-        const novBox = document.getElementById('crud-novedades-list');
-        novBox.innerHTML = novedadesDB.map((item, idx) => `
-            <div class="crud-item">
-                <span><b>${item.titulo}</b></span>
-                <div class="crud-actions">
-                    <button class="btn-delete" onclick="eliminarNovedad(${idx})">Eliminar</button>
-                </div>
-            </div>
-        `).join('');
     }
 
-    // OPERACIONES DE INFUSIONES
     function agregarInfusion() {
         const nombre = document.getElementById('inf-nombre').value;
         const desc = document.getElementById('inf-desc').value;
@@ -707,7 +774,6 @@
         document.getElementById('inf-dias').value = '';
     }
 
-    // OPERACIONES DE PODCASTS
     function agregarPodcast() {
         const nombre = document.getElementById('pod-nombre').value;
         const desc = document.getElementById('pod-desc').value;
@@ -750,7 +816,6 @@
         document.getElementById('pod-dias').value = '';
     }
 
-    // OPERACIONES DE ACTIVIDADES
     function agregarActividadConfig() {
         const nombre = document.getElementById('act-nombre').value;
         const dia = document.getElementById('act-dia').value;
@@ -782,13 +847,6 @@
         renderConfigLists();
     }
 
-    function eliminarNovedad(idx) {
-        novedadesDB.splice(idx, 1);
-        renderConfigLists();
-        renderHomeNovedades();
-    }
-
-    // OTROS MÉTODOS EXISTENTES
     function renderHomeNovedades() {
         const container = document.getElementById('home-novedades-list');
         const hoyStr = new Date().toISOString().split('T')[0];
@@ -810,24 +868,6 @@
                 ${nov.link ? `<a href="${nov.link}" target="_blank" style="color:var(--primary-dark); font-weight:bold;">🔗 Ver Enlace / Recurso</a>` : ''}
             </div>
         `).join('');
-    }
-
-    function publicarNovedad() {
-        const titulo = document.getElementById('nov-titulo').value;
-        const link = document.getElementById('nov-link').value;
-        const desde = document.getElementById('nov-desde').value;
-        const hasta = document.getElementById('nov-hasta').value;
-
-        if (titulo) {
-            novedadesDB.push({ titulo, link, desde, hasta });
-            renderHomeNovedades();
-            alert('Novedad cargada exitosamente');
-            document.getElementById('nov-titulo').value = '';
-            document.getElementById('nov-link').value = '';
-            document.getElementById('nov-desde').value = '';
-            document.getElementById('nov-hasta').value = '';
-            nav('home');
-        }
     }
 
     function renderPocimasList() {
@@ -865,31 +905,6 @@
         cfgCalendario.horaFin = parseInt(document.getElementById('cfg-hora-fin').value) || 21;
         initCalendar();
         alert('Configuración de calendario actualizada');
-    }
-
-    function initCalendar() {
-        const grid = document.getElementById('calendar-grid');
-        grid.innerHTML = '';
-        const diasSemana = ["Jueves", "Viernes", "Sábado", "Domingo", "Lunes", "Martes", "Miércoles"];
-        
-        for (let i = cfgCalendario.diaInicio; i <= cfgCalendario.diaFin; i++) {
-            const dayBox = document.createElement('div');
-            dayBox.className = 'cal-day';
-            
-            const numDia = (i + 2) % 30 || 30; 
-            const nombreDia = diasSemana[(i - 1) % 7];
-            const esCaminata = (nombreDia === "Martes" || nombreDia === "Jueves" || nombreDia === "Sábado");
-
-            dayBox.innerHTML = `
-                <span>D${i}</span>
-                <small style="font-size:0.75rem;">${nombreDia.substring(0,3)} ${numDia}</small>
-                ${esCaminata ? '<span class="walk-icon">🚶‍♀️</span><a href="#" class="podcast-link" onclick="event.stopPropagation(); alert(\'Podcast asignado para hoy\');">Podcast</a>' : ''}
-            `;
-            
-            const fechaKey = `2026-09-${numDia < 10 ? '0' + numDia : numDia}`;
-            dayBox.onclick = () => openAgendaModal(`${nombreDia} ${numDia} de septiembre`, nombreDia, fechaKey);
-            grid.appendChild(dayBox);
-        }
     }
 
     function openAgendaModal(fechaTexto, nombreDia, fechaKey) {
@@ -954,7 +969,9 @@
             hoursContainer.appendChild(row);
         }
 
-        document.getElementById('modal-text').value = registroPrevio.notas;
+        const txtArea = document.getElementById('modal-text');
+        txtArea.value = registroPrevio.notas;
+        autoExpandTextarea(txtArea);
 
         const select = document.getElementById('select-actividad-config');
         select.innerHTML = '<option value="">-- Seleccionar --</option>';
