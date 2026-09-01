@@ -61,7 +61,7 @@
 
         /* PANTALLA INICIAL */
         .welcome-container {
-            flex: 1.2; min-height: 0; border-radius: var(--border-radius);
+            flex: 1; min-height: 0; border-radius: var(--border-radius);
             overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             display: flex; align-items: center; justify-content: center; background: #fff;
         }
@@ -69,8 +69,8 @@
         .welcome-img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
 
         .menu-grid-2col {
-            flex: 1; display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 8px; margin-top: 8px;
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 8px; margin-top: 8px; flex-shrink: 0;
         }
 
         .menu-card {
@@ -84,6 +84,18 @@
             margin: 0; color: var(--salmon); font-size: 0.85rem;
             font-weight: 700; line-height: 1.2;
         }
+
+        /* SECCIÓN NOVEDADES EN PANTALLA INICIAL */
+        .home-novedades-section {
+            background: #fff; padding: 10px; border-radius: var(--border-radius);
+            border: 1px solid var(--pastel-pink); margin-top: 8px; flex-shrink: 0;
+        }
+
+        .novedad-card-item {
+            background: var(--pastel-pink); padding: 8px; border-radius: 8px;
+            margin-bottom: 6px; font-size: 0.8rem; border-left: 3px solid var(--salmon);
+        }
+        .novedad-card-item:last-child { margin-bottom: 0; }
 
         .config-btn {
             flex-shrink: 0; margin-top: 8px; background: #eae5dc;
@@ -181,16 +193,10 @@
         .day-info-block h4 { margin: 0 0 4px 0; color: var(--salmon); font-size: 0.9rem; }
 
         .podcast-audio-link {
-            display: inline-block;
-            margin-top: 3px;
-            padding: 4px 10px;
-            background: var(--pastel-pink);
-            color: var(--primary-dark);
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.85rem;
-            border: 1px solid var(--salmon);
+            display: inline-block; margin-top: 3px; padding: 4px 10px;
+            background: var(--pastel-pink); color: var(--primary-dark);
+            border-radius: 12px; text-decoration: none; font-weight: bold;
+            font-size: 0.85rem; border: 1px solid var(--salmon);
         }
 
         .hours-container {
@@ -231,20 +237,17 @@
         .zoom-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.9); z-index: 300;
-            justify-content: center; align-items: center; overflow: hidden;
-            touch-action: none;
+            justify-content: center; align-items: center; overflow: hidden; touch-action: none;
         }
 
         .zoom-img-target {
             max-width: 95%; max-height: 90%;
-            transition: transform 0.05s linear;
-            transform-origin: center center;
+            transition: transform 0.05s linear; transform-origin: center center;
         }
 
         .zoom-close-btn {
-            position: absolute; top: 15px; right: 15px;
-            background: #fff; color: #000; border: none;
-            width: 36px; height: 36px; border-radius: 50%;
+            position: absolute; top: 15px; right: 15px; background: #fff; color: #000;
+            border: none; width: 36px; height: 36px; border-radius: 50%;
             font-size: 1.2rem; font-weight: bold; cursor: pointer; z-index: 310;
         }
     </style>
@@ -266,6 +269,14 @@
             <div class="menu-card" onclick="nav('agenda')"><h2>Mi Agenda Diaria y Sensaciones</h2></div>
             <div class="menu-card" onclick="nav('registro')"><h2>Registro Fotográfico Inicial</h2></div>
             <div class="menu-card" onclick="nav('novedades')"><h2>Novedades</h2></div>
+        </div>
+
+        <!-- SECCIÓN DINÁMICA DE NOVEDADES EN HOME -->
+        <div class="home-novedades-section">
+            <small style="font-weight:bold; color:var(--primary-dark);">📢 Novedades del Grupo:</small>
+            <div id="home-novedades-list" style="margin-top:4px;">
+                <i style="font-size:0.75rem; color:#888;">No hay novedades publicadas aún.</i>
+            </div>
         </div>
 
         <button class="config-btn" onclick="nav('config')">⚙️ Configuración (Admin)</button>
@@ -362,7 +373,7 @@
         </div>
     </div>
 
-    <!-- NOVEDADES -->
+    <!-- PANTALLA CARGAR NOVEDADES -->
     <div id="screen-novedades" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Novedades</h2>
@@ -370,10 +381,10 @@
         </div>
         <div class="screen-body">
             <div style="background: #fff; padding: 12px; border-radius: var(--border-radius);">
-                <h3 style="margin: 0 0 8px 0; font-size: 0.9rem;">Cargar Material y Enlaces</h3>
-                <div class="form-group"><label>Foto / Archivo:</label><input type="file"></div>
-                <div class="form-group"><label>Enlace / YouTube:</label><input type="text" placeholder="https://..."></div>
-                <button class="btn-submit">Publicar Novedad</button>
+                <h3 style="margin: 0 0 8px 0; font-size: 0.9rem;">Cargar Material y Novedades</h3>
+                <div class="form-group"><label>Título o Mensaje:</label><input type="text" id="nov-titulo" placeholder="Ej: Link Zoom Jueves 3"></div>
+                <div class="form-group"><label>Enlace / YouTube / Recurso:</label><input type="text" id="nov-link" placeholder="https://..."></div>
+                <button class="btn-submit" onclick="publicarNovedad()">Publicar Novedad en Pantalla Inicial</button>
             </div>
         </div>
     </div>
@@ -443,25 +454,21 @@
             <button class="btn-back" onclick="closeModal()">✕ Cerrar</button>
         </div>
         
-        <!-- FOTOS DEL DÍA -->
         <div id="modal-gallery-box" style="display:none;">
             <small style="font-size: 0.8rem; color: var(--primary-dark); font-weight: bold;">Registro Fotográfico de esta fecha:</small>
             <div class="modal-photo-gallery" id="modal-photo-grid"></div>
         </div>
 
-        <!-- INFUSIONES DEL DÍA -->
         <div class="day-info-block" id="block-infusiones" style="display:none;">
             <h4>🍵 Infusiones del día:</h4>
             <div id="content-infusiones"></div>
         </div>
 
-        <!-- PODCASTS DEL DÍA CON LINK ENLACE DIRECTO -->
         <div class="day-info-block" id="block-podcasts" style="display:none;">
             <h4>🎧 Podcast de hoy:</h4>
             <div id="content-podcasts"></div>
         </div>
 
-        <!-- ACTIVIDADES RECOMENDADAS -->
         <div class="day-info-block" id="block-actividades" style="display:none;">
             <h4>✨ Actividades recomendadas:</h4>
             <div id="content-actividades"></div>
@@ -512,6 +519,10 @@
         { nombre: "Podcast de Caminata 3", desc: "Audio guiado para movimiento consciente", link: "https://spotify.com", dias: "Sábado" }
     ];
 
+    let novedadesDB = [
+        { titulo: "Primer encuentro Zoom Jueves 3 - 20:00 hs", link: "https://zoom.us" }
+    ];
+
     let fotosPorFecha = {};
     let agendaGuardadaBD = {}; 
     let currentFechaKeyModal = "";
@@ -520,6 +531,34 @@
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById('screen-' + screenId).classList.add('active');
         if (screenId === 'pocimas') renderPocimasList();
+    }
+
+    function renderHomeNovedades() {
+        const container = document.getElementById('home-novedades-list');
+        if (novedadesDB.length === 0) {
+            container.innerHTML = '<i style="font-size:0.75rem; color:#888;">No hay novedades publicadas aún.</i>';
+            return;
+        }
+        container.innerHTML = novedadesDB.map(nov => `
+            <div class="novedad-card-item">
+                <b>${nov.titulo}</b><br>
+                ${nov.link ? `<a href="${nov.link}" target="_blank" style="color:var(--primary-dark); font-weight:bold;">🔗 Ver Enlace / Recurso</a>` : ''}
+            </div>
+        `).join('');
+    }
+
+    function publicarNovedad() {
+        const titulo = document.getElementById('nov-titulo').value;
+        const link = document.getElementById('nov-link').value;
+
+        if (titulo) {
+            novedadesDB.push({ titulo, link });
+            renderHomeNovedades();
+            alert('Novedad publicada en la Pantalla Inicial');
+            document.getElementById('nov-titulo').value = '';
+            document.getElementById('nov-link').value = '';
+            nav('home');
+        }
     }
 
     function renderPocimasList() {
@@ -588,7 +627,6 @@
         currentFechaKeyModal = fechaKey;
         document.getElementById('modal-date-title').innerText = fechaTexto;
 
-        // 1. Fotos
         const galleryBox = document.getElementById('modal-gallery-box');
         const photoGrid = document.getElementById('modal-photo-grid');
         photoGrid.innerHTML = '';
@@ -605,7 +643,6 @@
             galleryBox.style.display = 'none';
         }
 
-        // 2. Infusiones
         const infBlock = document.getElementById('block-infusiones');
         const infContent = document.getElementById('content-infusiones');
         const infs = infusionesDB.filter(i => i.dias === "Todos" || i.dias.includes(nombreDia));
@@ -614,7 +651,6 @@
             infBlock.style.display = 'block';
         } else infBlock.style.display = 'none';
 
-        // 3. Podcasts con Enlace Cliqueable de Reproducción
         const podBlock = document.getElementById('block-podcasts');
         const podContent = document.getElementById('content-podcasts');
         const pods = podcastsDB.filter(p => p.dias === "Todos" || p.dias.includes(nombreDia));
@@ -628,7 +664,6 @@
             podBlock.style.display = 'block';
         } else podBlock.style.display = 'none';
 
-        // 4. Actividades
         const actBlock = document.getElementById('block-actividades');
         const actContent = document.getElementById('content-actividades');
         const acts = actividadesDB.filter(a => a.dia === "Todos" || a.dia.includes(nombreDia));
@@ -637,7 +672,6 @@
             actBlock.style.display = 'block';
         } else actBlock.style.display = 'none';
 
-        // 5. Horarios guardados previamente
         const registroPrevio = agendaGuardadaBD[fechaKey] || { horarios: {}, notas: "" };
         const hoursContainer = document.getElementById('hours-container');
         hoursContainer.innerHTML = '';
@@ -653,7 +687,6 @@
 
         document.getElementById('modal-text').value = registroPrevio.notas;
 
-        // Select de Actividades del ABM
         const select = document.getElementById('select-actividad-config');
         select.innerHTML = '<option value="">-- Seleccionar --</option>';
         acts.forEach(a => {
@@ -795,6 +828,7 @@
 
     initCalendar();
     renderPocimasList();
+    renderHomeNovedades();
 </script>
 
 </body>
