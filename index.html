@@ -18,6 +18,10 @@
             --border-radius: 14px;
             --agenda-font-family: 'Patrick Hand', cursive;
             --agenda-font-size: 1.15rem;
+            
+            /* VARIABLES DINÁMICAS CARDS INICIO */
+            --card-title-color: #f4a291;
+            --card-title-size: 0.9rem;
         }
 
         html, body {
@@ -35,6 +39,18 @@
 
         @media (min-width: 600px) {
             .app-viewport.wide-view { max-width: 850px; }
+        }
+
+        /* HEADER SUPERIOR CON RUEDITA Y WHATSAPP */
+        .top-admin-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 8px; flex-shrink: 0;
+        }
+        .icon-btn {
+            background: #fff; border: 1px solid var(--pastel-pink);
+            padding: 6px 12px; border-radius: 20px; font-size: 1.1rem;
+            cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex; align-items: center; gap: 4px;
         }
 
         .screen {
@@ -81,16 +97,18 @@
         }
 
         .menu-card {
-            background: var(--card-bg); padding: 6px; border-radius: var(--border-radius);
+            background: var(--card-bg); padding: 8px 6px; border-radius: var(--border-radius);
             box-shadow: 0 2px 5px rgba(0,0,0,0.04); cursor: pointer; text-align: center;
-            display: flex; align-items: center; justify-content: center;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
             border: 1px solid rgba(244, 162, 145, 0.3);
         }
 
         .menu-card h2 {
-            margin: 0; color: var(--salmon); font-size: 0.85rem;
+            margin: 0; color: var(--card-title-color); font-size: var(--card-title-size);
             font-weight: 700; line-height: 1.2;
         }
+
+        .card-icon { font-size: calc(var(--card-title-size) + 0.2rem); }
 
         .home-novedades-section {
             background: #fff; padding: 10px; border-radius: var(--border-radius);
@@ -100,13 +118,6 @@
         .novedad-card-item {
             background: var(--pastel-pink); padding: 8px; border-radius: 8px;
             margin-bottom: 6px; font-size: 0.8rem; border-left: 3px solid var(--salmon);
-        }
-
-        .config-btn {
-            flex-shrink: 0; margin-top: 8px; background: #eae5dc;
-            color: var(--primary-dark); border: none; padding: 8px;
-            width: 100%; border-radius: var(--border-radius);
-            font-weight: bold; font-size: 0.85rem; cursor: pointer;
         }
 
         /* MODALIDAD EN GRANDE */
@@ -139,8 +150,7 @@
         /* CALENDARIO AGENDA */
         .calendar-grid {
             display: grid; grid-template-columns: repeat(7, 1fr);
-            gap: 6px; text-align: center;
-            font-family: var(--agenda-font-family);
+            gap: 6px; text-align: center; font-family: var(--agenda-font-family);
         }
 
         @media (min-width: 600px) {
@@ -172,7 +182,7 @@
         .btn-edit { background: #6b5b7b; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
         .btn-delete { background: #e06d53; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
 
-        /* DETALLE DEL DÍA CON TEXTAREA EXPANDIBLE */
+        /* DETALLE DEL DÍA */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-color); justify-content: center; align-items: center; z-index: 200;
@@ -208,14 +218,22 @@
             background: #ffffff; border: 1px solid #e8d5d0; border-radius: 8px; padding: 4px 8px; width: 100%;
         }
 
-        /* TEXTAREA DE NOTAS AUTO-EXPANSIBLE */
-        .expandable-textarea {
-            font-family: var(--agenda-font-family);
-            font-size: var(--agenda-font-size);
-            width: 100%; min-height: 50px; max-height: 200px;
-            border: 1px solid #ccc; border-radius: 6px; padding: 6px;
-            box-sizing: border-box; overflow-y: hidden; resize: none;
-            transition: height 0.15s ease;
+        /* POPUP TEXTAREA AMPLIADO */
+        .notes-popup-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); z-index: 400; justify-content: center; align-items: center; padding: 12px; box-sizing: border-box;
+        }
+
+        .notes-popup-card {
+            background: #fff; width: 100%; max-width: 650px; height: 80vh;
+            border-radius: var(--border-radius); padding: 16px; box-sizing: border-box;
+            display: flex; flex-direction: column; gap: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .notes-popup-card textarea {
+            flex: 1; width: 100%; font-family: var(--agenda-font-family);
+            font-size: 1.25rem; padding: 10px; border: 1px solid #ccc;
+            border-radius: 8px; box-sizing: border-box; resize: none;
         }
 
         .modal-photo-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 4px; }
@@ -248,6 +266,12 @@
 
 <div class="app-viewport" id="app-viewport">
 
+    <!-- BARRA SUPERIOR DE ACCESO RÁPIDO -->
+    <div class="top-admin-bar">
+        <button class="icon-btn" onclick="nav('config')" title="Configuración">⚙️</button>
+        <button class="icon-btn" onclick="openWhatsApp()" style="color:#25D366; font-weight:bold;" title="Enviar WhatsApp">💬 WhatsApp</button>
+    </div>
+
     <!-- PANTALLA INICIAL -->
     <div id="screen-home" class="screen active">
         <div class="welcome-container">
@@ -255,12 +279,12 @@
         </div>
 
         <div class="menu-grid-2col">
-            <div class="menu-card" onclick="nav('modalidad')"><h2>Modalidad</h2></div>
-            <div class="menu-card" onclick="nav('pocimas')"><h2>Pócimas y Yuyos del Bien</h2></div>
-            <div class="menu-card" onclick="nav('caminatas')"><h2>Propuesta Diaria y Caminatas</h2></div>
-            <div class="menu-card" onclick="nav('agenda')"><h2>Mi Agenda Diaria y Sensaciones</h2></div>
-            <div class="menu-card" onclick="nav('registro')"><h2>Registro Fotográfico Inicial</h2></div>
-            <div class="menu-card" onclick="nav('novedades')"><h2>Novedades</h2></div>
+            <div class="menu-card" onclick="nav('modalidad')"><span class="card-icon">🌸</span><h2>Modalidad</h2></div>
+            <div class="menu-card" onclick="nav('pocimas')"><span class="card-icon">🍵</span><h2>Pócimas y Yuyos del Bien</h2></div>
+            <div class="menu-card" onclick="nav('caminatas')"><span class="card-icon">🚶‍♀️</span><h2>Propuesta Diaria y Caminatas</h2></div>
+            <div class="menu-card" onclick="nav('agenda')"><span class="card-icon">📅</span><h2>Mi Agenda Diaria y Sensaciones</h2></div>
+            <div class="menu-card" onclick="nav('registro')"><span class="card-icon">📷</span><h2>Registro Fotográfico Inicial</h2></div>
+            <div class="menu-card" onclick="nav('novedades')"><span class="card-icon">🆗</span><h2>Novedades</h2></div>
         </div>
 
         <div class="home-novedades-section">
@@ -269,8 +293,6 @@
                 <i style="font-size:0.75rem; color:#888;">No hay novedades vigentes para hoy.</i>
             </div>
         </div>
-
-        <button class="config-btn" onclick="nav('config')">⚙️ Configuración (Admin)</button>
     </div>
 
     <!-- MODALIDAD CON ZOOM HABILITADO -->
@@ -317,7 +339,7 @@
         </div>
     </div>
 
-    <!-- MI AGENDA DIARIA (MOSTRANDO TODOS LOS DÍAS SIEMPRE) -->
+    <!-- MI AGENDA DIARIA -->
     <div id="screen-agenda" class="screen">
         <div class="screen-header">
             <h2 class="screen-title" style="font-family: 'Playfair Display', serif;">Mi Agenda Diaria</h2>
@@ -390,7 +412,6 @@
                 <button class="btn-submit" id="btn-save-nov" onclick="publicarNovedad()">Publicar Novedad</button>
             </div>
 
-            <!-- LISTADO ABM DE NOVEDADES -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); margin-top: 4px;">
                 <small style="font-weight:bold; color:var(--primary-dark);">Novedades Registradas:</small>
                 <div class="crud-list-container" id="novedades-abm-list" style="border-top:none;"></div>
@@ -398,7 +419,7 @@
         </div>
     </div>
 
-    <!-- CONFIGURACIÓN ADMIN -->
+    <!-- CONFIGURACIÓN ADMIN COMPLETA -->
     <div id="screen-config" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Configuración Admin</h2>
@@ -406,6 +427,35 @@
         </div>
         <div class="screen-body">
 
+            <!-- COLOR Y TAMAÑO DE CARDS INICIO -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Cards de Inicio (Estilo)</h3>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Color de Letra:</label>
+                        <input type="color" id="cfg-card-color" value="#f4a291" onchange="cambiarEstiloCards()">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Tamaño de Letra:</label>
+                        <select id="cfg-card-size" onchange="cambiarEstiloCards()">
+                            <option value="0.75rem">Chico (0.75rem)</option>
+                            <option value="0.85rem" selected>Normal (0.85rem)</option>
+                            <option value="1.0rem">Grande (1.0rem)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NÚMERO WHATSAPP -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Contacto WhatsApp</h3>
+                <div class="form-group">
+                    <label>Teléfono (formato internacional sin +):</label>
+                    <input type="text" id="cfg-wp-phone" value="5491112345678" placeholder="54911...">
+                </div>
+            </div>
+
+            <!-- ESTILO VISUAL DE AGENDA -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Estilo Visual de Mi Agenda</h3>
                 <div class="form-group">
@@ -427,6 +477,7 @@
                 </div>
             </div>
 
+            <!-- CALENDARIO -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Calendario y Horarios</h3>
                 <div style="display:flex; gap:6px;">
@@ -440,6 +491,7 @@
                 <button class="btn-submit" onclick="guardarConfigCalendario()">Actualizar Rangos</button>
             </div>
 
+            <!-- GESTIÓN INFUSIONES -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Infusiones / Pócimas</h3>
                 <div class="form-group"><label>Nombre:</label><input type="text" id="inf-nombre"></div>
@@ -454,6 +506,7 @@
                 </div>
             </div>
 
+            <!-- GESTIÓN PODCASTS -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Podcasts</h3>
                 <div class="form-group"><label>Nombre:</label><input type="text" id="pod-nombre"></div>
@@ -468,6 +521,7 @@
                 </div>
             </div>
 
+            <!-- GESTIÓN ACTIVIDADES -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Actividades</h3>
                 <div class="form-group"><label>Nombre Actividad:</label><input type="text" id="act-nombre"></div>
@@ -493,7 +547,7 @@
 
 </div>
 
-<!-- MODAL DETALLE DEL DÍA COMPLETO CON TEXTAREA AUTO-EXPANSIBLE -->
+<!-- MODAL DETALLE DEL DÍA COMPLETO -->
 <div class="modal-overlay" id="modal-agenda">
     <div class="modal-card-full">
         <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -533,10 +587,21 @@
 
         <div class="form-group" style="margin-top:2px;">
             <label style="font-family: var(--agenda-font-family); font-size: var(--agenda-font-size);">Notas / Sensaciones del día:</label>
-            <!-- TEXTAREA AUTO-EXPANSIBLE -->
-            <textarea id="modal-text" class="expandable-textarea" rows="2" placeholder="Escribe tus sensaciones aquí..." oninput="autoExpandTextarea(this)"></textarea>
+            <textarea id="modal-text" rows="2" style="font-family: var(--agenda-font-family); font-size: var(--agenda-font-size);" placeholder="Escribe tus sensaciones aquí..." onfocus="openNotesPopup()" onkeydown="openNotesPopup()"></textarea>
         </div>
         <button class="btn-submit" onclick="guardarRegistroAgenda()">Guardar en Agenda</button>
+    </div>
+</div>
+
+<!-- POP-UP EXTENDIDO PARA NOTAS/SENSACIONES -->
+<div class="notes-popup-overlay" id="notes-popup">
+    <div class="notes-popup-card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 style="margin:0; font-family:'Playfair Display', serif; color:var(--primary-dark);">Notas / Sensaciones del Día</h3>
+            <button class="btn-back" onclick="closeNotesPopup()">✕ Listo</button>
+        </div>
+        <textarea id="popup-textarea" placeholder="Escribe aquí todas tus sensaciones y notas detalladas..."></textarea>
+        <button class="btn-submit" onclick="closeNotesPopup()">Guardar Sensaciones</button>
     </div>
 </div>
 
@@ -581,11 +646,16 @@
     let agendaGuardadaBD = {}; 
     let currentFechaKeyModal = "";
 
-    function autoExpandTextarea(field) {
-        field.style.height = 'inherit';
-        const computed = window.getComputedStyle(field);
-        const height = field.scrollHeight + parseInt(computed.getPropertyValue('border-top-width'), 10) + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
-        field.style.height = height + 'px';
+    function openWhatsApp() {
+        const phone = document.getElementById('cfg-wp-phone').value || "5491112345678";
+        window.open(`https://wa.me/${phone}`, '_blank');
+    }
+
+    function cambiarEstiloCards() {
+        const color = document.getElementById('cfg-card-color').value;
+        const size = document.getElementById('cfg-card-size').value;
+        document.documentElement.style.setProperty('--card-title-color', color);
+        document.documentElement.style.setProperty('--card-title-size', size);
     }
 
     function cambiarEstiloAgenda() {
@@ -593,6 +663,22 @@
         const sizeValue = document.getElementById('cfg-agenda-size').value;
         document.documentElement.style.setProperty('--agenda-font-family', fontValue);
         document.documentElement.style.setProperty('--agenda-font-size', sizeValue);
+    }
+
+    /* MANEJO POP-UP EXTENDIDO DE NOTAS */
+    function openNotesPopup() {
+        const modalText = document.getElementById('modal-text');
+        const popupText = document.getElementById('popup-textarea');
+        popupText.value = modalText.value;
+        document.getElementById('notes-popup').style.display = 'flex';
+        popupText.focus();
+    }
+
+    function closeNotesPopup() {
+        const modalText = document.getElementById('modal-text');
+        const popupText = document.getElementById('popup-textarea');
+        modalText.value = popupText.value;
+        document.getElementById('notes-popup').style.display = 'none';
     }
 
     function nav(screenId) {
@@ -612,7 +698,6 @@
         if (screenId === 'config') renderConfigLists();
     }
 
-    /* INICIALIZAR AGENDA CON TODOS LOS DÍAS SIEMPRE */
     function initCalendar() {
         const grid = document.getElementById('calendar-grid');
         grid.innerHTML = '';
@@ -626,7 +711,6 @@
             const nombreDia = diasSemana[(i - 1) % 7];
             const esCaminata = (nombreDia === "Martes" || nombreDia === "Jueves" || nombreDia === "Sábado");
 
-            // Se muestra siempre el número de día (D1, D2, etc.) en todos los casos
             dayBox.innerHTML = `
                 <span>D${i}</span>
                 <small style="font-size:0.8rem;">${nombreDia.substring(0,3)} ${numDia}</small>
@@ -639,7 +723,6 @@
         }
     }
 
-    /* ABM COMPLETO NOVEDADES */
     function renderNovedadesABMList() {
         const container = document.getElementById('novedades-abm-list');
         container.innerHTML = novedadesDB.map((item, idx) => `
@@ -693,10 +776,8 @@
         novedadesDB.splice(idx, 1);
         renderNovedadesABMList();
         renderHomeNovedades();
-        if (document.getElementById('screen-config').classList.contains('active')) renderConfigLists();
     }
 
-    /* CRUD RESTO */
     function renderConfigLists() {
         const infBox = document.getElementById('crud-infusiones-list');
         infBox.innerHTML = infusionesDB.map((item, idx) => `
@@ -969,9 +1050,7 @@
             hoursContainer.appendChild(row);
         }
 
-        const txtArea = document.getElementById('modal-text');
-        txtArea.value = registroPrevio.notas;
-        autoExpandTextarea(txtArea);
+        document.getElementById('modal-text').value = registroPrevio.notas;
 
         const select = document.getElementById('select-actividad-config');
         select.innerHTML = '<option value="">-- Seleccionar --</option>';
