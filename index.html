@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Comunidad de Mujeres 28 Días</title>
-    <!-- Fuente amigable tipo libreta -->
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -107,16 +106,11 @@
             border-radius: var(--border-radius); align-self: center; cursor: pointer;
         }
 
-        /* REGISTRO FOTOGRÁFICO - IMAGEN PRINCIPAL PANTALLA CASI COMPLETA */
         .registro-hero-img {
-            flex: 1.8;
-            width: 100%;
-            object-fit: contain;
-            border-radius: var(--border-radius);
-            cursor: pointer;
+            flex: 1.8; width: 100%; object-fit: contain;
+            border-radius: var(--border-radius); cursor: pointer;
         }
 
-        /* LISTA PÓCIMAS Y YUYOS DESDE CONFIG */
         .pocimas-config-list {
             background: #fff; padding: 10px; border-radius: var(--border-radius);
             border: 1px solid rgba(244, 162, 145, 0.3); margin-top: 4px;
@@ -126,7 +120,7 @@
         }
         .pocima-item-card:last-child { border-bottom: none; }
 
-        /* CALENDARIO AGENDA - ESTILO PASTEL Y LETRA AMIGABLE */
+        /* CALENDARIO AGENDA */
         .calendar-grid {
             display: grid; grid-template-columns: repeat(7, 1fr);
             gap: 5px; text-align: center;
@@ -163,7 +157,7 @@
             border-radius: 6px; margin-top: 4px; display: none; cursor: pointer;
         }
 
-        /* DETALLE DEL DÍA A PANTALLA COMPLETA - PALETA PASTEL */
+        /* DETALLE DEL DÍA A PANTALLA COMPLETA */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-color); justify-content: center; align-items: center; z-index: 200;
@@ -180,8 +174,27 @@
             color: var(--primary-dark); margin: 0;
         }
 
+        .day-info-block {
+            background: #fff; border: 1px solid #f2c6be;
+            border-radius: 10px; padding: 8px; font-size: 0.85rem;
+        }
+        .day-info-block h4 { margin: 0 0 4px 0; color: var(--salmon); font-size: 0.9rem; }
+
+        .podcast-audio-link {
+            display: inline-block;
+            margin-top: 3px;
+            padding: 4px 10px;
+            background: var(--pastel-pink);
+            color: var(--primary-dark);
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            border: 1px solid var(--salmon);
+        }
+
         .hours-container {
-            flex: 1; min-height: 150px; overflow-y: auto; border: 1px solid #f2c6be;
+            flex: 1; min-height: 140px; overflow-y: auto; border: 1px solid #f2c6be;
             padding: 8px; border-radius: 12px; background: #fff8f6;
         }
 
@@ -195,10 +208,10 @@
         }
 
         .modal-photo-gallery {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 6px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 4px;
         }
         .modal-photo-gallery img {
-            width: 100%; height: 75px; object-fit: cover; border-radius: 8px; border: 1px solid var(--salmon); cursor: pointer;
+            width: 100%; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid var(--salmon); cursor: pointer;
         }
 
         /* FORMULARIOS & BOTONES */
@@ -214,7 +227,7 @@
             cursor: pointer; font-size: 0.95rem; font-weight: bold; font-family: 'Patrick Hand', cursive;
         }
 
-        /* MODAL DE ZOOM DE IMÁGENES (PINCH-TO-ZOOM / TOUCH MULTIPOINT) */
+        /* MODAL DE ZOOM DE IMÁGENES */
         .zoom-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.9); z-index: 300;
@@ -321,7 +334,6 @@
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
-            <!-- La imagen ocupa la mayor parte de la pantalla -->
             <img src="Registro fotografico.jpeg" alt="Registro Fotográfico" class="registro-hero-img" onclick="openZoomModal(this.src)">
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); flex-shrink: 0;">
                 <div class="form-group">
@@ -423,7 +435,7 @@
 
 </div>
 
-<!-- MODAL AGENDA DIARIA PANTALLA COMPLETA - COLORES PASTEL -->
+<!-- MODAL DETALLE DEL DÍA COMPLETO -->
 <div class="modal-overlay" id="modal-agenda">
     <div class="modal-card-full">
         <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -431,9 +443,28 @@
             <button class="btn-back" onclick="closeModal()">✕ Cerrar</button>
         </div>
         
+        <!-- FOTOS DEL DÍA -->
         <div id="modal-gallery-box" style="display:none;">
             <small style="font-size: 0.8rem; color: var(--primary-dark); font-weight: bold;">Registro Fotográfico de esta fecha:</small>
             <div class="modal-photo-gallery" id="modal-photo-grid"></div>
+        </div>
+
+        <!-- INFUSIONES DEL DÍA -->
+        <div class="day-info-block" id="block-infusiones" style="display:none;">
+            <h4>🍵 Infusiones del día:</h4>
+            <div id="content-infusiones"></div>
+        </div>
+
+        <!-- PODCASTS DEL DÍA CON LINK ENLACE DIRECTO -->
+        <div class="day-info-block" id="block-podcasts" style="display:none;">
+            <h4>🎧 Podcast de hoy:</h4>
+            <div id="content-podcasts"></div>
+        </div>
+
+        <!-- ACTIVIDADES RECOMENDADAS -->
+        <div class="day-info-block" id="block-actividades" style="display:none;">
+            <h4>✨ Actividades recomendadas:</h4>
+            <div id="content-actividades"></div>
         </div>
 
         <div class="form-group">
@@ -464,20 +495,25 @@
     let cfgCalendario = { diaInicio: 1, diaFin: 28, horaInicio: 7, horaFin: 21 };
     
     let actividadesDB = [
-        { nombre: "Caminata con Podcast", dia: "Martes" },
-        { nombre: "Caminata con Podcast", dia: "Jueves" },
-        { nombre: "Caminata con Podcast", dia: "Sábado" }
+        { nombre: "Caminata de Conexión", dia: "Martes" },
+        { nombre: "Caminata de Conexión", dia: "Jueves" },
+        { nombre: "Caminata de Conexión", dia: "Sábado" }
     ];
 
     let infusionesDB = [
-        { nombre: "Manzanilla", desc: "Infusión suave", efecto: "Cuidar hígado e intestino", dias: "Todos los días" }
+        { nombre: "Manzanilla", desc: "2 tazas diarias", efecto: "Cuidar hígado e intestino", dias: "Todos" },
+        { nombre: "Suico", desc: "20 gotas en la tarde", efecto: "Antiparasitario", dias: "Todos" },
+        { nombre: "Pasionaria", desc: "20 gotas al atardecer", efecto: "Sistema nervioso", dias: "Todos" }
     ];
 
-    let podcastsDB = [];
+    let podcastsDB = [
+        { nombre: "Podcast de Caminata 1", desc: "Audio guiado para movimiento consciente", link: "https://spotify.com", dias: "Martes" },
+        { nombre: "Podcast de Caminata 2", desc: "Audio guiado para movimiento consciente", link: "https://spotify.com", dias: "Jueves" },
+        { nombre: "Podcast de Caminata 3", desc: "Audio guiado para movimiento consciente", link: "https://spotify.com", dias: "Sábado" }
+    ];
+
     let fotosPorFecha = {};
-    
-    // PERSISTENCIA DE ACTIVIDADES DE LA AGENDA
-    let agendaGuardadaBD = {}; // Estrategia: { '2026-09-03': { horarios: { '08:00 hs': 'texto' }, notas: 'sensaciones' } }
+    let agendaGuardadaBD = {}; 
     let currentFechaKeyModal = "";
 
     function nav(screenId) {
@@ -539,7 +575,7 @@
             dayBox.innerHTML = `
                 <span>D${i}</span>
                 <small style="font-size:0.75rem;">${nombreDia.substring(0,3)} ${numDia}</small>
-                ${esCaminata ? '<span class="walk-icon">🚶‍♀️</span><a href="#" class="podcast-link" onclick="event.stopPropagation(); alert(\'Reproduciendo Podcast del día\');">Podcast</a>' : ''}
+                ${esCaminata ? '<span class="walk-icon">🚶‍♀️</span><a href="#" class="podcast-link" onclick="event.stopPropagation(); alert(\'Podcast asignado para hoy\');">Podcast</a>' : ''}
             `;
             
             const fechaKey = `2026-09-${numDia < 10 ? '0' + numDia : numDia}`;
@@ -552,7 +588,7 @@
         currentFechaKeyModal = fechaKey;
         document.getElementById('modal-date-title').innerText = fechaTexto;
 
-        // Galería de fotos si existen
+        // 1. Fotos
         const galleryBox = document.getElementById('modal-gallery-box');
         const photoGrid = document.getElementById('modal-photo-grid');
         photoGrid.innerHTML = '';
@@ -569,12 +605,43 @@
             galleryBox.style.display = 'none';
         }
 
-        // Cargar o recuperar datos guardados previamente para esa fecha
-        const registroPrevio = agendaGuardadaBD[fechaKey] || { horarios: {}, notas: "" };
+        // 2. Infusiones
+        const infBlock = document.getElementById('block-infusiones');
+        const infContent = document.getElementById('content-infusiones');
+        const infs = infusionesDB.filter(i => i.dias === "Todos" || i.dias.includes(nombreDia));
+        if (infs.length > 0) {
+            infContent.innerHTML = infs.map(i => `<div>• <b>${i.nombre}</b>: ${i.desc} (${i.efecto})</div>`).join('');
+            infBlock.style.display = 'block';
+        } else infBlock.style.display = 'none';
 
-        // Filas de Horarios
+        // 3. Podcasts con Enlace Cliqueable de Reproducción
+        const podBlock = document.getElementById('block-podcasts');
+        const podContent = document.getElementById('content-podcasts');
+        const pods = podcastsDB.filter(p => p.dias === "Todos" || p.dias.includes(nombreDia));
+        if (pods.length > 0) {
+            podContent.innerHTML = pods.map(p => `
+                <div style="margin-bottom: 4px;">
+                    🎧 <b>${p.nombre}</b> - ${p.desc}<br>
+                    <a href="${p.link || '#'}" target="_blank" class="podcast-audio-link">▶ Escuchar Audio Podcast</a>
+                </div>
+            `).join('');
+            podBlock.style.display = 'block';
+        } else podBlock.style.display = 'none';
+
+        // 4. Actividades
+        const actBlock = document.getElementById('block-actividades');
+        const actContent = document.getElementById('content-actividades');
+        const acts = actividadesDB.filter(a => a.dia === "Todos" || a.dia.includes(nombreDia));
+        if (acts.length > 0) {
+            actContent.innerHTML = acts.map(a => `<div>✨ ${a.nombre}</div>`).join('');
+            actBlock.style.display = 'block';
+        } else actBlock.style.display = 'none';
+
+        // 5. Horarios guardados previamente
+        const registroPrevio = agendaGuardadaBD[fechaKey] || { horarios: {}, notas: "" };
         const hoursContainer = document.getElementById('hours-container');
         hoursContainer.innerHTML = '';
+
         for (let h = cfgCalendario.horaInicio; h <= cfgCalendario.horaFin; h++) {
             const horaStr = `${h < 10 ? '0' + h : h}:00 hs`;
             const valorPrevio = registroPrevio.horarios[horaStr] || '';
@@ -586,10 +653,10 @@
 
         document.getElementById('modal-text').value = registroPrevio.notas;
 
-        // Actividades del ABM
+        // Select de Actividades del ABM
         const select = document.getElementById('select-actividad-config');
         select.innerHTML = '<option value="">-- Seleccionar --</option>';
-        actividadesDB.filter(a => a.dia === nombreDia || a.dia === "Todos").forEach(a => {
+        acts.forEach(a => {
             const opt = document.createElement('option');
             opt.value = a.nombre;
             opt.innerText = a.nombre;
@@ -619,13 +686,12 @@
 
         const notas = document.getElementById('modal-text').value;
 
-        // Guardar permanentemente en el objeto estado de la app
         agendaGuardadaBD[currentFechaKeyModal] = {
             horarios: horariosMap,
             notas: notas
         };
 
-        alert('¡Actividades guardadas en la agenda!');
+        alert('¡Día guardado en tu agenda!');
         closeModal();
     }
 
@@ -640,8 +706,8 @@
         const dias = document.getElementById('inf-dias').value;
 
         if (nombre) {
-            infusionesDB.push({ nombre, desc, efecto, dias });
-            alert(`Infusión "${nombre}" agregada a Config`);
+            infusionesDB.push({ nombre, desc, efecto, dias: dias || "Todos" });
+            alert(`Infusión "${nombre}" agregada`);
             document.getElementById('inf-nombre').value = '';
             document.getElementById('inf-desc').value = '';
             document.getElementById('inf-efecto').value = '';
@@ -652,10 +718,17 @@
 
     function agregarPodcast() {
         const nombre = document.getElementById('pod-nombre').value;
+        const desc = document.getElementById('pod-desc').value;
+        const link = document.getElementById('pod-link').value;
+        const dias = document.getElementById('pod-dias').value;
+
         if (nombre) {
-            podcastsDB.push({ nombre });
+            podcastsDB.push({ nombre, desc, link: link || "#", dias: dias || "Todos" });
             alert(`Podcast "${nombre}" guardado`);
             document.getElementById('pod-nombre').value = '';
+            document.getElementById('pod-desc').value = '';
+            document.getElementById('pod-link').value = '';
+            document.getElementById('pod-dias').value = '';
         }
     }
 
@@ -669,7 +742,7 @@
         }
     }
 
-    /* MOTOR DE ZOOM & PINCH-TO-ZOOM EN CELULARES */
+    /* MOTOR DE ZOOM */
     let currentScale = 1;
     let initialDistance = 0;
     const zoomModal = document.getElementById('zoom-modal');
@@ -687,7 +760,6 @@
         zoomModal.style.display = 'none';
     }
 
-    // Eventos táctiles para agrandar con los dedos en pantallas táctiles
     zoomModal.addEventListener('touchstart', (e) => {
         if (e.touches.length === 2) {
             initialDistance = Math.hypot(
