@@ -4,20 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Comunidad de Mujeres 28 Días</title>
+    <!-- Fuente amigable tipo libreta -->
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #faf7f2;
+            --bg-color: #fcf8f3;
             --card-bg: #ffffff;
-            --salmon: #fa8072;
-            --primary: #6b5b7b;
+            --salmon: #f4a291;
+            --pastel-pink: #fbe3e8;
+            --pastel-purple: #e8dff5;
+            --pastel-green: #e1f0da;
+            --primary: #826c7f;
             --primary-dark: #4a3e56;
-            --border-radius: 12px;
+            --border-radius: 14px;
         }
 
         html, body {
             margin: 0; padding: 0; width: 100%; height: 100%;
             overflow: hidden; background-color: var(--bg-color);
-            font-family: 'Segoe UI', Georgia, serif; color: #333;
+            font-family: 'Segoe UI', Georgia, serif; color: #444;
         }
 
         .app-viewport {
@@ -62,7 +67,7 @@
             display: flex; align-items: center; justify-content: center; background: #fff;
         }
 
-        .welcome-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .welcome-img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
 
         .menu-grid-2col {
             flex: 1; display: grid; grid-template-columns: repeat(2, 1fr);
@@ -73,7 +78,7 @@
             background: var(--card-bg); padding: 6px; border-radius: var(--border-radius);
             box-shadow: 0 2px 5px rgba(0,0,0,0.04); cursor: pointer; text-align: center;
             display: flex; align-items: center; justify-content: center;
-            border: 1px solid rgba(250, 128, 114, 0.25);
+            border: 1px solid rgba(244, 162, 145, 0.3);
         }
 
         .menu-card h2 {
@@ -94,32 +99,55 @@
             width: 100%; height: 100%; align-items: center;
         }
         .horizontal-container img {
-            width: 50%; max-height: 90%; object-fit: contain; border-radius: 8px;
+            width: 50%; max-height: 90%; object-fit: contain; border-radius: 8px; cursor: pointer;
         }
 
         .fit-img {
-            max-width: 100%; max-height: 45%; object-fit: contain;
-            border-radius: var(--border-radius); align-self: center;
+            max-width: 100%; object-fit: contain;
+            border-radius: var(--border-radius); align-self: center; cursor: pointer;
         }
 
-        /* CALENDARIO AGENDA */
+        /* REGISTRO FOTOGRÁFICO - IMAGEN PRINCIPAL PANTALLA CASI COMPLETA */
+        .registro-hero-img {
+            flex: 1.8;
+            width: 100%;
+            object-fit: contain;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+        }
+
+        /* LISTA PÓCIMAS Y YUYOS DESDE CONFIG */
+        .pocimas-config-list {
+            background: #fff; padding: 10px; border-radius: var(--border-radius);
+            border: 1px solid rgba(244, 162, 145, 0.3); margin-top: 4px;
+        }
+        .pocima-item-card {
+            border-bottom: 1px dashed #eee; padding: 4px 0; font-size: 0.75rem;
+        }
+        .pocima-item-card:last-child { border-bottom: none; }
+
+        /* CALENDARIO AGENDA - ESTILO PASTEL Y LETRA AMIGABLE */
         .calendar-grid {
             display: grid; grid-template-columns: repeat(7, 1fr);
-            gap: 4px; text-align: center;
+            gap: 5px; text-align: center;
+            font-family: 'Patrick Hand', cursive;
         }
 
         .cal-day {
-            background: #fff; padding: 6px 0; border-radius: 6px;
-            cursor: pointer; border: 1px solid #eee; font-weight: bold;
-            font-size: 0.7rem; display: flex; flex-direction: column;
-            align-items: center; min-height: 50px; justify-content: space-between;
+            background: var(--pastel-pink); padding: 4px 0; border-radius: 10px;
+            cursor: pointer; border: 1px solid #f2c6be; font-weight: bold;
+            font-size: 0.95rem; display: flex; flex-direction: column;
+            align-items: center; min-height: 52px; justify-content: space-between;
+            color: var(--primary-dark);
+            transition: transform 0.1s, background-color 0.2s;
         }
 
-        .cal-day:hover { background: var(--salmon); color: #fff; }
-        .walk-icon { font-size: 0.85rem; margin-top: 2px; }
-        .podcast-link { font-size: 0.6rem; color: var(--primary); text-decoration: underline; }
+        .cal-day:nth-child(even) { background: var(--pastel-purple); border-color: #d8cbe5; }
+        .cal-day:hover { transform: scale(1.03); background: var(--pastel-green); }
+        .walk-icon { font-size: 0.9rem; }
+        .podcast-link { font-size: 0.75rem; color: var(--primary); text-decoration: underline; }
 
-        /* REGISTRO FOTOGRÁFICO CON PREVISUALIZACIÓN */
+        /* REGISTRO FOTOGRÁFICO CONTROLES */
         .photo-upload-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
         }
@@ -131,55 +159,80 @@
         .photo-box-input input { width: 100%; font-size: 0.65rem; margin-top: 4px; }
         
         .preview-img {
-            width: 100%; height: 70px; object-fit: cover;
-            border-radius: 6px; margin-top: 4px; display: none;
+            width: 100%; height: 50px; object-fit: cover;
+            border-radius: 6px; margin-top: 4px; display: none; cursor: pointer;
         }
 
-        /* FORMULARIOS & MODAL */
-        .form-group { margin-bottom: 8px; }
-        .form-group label { display: block; font-size: 0.75rem; font-weight: bold; margin-bottom: 2px; }
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 0.8rem;
-        }
-
-        .btn-submit {
-            background: var(--primary); color: white; border: none;
-            padding: 8px; border-radius: 6px; width: 100%;
-            cursor: pointer; font-size: 0.85rem; font-weight: bold;
-        }
-
+        /* DETALLE DEL DÍA A PANTALLA COMPLETA - PALETA PASTEL */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 100;
+            background: var(--bg-color); justify-content: center; align-items: center; z-index: 200;
         }
 
-        .modal-card {
-            background: #fffef9; width: 85%; max-width: 380px; padding: 16px;
-            border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            border-left: 5px solid var(--salmon); max-height: 85vh; overflow-y: auto;
+        .modal-card-full {
+            background: #fffdfa; width: 100%; height: 100dvh; padding: 14px;
+            box-sizing: border-box; display: flex; flex-direction: column; gap: 8px;
+            overflow-y: auto; font-family: 'Patrick Hand', cursive;
         }
 
         .modal-title {
-            font-family: 'Georgia', serif; font-size: 1.1rem;
-            color: var(--primary-dark); margin-top: 0; margin-bottom: 8px;
+            font-family: 'Playfair Display', serif; font-size: 1.3rem;
+            color: var(--primary-dark); margin: 0;
         }
 
         .hours-container {
-            max-height: 160px; overflow-y: auto; border: 1px solid #eee;
-            padding: 4px; border-radius: 6px; margin-bottom: 8px; background: #fff;
+            flex: 1; min-height: 150px; overflow-y: auto; border: 1px solid #f2c6be;
+            padding: 8px; border-radius: 12px; background: #fff8f6;
         }
 
         .hour-row {
-            display: flex; align-items: center; gap: 6px; margin-bottom: 4px;
+            display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
         }
-        .hour-label { font-size: 0.7rem; font-weight: bold; width: 55px; flex-shrink: 0; }
+        .hour-label { font-size: 0.95rem; font-weight: bold; width: 65px; flex-shrink: 0; color: var(--primary-dark); }
+        .hour-input {
+            font-family: 'Patrick Hand', cursive; font-size: 1rem; color: #333;
+            background: #ffffff; border: 1px solid #e8d5d0; border-radius: 8px; padding: 4px 8px; width: 100%;
+        }
 
-        /* GALERÍA MODAL */
         .modal-photo-gallery {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 8px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 6px;
         }
         .modal-photo-gallery img {
-            width: 100%; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid var(--salmon);
+            width: 100%; height: 75px; object-fit: cover; border-radius: 8px; border: 1px solid var(--salmon); cursor: pointer;
+        }
+
+        /* FORMULARIOS & BOTONES */
+        .form-group { margin-bottom: 8px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 2px; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 0.85rem;
+        }
+
+        .btn-submit {
+            background: var(--salmon); color: white; border: none;
+            padding: 8px; border-radius: 8px; width: 100%;
+            cursor: pointer; font-size: 0.95rem; font-weight: bold; font-family: 'Patrick Hand', cursive;
+        }
+
+        /* MODAL DE ZOOM DE IMÁGENES (PINCH-TO-ZOOM / TOUCH MULTIPOINT) */
+        .zoom-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9); z-index: 300;
+            justify-content: center; align-items: center; overflow: hidden;
+            touch-action: none;
+        }
+
+        .zoom-img-target {
+            max-width: 95%; max-height: 90%;
+            transition: transform 0.05s linear;
+            transform-origin: center center;
+        }
+
+        .zoom-close-btn {
+            position: absolute; top: 15px; right: 15px;
+            background: #fff; color: #000; border: none;
+            width: 36px; height: 36px; border-radius: 50%;
+            font-size: 1.2rem; font-weight: bold; cursor: pointer; z-index: 310;
         }
     </style>
 </head>
@@ -190,7 +243,7 @@
     <!-- PANTALLA INICIAL -->
     <div id="screen-home" class="screen active">
         <div class="welcome-container">
-            <img src="1-Bienvenida.jpeg" alt="Bienvenida" class="welcome-img">
+            <img src="1-Bienvenida.jpeg" alt="Bienvenida" class="welcome-img" onclick="openZoomModal(this.src)">
         </div>
 
         <div class="menu-grid-2col">
@@ -213,8 +266,8 @@
         </div>
         <div class="screen-body">
             <div class="horizontal-container">
-                <img src="modalidad1.jpeg" alt="Modalidad 1">
-                <img src="modalidad2.jpeg" alt="Modalidad 2">
+                <img src="modalidad1.jpeg" alt="Modalidad 1" onclick="openZoomModal(this.src)">
+                <img src="modalidad2.jpeg" alt="Modalidad 2" onclick="openZoomModal(this.src)">
             </div>
         </div>
     </div>
@@ -225,9 +278,16 @@
             <h2 class="screen-title">Pócimas y Yuyos del Bien</h2>
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
-        <div class="screen-body" style="justify-content: center;">
-            <img src="yuyos del bien.jpeg" alt="Yuyos del Bien" class="fit-img" style="max-height: 55%;">
-            <img src="yuyos.jpeg" alt="Yuyos" class="fit-img" style="max-height: 35%;">
+        <div class="screen-body">
+            <img src="yuyos del bien.jpeg" alt="Yuyos del Bien" class="fit-img" style="max-height: 40%;" onclick="openZoomModal(this.src)">
+            <img src="yuyos.jpeg" alt="Yuyos" class="fit-img" style="max-height: 25%;" onclick="openZoomModal(this.src)">
+            
+            <div class="pocimas-config-list">
+                <small style="font-weight:bold; color:var(--primary-dark);">Infusiones y Pócimas Configuradas:</small>
+                <div id="pocimas-dynamic-list" style="margin-top:4px;">
+                    <i style="font-size:0.7rem; color:#888;">No hay infusiones adicionadas en Config.</i>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -238,18 +298,18 @@
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body" style="justify-content: center;">
-            <img src="Caminatas.jpeg" alt="Caminatas" class="fit-img" style="max-height: 90%;">
+            <img src="Caminatas.jpeg" alt="Caminatas" class="fit-img" style="max-height: 90%;" onclick="openZoomModal(this.src)">
         </div>
     </div>
 
     <!-- MI AGENDA DIARIA -->
     <div id="screen-agenda" class="screen">
         <div class="screen-header">
-            <h2 class="screen-title">Mi Agenda Diaria</h2>
+            <h2 class="screen-title" style="font-family: 'Playfair Display', serif;">Mi Agenda Diaria</h2>
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
-            <p style="font-size: 0.8rem; margin: 0;">Selecciona un día para gestionar tus actividades:</p>
+            <p style="font-size: 0.85rem; margin: 0; font-family: 'Patrick Hand', cursive;">Selecciona un día para organizar tus rutinas:</p>
             <div class="calendar-grid" id="calendar-grid"></div>
         </div>
     </div>
@@ -261,8 +321,9 @@
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
-            <img src="Registro fotografico.jpeg" alt="Registro Fotográfico" class="fit-img" style="max-height: 30%;">
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+            <!-- La imagen ocupa la mayor parte de la pantalla -->
+            <img src="Registro fotografico.jpeg" alt="Registro Fotográfico" class="registro-hero-img" onclick="openZoomModal(this.src)">
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); flex-shrink: 0;">
                 <div class="form-group">
                     <label>Fecha de la toma:</label>
                     <input type="date" id="foto-fecha">
@@ -270,21 +331,21 @@
                 <div class="photo-upload-grid">
                     <div class="photo-box-input">
                         <b>Rostro</b>
-                        <img id="prev-rostro" class="preview-img">
+                        <img id="prev-rostro" class="preview-img" onclick="openZoomModal(this.src)">
                         <input type="file" accept="image/*" onchange="previewAndSave('rostro', event)">
                     </div>
                     <div class="photo-box-input">
                         <b>Medio Cuerpo</b>
-                        <img id="prev-medio" class="preview-img">
+                        <img id="prev-medio" class="preview-img" onclick="openZoomModal(this.src)">
                         <input type="file" accept="image/*" onchange="previewAndSave('medio', event)">
                     </div>
                     <div class="photo-box-input">
                         <b>Cuerpo Entero</b>
-                        <img id="prev-entero" class="preview-img">
+                        <img id="prev-entero" class="preview-img" onclick="openZoomModal(this.src)">
                         <input type="file" accept="image/*" onchange="previewAndSave('entero', event)">
                     </div>
                 </div>
-                <button class="btn-submit" style="margin-top: 8px;" onclick="alert('Registro Fotográfico actualizado con éxito')">Guardar Fotos</button>
+                <button class="btn-submit" style="margin-top: 8px;" onclick="alert('Registro Fotográfico guardado')">Guardar Fotos</button>
             </div>
         </div>
     </div>
@@ -312,7 +373,6 @@
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
-            <!-- PARÁMETROS DE CALENDARIO -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Calendario y Horarios</h3>
                 <div style="display:flex; gap:6px;">
@@ -326,7 +386,6 @@
                 <button class="btn-submit" onclick="guardarConfigCalendario()">Actualizar Rangos</button>
             </div>
 
-            <!-- ABM INFUSIONES -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">ABM Infusiones / Pócimas</h3>
                 <div class="form-group"><label>Nombre:</label><input type="text" id="inf-nombre"></div>
@@ -336,7 +395,6 @@
                 <button class="btn-submit" onclick="agregarInfusion()">Guardar Infusión</button>
             </div>
 
-            <!-- ABM PODCAST -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">ABM Podcasts</h3>
                 <div class="form-group"><label>Nombre:</label><input type="text" id="pod-nombre"></div>
@@ -346,7 +404,6 @@
                 <button class="btn-submit" onclick="agregarPodcast()">Guardar Podcast</button>
             </div>
 
-            <!-- ABM ACTIVIDADES -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">ABM Actividades</h3>
                 <div class="form-group"><label>Nombre Actividad:</label><input type="text" id="act-nombre"></div>
@@ -366,60 +423,83 @@
 
 </div>
 
-<!-- MODAL AGENDA DIARIA -->
+<!-- MODAL AGENDA DIARIA PANTALLA COMPLETA - COLORES PASTEL -->
 <div class="modal-overlay" id="modal-agenda">
-    <div class="modal-card">
-        <h2 class="modal-title" id="modal-date-title">Día de la semana</h2>
+    <div class="modal-card-full">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2 class="modal-title" id="modal-date-title">Día de la semana</h2>
+            <button class="btn-back" onclick="closeModal()">✕ Cerrar</button>
+        </div>
         
-        <!-- Galería de las 3 fotos si existen -->
         <div id="modal-gallery-box" style="display:none;">
-            <small style="font-size: 0.65rem; color: var(--primary-dark); font-weight: bold;">Registro Fotográfico de esta fecha:</small>
+            <small style="font-size: 0.8rem; color: var(--primary-dark); font-weight: bold;">Registro Fotográfico de esta fecha:</small>
             <div class="modal-photo-gallery" id="modal-photo-grid"></div>
         </div>
 
         <div class="form-group">
-            <label>Seleccionar Actividad Configurada:</label>
-            <select id="select-actividad-config" onchange="cargarActividadEnHorario(this.value)">
+            <label style="font-family:'Patrick Hand', cursive; font-size:0.95rem;">Seleccionar Actividad Configurada:</label>
+            <select id="select-actividad-config" style="font-family:'Patrick Hand', cursive; font-size:0.95rem;" onchange="cargarActividadEnHorario(this.value)">
                 <option value="">-- Seleccionar --</option>
             </select>
         </div>
 
-        <label style="font-size:0.75rem; font-weight:bold;">Horarios del día:</label>
+        <label style="font-size:0.95rem; font-weight:bold; color:var(--primary-dark);">Horarios del día:</label>
         <div class="hours-container" id="hours-container"></div>
 
-        <div class="form-group" style="margin-top:4px;">
-            <label>Notas / Sensaciones del día:</label>
-            <textarea id="modal-text" rows="2" placeholder="Escribe tus sensaciones aquí..."></textarea>
+        <div class="form-group" style="margin-top:2px;">
+            <label style="font-family:'Patrick Hand', cursive; font-size:0.95rem;">Notas / Sensaciones del día:</label>
+            <textarea id="modal-text" rows="2" style="font-family:'Patrick Hand', cursive; font-size:0.95rem;" placeholder="Escribe tus sensaciones aquí..."></textarea>
         </div>
-        <button class="btn-submit" onclick="closeModal()">Guardar en Agenda</button>
+        <button class="btn-submit" onclick="guardarRegistroAgenda()">Guardar en Agenda</button>
     </div>
 </div>
 
-<script>
-    // Estado Global Configurable
-    let cfgCalendario = {
-        diaInicio: 1,
-        diaFin: 28,
-        horaInicio: 7,
-        horaFin: 21
-    };
+<!-- MODAL ZOOM DE IMÁGENES -->
+<div class="zoom-overlay" id="zoom-modal" onclick="closeZoomModal()">
+    <button class="zoom-close-btn" onclick="closeZoomModal()">✕</button>
+    <img id="zoom-target-img" class="zoom-img-target" src="" alt="Zoom Image">
+</div>
 
+<script>
+    let cfgCalendario = { diaInicio: 1, diaFin: 28, horaInicio: 7, horaFin: 21 };
+    
     let actividadesDB = [
         { nombre: "Caminata con Podcast", dia: "Martes" },
         { nombre: "Caminata con Podcast", dia: "Jueves" },
         { nombre: "Caminata con Podcast", dia: "Sábado" }
     ];
 
-    let infusionesDB = [];
+    let infusionesDB = [
+        { nombre: "Manzanilla", desc: "Infusión suave", efecto: "Cuidar hígado e intestino", dias: "Todos los días" }
+    ];
+
     let podcastsDB = [];
-    let fotosPorFecha = {}; // Estrategia: { '2026-09-03': { rostro: 'url', medio: 'url', entero: 'url' } }
+    let fotosPorFecha = {};
+    
+    // PERSISTENCIA DE ACTIVIDADES DE LA AGENDA
+    let agendaGuardadaBD = {}; // Estrategia: { '2026-09-03': { horarios: { '08:00 hs': 'texto' }, notas: 'sensaciones' } }
+    let currentFechaKeyModal = "";
 
     function nav(screenId) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById('screen-' + screenId).classList.add('active');
+        if (screenId === 'pocimas') renderPocimasList();
     }
 
-    // Previsualizar y Guardar Fotos
+    function renderPocimasList() {
+        const container = document.getElementById('pocimas-dynamic-list');
+        if (infusionesDB.length === 0) {
+            container.innerHTML = '<i style="font-size:0.7rem; color:#888;">No hay infusiones adicionadas en Config.</i>';
+            return;
+        }
+        container.innerHTML = infusionesDB.map(item => `
+            <div class="pocima-item-card">
+                <b>${item.nombre}</b> ${item.dias ? `(${item.dias})` : ''}<br>
+                <span>${item.desc || ''} ${item.efecto ? `- ${item.efecto}` : ''}</span>
+            </div>
+        `).join('');
+    }
+
     function previewAndSave(tipo, event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -434,18 +514,15 @@
         fotosPorFecha[fecha][tipo] = url;
     }
 
-    // Configuración de Calendario
     function guardarConfigCalendario() {
         cfgCalendario.diaInicio = parseInt(document.getElementById('cfg-dia-inicio').value) || 1;
         cfgCalendario.diaFin = parseInt(document.getElementById('cfg-dia-fin').value) || 28;
         cfgCalendario.horaInicio = parseInt(document.getElementById('cfg-hora-inicio').value) || 7;
         cfgCalendario.horaFin = parseInt(document.getElementById('cfg-hora-fin').value) || 21;
-        
         initCalendar();
         alert('Configuración de calendario actualizada');
     }
 
-    // Inicializar Calendario
     function initCalendar() {
         const grid = document.getElementById('calendar-grid');
         grid.innerHTML = '';
@@ -461,22 +538,21 @@
 
             dayBox.innerHTML = `
                 <span>D${i}</span>
-                <small style="font-size:0.6rem;">${nombreDia.substring(0,3)} ${numDia}</small>
+                <small style="font-size:0.75rem;">${nombreDia.substring(0,3)} ${numDia}</small>
                 ${esCaminata ? '<span class="walk-icon">🚶‍♀️</span><a href="#" class="podcast-link" onclick="event.stopPropagation(); alert(\'Reproduciendo Podcast del día\');">Podcast</a>' : ''}
             `;
             
-            // Mapeo simulación fecha YYYY-MM-DD
             const fechaKey = `2026-09-${numDia < 10 ? '0' + numDia : numDia}`;
             dayBox.onclick = () => openAgendaModal(`${nombreDia} ${numDia} de septiembre`, nombreDia, fechaKey);
             grid.appendChild(dayBox);
         }
     }
 
-    // Modal de la Agenda Diaria
     function openAgendaModal(fechaTexto, nombreDia, fechaKey) {
+        currentFechaKeyModal = fechaKey;
         document.getElementById('modal-date-title').innerText = fechaTexto;
 
-        // 1. Cargar las 3 fotos si existen para la fecha
+        // Galería de fotos si existen
         const galleryBox = document.getElementById('modal-gallery-box');
         const photoGrid = document.getElementById('modal-photo-grid');
         photoGrid.innerHTML = '';
@@ -485,6 +561,7 @@
             Object.values(fotosPorFecha[fechaKey]).forEach(srcUrl => {
                 const img = document.createElement('img');
                 img.src = srcUrl;
+                img.onclick = () => openZoomModal(srcUrl);
                 photoGrid.appendChild(img);
             });
             galleryBox.style.display = 'block';
@@ -492,18 +569,24 @@
             galleryBox.style.display = 'none';
         }
 
-        // 2. Generar Filas de Horarios Parametrizados
+        // Cargar o recuperar datos guardados previamente para esa fecha
+        const registroPrevio = agendaGuardadaBD[fechaKey] || { horarios: {}, notas: "" };
+
+        // Filas de Horarios
         const hoursContainer = document.getElementById('hours-container');
         hoursContainer.innerHTML = '';
         for (let h = cfgCalendario.horaInicio; h <= cfgCalendario.horaFin; h++) {
             const horaStr = `${h < 10 ? '0' + h : h}:00 hs`;
+            const valorPrevio = registroPrevio.horarios[horaStr] || '';
             const row = document.createElement('div');
             row.className = 'hour-row';
-            row.innerHTML = `<span class="hour-label">${horaStr}</span><input type="text" class="hour-input" placeholder="Actividad...">`;
+            row.innerHTML = `<span class="hour-label">${horaStr}</span><input type="text" class="hour-input" data-hora="${horaStr}" value="${valorPrevio}" placeholder="Actividad...">`;
             hoursContainer.appendChild(row);
         }
 
-        // 3. Actividades del ABM
+        document.getElementById('modal-text').value = registroPrevio.notas;
+
+        // Actividades del ABM
         const select = document.getElementById('select-actividad-config');
         select.innerHTML = '<option value="">-- Seleccionar --</option>';
         actividadesDB.filter(a => a.dia === nombreDia || a.dia === "Todos").forEach(a => {
@@ -524,11 +607,32 @@
         }
     }
 
+    function guardarRegistroAgenda() {
+        if (!currentFechaKeyModal) return;
+
+        const inputs = document.querySelectorAll('.hour-input');
+        let horariosMap = {};
+        inputs.forEach(input => {
+            const h = input.getAttribute('data-hora');
+            horariosMap[h] = input.value;
+        });
+
+        const notas = document.getElementById('modal-text').value;
+
+        // Guardar permanentemente en el objeto estado de la app
+        agendaGuardadaBD[currentFechaKeyModal] = {
+            horarios: horariosMap,
+            notas: notas
+        };
+
+        alert('¡Actividades guardadas en la agenda!');
+        closeModal();
+    }
+
     function closeModal() {
         document.getElementById('modal-agenda').style.display = 'none';
     }
 
-    // ABMs
     function agregarInfusion() {
         const nombre = document.getElementById('inf-nombre').value;
         const desc = document.getElementById('inf-desc').value;
@@ -537,20 +641,20 @@
 
         if (nombre) {
             infusionesDB.push({ nombre, desc, efecto, dias });
-            alert(`Infusión "${nombre}" agregada exitosamente`);
+            alert(`Infusión "${nombre}" agregada a Config`);
             document.getElementById('inf-nombre').value = '';
+            document.getElementById('inf-desc').value = '';
+            document.getElementById('inf-efecto').value = '';
+            document.getElementById('inf-dias').value = '';
+            renderPocimasList();
         }
     }
 
     function agregarPodcast() {
         const nombre = document.getElementById('pod-nombre').value;
-        const desc = document.getElementById('pod-desc').value;
-        const link = document.getElementById('pod-link').value;
-        const dias = document.getElementById('pod-dias').value;
-
         if (nombre) {
-            podcastsDB.push({ nombre, desc, link, dias });
-            alert(`Podcast "${nombre}" guardado exitosamente`);
+            podcastsDB.push({ nombre });
+            alert(`Podcast "${nombre}" guardado`);
             document.getElementById('pod-nombre').value = '';
         }
     }
@@ -565,8 +669,60 @@
         }
     }
 
-    // Inicio
+    /* MOTOR DE ZOOM & PINCH-TO-ZOOM EN CELULARES */
+    let currentScale = 1;
+    let initialDistance = 0;
+    const zoomModal = document.getElementById('zoom-modal');
+    const zoomImg = document.getElementById('zoom-target-img');
+
+    function openZoomModal(src) {
+        if (!src) return;
+        zoomImg.src = src;
+        currentScale = 1;
+        zoomImg.style.transform = `scale(${currentScale})`;
+        zoomModal.style.display = 'flex';
+    }
+
+    function closeZoomModal() {
+        zoomModal.style.display = 'none';
+    }
+
+    // Eventos táctiles para agrandar con los dedos en pantallas táctiles
+    zoomModal.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 2) {
+            initialDistance = Math.hypot(
+                e.touches[0].pageX - e.touches[1].pageX,
+                e.touches[0].pageY - e.touches[1].pageY
+            );
+        }
+    });
+
+    zoomModal.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 2 && initialDistance > 0) {
+            const currentDistance = Math.hypot(
+                e.touches[0].pageX - e.touches[1].pageX,
+                e.touches[0].pageY - e.touches[1].pageY
+            );
+            const factor = currentDistance / initialDistance;
+            let newScale = currentScale * factor;
+            if (newScale >= 1 && newScale <= 4) {
+                zoomImg.style.transform = `scale(${newScale})`;
+            }
+        }
+    });
+
+    zoomModal.addEventListener('touchend', (e) => {
+        if (e.touches.length < 2) {
+            const transform = zoomImg.style.transform;
+            const match = transform.match(/scale\(([^)]+)\)/);
+            if (match) {
+                currentScale = parseFloat(match[1]);
+            }
+        }
+    });
+
     initCalendar();
+    renderPocimasList();
 </script>
 
 </body>
