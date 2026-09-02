@@ -7,10 +7,67 @@
       "link": "https://youtu.be/cDky5vTbp9U",
       "comentario": "",
       "observaciones": []
+    },
+    {
+      "id": 1788380865210,
+      "nombre": "Practica 2",
+      "desc": "",
+      "link": "",
+      "comentario": "",
+      "observaciones": []
     }
   ],
-  "infusionesDB": [],
+  "infusionesDB": [
+    {
+      "nombre": "Te de Manzanilla",
+      "desc": "",
+      "efecto": "Higado y estomago",
+      "dias": "Todos"
+    },
+    {
+      "nombre": "Suico en tintura madre 20 gotas",
+      "desc": "",
+      "efecto": "Para los parasitos de la tardecita",
+      "dias": "Todos"
+    },
+    {
+      "nombre": "Pasionaria en tintura madre 20 gotas",
+      "desc": "",
+      "efecto": "Para las emociones",
+      "dias": "Todos"
+    }
+  ],
   "novedadesDB": [
+    {
+      "titulo": "[2/9/2026] Actualización en Prácticas: Nueva incorporación - \"Practica 2\"",
+      "link": "",
+      "desde": "2026-09-02",
+      "hasta": "2026-09-02"
+    },
+    {
+      "titulo": "[2/9/2026] Actualización en Pócimas y Yuyos: Nueva incorporación - \"Pasionaria en tintura madre 20 gotas\"",
+      "link": "",
+      "desde": "2026-09-02",
+      "hasta": "2026-09-02"
+    },
+    {
+      "titulo": "[2/9/2026] Actualización en Pócimas y Yuyos: Modificación - \"Suico en tintura madre 20 gotas\"",
+      "link": "",
+      "desde": "2026-09-02",
+      "hasta": "2026-09-02"
+    },
+    {
+      "titulo": "[2/9/2026] Actualización en Pócimas y Yuyos: Nueva incorporación - \"Suico en tintura madre 20 gotas\"",
+      "link": "",
+      "desde": "2026-09-02",
+      "hasta": "2026-09-02"
+    },
+    {
+      "titulo": "[2/9/2026] Actualización en Pócimas y Yuyos: Nueva incorporación - \"Te de Manzanilla\"",
+      "link": "",
+      "desde": "2026-09-02",
+      "hasta": "2026-09-02"
+    },
     {
       "titulo": "Zoom Jueves 03 a las 20 hs",
       "link": "https://youtu.be/cDky5vTbp9U",
