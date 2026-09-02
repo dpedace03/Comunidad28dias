@@ -8,6 +8,7 @@
     <style>
         :root {
             --bg-color: #fcf8f3;
+            --bg-image: none;
             --card-bg: #ffffff;
             --salmon: #f4a291;
             --pastel-pink: #fbe3e8;
@@ -22,12 +23,15 @@
             /* VARIABLES DINÁMICAS CARDS INICIO */
             --card-bg-color: #ffffff;
             --card-title-color: #f4a291;
-            --card-title-size: 0.9rem;
+            --card-title-size: 1.05rem;
+            --btn-3d-shadow: none;
         }
 
         html, body {
             margin: 0; padding: 0; width: 100%; height: 100%;
             overflow: hidden; background-color: var(--bg-color);
+            background-image: var(--bg-image);
+            background-size: cover; background-position: center;
             font-family: 'Segoe UI', Georgia, serif; color: #444;
         }
 
@@ -42,7 +46,6 @@
             .app-viewport.wide-view { max-width: 850px; }
         }
 
-        /* HEADER SUPERIOR CON RUEDITA Y WHATSAPP */
         .top-admin-bar {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 8px; flex-shrink: 0;
@@ -72,7 +75,7 @@
         }
 
         .btn-back {
-            background: none; border: 1px solid var(--primary);
+            background: #fff; border: 1px solid var(--primary);
             color: var(--primary); padding: 4px 12px; border-radius: 16px;
             cursor: pointer; font-weight: bold; font-size: 0.8rem; flex-shrink: 0;
         }
@@ -83,25 +86,34 @@
         }
         .screen-body::-webkit-scrollbar { display: none; }
 
-        /* PANTALLA INICIAL */
-        .welcome-container {
-            flex: 1; min-height: 0; border-radius: var(--border-radius);
-            overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            display: flex; align-items: center; justify-content: center; background: #fff;
+        .home-container-full {
+            flex: 1; display: flex; flex-direction: column; gap: 8px; height: 100%;
         }
 
-        .welcome-img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
-
-        .menu-grid-2col {
-            display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 8px; margin-top: 8px; flex-shrink: 0;
+        .menu-grid-full {
+            flex: 1; display: flex; flex-direction: column; gap: 8px; width: 100%;
         }
 
+        .menu-row {
+            flex: 1; display: flex; gap: 8px; width: 100%;
+        }
+
+        /* ESTILO BASE Y ESTILO 3D Opcional */
         .menu-card {
-            background: var(--card-bg-color); padding: 8px 6px; border-radius: var(--border-radius);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.04); cursor: pointer; text-align: center;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
-            border: 1px solid rgba(244, 162, 145, 0.3); transition: background-color 0.2s ease;
+            flex: 1; background: var(--card-bg-color); padding: 8px; border-radius: var(--border-radius);
+            box-shadow: var(--btn-3d-shadow, 0 2px 5px rgba(0,0,0,0.04)); cursor: pointer; text-align: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+            border: 1px solid rgba(244, 162, 145, 0.4); transition: transform 0.1s, background-color 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+        }
+
+        .menu-card.btn-3d {
+            box-shadow: 0 6px 0px rgba(0, 0, 0, 0.15), 0 8px 12px rgba(0,0,0,0.1);
+            border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+        }
+        .menu-card.btn-3d:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px rgba(0, 0, 0, 0.15);
         }
 
         .menu-card h2 {
@@ -109,28 +121,85 @@
             font-weight: 700; line-height: 1.2;
         }
 
-        .card-icon { font-size: calc(var(--card-title-size) + 0.2rem); }
+        .card-icon { font-size: calc(var(--card-title-size) * 1.8); }
 
-        .home-novedades-section {
-            background: #fff; padding: 10px; border-radius: var(--border-radius);
-            border: 1px solid var(--pastel-pink); margin-top: 8px; flex-shrink: 0;
+        /* NUEVA MARCA / INSIGNIA DE ALERTA DE NOVEDADES (CAMPANA PULSANTE) */
+        .card-badge-alert {
+            display: none; position: absolute; top: -6px; right: -4px;
+            background: #ff3b30; color: #fff; border-radius: 50%;
+            width: 26px; height: 26px; font-size: 0.9rem; font-weight: bold;
+            line-height: 26px; text-align: center; box-shadow: 0 2px 6px rgba(255,59,48,0.5);
+            animation: ringPulse 1.2s infinite ease-in-out; z-index: 10;
+        }
+
+        @keyframes ringPulse {
+            0% { transform: scale(1) rotate(0deg); }
+            20% { transform: scale(1.2) rotate(15deg); }
+            40% { transform: scale(1.2) rotate(-15deg); }
+            60% { transform: scale(1.1) rotate(10deg); }
+            80% { transform: scale(1.1) rotate(0deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .carousel-container {
+            flex: 1; min-height: 200px; border-radius: var(--border-radius);
+            overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex; align-items: center; justify-content: center; background: #fff;
+            position: relative;
+        }
+
+        .carousel-img { width: 100%; height: 100%; object-fit: contain; display: block; cursor: pointer; }
+
+        .carousel-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8); border: 1px solid var(--salmon);
+            color: var(--primary-dark); width: 32px; height: 32px; border-radius: 50%;
+            font-size: 1rem; font-weight: bold; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        .carousel-btn.prev { left: 8px; }
+        .carousel-btn.next { right: 8px; }
+
+        .carousel-indicator {
+            position: absolute; bottom: 8px; background: rgba(0,0,0,0.5);
+            color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem;
         }
 
         .novedad-card-item {
-            background: var(--pastel-pink); padding: 8px; border-radius: 8px;
-            margin-bottom: 6px; font-size: 0.8rem; border-left: 3px solid var(--salmon);
+            background: var(--pastel-pink); padding: 10px; border-radius: 8px;
+            margin-bottom: 8px; font-size: 0.85rem; border-left: 4px solid var(--salmon);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
         }
 
-        /* MODALIDAD EN GRANDE */
-        .modalidad-large-container {
-            display: flex; flex-direction: column; gap: 12px;
-            width: 100%; align-items: center; padding-bottom: 16px;
+        .practica-card-item {
+            background: #fff; padding: 10px; border-radius: var(--border-radius);
+            border: 1px solid rgba(244, 162, 145, 0.4); margin-bottom: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 4px;
         }
-        .modalidad-large-container img {
-            width: 100%; height: auto; max-width: 100%;
-            border-radius: var(--border-radius); cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        .practica-card-item h3 { margin: 0; color: var(--primary-dark); font-size: 0.95rem; }
+        .practica-card-item p { margin: 0; font-size: 0.85rem; color: #555; }
+        .practica-card-item .comentario {
+            font-style: italic; font-size: 0.8rem; color: #777;
+            background: var(--pastel-pink); padding: 4px 8px; border-radius: 6px; margin-top: 4px;
         }
+        .practica-link-btn {
+            display: inline-block; margin-top: 4px; padding: 4px 10px;
+            background: var(--pastel-green); color: var(--primary-dark);
+            border-radius: 12px; text-decoration: none; font-weight: bold;
+            font-size: 0.8rem; border: 1px solid #b8e0a8; align-self: flex-start;
+        }
+
+        .obs-container {
+            margin-top: 8px; border-top: 1px dashed var(--salmon); padding-top: 6px;
+        }
+        .obs-history-list {
+            margin-top: 4px; max-height: 120px; overflow-y: auto; background: #faf8f5;
+            border: 1px solid #eee; border-radius: 6px; padding: 6px; font-size: 0.75rem;
+        }
+        .obs-item { border-bottom: 1px solid #f0e6e4; padding: 3px 0; color: #444; }
+        .obs-item:last-child { border-bottom: none; }
+        .obs-date { font-weight: bold; color: var(--primary); font-size: 0.7rem; }
 
         .fit-img {
             max-width: 100%; object-fit: contain;
@@ -144,11 +213,10 @@
 
         .pocimas-config-list {
             background: #fff; padding: 10px; border-radius: var(--border-radius);
-            border: 1px solid rgba(244, 162, 145, 0.3); margin-top: 4px;
+            border: 1px solid rgba(244, 162, 145, 0.3); margin-top: 4px; flex-shrink: 0;
         }
         .pocima-item-card { border-bottom: 1px dashed #eee; padding: 4px 0; font-size: 0.75rem; }
 
-        /* CALENDARIO AGENDA */
         .calendar-grid {
             display: grid; grid-template-columns: repeat(7, 1fr);
             gap: 6px; text-align: center; font-family: var(--agenda-font-family);
@@ -172,7 +240,6 @@
         .walk-icon { font-size: 1rem; }
         .podcast-link { font-size: 0.8rem; color: var(--primary); text-decoration: underline; }
 
-        /* LISTAS CRUD */
         .crud-list-container { margin-top: 6px; border-top: 1px dashed #e8d5d0; padding-top: 6px; }
         .crud-item {
             display: flex; justify-content: space-between; align-items: center;
@@ -183,7 +250,6 @@
         .btn-edit { background: #6b5b7b; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
         .btn-delete { background: #e06d53; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
 
-        /* DETALLE DEL DÍA */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-color); justify-content: center; align-items: center; z-index: 200;
@@ -219,7 +285,6 @@
             background: #ffffff; border: 1px solid #e8d5d0; border-radius: 8px; padding: 4px 8px; width: 100%;
         }
 
-        /* POPUP TEXTAREA AMPLIADO */
         .notes-popup-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.6); z-index: 400; justify-content: center; align-items: center; padding: 12px; box-sizing: border-box;
@@ -252,7 +317,6 @@
             cursor: pointer; font-size: 1rem; font-weight: bold; font-family: var(--agenda-font-family);
         }
 
-        /* ZOOM MODAL */
         .zoom-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.9); z-index: 300;
@@ -269,56 +333,77 @@
 
     <!-- BARRA SUPERIOR DE ACCESO RÁPIDO -->
     <div class="top-admin-bar">
-        <button class="icon-btn" onclick="nav('config')" title="Configuración">⚙️</button>
+        <button class="icon-btn" onclick="solicitarAccesoAdmin()" title="Configuración">⚙️ Config</button>
         <button class="icon-btn" onclick="openWhatsApp()" style="color:#25D366; font-weight:bold;" title="Enviar WhatsApp">💬 WhatsApp</button>
     </div>
 
     <!-- PANTALLA INICIAL -->
     <div id="screen-home" class="screen active">
-        <div class="welcome-container">
-            <img src="1-Bienvenida.jpeg" alt="Bienvenida" class="welcome-img" onclick="openZoomModal(this.src)">
-        </div>
-
-        <div class="menu-grid-2col">
-            <div class="menu-card" onclick="nav('modalidad')"><span class="card-icon">🌸</span><h2>Modalidad</h2></div>
-            <div class="menu-card" onclick="nav('pocimas')"><span class="card-icon">🍵</span><h2>Pócimas y Yuyos del Bien</h2></div>
-            <div class="menu-card" onclick="nav('caminatas')"><span class="card-icon">🚶‍♀️</span><h2>Propuesta Diaria y Caminatas</h2></div>
-            <div class="menu-card" onclick="nav('agenda')"><span class="card-icon">📅</span><h2>Mi Agenda Diaria y Sensaciones</h2></div>
-            <div class="menu-card" onclick="nav('registro')"><span class="card-icon">📷</span><h2>Registro Fotográfico Inicial</h2></div>
-            <div class="menu-card" onclick="nav('novedades')"><span class="card-icon">🆗</span><h2>Novedades</h2></div>
-        </div>
-
-        <div class="home-novedades-section">
-            <small style="font-weight:bold; color:var(--primary-dark);">📢 Novedades del Grupo:</small>
-            <div id="home-novedades-list" style="margin-top:4px;">
-                <i style="font-size:0.75rem; color:#888;">No hay novedades vigentes para hoy.</i>
+        <div class="home-container-full">
+            <div class="menu-grid-full">
+                <div class="menu-row">
+                    <div class="menu-card" onclick="nav('modalidad')"><span class="card-icon">🌸</span><h2>Modalidad</h2></div>
+                    <div class="menu-card" onclick="nav('pocimas')"><span class="card-icon">🍵</span><h2>Pócimas y Yuyos del Bien</h2></div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-card" onclick="nav('caminatas')"><span class="card-icon">🚶‍♀️</span><h2>Propuesta Diaria y Caminatas</h2></div>
+                    <div class="menu-card" onclick="nav('practicas')"><span class="card-icon">🧘‍♀️</span><h2>Prácticas</h2></div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-card" onclick="nav('agenda')"><span class="card-icon">📅</span><h2>Mi Agenda Diaria y Sensaciones</h2></div>
+                    <div class="menu-card" onclick="nav('registro')"><span class="card-icon">📷</span><h2>Registro Fotográfico</h2></div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-card" onclick="nav('novedades')" style="background: var(--pastel-pink); border-color: var(--salmon);">
+                        <span class="card-badge-alert" id="home-novedades-alert">🔔</span>
+                        <span class="card-icon">📢</span>
+                        <h2>Novedades</h2>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- MODALIDAD CON ZOOM HABILITADO -->
+    <!-- PANTALLA NOVEDADES (SOLO LECTURA) -->
+    <div id="screen-novedades" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Novedades del Grupo</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body" id="public-novedades-list">
+            <i style="font-size:0.8rem; color:#888; text-align:center;">No hay novedades vigentes para hoy.</i>
+        </div>
+    </div>
+
+    <!-- PANTALLA MODALIDAD -->
     <div id="screen-modalidad" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Modalidad</h2>
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
-            <div class="modalidad-large-container">
-                <img src="modalidad1.jpeg" alt="Modalidad 1" onclick="openZoomModal(this.src)">
-                <img src="modalidad2.jpeg" alt="Modalidad 2" onclick="openZoomModal(this.src)">
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="prevCarousel('modalidad')">❮</button>
+                <img id="img-carousel-modalidad" src="1-Bienvenida.jpeg" alt="Modalidad" class="carousel-img" onclick="openZoomModal(this.src)">
+                <button class="carousel-btn next" onclick="nextCarousel('modalidad')">❯</button>
+                <div class="carousel-indicator" id="ind-carousel-modalidad">1/3</div>
             </div>
         </div>
     </div>
 
-    <!-- PÓCIMAS Y YUYOS -->
+    <!-- PANTALLA PÓCIMAS Y YUYOS -->
     <div id="screen-pocimas" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Pócimas y Yuyos del Bien</h2>
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
-            <img src="yuyos del bien.jpeg" alt="Yuyos del Bien" class="fit-img" style="max-height: 40%;" onclick="openZoomModal(this.src)">
-            <img src="yuyos.jpeg" alt="Yuyos" class="fit-img" style="max-height: 25%;" onclick="openZoomModal(this.src)">
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="prevCarousel('pocimas')">❮</button>
+                <img id="img-carousel-pocimas" src="yuyos del bien.jpeg" alt="Yuyos del Bien" class="carousel-img" onclick="openZoomModal(this.src)">
+                <button class="carousel-btn next" onclick="nextCarousel('pocimas')">❯</button>
+                <div class="carousel-indicator" id="ind-carousel-pocimas">1/2</div>
+            </div>
             
             <div class="pocimas-config-list">
                 <small style="font-weight:bold; color:var(--primary-dark);">Infusiones y Pócimas Configuradas:</small>
@@ -326,6 +411,17 @@
                     <i style="font-size:0.7rem; color:#888;">No hay infusiones adicionadas en Config.</i>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- PANTALLA DE PRÁCTICAS -->
+    <div id="screen-practicas" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Prácticas Guiadas</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body" id="practicas-dynamic-list">
+            <i style="font-size:0.8rem; color:#888; text-align:center;">No hay prácticas cargadas.</i>
         </div>
     </div>
 
@@ -352,7 +448,7 @@
         </div>
     </div>
 
-    <!-- REGISTRO FOTOGRÁFICO INICIAL -->
+    <!-- REGISTRO FOTOGRÁFICO -->
     <div id="screen-registro" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Registro Fotográfico</h2>
@@ -387,15 +483,59 @@
         </div>
     </div>
 
-    <!-- PANTALLA NOVEDADES CON ABM INTEGRADO -->
-    <div id="screen-novedades" class="screen">
+    <!-- CONFIGURACIÓN ADMIN COMPLETA -->
+    <div id="screen-config" class="screen">
         <div class="screen-header">
-            <h2 class="screen-title">Novedades (ABM)</h2>
+            <h2 class="screen-title">Configuración Admin (Anka)</h2>
             <button class="btn-back" onclick="nav('home')">← Volver</button>
         </div>
         <div class="screen-body">
-            <div style="background: #fff; padding: 12px; border-radius: var(--border-radius);">
-                <h3 style="margin: 0 0 8px 0; font-size: 0.9rem;">Cargar / Modificar Novedad</h3>
+
+            <!-- BOTÓN EXPORTAR / GUARDAR CONFIG.JSON -->
+            <div style="background: var(--pastel-green); padding: 10px; border-radius: var(--border-radius); border: 1px solid #b8e0a8;">
+                <small style="font-weight:bold; color:var(--primary-dark);">💾 Exportación / Sincronización de Datos:</small>
+                <p style="font-size:0.75rem; margin:4px 0 8px 0;">Descarga el archivo <b>config.json</b> actualizado para subirlo a tu repositorio de GitHub.</p>
+                <button class="btn-submit" style="background:#52b788;" onclick="descargarConfigJSON()">Descargar config.json Actualizado</button>
+            </div>
+
+            <!-- APARIENCIA VISUAL: FONDO, BOTONES 3D, IMAGEN DE FONDO -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Apariencia Global y Pantalla</h3>
+                
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Color Fondo Pantalla:</label>
+                        <input type="color" id="cfg-app-bg" value="#fcf8f3" onchange="cambiarAparienciaGlobal()">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Color Letra Cards:</label>
+                        <input type="color" id="cfg-card-color" value="#f4a291" onchange="cambiarEstiloCards()">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Imagen de Fondo de Pantalla:</label>
+                    <input type="file" accept="image/*" onchange="cargarImagenFondoPantalla(event)">
+                </div>
+
+                <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                    <input type="checkbox" id="cfg-btn-3d" style="width:auto;" onchange="cambiarEstilo3DBotones()">
+                    <label for="cfg-btn-3d" style="margin:0; cursor:pointer;">Activar Botones con Efecto 3D / Relieve</label>
+                </div>
+
+                <div class="form-group" style="margin-bottom:0; margin-top:6px;">
+                    <label>Tamaño de Letra del Título:</label>
+                    <select id="cfg-card-size" onchange="cambiarEstiloCards()">
+                        <option value="0.85rem">Chico (0.85rem)</option>
+                        <option value="1.05rem" selected>Normal (1.05rem)</option>
+                        <option value="1.25rem">Grande (1.25rem)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- ABM DE NOVEDADES -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Novedades (ABM)</h3>
                 <div class="form-group"><label>Título o Mensaje:</label><input type="text" id="nov-titulo" placeholder="Ej: Link Zoom Jueves 3"></div>
                 <div class="form-group"><label>Enlace / YouTube / Recurso:</label><input type="text" id="nov-link" placeholder="https://..."></div>
                 
@@ -410,44 +550,45 @@
                     </div>
                 </div>
 
-                <button class="btn-submit" id="btn-save-nov" onclick="publicarNovedad()">Publicar Novedad</button>
-            </div>
+                <button class="btn-submit" id="btn-save-nov" onclick="publicarNovedadManual()">Publicar Novedad</button>
 
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); margin-top: 4px;">
-                <small style="font-weight:bold; color:var(--primary-dark);">Novedades Registradas:</small>
-                <div class="crud-list-container" id="novedades-abm-list" style="border-top:none;"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- CONFIGURACIÓN ADMIN COMPLETA -->
-    <div id="screen-config" class="screen">
-        <div class="screen-header">
-            <h2 class="screen-title">Configuración Admin</h2>
-            <button class="btn-back" onclick="nav('home')">← Volver</button>
-        </div>
-        <div class="screen-body">
-
-            <!-- COLOR FONDO, COLOR TEXTO Y TAMAÑO DE CARDS INICIO -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
-                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Cards de Inicio (Estilo Visual)</h3>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;">
-                        <label>Fondo Card:</label>
-                        <input type="color" id="cfg-card-bg" value="#ffffff" onchange="cambiarEstiloCards()">
-                    </div>
-                    <div class="form-group" style="flex:1;">
-                        <label>Color Letra:</label>
-                        <input type="color" id="cfg-card-color" value="#f4a291" onchange="cambiarEstiloCards()">
-                    </div>
+                <div class="crud-list-container">
+                    <small style="font-weight:bold;">Novedades Registradas:</small>
+                    <div id="novedades-abm-list"></div>
                 </div>
-                <div class="form-group" style="margin-bottom:0;">
-                    <label>Tamaño de Letra:</label>
-                    <select id="cfg-card-size" onchange="cambiarEstiloCards()">
-                        <option value="0.75rem">Chico (0.75rem)</option>
-                        <option value="0.85rem" selected>Normal (0.85rem)</option>
-                        <option value="1.0rem">Grande (1.0rem)</option>
-                    </select>
+            </div>
+
+            <!-- GESTIÓN DE PRÁCTICAS (ABM) -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Prácticas</h3>
+                <div class="form-group"><label>Nombre Práctica:</label><input type="text" id="pra-nombre"></div>
+                <div class="form-group"><label>Descripción:</label><input type="text" id="pra-desc"></div>
+                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="pra-link" placeholder="https://..."></div>
+                <div class="form-group"><label>Comentario / Nota Inicial:</label><input type="text" id="pra-comentario"></div>
+                <button class="btn-submit" id="btn-save-pra" onclick="agregarPractica()">Guardar Práctica</button>
+
+                <div class="crud-list-container">
+                    <small style="font-weight:bold;">Prácticas Cargadas:</small>
+                    <div id="crud-practicas-list"></div>
+                </div>
+            </div>
+
+            <!-- GESTIÓN DE IMÁGENES DE MODALIDAD -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Carrusel Modalidad</h3>
+                <div class="form-group">
+                    <label>Agregar Imagen (Ruta local o URL):</label>
+                    <input type="text" id="cfg-modalidad-url" placeholder="Ej: https://...">
+                </div>
+                <div class="form-group">
+                    <label>o Seleccionar Archivo Local:</label>
+                    <input type="file" accept="image/*" onchange="addModalidadImageFile(event)">
+                </div>
+                <button class="btn-submit" onclick="addModalidadImageUrl()">Agregar a Modalidad</button>
+                
+                <div class="crud-list-container">
+                    <small style="font-weight:bold;">Imágenes en Modalidad:</small>
+                    <div id="crud-modalidad-list"></div>
                 </div>
             </div>
 
@@ -457,28 +598,6 @@
                 <div class="form-group">
                     <label>Teléfono (formato internacional sin +):</label>
                     <input type="text" id="cfg-wp-phone" value="5491112345678" placeholder="54911...">
-                </div>
-            </div>
-
-            <!-- ESTILO VISUAL DE AGENDA -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
-                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Estilo Visual de Mi Agenda</h3>
-                <div class="form-group">
-                    <label>Tipo de Letra / Fuente:</label>
-                    <select id="cfg-agenda-font" onchange="cambiarEstiloAgenda()">
-                        <option value="'Patrick Hand', cursive">Patrick Hand (Manuscrita / Amigable)</option>
-                        <option value="'Playfair Display', serif">Playfair Display (Elegante / Serif)</option>
-                        <option value="'Georgia', serif">Georgia (Clásica / Lectura)</option>
-                        <option value="'Segoe UI', sans-serif">Segoe UI (Moderna / Limpia)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Tamaño de Letra:</label>
-                    <select id="cfg-agenda-size" onchange="cambiarEstiloAgenda()">
-                        <option value="1rem">Normal (1.0rem)</option>
-                        <option value="1.15rem" selected>Grande (1.15rem)</option>
-                        <option value="1.3rem">Muy Grande (1.30rem)</option>
-                    </select>
                 </div>
             </div>
 
@@ -523,27 +642,6 @@
                 <div class="crud-list-container">
                     <small style="font-weight:bold;">Podcasts Cargados:</small>
                     <div id="crud-podcasts-list"></div>
-                </div>
-            </div>
-
-            <!-- GESTIÓN ACTIVIDADES -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
-                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Actividades</h3>
-                <div class="form-group"><label>Nombre Actividad:</label><input type="text" id="act-nombre"></div>
-                <div class="form-group">
-                    <label>Día Asignado:</label>
-                    <select id="act-dia">
-                        <option value="Martes">Martes</option>
-                        <option value="Jueves">Jueves</option>
-                        <option value="Sábado">Sábado</option>
-                        <option value="Todos">Todos los días</option>
-                    </select>
-                </div>
-                <button class="btn-submit" id="btn-save-act" onclick="agregarActividadConfig()">Guardar Actividad</button>
-
-                <div class="crud-list-container">
-                    <small style="font-weight:bold;">Actividades Cargadas:</small>
-                    <div id="crud-actividades-list"></div>
                 </div>
             </div>
 
@@ -618,38 +716,478 @@
 
 <script>
     let cfgCalendario = { diaInicio: 1, diaFin: 28, horaInicio: 7, horaFin: 21 };
+    let configVisual = { bgColor: '#fcf8f3', bgImage: '', btn3D: false, cardTitleColor: '#f4a291', cardTitleSize: '1.05rem' };
     
-    let actividadesDB = [
-        { nombre: "Caminata de Conexión", dia: "Martes" },
-        { nombre: "Caminata de Conexión", dia: "Jueves" },
-        { nombre: "Caminata de Conexión", dia: "Sábado" }
-    ];
+    let carruseles = {
+        modalidad: ["1-Bienvenida.jpeg", "modalidad1.jpeg", "modalidad2.jpeg"],
+        pocimas: ["yuyos del bien.jpeg", "yuyos.jpeg"]
+    };
+    
+    let indicesCarrusel = { modalidad: 0, pocimas: 0 };
+    let practicasDB = [];
+    let actividadesDB = [];
+    let infusionesDB = [];
+    let podcastsDB = [];
+    let novedadesDB = [];
 
-    let infusionesDB = [
-        { nombre: "Manzanilla", desc: "2 tazas diarias", efecto: "Cuidar hígado e intestino", dias: "Todos" },
-        { nombre: "Suico", desc: "20 gotas en la tarde", efecto: "Antiparasitario", dias: "Todos" },
-        { nombre: "Pasionaria", desc: "20 gotas al atardecer", efecto: "Sistema nervioso", dias: "Todos" }
-    ];
-
-    let podcastsDB = [
-        { nombre: "Podcast de Caminata 1", desc: "Audio guiado para movimiento consciente", link: "https://spotify.com", dias: "Martes" },
-        { nombre: "Podcast de Caminata 2", desc: "Audio guiado para movimiento consciente", link: "https://spotify.com", dias: "Jueves" },
-        { nombre: "Podcast de Caminata 3", desc: "Audio guiado para movimiento consciente", link: "https://spotify.com", dias: "Sábado" }
-    ];
-
-    let novedadesDB = [
-        { 
-            titulo: "Primer encuentro Zoom Jueves 3 - 20:00 hs", 
-            link: "https://zoom.us", 
-            desde: "2026-09-01", 
-            hasta: "2026-09-30" 
-        }
-    ];
-
-    let editIndices = { inf: -1, pod: -1, act: -1, nov: -1 };
+    let editIndices = { inf: -1, pod: -1, act: -1, nov: -1, pra: -1 };
     let fotosPorFecha = {};
     let agendaGuardadaBD = {}; 
     let currentFechaKeyModal = "";
+
+    /* CARGA AUTOMÁTICA DE CONFIG.JSON AL INICIAR */
+    async function cargarConfiguracionInicial() {
+        try {
+            const res = await fetch('./config.json');
+            if (res.ok) {
+                const data = await res.json();
+                if (data.practicasDB) practicasDB = data.practicasDB;
+                if (data.infusionesDB) infusionesDB = data.infusionesDB;
+                if (data.novedadesDB) novedadesDB = data.novedadesDB;
+                if (data.podcastsDB) podcastsDB = data.podcastsDB;
+                if (data.actividadesDB) actividadesDB = data.actividadesDB;
+                if (data.carruseles) carruseles = data.carruseles;
+                if (data.cfgCalendario) cfgCalendario = data.cfgCalendario;
+                if (data.configVisual) {
+                    configVisual = data.configVisual;
+                    aplicarEstilosVisualesCargados();
+                }
+            }
+        } catch (e) {
+            console.warn("No se pudo cargar config.json local, iniciando con valores por defecto.");
+        }
+
+        initCalendar();
+        renderPocimasList();
+        renderPracticasScreen();
+        renderPublicNovedades();
+        renderConfigLists();
+        updateCarouselDisplay('modalidad');
+        updateCarouselDisplay('pocimas');
+    }
+
+    /* SEGURIDAD DE ACCESO ADMIN (ANKA / 1234) */
+    function solicitarAccesoAdmin() {
+        const usuario = prompt("Ingrese su Nombre de Usuario:");
+        if (!usuario || usuario.trim().toUpperCase() !== "ANKA") {
+            alert("Acceso denegado: Usuario incorrecto.");
+            return;
+        }
+
+        const clave = prompt("Ingrese su Clave:");
+        if (clave !== "1234") {
+            alert("Acceso denegado: Clave incorrecta.");
+            return;
+        }
+
+        nav('config');
+    }
+
+    /* DESCARGA Y EXPORTACIÓN DE CONFIG.JSON */
+    function descargarConfigJSON() {
+        const configData = {
+            practicasDB,
+            infusionesDB,
+            novedadesDB,
+            podcastsDB,
+            actividadesDB,
+            carruseles,
+            cfgCalendario,
+            configVisual
+        };
+
+        const jsonStr = JSON.stringify(configData, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'config.json';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    /* APARIENCIA GLOBAL: COLOR, IMAGEN Y BOTONES 3D */
+    function cambiarAparienciaGlobal() {
+        const color = document.getElementById('cfg-app-bg').value;
+        document.documentElement.style.setProperty('--bg-color', color);
+        configVisual.bgColor = color;
+    }
+
+    function cargarImagenFondoPantalla(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const url = URL.createObjectURL(file);
+        document.documentElement.style.setProperty('--bg-image', `url('${url}')`);
+        configVisual.bgImage = url;
+    }
+
+    function cambiarEstilo3DBotones() {
+        const activo = document.getElementById('cfg-btn-3d').checked;
+        configVisual.btn3D = activo;
+        const cards = document.querySelectorAll('.menu-card');
+        cards.forEach(card => {
+            if (activo) card.classList.add('btn-3d');
+            else card.classList.remove('btn-3d');
+        });
+    }
+
+    function aplicarEstilosVisualesCargados() {
+        if (configVisual.bgColor) {
+            document.documentElement.style.setProperty('--bg-color', configVisual.bgColor);
+            document.getElementById('cfg-app-bg').value = configVisual.bgColor;
+        }
+        if (configVisual.bgImage) {
+            document.documentElement.style.setProperty('--bg-image', `url('${configVisual.bgImage}')`);
+        }
+        if (configVisual.btn3D) {
+            document.getElementById('cfg-btn-3d').checked = true;
+            cambiarEstilo3DBotones();
+        }
+        if (configVisual.cardTitleColor) {
+            document.documentElement.style.setProperty('--card-title-color', configVisual.cardTitleColor);
+            document.getElementById('cfg-card-color').value = configVisual.cardTitleColor;
+        }
+        if (configVisual.cardTitleSize) {
+            document.documentElement.style.setProperty('--card-title-size', configVisual.cardTitleSize);
+            document.getElementById('cfg-card-size').value = configVisual.cardTitleSize;
+        }
+    }
+
+    /* AUTO GENERACIÓN DE NOVEDAD AL EDITAR ABM */
+    function generarNovedadAutomatica(seccion, accion, detalle) {
+        const hoy = new Date();
+        const hoyStr = hoy.toISOString().split('T')[0];
+        const fechaFormateada = `${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()}`;
+        
+        const titulo = `[${fechaFormateada}] Actualización en ${seccion}: ${accion} - "${detalle}"`;
+        novedadesDB.unshift({
+            titulo: titulo,
+            link: "",
+            desde: hoyStr,
+            hasta: hoyStr
+        });
+
+        renderNovedadesABMList();
+        renderPublicNovedades();
+    }
+
+    function renderPublicNovedades() {
+        const container = document.getElementById('public-novedades-list');
+        const alertBadge = document.getElementById('home-novedades-alert');
+        const hoyStr = new Date().toISOString().split('T')[0];
+
+        const novVigentes = novedadesDB.filter(nov => {
+            const desdeOk = !nov.desde || hoyStr >= nov.desde;
+            const hastaOk = !nov.hasta || hoyStr <= nov.hasta;
+            return desdeOk && hastaOk;
+        });
+
+        if (novVigentes.length > 0) {
+            alertBadge.style.display = 'block';
+        } else {
+            alertBadge.style.display = 'none';
+        }
+
+        if (novVigentes.length === 0) {
+            container.innerHTML = '<i style="font-size:0.8rem; color:#888; text-align:center;">No hay novedades vigentes para hoy.</i>';
+            return;
+        }
+
+        container.innerHTML = novVigentes.map(nov => `
+            <div class="novedad-card-item">
+                <b style="color:var(--primary-dark); font-size:0.95rem;">📢 ${nov.titulo}</b><br>
+                ${nov.link ? `<a href="${nov.link}" target="_blank" style="color:var(--primary); font-weight:bold; display:inline-block; margin-top:4px;">🔗 Abrir Enlace / Recurso</a>` : ''}
+            </div>
+        `).join('');
+    }
+
+    function renderNovedadesABMList() {
+        const container = document.getElementById('novedades-abm-list');
+        container.innerHTML = novedadesDB.map((item, idx) => `
+            <div class="crud-item">
+                <span><b>${item.titulo}</b> (${item.desde || 'N/A'} - ${item.hasta || 'N/A'})</span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarNovedad(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="eliminarNovedad(${idx})">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function publicarNovedadManual() {
+        const titulo = document.getElementById('nov-titulo').value;
+        const link = document.getElementById('nov-link').value;
+        const desde = document.getElementById('nov-desde').value;
+        const hasta = document.getElementById('nov-hasta').value;
+
+        if (!titulo) return;
+
+        if (editIndices.nov >= 0) {
+            novedadesDB[editIndices.nov] = { titulo, link, desde, hasta };
+            editIndices.nov = -1;
+            document.getElementById('btn-save-nov').innerText = "Publicar Novedad";
+        } else {
+            novedadesDB.unshift({ titulo, link, desde, hasta });
+        }
+
+        document.getElementById('nov-titulo').value = '';
+        document.getElementById('nov-link').value = '';
+        document.getElementById('nov-desde').value = '';
+        document.getElementById('nov-hasta').value = '';
+
+        renderNovedadesABMList();
+        renderPublicNovedades();
+    }
+
+    function editarNovedad(idx) {
+        const item = novedadesDB[idx];
+        document.getElementById('nov-titulo').value = item.titulo;
+        document.getElementById('nov-link').value = item.link || '';
+        document.getElementById('nov-desde').value = item.desde || '';
+        document.getElementById('nov-hasta').value = item.hasta || '';
+        editIndices.nov = idx;
+        document.getElementById('btn-save-nov').innerText = "Actualizar Novedad";
+    }
+
+    function eliminarNovedad(idx) {
+        novedadesDB.splice(idx, 1);
+        renderNovedadesABMList();
+        renderPublicNovedades();
+    }
+
+    function agregarPractica() {
+        const nombre = document.getElementById('pra-nombre').value;
+        const desc = document.getElementById('pra-desc').value;
+        const link = document.getElementById('pra-link').value;
+        const comentario = document.getElementById('pra-comentario').value;
+
+        if (!nombre) return;
+
+        if (editIndices.pra >= 0) {
+            const obsPrevias = practicasDB[editIndices.pra].observaciones || [];
+            practicasDB[editIndices.pra] = { id: Date.now(), nombre, desc, link, comentario, observaciones: obsPrevias };
+            editIndices.pra = -1;
+            document.getElementById('btn-save-pra').innerText = "Guardar Práctica";
+            generarNovedadAutomatica("Prácticas", "Modificación", nombre);
+        } else {
+            practicasDB.push({ id: Date.now(), nombre, desc, link, comentario, observaciones: [] });
+            generarNovedadAutomatica("Prácticas", "Nueva incorporación", nombre);
+        }
+
+        limpiarPraForm();
+        renderConfigLists();
+        renderPracticasScreen();
+    }
+
+    function eliminarPractica(idx) {
+        const p = practicasDB[idx];
+        practicasDB.splice(idx, 1);
+        generarNovedadAutomatica("Prácticas", "Eliminación", p.nombre);
+        renderConfigLists();
+        renderPracticasScreen();
+    }
+
+    function agregarInfusion() {
+        const nombre = document.getElementById('inf-nombre').value;
+        const desc = document.getElementById('inf-desc').value;
+        const efecto = document.getElementById('inf-efecto').value;
+        const dias = document.getElementById('inf-dias').value || "Todos";
+
+        if (!nombre) return;
+
+        if (editIndices.inf >= 0) {
+            infusionesDB[editIndices.inf] = { nombre, desc, efecto, dias };
+            editIndices.inf = -1;
+            document.getElementById('btn-save-inf').innerText = "Guardar Infusión";
+            generarNovedadAutomatica("Pócimas y Yuyos", "Modificación", nombre);
+        } else {
+            infusionesDB.push({ nombre, desc, efecto, dias });
+            generarNovedadAutomatica("Pócimas y Yuyos", "Nueva incorporación", nombre);
+        }
+
+        limpiarInfForm();
+        renderConfigLists();
+    }
+
+    function eliminarInfusion(idx) {
+        const inf = infusionesDB[idx];
+        infusionesDB.splice(idx, 1);
+        generarNovedadAutomatica("Pócimas y Yuyos", "Eliminación", inf.nombre);
+        renderConfigLists();
+    }
+
+    function addModalidadImageUrl() {
+        const url = document.getElementById('cfg-modalidad-url').value.trim();
+        if (url) {
+            carruseles.modalidad.push(url);
+            document.getElementById('cfg-modalidad-url').value = '';
+            renderModalidadConfigList();
+            updateCarouselDisplay('modalidad');
+            generarNovedadAutomatica("Modalidad", "Nueva imagen incorporada", "En el carrusel");
+        }
+    }
+
+    function addModalidadImageFile(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const url = URL.createObjectURL(file);
+        carruseles.modalidad.push(url);
+        renderModalidadConfigList();
+        updateCarouselDisplay('modalidad');
+        generarNovedadAutomatica("Modalidad", "Nueva imagen subida", file.name);
+    }
+
+    function removeModalidadImage(idx) {
+        carruseles.modalidad.splice(idx, 1);
+        renderModalidadConfigList();
+        updateCarouselDisplay('modalidad');
+        generarNovedadAutomatica("Modalidad", "Eliminación de imagen", `Imagen #${idx + 1}`);
+    }
+
+    function agregarPodcast() {
+        const nombre = document.getElementById('pod-nombre').value;
+        const desc = document.getElementById('pod-desc').value;
+        const link = document.getElementById('pod-link').value || "#";
+        const dias = document.getElementById('pod-dias').value || "Todos";
+
+        if (!nombre) return;
+
+        if (editIndices.pod >= 0) {
+            podcastsDB[editIndices.pod] = { nombre, desc, link, dias };
+            editIndices.pod = -1;
+            document.getElementById('btn-save-pod').innerText = "Guardar Podcast";
+            generarNovedadAutomatica("Propuesta Diaria y Caminatas", "Modificación de Podcast", nombre);
+        } else {
+            podcastsDB.push({ nombre, desc, link, dias });
+            generarNovedadAutomatica("Propuesta Diaria y Caminatas", "Nuevo Podcast asignado", nombre);
+        }
+
+        limpiarPodForm();
+        renderConfigLists();
+    }
+
+    function eliminarPodcast(idx) {
+        const pod = podcastsDB[idx];
+        podcastsDB.splice(idx, 1);
+        generarNovedadAutomatica("Propuesta Diaria y Caminatas", "Eliminación de Podcast", pod.nombre);
+        renderConfigLists();
+    }
+
+    function updateCarouselDisplay(key) {
+        const list = carruseles[key];
+        if (!list || list.length === 0) return;
+
+        let idx = indicesCarrusel[key];
+        if (idx >= list.length) idx = 0;
+        if (idx < 0) idx = list.length - 1;
+        indicesCarrusel[key] = idx;
+
+        const imgEl = document.getElementById(`img-carousel-${key}`);
+        const indEl = document.getElementById(`ind-carousel-${key}`);
+
+        if (imgEl) imgEl.src = list[idx];
+        if (indEl) indEl.innerText = `${idx + 1}/${list.length}`;
+    }
+
+    function nextCarousel(key) {
+        if (!carruseles[key] || carruseles[key].length <= 1) return;
+        indicesCarrusel[key] = (indicesCarrusel[key] + 1) % carruseles[key].length;
+        updateCarouselDisplay(key);
+    }
+
+    function prevCarousel(key) {
+        if (!carruseles[key] || carruseles[key].length <= 1) return;
+        indicesCarrusel[key] = (indicesCarrusel[key] - 1 + carruseles[key].length) % carruseles[key].length;
+        updateCarouselDisplay(key);
+    }
+
+    function renderModalidadConfigList() {
+        const container = document.getElementById('crud-modalidad-list');
+        container.innerHTML = carruseles.modalidad.map((src, idx) => `
+            <div class="crud-item">
+                <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:70%;"><b>Img ${idx+1}:</b> ${src}</span>
+                <div class="crud-actions">
+                    <button class="btn-delete" onclick="removeModalidadImage(${idx})">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderPracticasScreen() {
+        const container = document.getElementById('practicas-dynamic-list');
+        if (practicasDB.length === 0) {
+            container.innerHTML = '<i style="font-size:0.8rem; color:#888; text-align:center;">No hay prácticas cargadas.</i>';
+            return;
+        }
+
+        container.innerHTML = practicasDB.map((p, idx) => {
+            const obsList = p.observaciones || [];
+            return `
+                <div class="practica-card-item">
+                    <h3>🧘‍♀️ ${p.nombre}</h3>
+                    <p>${p.desc || ''}</p>
+                    ${p.link ? `<a href="${p.link}" target="_blank" class="practica-link-btn">🔗 Abrir Práctica / Enlace</a>` : ''}
+                    ${p.comentario ? `<div class="comentario">💡 ${p.comentario}</div>` : ''}
+
+                    <div class="obs-container">
+                        <label style="font-size:0.8rem; font-weight:bold; color:var(--primary-dark);">Agregar Observación:</label>
+                        <div style="display:flex; gap:4px; margin-top:3px;">
+                            <input type="text" id="input-obs-${idx}" placeholder="Escribe tu observación o progreso..." style="flex:1; padding:4px 6px; border:1px solid #ccc; border-radius:6px; font-size:0.8rem;">
+                            <button onclick="agregarObservacionesPractica(${idx})" style="background:var(--salmon); color:#fff; border:none; padding:4px 10px; border-radius:6px; font-weight:bold; cursor:pointer; font-size:0.8rem;">+ Agregar</button>
+                        </div>
+
+                        ${obsList.length > 0 ? `
+                            <div class="obs-history-list">
+                                ${obsList.map(obs => `
+                                    <div class="obs-item">
+                                        <span class="obs-date">[${obs.fecha}]:</span> ${obs.texto}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function agregarObservacionesPractica(idx) {
+        const input = document.getElementById(`input-obs-${idx}`);
+        const texto = input ? input.value.trim() : '';
+
+        if (!texto) return;
+
+        if (!practicasDB[idx].observaciones) {
+            practicasDB[idx].observaciones = [];
+        }
+
+        const ahora = new Date();
+        const fechaStr = `${ahora.getDate()}/${ahora.getMonth()+1}/${ahora.getFullYear()} ${ahora.getHours()}:${ahora.getMinutes() < 10 ? '0' + ahora.getMinutes() : ahora.getMinutes()}`;
+
+        practicasDB[idx].observaciones.push({
+            fecha: fechaStr,
+            texto: texto
+        });
+
+        renderPracticasScreen();
+    }
+
+    function editarPractica(idx) {
+        const p = practicasDB[idx];
+        document.getElementById('pra-nombre').value = p.nombre;
+        document.getElementById('pra-desc').value = p.desc || '';
+        document.getElementById('pra-link').value = p.link || '';
+        document.getElementById('pra-comentario').value = p.comentario || '';
+        editIndices.pra = idx;
+        document.getElementById('btn-save-pra').innerText = "Actualizar Práctica";
+    }
+
+    function limpiarPraForm() {
+        document.getElementById('pra-nombre').value = '';
+        document.getElementById('pra-desc').value = '';
+        document.getElementById('pra-link').value = '';
+        document.getElementById('pra-comentario').value = '';
+    }
 
     function openWhatsApp() {
         const phone = document.getElementById('cfg-wp-phone').value || "5491112345678";
@@ -657,19 +1195,12 @@
     }
 
     function cambiarEstiloCards() {
-        const bg = document.getElementById('cfg-card-bg').value;
         const color = document.getElementById('cfg-card-color').value;
         const size = document.getElementById('cfg-card-size').value;
-        document.documentElement.style.setProperty('--card-bg-color', bg);
         document.documentElement.style.setProperty('--card-title-color', color);
         document.documentElement.style.setProperty('--card-title-size', size);
-    }
-
-    function cambiarEstiloAgenda() {
-        const fontValue = document.getElementById('cfg-agenda-font').value;
-        const sizeValue = document.getElementById('cfg-agenda-size').value;
-        document.documentElement.style.setProperty('--agenda-font-family', fontValue);
-        document.documentElement.style.setProperty('--agenda-font-size', sizeValue);
+        configVisual.cardTitleColor = color;
+        configVisual.cardTitleSize = size;
     }
 
     function openNotesPopup() {
@@ -698,10 +1229,16 @@
             viewport.classList.remove('wide-view');
         }
 
-        if (screenId === 'pocimas') renderPocimasList();
-        if (screenId === 'home') renderHomeNovedades();
-        if (screenId === 'novedades') renderNovedadesABMList();
+        if (screenId === 'modalidad') updateCarouselDisplay('modalidad');
+        if (screenId === 'pocimas') {
+            updateCarouselDisplay('pocimas');
+            renderPocimasList();
+        }
+        if (screenId === 'practicas') renderPracticasScreen();
+        if (screenId === 'novedades') renderPublicNovedades();
         if (screenId === 'config') renderConfigLists();
+        
+        renderPublicNovedades();
     }
 
     function initCalendar() {
@@ -729,62 +1266,21 @@
         }
     }
 
-    function renderNovedadesABMList() {
-        const container = document.getElementById('novedades-abm-list');
-        container.innerHTML = novedadesDB.map((item, idx) => `
+    function renderConfigLists() {
+        renderModalidadConfigList();
+        renderNovedadesABMList();
+
+        const praBox = document.getElementById('crud-practicas-list');
+        praBox.innerHTML = practicasDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>${item.titulo}</b> (${item.desde || 'N/A'} - ${item.hasta || 'N/A'})</span>
+                <span><b>${item.nombre}</b></span>
                 <div class="crud-actions">
-                    <button class="btn-edit" onclick="editarNovedad(${idx})">Modificar</button>
-                    <button class="btn-delete" onclick="eliminarNovedad(${idx})">Eliminar</button>
+                    <button class="btn-edit" onclick="editarPractica(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="eliminarPractica(${idx})">Eliminar</button>
                 </div>
             </div>
         `).join('');
-    }
 
-    function publicarNovedad() {
-        const titulo = document.getElementById('nov-titulo').value;
-        const link = document.getElementById('nov-link').value;
-        const desde = document.getElementById('nov-desde').value;
-        const hasta = document.getElementById('nov-hasta').value;
-
-        if (!titulo) return;
-
-        if (editIndices.nov >= 0) {
-            novedadesDB[editIndices.nov] = { titulo, link, desde, hasta };
-            editIndices.nov = -1;
-            document.getElementById('btn-save-nov').innerText = "Publicar Novedad";
-        } else {
-            novedadesDB.push({ titulo, link, desde, hasta });
-        }
-
-        document.getElementById('nov-titulo').value = '';
-        document.getElementById('nov-link').value = '';
-        document.getElementById('nov-desde').value = '';
-        document.getElementById('nov-hasta').value = '';
-
-        renderNovedadesABMList();
-        renderHomeNovedades();
-        alert('Novedad procesada con éxito');
-    }
-
-    function editarNovedad(idx) {
-        const item = novedadesDB[idx];
-        document.getElementById('nov-titulo').value = item.titulo;
-        document.getElementById('nov-link').value = item.link || '';
-        document.getElementById('nov-desde').value = item.desde || '';
-        document.getElementById('nov-hasta').value = item.hasta || '';
-        editIndices.nov = idx;
-        document.getElementById('btn-save-nov').innerText = "Actualizar Novedad";
-    }
-
-    function eliminarNovedad(idx) {
-        novedadesDB.splice(idx, 1);
-        renderNovedadesABMList();
-        renderHomeNovedades();
-    }
-
-    function renderConfigLists() {
         const infBox = document.getElementById('crud-infusiones-list');
         infBox.innerHTML = infusionesDB.map((item, idx) => `
             <div class="crud-item">
@@ -806,37 +1302,6 @@
                 </div>
             </div>
         `).join('');
-
-        const actBox = document.getElementById('crud-actividades-list');
-        actBox.innerHTML = actividadesDB.map((item, idx) => `
-            <div class="crud-item">
-                <span><b>${item.nombre}</b> (${item.dia})</span>
-                <div class="crud-actions">
-                    <button class="btn-edit" onclick="editarActividad(${idx})">Modificar</button>
-                    <button class="btn-delete" onclick="eliminarActividad(${idx})">Eliminar</button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function agregarInfusion() {
-        const nombre = document.getElementById('inf-nombre').value;
-        const desc = document.getElementById('inf-desc').value;
-        const efecto = document.getElementById('inf-efecto').value;
-        const dias = document.getElementById('inf-dias').value || "Todos";
-
-        if (!nombre) return;
-
-        if (editIndices.inf >= 0) {
-            infusionesDB[editIndices.inf] = { nombre, desc, efecto, dias };
-            editIndices.inf = -1;
-            document.getElementById('btn-save-inf').innerText = "Guardar Infusión";
-        } else {
-            infusionesDB.push({ nombre, desc, efecto, dias });
-        }
-
-        limpiarInfForm();
-        renderConfigLists();
     }
 
     function editarInfusion(idx) {
@@ -849,36 +1314,11 @@
         document.getElementById('btn-save-inf').innerText = "Actualizar Infusión";
     }
 
-    function eliminarInfusion(idx) {
-        infusionesDB.splice(idx, 1);
-        renderConfigLists();
-    }
-
     function limpiarInfForm() {
         document.getElementById('inf-nombre').value = '';
         document.getElementById('inf-desc').value = '';
         document.getElementById('inf-efecto').value = '';
         document.getElementById('inf-dias').value = '';
-    }
-
-    function agregarPodcast() {
-        const nombre = document.getElementById('pod-nombre').value;
-        const desc = document.getElementById('pod-desc').value;
-        const link = document.getElementById('pod-link').value || "#";
-        const dias = document.getElementById('pod-dias').value || "Todos";
-
-        if (!nombre) return;
-
-        if (editIndices.pod >= 0) {
-            podcastsDB[editIndices.pod] = { nombre, desc, link, dias };
-            editIndices.pod = -1;
-            document.getElementById('btn-save-pod').innerText = "Guardar Podcast";
-        } else {
-            podcastsDB.push({ nombre, desc, link, dias });
-        }
-
-        limpiarPodForm();
-        renderConfigLists();
     }
 
     function editarPodcast(idx) {
@@ -891,70 +1331,11 @@
         document.getElementById('btn-save-pod').innerText = "Actualizar Podcast";
     }
 
-    function eliminarPodcast(idx) {
-        podcastsDB.splice(idx, 1);
-        renderConfigLists();
-    }
-
     function limpiarPodForm() {
         document.getElementById('pod-nombre').value = '';
         document.getElementById('pod-desc').value = '';
         document.getElementById('pod-link').value = '';
         document.getElementById('pod-dias').value = '';
-    }
-
-    function agregarActividadConfig() {
-        const nombre = document.getElementById('act-nombre').value;
-        const dia = document.getElementById('act-dia').value;
-
-        if (!nombre) return;
-
-        if (editIndices.act >= 0) {
-            actividadesDB[editIndices.act] = { nombre, dia };
-            editIndices.act = -1;
-            document.getElementById('btn-save-act').innerText = "Guardar Actividad";
-        } else {
-            actividadesDB.push({ nombre, dia });
-        }
-
-        document.getElementById('act-nombre').value = '';
-        renderConfigLists();
-    }
-
-    function editarActividad(idx) {
-        const item = actividadesDB[idx];
-        document.getElementById('act-nombre').value = item.nombre;
-        document.getElementById('act-dia').value = item.dia;
-        editIndices.act = idx;
-        document.getElementById('btn-save-act').innerText = "Actualizar Actividad";
-    }
-
-    function eliminarActividad(idx) {
-        actividadesDB.splice(idx, 1);
-        renderConfigLists();
-    }
-
-    function renderHomeNovedades() {
-        const container = document.getElementById('home-novedades-list');
-        const hoyStr = new Date().toISOString().split('T')[0];
-
-        const novVigentes = novedadesDB.filter(nov => {
-            const desdeOk = !nov.desde || hoyStr >= nov.desde;
-            const hastaOk = !nov.hasta || hoyStr <= nov.hasta;
-            return desdeOk && hastaOk;
-        });
-
-        if (novVigentes.length === 0) {
-            container.innerHTML = '<i style="font-size:0.75rem; color:#888;">No hay novedades vigentes para hoy.</i>';
-            return;
-        }
-
-        container.innerHTML = novVigentes.map(nov => `
-            <div class="novedad-card-item">
-                <b>${nov.titulo}</b><br>
-                ${nov.link ? `<a href="${nov.link}" target="_blank" style="color:var(--primary-dark); font-weight:bold;">🔗 Ver Enlace / Recurso</a>` : ''}
-            </div>
-        `).join('');
     }
 
     function renderPocimasList() {
@@ -1154,10 +1535,7 @@
         }
     });
 
-    initCalendar();
-    renderPocimasList();
-    renderHomeNovedades();
-    renderConfigLists();
+    cargarConfiguracionInicial();
 </script>
 
 </body>
