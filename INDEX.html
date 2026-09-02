@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Comunidad de Mujeres 28 Días</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fcf8f3;
+            --bg-image: none;
+            --card-bg: #ffffff;
+            --salmon: #f4a291;
+            --pastel-pink: #fbe3e8;
+            --pastel-purple: #e8dff5;
+            --pastel-green: #e1f0da;
+            --primary: #826c7f;
+            --primary-dark: #4a3e56;
+            --border-radius: 14px;
+            --agenda-font-family: 'Patrick Hand', cursive;
+            --agenda-font-size: 1.15rem;
+            
+            /* VARIABLES DINÁMICAS CARDS INICIO */
+            --card-bg-color: #ffffff;
+            --card-title-color: #f4a291;
+            --card-title-size: 1.05rem;
+            --btn-3d-shadow: none;
+        }
+
+        html, body {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; background-color: var(--bg-color);
+            background-image: var(--bg-image);
+            background-size: cover; background-position: center;
+            font-family: 'Segoe UI', Georgia, serif; color: #444;
+        }
+
+        .app-viewport {
+            width: 100%; max-width: 500px; height: 100dvh;
+            margin: 0 auto; box-sizing: border-box; padding: 12px;
+            display: flex; flex-direction: column; position: relative;
+            transition: max-width 0.3s ease;
+        }
+
+        @media (min-width: 600px) {
+            .app-viewport.wide-view { max-width: 850px; }
+        }
+
+        .top-admin-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 8px; flex-shrink: 0;
+        }
+        .icon-btn {
+            background: #fff; border: 1px solid var(--pastel-pink);
+            padding: 6px 12px; border-radius: 20px; font-size: 1.1rem;
+            cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex; align-items: center; gap: 4px;
+        }
+
+        .screen {
+            display: none; width: 100%; height: 100%;
+            flex-direction: column; box-sizing: border-box; overflow: hidden;
+        }
+
+        .screen.active { display: flex; }
+
+        .screen-header {
+            flex-shrink: 0; display: flex; align-items: center;
+            justify-content: space-between; margin-bottom: 8px;
+        }
+
+        .screen-title {
+            margin: 0; font-size: 1.1rem; color: var(--primary-dark);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+
+        .btn-back {
+            background: #fff; border: 1px solid var(--primary);
+            color: var(--primary); padding: 4px 12px; border-radius: 16px;
+            cursor: pointer; font-weight: bold; font-size: 0.8rem; flex-shrink: 0;
+        }
+
+        .screen-body {
+            flex: 1; display: flex; flex-direction: column; gap: 8px;
+            overflow-y: auto; scrollbar-width: none;
+        }
+        .screen-body::-webkit-scrollbar { display: none; }
+
+        .home-container-full {
+            flex: 1; display: flex; flex-direction: column; gap: 8px; height: 100%;
+        }
+
+        .menu-grid-full {
+            flex: 1; display: flex; flex-direction: column; gap: 8px; width: 100%;
+        }
+
+        .menu-row {
+            flex: 1; display: flex; gap: 8px; width: 100%;
+        }
+
+        /* ESTILO BASE Y ESTILO 3D Opcional */
+        .menu-card {
+            flex: 1; background: var(--card-bg-color); padding: 8px; border-radius: var(--border-radius);
+            box-shadow: var(--btn-3d-shadow, 0 2px 5px rgba(0,0,0,0.04)); cursor: pointer; text-align: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+            border: 1px solid rgba(244, 162, 145, 0.4); transition: transform 0.1s, background-color 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+        }
+
+        .menu-card.btn-3d {
+            box-shadow: 0 6px 0px rgba(0, 0, 0, 0.15), 0 8px 12px rgba(0,0,0,0.1);
+            border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+        }
+        .menu-card.btn-3d:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px rgba(0, 0, 0, 0.15);
+        }
+
+        .menu-card h2 {
+            margin: 0; color: var(--card-title-color); font-size: var(--card-title-size);
+            font-weight: 700; line-height: 1.2;
+        }
+
+        .card-icon { font-size: calc(var(--card-title-size) * 1.8); }
+
+        /* NUEVA MARCA / INSIGNIA DE ALERTA DE NOVEDADES (CAMPANA PULSANTE) */
+        .card-badge-alert {
+            display: none; position: absolute; top: -6px; right: -4px;
+            background: #ff3b30; color: #fff; border-radius: 50%;
+            width: 26px; height: 26px; font-size: 0.9rem; font-weight: bold;
+            line-height: 26px; text-align: center; box-shadow: 0 2px 6px rgba(255,59,48,0.5);
+            animation: ringPulse 1.2s infinite ease-in-out; z-index: 10;
+        }
+
+        @keyframes ringPulse {
+            0% { transform: scale(1) rotate(0deg); }
+            20% { transform: scale(1.2) rotate(15deg); }
+            40% { transform: scale(1.2) rotate(-15deg); }
+            60% { transform: scale(1.1) rotate(10deg); }
+            80% { transform: scale(1.1) rotate(0deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .carousel-container {
+            flex: 1; min-height: 200px; border-radius: var(--border-radius);
+            overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex; align-items: center; justify-content: center; background: #fff;
+            position: relative;
+        }
+
+        .carousel-img { width: 100%; height: 100%; object-fit: contain; display: block; cursor: pointer; }
+
+        .carousel-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8); border: 1px solid var(--salmon);
+            color: var(--primary-dark); width: 32px; height: 32px; border-radius: 50%;
+            font-size: 1rem; font-weight: bold; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        .carousel-btn.prev { left: 8px; }
+        .carousel-btn.next { right: 8px; }
+
+        .carousel-indicator {
+            position: absolute; bottom: 8px; background: rgba(0,0,0,0.5);
+            color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem;
+        }
+
+        .novedad-card-item {
+            background: var(--pastel-pink); padding: 10px; border-radius: 8px;
+            margin-bottom: 8px; font-size: 0.85rem; border-left: 4px solid var(--salmon);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+        }
+
+        .practica-card-item {
+            background: #fff; padding: 10px; border-radius: var(--border-radius);
+            border: 1px solid rgba(244, 162, 145, 0.4); margin-bottom: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 4px;
+        }
+        .practica-card-item h3 { margin: 0; color: var(--primary-dark); font-size: 0.95rem; }
+        .practica-card-item p { margin: 0; font-size: 0.85rem; color: #555; }
+        .practica-card-item .comentario {
+            font-style: italic; font-size: 0.8rem; color: #777;
+            background: var(--pastel-pink); padding: 4px 8px; border-radius: 6px; margin-top: 4px;
+        }
+        .practica-link-btn {
+            display: inline-block; margin-top: 4px; padding: 4px 10px;
+            background: var(--pastel-green); color: var(--primary-dark);
+            border-radius: 12px; text-decoration: none; font-weight: bold;
+            font-size: 0.8rem; border: 1px solid #b8e0a8; align-self: flex-start;
+        }
+
+        .obs-container {
+            margin-top: 8px; border-top: 1px dashed var(--salmon); padding-top: 6px;
+        }
+        .obs-history-list {
+            margin-top: 4px; max-height: 120px; overflow-y: auto; background: #faf8f5;
+            border: 1px solid #eee; border-radius: 6px; padding: 6px; font-size: 0.75rem;
+        }
+        .obs-item { border-bottom: 1px solid #f0e6e4; padding: 3px 0; color: #444; }
+        .obs-item:last-child { border-bottom: none; }
+        .obs-date { font-weight: bold; color: var(--primary); font-size: 0.7rem; }
+
+        .fit-img {
+            max-width: 100%; object-fit: contain;
+            border-radius: var(--border-radius); align-self: center; cursor: pointer;
+        }
+
+        .registro-hero-img {
+            flex: 1.8; width: 100%; object-fit: contain;
+            border-radius: var(--border-radius); cursor: pointer;
+        }
+
+        .pocimas-config-list {
+            background: #fff; padding: 10px; border-radius: var(--border-radius);
+            border: 1px solid rgba(244, 162, 145, 0.3); margin-top: 4px; flex-shrink: 0;
+        }
+        .pocima-item-card { border-bottom: 1px dashed #eee; padding: 4px 0; font-size: 0.75rem; }
+
+        .calendar-grid {
+            display: grid; grid-template-columns: repeat(7, 1fr);
+            gap: 6px; text-align: center; font-family: var(--agenda-font-family);
+        }
+
+        @media (min-width: 600px) {
+            .calendar-grid { gap: 10px; }
+            .cal-day { min-height: 75px !important; }
+        }
+
+        .cal-day {
+            background: var(--pastel-pink); padding: 6px 0; border-radius: 10px;
+            cursor: pointer; border: 1px solid #f2c6be; font-weight: bold;
+            font-size: var(--agenda-font-size); display: flex; flex-direction: column;
+            align-items: center; min-height: 58px; justify-content: space-between;
+            color: var(--primary-dark); transition: transform 0.1s, background-color 0.2s;
+        }
+
+        .cal-day:nth-child(even) { background: var(--pastel-purple); border-color: #d8cbe5; }
+        .cal-day:hover { transform: scale(1.03); background: var(--pastel-green); }
+        .walk-icon { font-size: 1rem; }
+        .podcast-link { font-size: 0.8rem; color: var(--primary); text-decoration: underline; }
+
+        .crud-list-container { margin-top: 6px; border-top: 1px dashed #e8d5d0; padding-top: 6px; }
+        .crud-item {
+            display: flex; justify-content: space-between; align-items: center;
+            background: #faf8f5; border: 1px solid #eee; padding: 6px 8px;
+            border-radius: 6px; margin-bottom: 4px; font-size: 0.75rem;
+        }
+        .crud-actions { display: flex; gap: 4px; }
+        .btn-edit { background: #6b5b7b; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
+        .btn-delete { background: #e06d53; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
+
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-color); justify-content: center; align-items: center; z-index: 200;
+        }
+
+        .modal-card-full {
+            background: #fffdfa; width: 100%; height: 100dvh; padding: 14px;
+            box-sizing: border-box; display: flex; flex-direction: column; gap: 8px;
+            overflow-y: auto; font-family: var(--agenda-font-family); max-width: 850px; margin: 0 auto;
+        }
+
+        .modal-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--primary-dark); margin: 0; }
+
+        .day-info-block { background: #fff; border: 1px solid #f2c6be; border-radius: 10px; padding: 8px; font-size: var(--agenda-font-size); }
+        .day-info-block h4 { margin: 0 0 4px 0; color: var(--salmon); font-size: 1rem; }
+
+        .podcast-audio-link {
+            display: inline-block; margin-top: 3px; padding: 4px 10px;
+            background: var(--pastel-pink); color: var(--primary-dark);
+            border-radius: 12px; text-decoration: none; font-weight: bold;
+            font-size: var(--agenda-font-size); border: 1px solid var(--salmon);
+        }
+
+        .hours-container {
+            flex: 1; min-height: 140px; overflow-y: auto; border: 1px solid #f2c6be;
+            padding: 8px; border-radius: 12px; background: #fff8f6;
+        }
+
+        .hour-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+        .hour-label { font-size: var(--agenda-font-size); font-weight: bold; width: 75px; flex-shrink: 0; color: var(--primary-dark); }
+        .hour-input {
+            font-family: var(--agenda-font-family); font-size: var(--agenda-font-size); color: #333;
+            background: #ffffff; border: 1px solid #e8d5d0; border-radius: 8px; padding: 4px 8px; width: 100%;
+        }
+
+        .notes-popup-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); z-index: 400; justify-content: center; align-items: center; padding: 12px; box-sizing: border-box;
+        }
+
+        .notes-popup-card {
+            background: #fff; width: 100%; max-width: 650px; height: 80vh;
+            border-radius: var(--border-radius); padding: 16px; box-sizing: border-box;
+            display: flex; flex-direction: column; gap: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .notes-popup-card textarea {
+            flex: 1; width: 100%; font-family: var(--agenda-font-family);
+            font-size: 1.25rem; padding: 10px; border: 1px solid #ccc;
+            border-radius: 8px; box-sizing: border-box; resize: none;
+        }
+
+        .modal-photo-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 4px; }
+        .modal-photo-gallery img { width: 100%; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid var(--salmon); cursor: pointer; }
+
+        .form-group { margin-bottom: 8px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 2px; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 0.85rem;
+        }
+
+        .btn-submit {
+            background: var(--salmon); color: white; border: none;
+            padding: 8px; border-radius: 8px; width: 100%;
+            cursor: pointer; font-size: 1rem; font-weight: bold; font-family: var(--agenda-font-family);
+        }
+
+        .zoom-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9); z-index: 300;
+            justify-content: center; align-items: center; overflow: hidden; touch-action: none;
+        }
+
+        .zoom-img-target { max-width: 95%; max-height: 90%; transition: transform 0.05s linear; transform-origin: center center; }
+        .zoom-close-btn { position: absolute; top: 15px; right: 15px; background: #fff; color: #000; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; font-weight: bold; cursor: pointer; z-index: 310; }
+    </style>
+</head>
+<body>
+
+<div class="app-viewport" id="app-viewport">
+
+    <!-- BARRA SUPERIOR DE ACCESO RÁPIDO -->
+    <div class="top-admin-bar">
+        <button class="icon-btn" onclick="solicitarAccesoAdmin()" title="Configuración">⚙️ Config</button>
+        <button class="icon-btn" onclick="openWhatsApp()" style="color:#25D366; font-weight:bold;" title="Enviar WhatsApp">💬 WhatsApp</button>
+    </div>
+
+    <!-- PANTALLA INICIAL -->
+    <div id="screen-home" class="screen active">
+        <div class="home-container-full">
+            <div class="menu-grid-full">
+                <div class="menu-row">
+                    <div class="menu-card" onclick="nav('modalidad')"><span class="card-icon">🌸</span><h2>Modalidad</h2></div>
+                    <div class="menu-card" onclick="nav('pocimas')"><span class="card-icon">🍵</span><h2>Pócimas y Yuyos del Bien</h2></div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-card" onclick="nav('caminatas')"><span class="card-icon">🚶‍♀️</span><h2>Propuesta Diaria y Caminatas</h2></div>
+                    <div class="menu-card" onclick="nav('practicas')"><span class="card-icon">🧘‍♀️</span><h2>Prácticas</h2></div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-card" onclick="nav('agenda')"><span class="card-icon">📅</span><h2>Mi Agenda Diaria y Sensaciones</h2></div>
+                    <div class="menu-card" onclick="nav('registro')"><span class="card-icon">📷</span><h2>Registro Fotográfico</h2></div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-card" onclick="nav('novedades')" style="background: var(--pastel-pink); border-color: var(--salmon);">
+                        <span class="card-badge-alert" id="home-novedades-alert">🔔</span>
+                        <span class="card-icon">📢</span>
+                        <h2>Novedades</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANTALLA NOVEDADES (SOLO LECTURA) -->
+    <div id="screen-novedades" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Novedades del Grupo</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body" id="public-novedades-list">
+            <i style="font-size:0.8rem; color:#888; text-align:center;">No hay novedades vigentes para hoy.</i>
+        </div>
+    </div>
+
+    <!-- PANTALLA MODALIDAD -->
+    <div id="screen-modalidad" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Modalidad</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body">
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="prevCarousel('modalidad')">❮</button>
+                <img id="img-carousel-modalidad" src="1-Bienvenida.jpeg" alt="Modalidad" class="carousel-img" onclick="openZoomModal(this.src)">
+                <button class="carousel-btn next" onclick="nextCarousel('modalidad')">❯</button>
+                <div class="carousel-indicator" id="ind-carousel-modalidad">1/3</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANTALLA PÓCIMAS Y YUYOS -->
+    <div id="screen-pocimas" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Pócimas y Yuyos del Bien</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body">
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="prevCarousel('pocimas')">❮</button>
+                <img id="img-carousel-pocimas" src="yuyos del bien.jpeg" alt="Yuyos del Bien" class="carousel-img" onclick="openZoomModal(this.src)">
+                <button class="carousel-btn next" onclick="nextCarousel('pocimas')">❯</button>
+                <div class="carousel-indicator" id="ind-carousel-pocimas">1/2</div>
+            </div>
+            
+            <div class="pocimas-config-list">
+                <small style="font-weight:bold; color:var(--primary-dark);">Infusiones y Pócimas Configuradas:</small>
+                <div id="pocimas-dynamic-list" style="margin-top:4px;">
+                    <i style="font-size:0.7rem; color:#888;">No hay infusiones adicionadas en Config.</i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANTALLA DE PRÁCTICAS -->
+    <div id="screen-practicas" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Prácticas Guiadas</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body" id="practicas-dynamic-list">
+            <i style="font-size:0.8rem; color:#888; text-align:center;">No hay prácticas cargadas.</i>
+        </div>
+    </div>
+
+    <!-- PROPUESTA DIARIA Y CAMINATAS -->
+    <div id="screen-caminatas" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Propuesta Diaria y Caminatas</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body" style="justify-content: center;">
+            <img src="Caminatas.jpeg" alt="Caminatas" class="fit-img" style="max-height: 90%;" onclick="openZoomModal(this.src)">
+        </div>
+    </div>
+
+    <!-- MI AGENDA DIARIA -->
+    <div id="screen-agenda" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title" style="font-family: 'Playfair Display', serif;">Mi Agenda Diaria</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body">
+            <p style="font-size: 1rem; margin: 0; font-family: var(--agenda-font-family);">Selecciona un día para organizar tus rutinas:</p>
+            <div class="calendar-grid" id="calendar-grid"></div>
+        </div>
+    </div>
+
+    <!-- REGISTRO FOTOGRÁFICO -->
+    <div id="screen-registro" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Registro Fotográfico</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body">
+            <img src="Registro fotografico.jpeg" alt="Registro Fotográfico" class="registro-hero-img" onclick="openZoomModal(this.src)">
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); flex-shrink: 0;">
+                <div class="form-group">
+                    <label>Fecha de la toma:</label>
+                    <input type="date" id="foto-fecha">
+                </div>
+                <div class="photo-upload-grid">
+                    <div class="photo-box-input">
+                        <b>Rostro</b>
+                        <img id="prev-rostro" class="preview-img" onclick="openZoomModal(this.src)">
+                        <input type="file" accept="image/*" onchange="previewAndSave('rostro', event)">
+                    </div>
+                    <div class="photo-box-input">
+                        <b>Medio Cuerpo</b>
+                        <img id="prev-medio" class="preview-img" onclick="openZoomModal(this.src)">
+                        <input type="file" accept="image/*" onchange="previewAndSave('medio', event)">
+                    </div>
+                    <div class="photo-box-input">
+                        <b>Cuerpo Entero</b>
+                        <img id="prev-entero" class="preview-img" onclick="openZoomModal(this.src)">
+                        <input type="file" accept="image/*" onchange="previewAndSave('entero', event)">
+                    </div>
+                </div>
+                <button class="btn-submit" style="margin-top: 8px;" onclick="alert('Registro Fotográfico guardado')">Guardar Fotos</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONFIGURACIÓN ADMIN COMPLETA -->
+    <div id="screen-config" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Configuración Admin (Anka)</h2>
+            <button class="btn-back" onclick="nav('home')">← Volver</button>
+        </div>
+        <div class="screen-body">
+
+            <!-- BOTÓN EXPORTAR / GUARDAR CONFIG.JSON -->
+            <div style="background: var(--pastel-green); padding: 10px; border-radius: var(--border-radius); border: 1px solid #b8e0a8;">
+                <small style="font-weight:bold; color:var(--primary-dark);">💾 Exportación / Sincronización de Datos:</small>
+                <p style="font-size:0.75rem; margin:4px 0 8px 0;">Descarga el archivo <b>config.json</b> actualizado para subirlo a tu repositorio de GitHub.</p>
+                <button class="btn-submit" style="background:#52b788;" onclick="descargarConfigJSON()">Descargar config.json Actualizado</button>
+            </div>
+
+            <!-- APARIENCIA VISUAL: FONDO, BOTONES 3D, IMAGEN DE FONDO -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Apariencia Global y Pantalla</h3>
+                
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Color Fondo Pantalla:</label>
+                        <input type="color" id="cfg-app-bg" value="#fcf8f3" onchange="cambiarAparienciaGlobal()">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Color Letra Cards:</label>
+                        <input type="color" id="cfg-card-color" value="#f4a291" onchange="cambiarEstiloCards()">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Imagen de Fondo de Pantalla:</label>
+                    <input type="file" accept="image/*" onchange="cargarImagenFondoPantalla(event)">
+                </div>
+
+                <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                    <input type="checkbox" id="cfg-btn-3d" style="width:auto;" onchange="cambiarEstilo3DBotones()">
+                    <label for="cfg-btn-3d" style="margin:0; cursor:pointer;">Activar Botones con Efecto 3D / Relieve</label>
+                </div>
+
+                <div class="form-group" style="margin-bottom:0; margin-top:6px;">
+                    <label>Tamaño de Letra del Título:</label>
+                    <select id="cfg-card-size" onchange="cambiarEstiloCards()">
+                        <option value="0.85rem">Chico (0.85rem)</option>
+                        <option value="1.05rem" selected>Normal (1.05rem)</option>
+                        <option value="1.25rem">Grande (1.25rem)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- ABM DE NOVEDADES -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Novedades (ABM)</h3>
+                <div class="form-group"><label>Título o Mensaje:</label><input type="text" id="nov-titulo" placeholder="Ej: Link Zoom Jueves 3"></div>
+                <div class="form-group"><label>Enlace / YouTube / Recurso:</label><input type="text" id="nov-link" placeholder="https://..."></div>
+                
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Vigencia Desde:</label>
+                        <input type="date" id="nov-desde">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Vigencia Hasta:</label>
+                        <input type="date" id="nov-hasta">
+                    </div>
+                </div>
+
+                <button class="btn-submit" id="btn-save-nov" onclick="publicarNovedadManual()">Publicar Novedad</button>
+
+                <div class="crud-list-container">
+                    <small style="font-weight:bold;">Novedades Registradas:</small>
+                    <div id="novedades-abm-list"></div>
+                </div>
+            </div>
+
+            <!-- GESTIÓN DE PRÁCTICAS (ABM) -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Prácticas</h3>
+                <div class="form-group"><label>Nombre Práctica:</label><input type="text" id="pra-nombre"></div>
+                <div class="form-group"><label>Descripción:</label><input type="text" id="pra-desc"></div>
+                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="pra-link" placeholder="https://..."></div>
+                <div class="form-group"><label>Comentario / Nota Inicial:</label><input type="text" id="pra-comentario"></div>
+                <button class="btn-submit" id="btn-save-pra" onclick="agregarPractica()">Guardar Práctica</button>
+
+                <div class="crud-list-container">
+                    <small style="font-weight:bold;">Prácticas Cargadas:</small>
+                    <div id="crud-practicas-list"></div>
+                </div>
+            </div>
+
+            <!-- GESTIÓN DE IMÁGENES DE MODALIDAD -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Carrusel Modalidad</h3>
+                <div class="form-group">
+                    <label>Agregar Imagen (Ruta local o URL):</label>
+                    <input type="text" id="cfg-modalidad-url" placeholder="Ej: https://...">
+                </div>
+                <div class="form-group">
+                    <label>o Seleccionar Archivo Local:</label>
+                    <input type="file" accept="image/*" onchange="addModalidadImageFile(event)">
+                </div>
+                <button class="btn-submit" onclick="addModalidadImageUrl()">Agregar a Modalidad</button>
+                
+                <div class="crud-list-container">
+                    <small style="font-weight:bold;">Imágenes en Modalidad:</small>
+                    <div id="crud-modalidad-list"></div>
+                </div>
+            </div>
+
+            <!-- NÚMERO WHATSAPP -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Contacto WhatsApp</h3>
+                <div class="form-group">
+                    <label>Teléfono (formato internacional sin +):</label>
+                    <input type="text" id="cfg-wp-phone" value="5491112345678" placeholder="54911...">
+                </div>
+            </div>
+
+            <!-- CALENDARIO -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Calendario y Horarios</h3>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;"><label>Día Inicio:</label><input type="number" id="cfg-dia-inicio" value="1"></div>
+                    <div class="form-group" style="flex:1;"><label>Día Fin:</label><input type="number" id="cfg-dia-fin" value="28"></div>
+                </div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;"><label>Hora Inicio:</label><input type="number" id="cfg-hora-inicio" value="7"></div>
+                    <div class="form-group" style="flex:1;"><label>Hora Fin:</label><input type="number" id="cfg-hora-fin" value="21"></div>
+                </div>
+                <button class="btn-submit" onclick="guardarConfigCalendario()">Actualizar Rangos</button>
+            </div>
+
+            <!-- GESTIÓN INFUSIONES -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Infusiones / Pócimas</h3>
+                <div class="form-group"><label>Nombre:</label><input type="text" id="inf-nombre"></div>
+                <div class="form-group"><label>Descripción / Preparación:</label><input type="text" id="inf-desc"></div>
+                <div class="form-group"><label>Efecto / Propiedad:</label><input type="text" id="inf-efecto"></div>
+                <div class="form-group"><label>Días de toma:</label><input type="text" id="inf-dias" placeholder="Ej: Todos, Lunes, Martes"></div>
+                <button class="btn-submit" id="btn-save-inf" onclick="agregarInfusion()">Guardar Infusión</button>
+                
+                <div class="crud-list-container">
+                    <small style="font-weight:bold;">Infusiones Cargadas:</small>
+                    <div id="crud-infusiones-list"></div>
+                </div>
+            </div>
+
+            <!-- GESTIÓN PODCASTS -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Podcasts</h3>
+                <div class="form-group"><label>Nombre:</label><input type="text" id="pod-nombre"></div>
+                <div class="form-group"><label>Descripción:</label><input type="text" id="pod-desc"></div>
+                <div class="form-group"><label>Link Audio:</label><input type="text" id="pod-link" placeholder="https://..."></div>
+                <div class="form-group"><label>Días para escuchar:</label><input type="text" id="pod-dias" placeholder="Ej: Martes, Jueves, Sábado"></div>
+                <button class="btn-submit" id="btn-save-pod" onclick="agregarPodcast()">Guardar Podcast</button>
+
+                <div class="crud-list-container">
+                    <small style="font-weight:bold;">Podcasts Cargados:</small>
+                    <div id="crud-podcasts-list"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- MODAL DETALLE DEL DÍA COMPLETO -->
+<div class="modal-overlay" id="modal-agenda">
+    <div class="modal-card-full">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2 class="modal-title" id="modal-date-title">Día de la semana</h2>
+            <button class="btn-back" onclick="closeModal()">✕ Cerrar</button>
+        </div>
+        
+        <div id="modal-gallery-box" style="display:none;">
+            <small style="font-size: 0.85rem; color: var(--primary-dark); font-weight: bold;">Registro Fotográfico de esta fecha:</small>
+            <div class="modal-photo-gallery" id="modal-photo-grid"></div>
+        </div>
+
+        <div class="day-info-block" id="block-infusiones" style="display:none;">
+            <h4>🍵 Infusiones del día:</h4>
+            <div id="content-infusiones"></div>
+        </div>
+
+        <div class="day-info-block" id="block-podcasts" style="display:none;">
+            <h4>🎧 Podcast de hoy:</h4>
+            <div id="content-podcasts"></div>
+        </div>
+
+        <div class="day-info-block" id="block-actividades" style="display:none;">
+            <h4>✨ Actividades recomendadas:</h4>
+            <div id="content-actividades"></div>
+        </div>
+
+        <div class="form-group">
+            <label style="font-family: var(--agenda-font-family); font-size: var(--agenda-font-size);">Seleccionar Actividad Configurada:</label>
+            <select id="select-actividad-config" style="font-family: var(--agenda-font-family); font-size: var(--agenda-font-size);" onchange="cargarActividadEnHorario(this.value)">
+                <option value="">-- Seleccionar --</option>
+            </select>
+        </div>
+
+        <label style="font-size: var(--agenda-font-size); font-weight:bold; color:var(--primary-dark);">Horarios del día:</label>
+        <div class="hours-container" id="hours-container"></div>
+
+        <div class="form-group" style="margin-top:2px;">
+            <label style="font-family: var(--agenda-font-family); font-size: var(--agenda-font-size);">Notas / Sensaciones del día:</label>
+            <textarea id="modal-text" rows="2" style="font-family: var(--agenda-font-family); font-size: var(--agenda-font-size);" placeholder="Escribe tus sensaciones aquí..." onfocus="openNotesPopup()" onkeydown="openNotesPopup()"></textarea>
+        </div>
+        <button class="btn-submit" onclick="guardarRegistroAgenda()">Guardar en Agenda</button>
+    </div>
+</div>
+
+<!-- POP-UP EXTENDIDO PARA NOTAS/SENSACIONES -->
+<div class="notes-popup-overlay" id="notes-popup">
+    <div class="notes-popup-card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 style="margin:0; font-family:'Playfair Display', serif; color:var(--primary-dark);">Notas / Sensaciones del Día</h3>
+            <button class="btn-back" onclick="closeNotesPopup()">✕ Listo</button>
+        </div>
+        <textarea id="popup-textarea" placeholder="Escribe aquí todas tus sensaciones y notas detalladas..."></textarea>
+        <button class="btn-submit" onclick="closeNotesPopup()">Guardar Sensaciones</button>
+    </div>
+</div>
+
+<!-- MODAL ZOOM DE IMÁGENES -->
+<div class="zoom-overlay" id="zoom-modal" onclick="closeZoomModal()">
+    <button class="zoom-close-btn" onclick="closeZoomModal()">✕</button>
+    <img id="zoom-target-img" class="zoom-img-target" src="" alt="Zoom Image">
+</div>
+
+<script>
+    let cfgCalendario = { diaInicio: 1, diaFin: 28, horaInicio: 7, horaFin: 21 };
+    let configVisual = { bgColor: '#fcf8f3', bgImage: '', btn3D: false, cardTitleColor: '#f4a291', cardTitleSize: '1.05rem' };
+    
+    let carruseles = {
+        modalidad: ["1-Bienvenida.jpeg", "modalidad1.jpeg", "modalidad2.jpeg"],
+        pocimas: ["yuyos del bien.jpeg", "yuyos.jpeg"]
+    };
+    
+    let indicesCarrusel = { modalidad: 0, pocimas: 0 };
+    let practicasDB = [];
+    let actividadesDB = [];
+    let infusionesDB = [];
+    let podcastsDB = [];
+    let novedadesDB = [];
+
+    let editIndices = { inf: -1, pod: -1, act: -1, nov: -1, pra: -1 };
+    let fotosPorFecha = {};
+    let agendaGuardadaBD = {}; 
+    let currentFechaKeyModal = "";
+
+    /* CARGA AUTOMÁTICA DE CONFIG.JSON AL INICIAR */
+    async function cargarConfiguracionInicial() {
+        try {
+            const res = await fetch('./config.json');
+            if (res.ok) {
+                const data = await res.json();
+                if (data.practicasDB) practicasDB = data.practicasDB;
+                if (data.infusionesDB) infusionesDB = data.infusionesDB;
+                if (data.novedadesDB) novedadesDB = data.novedadesDB;
+                if (data.podcastsDB) podcastsDB = data.podcastsDB;
+                if (data.actividadesDB) actividadesDB = data.actividadesDB;
+                if (data.carruseles) carruseles = data.carruseles;
+                if (data.cfgCalendario) cfgCalendario = data.cfgCalendario;
+                if (data.configVisual) {
+                    configVisual = data.configVisual;
+                    aplicarEstilosVisualesCargados();
+                }
+            }
+        } catch (e) {
+            console.warn("No se pudo cargar config.json local, iniciando con valores por defecto.");
+        }
+
+        initCalendar();
+        renderPocimasList();
+        renderPracticasScreen();
+        renderPublicNovedades();
+        renderConfigLists();
+        updateCarouselDisplay('modalidad');
+        updateCarouselDisplay('pocimas');
+    }
+
+    /* SEGURIDAD DE ACCESO ADMIN (ANKA / 1234) */
+    function solicitarAccesoAdmin() {
+        const usuario = prompt("Ingrese su Nombre de Usuario:");
+        if (!usuario || usuario.trim().toUpperCase() !== "ANKA") {
+            alert("Acceso denegado: Usuario incorrecto.");
+            return;
+        }
+
+        const clave = prompt("Ingrese su Clave:");
+        if (clave !== "1234") {
+            alert("Acceso denegado: Clave incorrecta.");
+            return;
+        }
+
+        nav('config');
+    }
+
+    /* DESCARGA Y EXPORTACIÓN DE CONFIG.JSON */
+    function descargarConfigJSON() {
+        const configData = {
+            practicasDB,
+            infusionesDB,
+            novedadesDB,
+            podcastsDB,
+            actividadesDB,
+            carruseles,
+            cfgCalendario,
+            configVisual
+        };
+
+        const jsonStr = JSON.stringify(configData, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'config.json';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    /* APARIENCIA GLOBAL: COLOR, IMAGEN Y BOTONES 3D */
+    function cambiarAparienciaGlobal() {
+        const color = document.getElementById('cfg-app-bg').value;
+        document.documentElement.style.setProperty('--bg-color', color);
+        configVisual.bgColor = color;
+    }
+
+    function cargarImagenFondoPantalla(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const url = URL.createObjectURL(file);
+        document.documentElement.style.setProperty('--bg-image', `url('${url}')`);
+        configVisual.bgImage = url;
+    }
+
+    function cambiarEstilo3DBotones() {
+        const activo = document.getElementById('cfg-btn-3d').checked;
+        configVisual.btn3D = activo;
+        const cards = document.querySelectorAll('.menu-card');
+        cards.forEach(card => {
+            if (activo) card.classList.add('btn-3d');
+            else card.classList.remove('btn-3d');
+        });
+    }
+
+    function aplicarEstilosVisualesCargados() {
+        if (configVisual.bgColor) {
+            document.documentElement.style.setProperty('--bg-color', configVisual.bgColor);
+            document.getElementById('cfg-app-bg').value = configVisual.bgColor;
+        }
+        if (configVisual.bgImage) {
+            document.documentElement.style.setProperty('--bg-image', `url('${configVisual.bgImage}')`);
+        }
+        if (configVisual.btn3D) {
+            document.getElementById('cfg-btn-3d').checked = true;
+            cambiarEstilo3DBotones();
+        }
+        if (configVisual.cardTitleColor) {
+            document.documentElement.style.setProperty('--card-title-color', configVisual.cardTitleColor);
+            document.getElementById('cfg-card-color').value = configVisual.cardTitleColor;
+        }
+        if (configVisual.cardTitleSize) {
+            document.documentElement.style.setProperty('--card-title-size', configVisual.cardTitleSize);
+            document.getElementById('cfg-card-size').value = configVisual.cardTitleSize;
+        }
+    }
+
+    /* AUTO GENERACIÓN DE NOVEDAD AL EDITAR ABM */
+    function generarNovedadAutomatica(seccion, accion, detalle) {
+        const hoy = new Date();
+        const hoyStr = hoy.toISOString().split('T')[0];
+        const fechaFormateada = `${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()}`;
+        
+        const titulo = `[${fechaFormateada}] Actualización en ${seccion}: ${accion} - "${detalle}"`;
+        novedadesDB.unshift({
+            titulo: titulo,
+            link: "",
+            desde: hoyStr,
+            hasta: hoyStr
+        });
+
+        renderNovedadesABMList();
+        renderPublicNovedades();
+    }
+
+    function renderPublicNovedades() {
+        const container = document.getElementById('public-novedades-list');
+        const alertBadge = document.getElementById('home-novedades-alert');
+        const hoyStr = new Date().toISOString().split('T')[0];
+
+        const novVigentes = novedadesDB.filter(nov => {
+            const desdeOk = !nov.desde || hoyStr >= nov.desde;
+            const hastaOk = !nov.hasta || hoyStr <= nov.hasta;
+            return desdeOk && hastaOk;
+        });
+
+        if (novVigentes.length > 0) {
+            alertBadge.style.display = 'block';
+        } else {
+            alertBadge.style.display = 'none';
+        }
+
+        if (novVigentes.length === 0) {
+            container.innerHTML = '<i style="font-size:0.8rem; color:#888; text-align:center;">No hay novedades vigentes para hoy.</i>';
+            return;
+        }
+
+        container.innerHTML = novVigentes.map(nov => `
+            <div class="novedad-card-item">
+                <b style="color:var(--primary-dark); font-size:0.95rem;">📢 ${nov.titulo}</b><br>
+                ${nov.link ? `<a href="${nov.link}" target="_blank" style="color:var(--primary); font-weight:bold; display:inline-block; margin-top:4px;">🔗 Abrir Enlace / Recurso</a>` : ''}
+            </div>
+        `).join('');
+    }
+
+    function renderNovedadesABMList() {
+        const container = document.getElementById('novedades-abm-list');
+        container.innerHTML = novedadesDB.map((item, idx) => `
+            <div class="crud-item">
+                <span><b>${item.titulo}</b> (${item.desde || 'N/A'} - ${item.hasta || 'N/A'})</span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarNovedad(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="eliminarNovedad(${idx})">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function publicarNovedadManual() {
+        const titulo = document.getElementById('nov-titulo').value;
+        const link = document.getElementById('nov-link').value;
+        const desde = document.getElementById('nov-desde').value;
+        const hasta = document.getElementById('nov-hasta').value;
+
+        if (!titulo) return;
+
+        if (editIndices.nov >= 0) {
+            novedadesDB[editIndices.nov] = { titulo, link, desde, hasta };
+            editIndices.nov = -1;
+            document.getElementById('btn-save-nov').innerText = "Publicar Novedad";
+        } else {
+            novedadesDB.unshift({ titulo, link, desde, hasta });
+        }
+
+        document.getElementById('nov-titulo').value = '';
+        document.getElementById('nov-link').value = '';
+        document.getElementById('nov-desde').value = '';
+        document.getElementById('nov-hasta').value = '';
+
+        renderNovedadesABMList();
+        renderPublicNovedades();
+    }
+
+    function editarNovedad(idx) {
+        const item = novedadesDB[idx];
+        document.getElementById('nov-titulo').value = item.titulo;
+        document.getElementById('nov-link').value = item.link || '';
+        document.getElementById('nov-desde').value = item.desde || '';
+        document.getElementById('nov-hasta').value = item.hasta || '';
+        editIndices.nov = idx;
+        document.getElementById('btn-save-nov').innerText = "Actualizar Novedad";
+    }
+
+    function eliminarNovedad(idx) {
+        novedadesDB.splice(idx, 1);
+        renderNovedadesABMList();
+        renderPublicNovedades();
+    }
+
+    function agregarPractica() {
+        const nombre = document.getElementById('pra-nombre').value;
+        const desc = document.getElementById('pra-desc').value;
+        const link = document.getElementById('pra-link').value;
+        const comentario = document.getElementById('pra-comentario').value;
+
+        if (!nombre) return;
+
+        if (editIndices.pra >= 0) {
+            const obsPrevias = practicasDB[editIndices.pra].observaciones || [];
+            practicasDB[editIndices.pra] = { id: Date.now(), nombre, desc, link, comentario, observaciones: obsPrevias };
+            editIndices.pra = -1;
+            document.getElementById('btn-save-pra').innerText = "Guardar Práctica";
+            generarNovedadAutomatica("Prácticas", "Modificación", nombre);
+        } else {
+            practicasDB.push({ id: Date.now(), nombre, desc, link, comentario, observaciones: [] });
+            generarNovedadAutomatica("Prácticas", "Nueva incorporación", nombre);
+        }
+
+        limpiarPraForm();
+        renderConfigLists();
+        renderPracticasScreen();
+    }
+
+    function eliminarPractica(idx) {
+        const p = practicasDB[idx];
+        practicasDB.splice(idx, 1);
+        generarNovedadAutomatica("Prácticas", "Eliminación", p.nombre);
+        renderConfigLists();
+        renderPracticasScreen();
+    }
+
+    function agregarInfusion() {
+        const nombre = document.getElementById('inf-nombre').value;
+        const desc = document.getElementById('inf-desc').value;
+        const efecto = document.getElementById('inf-efecto').value;
+        const dias = document.getElementById('inf-dias').value || "Todos";
+
+        if (!nombre) return;
+
+        if (editIndices.inf >= 0) {
+            infusionesDB[editIndices.inf] = { nombre, desc, efecto, dias };
+            editIndices.inf = -1;
+            document.getElementById('btn-save-inf').innerText = "Guardar Infusión";
+            generarNovedadAutomatica("Pócimas y Yuyos", "Modificación", nombre);
+        } else {
+            infusionesDB.push({ nombre, desc, efecto, dias });
+            generarNovedadAutomatica("Pócimas y Yuyos", "Nueva incorporación", nombre);
+        }
+
+        limpiarInfForm();
+        renderConfigLists();
+    }
+
+    function eliminarInfusion(idx) {
+        const inf = infusionesDB[idx];
+        infusionesDB.splice(idx, 1);
+        generarNovedadAutomatica("Pócimas y Yuyos", "Eliminación", inf.nombre);
+        renderConfigLists();
+    }
+
+    function addModalidadImageUrl() {
+        const url = document.getElementById('cfg-modalidad-url').value.trim();
+        if (url) {
+            carruseles.modalidad.push(url);
+            document.getElementById('cfg-modalidad-url').value = '';
+            renderModalidadConfigList();
+            updateCarouselDisplay('modalidad');
+            generarNovedadAutomatica("Modalidad", "Nueva imagen incorporada", "En el carrusel");
+        }
+    }
+
+    function addModalidadImageFile(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const url = URL.createObjectURL(file);
+        carruseles.modalidad.push(url);
+        renderModalidadConfigList();
+        updateCarouselDisplay('modalidad');
+        generarNovedadAutomatica("Modalidad", "Nueva imagen subida", file.name);
+    }
+
+    function removeModalidadImage(idx) {
+        carruseles.modalidad.splice(idx, 1);
+        renderModalidadConfigList();
+        updateCarouselDisplay('modalidad');
+        generarNovedadAutomatica("Modalidad", "Eliminación de imagen", `Imagen #${idx + 1}`);
+    }
+
+    function agregarPodcast() {
+        const nombre = document.getElementById('pod-nombre').value;
+        const desc = document.getElementById('pod-desc').value;
+        const link = document.getElementById('pod-link').value || "#";
+        const dias = document.getElementById('pod-dias').value || "Todos";
+
+        if (!nombre) return;
+
+        if (editIndices.pod >= 0) {
+            podcastsDB[editIndices.pod] = { nombre, desc, link, dias };
+            editIndices.pod = -1;
+            document.getElementById('btn-save-pod').innerText = "Guardar Podcast";
+            generarNovedadAutomatica("Propuesta Diaria y Caminatas", "Modificación de Podcast", nombre);
+        } else {
+            podcastsDB.push({ nombre, desc, link, dias });
+            generarNovedadAutomatica("Propuesta Diaria y Caminatas", "Nuevo Podcast asignado", nombre);
+        }
+
+        limpiarPodForm();
+        renderConfigLists();
+    }
+
+    function eliminarPodcast(idx) {
+        const pod = podcastsDB[idx];
+        podcastsDB.splice(idx, 1);
+        generarNovedadAutomatica("Propuesta Diaria y Caminatas", "Eliminación de Podcast", pod.nombre);
+        renderConfigLists();
+    }
+
+    function updateCarouselDisplay(key) {
+        const list = carruseles[key];
+        if (!list || list.length === 0) return;
+
+        let idx = indicesCarrusel[key];
+        if (idx >= list.length) idx = 0;
+        if (idx < 0) idx = list.length - 1;
+        indicesCarrusel[key] = idx;
+
+        const imgEl = document.getElementById(`img-carousel-${key}`);
+        const indEl = document.getElementById(`ind-carousel-${key}`);
+
+        if (imgEl) imgEl.src = list[idx];
+        if (indEl) indEl.innerText = `${idx + 1}/${list.length}`;
+    }
+
+    function nextCarousel(key) {
+        if (!carruseles[key] || carruseles[key].length <= 1) return;
+        indicesCarrusel[key] = (indicesCarrusel[key] + 1) % carruseles[key].length;
+        updateCarouselDisplay(key);
+    }
+
+    function prevCarousel(key) {
+        if (!carruseles[key] || carruseles[key].length <= 1) return;
+        indicesCarrusel[key] = (indicesCarrusel[key] - 1 + carruseles[key].length) % carruseles[key].length;
+        updateCarouselDisplay(key);
+    }
+
+    function renderModalidadConfigList() {
+        const container = document.getElementById('crud-modalidad-list');
+        container.innerHTML = carruseles.modalidad.map((src, idx) => `
+            <div class="crud-item">
+                <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:70%;"><b>Img ${idx+1}:</b> ${src}</span>
+                <div class="crud-actions">
+                    <button class="btn-delete" onclick="removeModalidadImage(${idx})">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderPracticasScreen() {
+        const container = document.getElementById('practicas-dynamic-list');
+        if (practicasDB.length === 0) {
+            container.innerHTML = '<i style="font-size:0.8rem; color:#888; text-align:center;">No hay prácticas cargadas.</i>';
+            return;
+        }
+
+        container.innerHTML = practicasDB.map((p, idx) => {
+            const obsList = p.observaciones || [];
+            return `
+                <div class="practica-card-item">
+                    <h3>🧘‍♀️ ${p.nombre}</h3>
+                    <p>${p.desc || ''}</p>
+                    ${p.link ? `<a href="${p.link}" target="_blank" class="practica-link-btn">🔗 Abrir Práctica / Enlace</a>` : ''}
+                    ${p.comentario ? `<div class="comentario">💡 ${p.comentario}</div>` : ''}
+
+                    <div class="obs-container">
+                        <label style="font-size:0.8rem; font-weight:bold; color:var(--primary-dark);">Agregar Observación:</label>
+                        <div style="display:flex; gap:4px; margin-top:3px;">
+                            <input type="text" id="input-obs-${idx}" placeholder="Escribe tu observación o progreso..." style="flex:1; padding:4px 6px; border:1px solid #ccc; border-radius:6px; font-size:0.8rem;">
+                            <button onclick="agregarObservacionesPractica(${idx})" style="background:var(--salmon); color:#fff; border:none; padding:4px 10px; border-radius:6px; font-weight:bold; cursor:pointer; font-size:0.8rem;">+ Agregar</button>
+                        </div>
+
+                        ${obsList.length > 0 ? `
+                            <div class="obs-history-list">
+                                ${obsList.map(obs => `
+                                    <div class="obs-item">
+                                        <span class="obs-date">[${obs.fecha}]:</span> ${obs.texto}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function agregarObservacionesPractica(idx) {
+        const input = document.getElementById(`input-obs-${idx}`);
+        const texto = input ? input.value.trim() : '';
+
+        if (!texto) return;
+
+        if (!practicasDB[idx].observaciones) {
+            practicasDB[idx].observaciones = [];
+        }
+
+        const ahora = new Date();
+        const fechaStr = `${ahora.getDate()}/${ahora.getMonth()+1}/${ahora.getFullYear()} ${ahora.getHours()}:${ahora.getMinutes() < 10 ? '0' + ahora.getMinutes() : ahora.getMinutes()}`;
+
+        practicasDB[idx].observaciones.push({
+            fecha: fechaStr,
+            texto: texto
+        });
+
+        renderPracticasScreen();
+    }
+
+    function editarPractica(idx) {
+        const p = practicasDB[idx];
+        document.getElementById('pra-nombre').value = p.nombre;
+        document.getElementById('pra-desc').value = p.desc || '';
+        document.getElementById('pra-link').value = p.link || '';
+        document.getElementById('pra-comentario').value = p.comentario || '';
+        editIndices.pra = idx;
+        document.getElementById('btn-save-pra').innerText = "Actualizar Práctica";
+    }
+
+    function limpiarPraForm() {
+        document.getElementById('pra-nombre').value = '';
+        document.getElementById('pra-desc').value = '';
+        document.getElementById('pra-link').value = '';
+        document.getElementById('pra-comentario').value = '';
+    }
+
+    function openWhatsApp() {
+        const phone = document.getElementById('cfg-wp-phone').value || "5491112345678";
+        window.open(`https://wa.me/${phone}`, '_blank');
+    }
+
+    function cambiarEstiloCards() {
+        const color = document.getElementById('cfg-card-color').value;
+        const size = document.getElementById('cfg-card-size').value;
+        document.documentElement.style.setProperty('--card-title-color', color);
+        document.documentElement.style.setProperty('--card-title-size', size);
+        configVisual.cardTitleColor = color;
+        configVisual.cardTitleSize = size;
+    }
+
+    function openNotesPopup() {
+        const modalText = document.getElementById('modal-text');
+        const popupText = document.getElementById('popup-textarea');
+        popupText.value = modalText.value;
+        document.getElementById('notes-popup').style.display = 'flex';
+        popupText.focus();
+    }
+
+    function closeNotesPopup() {
+        const modalText = document.getElementById('modal-text');
+        const popupText = document.getElementById('popup-textarea');
+        modalText.value = popupText.value;
+        document.getElementById('notes-popup').style.display = 'none';
+    }
+
+    function nav(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen-' + screenId).classList.add('active');
+        
+        const viewport = document.getElementById('app-viewport');
+        if (screenId === 'agenda') {
+            viewport.classList.add('wide-view');
+        } else {
+            viewport.classList.remove('wide-view');
+        }
+
+        if (screenId === 'modalidad') updateCarouselDisplay('modalidad');
+        if (screenId === 'pocimas') {
+            updateCarouselDisplay('pocimas');
+            renderPocimasList();
+        }
+        if (screenId === 'practicas') renderPracticasScreen();
+        if (screenId === 'novedades') renderPublicNovedades();
+        if (screenId === 'config') renderConfigLists();
+        
+        renderPublicNovedades();
+    }
+
+    function initCalendar() {
+        const grid = document.getElementById('calendar-grid');
+        grid.innerHTML = '';
+        const diasSemana = ["Jueves", "Viernes", "Sábado", "Domingo", "Lunes", "Martes", "Miércoles"];
+        
+        for (let i = cfgCalendario.diaInicio; i <= cfgCalendario.diaFin; i++) {
+            const dayBox = document.createElement('div');
+            dayBox.className = 'cal-day';
+            
+            const numDia = (i + 2) % 30 || 30; 
+            const nombreDia = diasSemana[(i - 1) % 7];
+            const esCaminata = (nombreDia === "Martes" || nombreDia === "Jueves" || nombreDia === "Sábado");
+
+            dayBox.innerHTML = `
+                <span>D${i}</span>
+                <small style="font-size:0.8rem;">${nombreDia.substring(0,3)} ${numDia}</small>
+                ${esCaminata ? '<span class="walk-icon">🚶‍♀️</span><a href="#" class="podcast-link" onclick="event.stopPropagation(); alert(\'Podcast asignado para hoy\');">Podcast</a>' : ''}
+            `;
+            
+            const fechaKey = `2026-09-${numDia < 10 ? '0' + numDia : numDia}`;
+            dayBox.onclick = () => openAgendaModal(`${nombreDia} ${numDia} de septiembre`, nombreDia, fechaKey);
+            grid.appendChild(dayBox);
+        }
+    }
+
+    function renderConfigLists() {
+        renderModalidadConfigList();
+        renderNovedadesABMList();
+
+        const praBox = document.getElementById('crud-practicas-list');
+        praBox.innerHTML = practicasDB.map((item, idx) => `
+            <div class="crud-item">
+                <span><b>${item.nombre}</b></span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarPractica(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="eliminarPractica(${idx})">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+
+        const infBox = document.getElementById('crud-infusiones-list');
+        infBox.innerHTML = infusionesDB.map((item, idx) => `
+            <div class="crud-item">
+                <span><b>${item.nombre}</b> (${item.dias})</span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarInfusion(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="eliminarInfusion(${idx})">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+
+        const podBox = document.getElementById('crud-podcasts-list');
+        podBox.innerHTML = podcastsDB.map((item, idx) => `
+            <div class="crud-item">
+                <span><b>${item.nombre}</b> (${item.dias})</span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarPodcast(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="eliminarPodcast(${idx})">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function editarInfusion(idx) {
+        const item = infusionesDB[idx];
+        document.getElementById('inf-nombre').value = item.nombre;
+        document.getElementById('inf-desc').value = item.desc;
+        document.getElementById('inf-efecto').value = item.efecto;
+        document.getElementById('inf-dias').value = item.dias;
+        editIndices.inf = idx;
+        document.getElementById('btn-save-inf').innerText = "Actualizar Infusión";
+    }
+
+    function limpiarInfForm() {
+        document.getElementById('inf-nombre').value = '';
+        document.getElementById('inf-desc').value = '';
+        document.getElementById('inf-efecto').value = '';
+        document.getElementById('inf-dias').value = '';
+    }
+
+    function editarPodcast(idx) {
+        const item = podcastsDB[idx];
+        document.getElementById('pod-nombre').value = item.nombre;
+        document.getElementById('pod-desc').value = item.desc;
+        document.getElementById('pod-link').value = item.link;
+        document.getElementById('pod-dias').value = item.dias;
+        editIndices.pod = idx;
+        document.getElementById('btn-save-pod').innerText = "Actualizar Podcast";
+    }
+
+    function limpiarPodForm() {
+        document.getElementById('pod-nombre').value = '';
+        document.getElementById('pod-desc').value = '';
+        document.getElementById('pod-link').value = '';
+        document.getElementById('pod-dias').value = '';
+    }
+
+    function renderPocimasList() {
+        const container = document.getElementById('pocimas-dynamic-list');
+        if (infusionesDB.length === 0) {
+            container.innerHTML = '<i style="font-size:0.7rem; color:#888;">No hay infusiones adicionadas en Config.</i>';
+            return;
+        }
+        container.innerHTML = infusionesDB.map(item => `
+            <div class="pocima-item-card">
+                <b>${item.nombre}</b> ${item.dias ? `(${item.dias})` : ''}<br>
+                <span>${item.desc || ''} ${item.efecto ? `- ${item.efecto}` : ''}</span>
+            </div>
+        `).join('');
+    }
+
+    function previewAndSave(tipo, event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const url = URL.createObjectURL(file);
+        const imgElement = document.getElementById('prev-' + tipo);
+        imgElement.src = url;
+        imgElement.style.display = 'block';
+
+        const fecha = document.getElementById('foto-fecha').value || '2026-09-03';
+        if (!fotosPorFecha[fecha]) fotosPorFecha[fecha] = {};
+        fotosPorFecha[fecha][tipo] = url;
+    }
+
+    function guardarConfigCalendario() {
+        cfgCalendario.diaInicio = parseInt(document.getElementById('cfg-dia-inicio').value) || 1;
+        cfgCalendario.diaFin = parseInt(document.getElementById('cfg-dia-fin').value) || 28;
+        cfgCalendario.horaInicio = parseInt(document.getElementById('cfg-hora-inicio').value) || 7;
+        cfgCalendario.horaFin = parseInt(document.getElementById('cfg-hora-fin').value) || 21;
+        initCalendar();
+        alert('Configuración de calendario actualizada');
+    }
+
+    function openAgendaModal(fechaTexto, nombreDia, fechaKey) {
+        currentFechaKeyModal = fechaKey;
+        document.getElementById('modal-date-title').innerText = fechaTexto;
+
+        const galleryBox = document.getElementById('modal-gallery-box');
+        const photoGrid = document.getElementById('modal-photo-grid');
+        photoGrid.innerHTML = '';
+
+        if (fotosPorFecha[fechaKey] && Object.keys(fotosPorFecha[fechaKey]).length > 0) {
+            Object.values(fotosPorFecha[fechaKey]).forEach(srcUrl => {
+                const img = document.createElement('img');
+                img.src = srcUrl;
+                img.onclick = () => openZoomModal(srcUrl);
+                photoGrid.appendChild(img);
+            });
+            galleryBox.style.display = 'block';
+        } else {
+            galleryBox.style.display = 'none';
+        }
+
+        const infBlock = document.getElementById('block-infusiones');
+        const infContent = document.getElementById('content-infusiones');
+        const infs = infusionesDB.filter(i => i.dias === "Todos" || i.dias.includes(nombreDia));
+        if (infs.length > 0) {
+            infContent.innerHTML = infs.map(i => `<div>• <b>${i.nombre}</b>: ${i.desc} (${i.efecto})</div>`).join('');
+            infBlock.style.display = 'block';
+        } else infBlock.style.display = 'none';
+
+        const podBlock = document.getElementById('block-podcasts');
+        const podContent = document.getElementById('content-podcasts');
+        const pods = podcastsDB.filter(p => p.dias === "Todos" || p.dias.includes(nombreDia));
+        if (pods.length > 0) {
+            podContent.innerHTML = pods.map(p => `
+                <div style="margin-bottom: 4px;">
+                    🎧 <b>${p.nombre}</b> - ${p.desc}<br>
+                    <a href="${p.link || '#'}" target="_blank" class="podcast-audio-link">▶ Escuchar Audio Podcast</a>
+                </div>
+            `).join('');
+            podBlock.style.display = 'block';
+        } else podBlock.style.display = 'none';
+
+        const actBlock = document.getElementById('block-actividades');
+        const actContent = document.getElementById('content-actividades');
+        const acts = actividadesDB.filter(a => a.dia === "Todos" || a.dia.includes(nombreDia));
+        if (acts.length > 0) {
+            actContent.innerHTML = acts.map(a => `<div>✨ ${a.nombre}</div>`).join('');
+            actBlock.style.display = 'block';
+        } else actBlock.style.display = 'none';
+
+        const registroPrevio = agendaGuardadaBD[fechaKey] || { horarios: {}, notas: "" };
+        const hoursContainer = document.getElementById('hours-container');
+        hoursContainer.innerHTML = '';
+
+        for (let h = cfgCalendario.horaInicio; h <= cfgCalendario.horaFin; h++) {
+            const horaStr = `${h < 10 ? '0' + h : h}:00 hs`;
+            const valorPrevio = registroPrevio.horarios[horaStr] || '';
+            const row = document.createElement('div');
+            row.className = 'hour-row';
+            row.innerHTML = `<span class="hour-label">${horaStr}</span><input type="text" class="hour-input" data-hora="${horaStr}" value="${valorPrevio}" placeholder="Actividad...">`;
+            hoursContainer.appendChild(row);
+        }
+
+        document.getElementById('modal-text').value = registroPrevio.notas;
+
+        const select = document.getElementById('select-actividad-config');
+        select.innerHTML = '<option value="">-- Seleccionar --</option>';
+        acts.forEach(a => {
+            const opt = document.createElement('option');
+            opt.value = a.nombre;
+            opt.innerText = a.nombre;
+            select.appendChild(opt);
+        });
+
+        document.getElementById('modal-agenda').style.display = 'flex';
+    }
+
+    function cargarActividadEnHorario(valor) {
+        if (!valor) return;
+        const inputs = document.querySelectorAll('.hour-input');
+        if (inputs[0] && inputs[0].value === "") {
+            inputs[0].value = valor;
+        }
+    }
+
+    function guardarRegistroAgenda() {
+        if (!currentFechaKeyModal) return;
+
+        const inputs = document.querySelectorAll('.hour-input');
+        let horariosMap = {};
+        inputs.forEach(input => {
+            const h = input.getAttribute('data-hora');
+            horariosMap[h] = input.value;
+        });
+
+        const notas = document.getElementById('modal-text').value;
+
+        agendaGuardadaBD[currentFechaKeyModal] = {
+            horarios: horariosMap,
+            notas: notas
+        };
+
+        alert('¡Día guardado en tu agenda!');
+        closeModal();
+    }
+
+    function closeModal() {
+        document.getElementById('modal-agenda').style.display = 'none';
+    }
+
+    /* MOTOR DE ZOOM */
+    let currentScale = 1;
+    let initialDistance = 0;
+    const zoomModal = document.getElementById('zoom-modal');
+    const zoomImg = document.getElementById('zoom-target-img');
+
+    function openZoomModal(src) {
+        if (!src) return;
+        zoomImg.src = src;
+        currentScale = 1;
+        zoomImg.style.transform = `scale(${currentScale})`;
+        zoomModal.style.display = 'flex';
+    }
+
+    function closeZoomModal() {
+        zoomModal.style.display = 'none';
+    }
+
+    zoomModal.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 2) {
+            initialDistance = Math.hypot(
+                e.touches[0].pageX - e.touches[1].pageX,
+                e.touches[0].pageY - e.touches[1].pageY
+            );
+        }
+    });
+
+    zoomModal.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 2 && initialDistance > 0) {
+            const currentDistance = Math.hypot(
+                e.touches[0].pageX - e.touches[1].pageX,
+                e.touches[0].pageY - e.touches[1].pageY
+            );
+            const factor = currentDistance / initialDistance;
+            let newScale = currentScale * factor;
+            if (newScale >= 1 && newScale <= 4) {
+                zoomImg.style.transform = `scale(${newScale})`;
+            }
+        }
+    });
+
+    zoomModal.addEventListener('touchend', (e) => {
+        if (e.touches.length < 2) {
+            const transform = zoomImg.style.transform;
+            const match = transform.match(/scale\(([^)]+)\)/);
+            if (match) {
+                currentScale = parseFloat(match[1]);
+            }
+        }
+    });
+
+    cargarConfiguracionInicial();
+</script>
+
+</body>
+</html>
