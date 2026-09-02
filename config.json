@@ -1,8 +1,49 @@
 {
-  "practicasDB": [],
+  "practicasDB": [
+    {
+      "id": 1788374652546,
+      "nombre": "Practica 1. Fluidos corporales",
+      "desc": "",
+      "link": "https://youtu.be/cDky5vTbp9U",
+      "comentario": "",
+      "observaciones": []
+    }
+  ],
   "infusionesDB": [],
-  "novedadesDB": [],
-  "podcastsDB": [],
+  "novedadesDB": [
+    {
+      "titulo": "[2/9/2026] Actualización en Prácticas: Nueva incorporación - \"Practica 1. Fluidos corporales\"",
+      "link": "",
+      "desde": "2026-09-02",
+      "hasta": "2026-09-02"
+    },
+    {
+      "titulo": "[2/9/2026] Actualización en Propuesta Diaria y Caminatas: Nuevo Podcast asignado - \" Caminando con las Diosas. Atenea.\"",
+      "link": "",
+      "desde": "2026-09-02",
+      "hasta": "2026-09-02"
+    },
+    {
+      "titulo": "[2/9/2026] Actualización en Propuesta Diaria y Caminatas: Nuevo Podcast asignado - \"Infusion y tintura\"",
+      "link": "",
+      "desde": "2026-09-02",
+      "hasta": "2026-09-02"
+    }
+  ],
+  "podcastsDB": [
+    {
+      "nombre": "Infusion y tintura",
+      "desc": "",
+      "link": "https://youtu.be/ENW0bbo_82I",
+      "dias": "Todos"
+    },
+    {
+      "nombre": " Caminando con las Diosas. Atenea.",
+      "desc": "",
+      "link": "https://youtu.be/LM7DKdEvF0I",
+      "dias": "Todos"
+    }
+  ],
   "actividadesDB": [],
   "carruseles": {
     "modalidad": [
@@ -22,10 +63,10 @@
     "horaFin": 21
   },
   "configVisual": {
-    "bgColor": "#fcf8f3",
+    "bgColor": "#eee4d8",
     "bgImage": "",
-    "btn3D": false,
-    "cardTitleColor": "#f4a291",
-    "cardTitleSize": "1.05rem"
+    "btn3D": true,
+    "cardTitleColor": "#e44525",
+    "cardTitleSize": "1.25rem"
   }
 }
