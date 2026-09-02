@@ -74,10 +74,13 @@
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
 
+        /* BOTÓN VOLVER CON SOLO LA FLECHA ← */
         .btn-back {
             background: #fff; border: 1px solid var(--primary);
-            color: var(--primary); padding: 4px 12px; border-radius: 16px;
-            cursor: pointer; font-weight: bold; font-size: 0.8rem; flex-shrink: 0;
+            color: var(--primary); width: 32px; height: 32px; border-radius: 50%;
+            cursor: pointer; font-weight: bold; font-size: 1.1rem; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .screen-body {
@@ -98,7 +101,6 @@
             flex: 1; display: flex; gap: 8px; width: 100%;
         }
 
-        /* ESTILO BASE Y ESTILO 3D Opcional */
         .menu-card {
             flex: 1; background: var(--card-bg-color); padding: 8px; border-radius: var(--border-radius);
             box-shadow: var(--btn-3d-shadow, 0 2px 5px rgba(0,0,0,0.04)); cursor: pointer; text-align: center;
@@ -123,7 +125,6 @@
 
         .card-icon { font-size: calc(var(--card-title-size) * 1.8); }
 
-        /* NUEVA MARCA / INSIGNIA DE ALERTA DE NOVEDADES (CAMPANA PULSANTE) */
         .card-badge-alert {
             display: none; position: absolute; top: -6px; right: -4px;
             background: #ff3b30; color: #fff; border-radius: 50%;
@@ -317,14 +318,25 @@
             cursor: pointer; font-size: 1rem; font-weight: bold; font-family: var(--agenda-font-family);
         }
 
+        /* ZOOM MODAL CON MOTOR TÁCTIL MEJORADO */
         .zoom-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9); z-index: 300;
+            background: rgba(0, 0, 0, 0.92); z-index: 300;
             justify-content: center; align-items: center; overflow: hidden; touch-action: none;
         }
 
-        .zoom-img-target { max-width: 95%; max-height: 90%; transition: transform 0.05s linear; transform-origin: center center; }
-        .zoom-close-btn { position: absolute; top: 15px; right: 15px; background: #fff; color: #000; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; font-weight: bold; cursor: pointer; z-index: 310; }
+        .zoom-img-target {
+            max-width: 95%; max-height: 90%;
+            transform-origin: center center;
+            will-change: transform;
+            cursor: grab;
+        }
+        .zoom-close-btn {
+            position: absolute; top: 15px; right: 15px; background: #fff;
+            color: #000; border: none; width: 38px; height: 38px; border-radius: 50%;
+            font-size: 1.2rem; font-weight: bold; cursor: pointer; z-index: 310;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
 <body>
@@ -368,7 +380,7 @@
     <div id="screen-novedades" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Novedades del Grupo</h2>
-            <button class="btn-back" onclick="nav('home')">← Volver</button>
+            <button class="btn-back" onclick="nav('home')">←</button>
         </div>
         <div class="screen-body" id="public-novedades-list">
             <i style="font-size:0.8rem; color:#888; text-align:center;">No hay novedades vigentes para hoy.</i>
@@ -379,7 +391,7 @@
     <div id="screen-modalidad" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Modalidad</h2>
-            <button class="btn-back" onclick="nav('home')">← Volver</button>
+            <button class="btn-back" onclick="nav('home')">←</button>
         </div>
         <div class="screen-body">
             <div class="carousel-container">
@@ -395,7 +407,7 @@
     <div id="screen-pocimas" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Pócimas y Yuyos del Bien</h2>
-            <button class="btn-back" onclick="nav('home')">← Volver</button>
+            <button class="btn-back" onclick="nav('home')">←</button>
         </div>
         <div class="screen-body">
             <div class="carousel-container">
@@ -418,7 +430,7 @@
     <div id="screen-practicas" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Prácticas Guiadas</h2>
-            <button class="btn-back" onclick="nav('home')">← Volver</button>
+            <button class="btn-back" onclick="nav('home')">←</button>
         </div>
         <div class="screen-body" id="practicas-dynamic-list">
             <i style="font-size:0.8rem; color:#888; text-align:center;">No hay prácticas cargadas.</i>
@@ -429,7 +441,7 @@
     <div id="screen-caminatas" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Propuesta Diaria y Caminatas</h2>
-            <button class="btn-back" onclick="nav('home')">← Volver</button>
+            <button class="btn-back" onclick="nav('home')">←</button>
         </div>
         <div class="screen-body" style="justify-content: center;">
             <img src="Caminatas.jpeg" alt="Caminatas" class="fit-img" style="max-height: 90%;" onclick="openZoomModal(this.src)">
@@ -440,7 +452,7 @@
     <div id="screen-agenda" class="screen">
         <div class="screen-header">
             <h2 class="screen-title" style="font-family: 'Playfair Display', serif;">Mi Agenda Diaria</h2>
-            <button class="btn-back" onclick="nav('home')">← Volver</button>
+            <button class="btn-back" onclick="nav('home')">←</button>
         </div>
         <div class="screen-body">
             <p style="font-size: 1rem; margin: 0; font-family: var(--agenda-font-family);">Selecciona un día para organizar tus rutinas:</p>
@@ -452,7 +464,7 @@
     <div id="screen-registro" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Registro Fotográfico</h2>
-            <button class="btn-back" onclick="nav('home')">← Volver</button>
+            <button class="btn-back" onclick="nav('home')">←</button>
         </div>
         <div class="screen-body">
             <img src="Registro fotografico.jpeg" alt="Registro Fotográfico" class="registro-hero-img" onclick="openZoomModal(this.src)">
@@ -487,7 +499,7 @@
     <div id="screen-config" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Configuración Admin (Anka)</h2>
-            <button class="btn-back" onclick="nav('home')">← Volver</button>
+            <button class="btn-back" onclick="nav('home')">←</button>
         </div>
         <div class="screen-body">
 
@@ -655,7 +667,7 @@
     <div class="modal-card-full">
         <div style="display:flex; justify-content:space-between; align-items:center;">
             <h2 class="modal-title" id="modal-date-title">Día de la semana</h2>
-            <button class="btn-back" onclick="closeModal()">✕ Cerrar</button>
+            <button class="btn-back" onclick="closeModal()">✕</button>
         </div>
         
         <div id="modal-gallery-box" style="display:none;">
@@ -701,7 +713,7 @@
     <div class="notes-popup-card">
         <div style="display:flex; justify-content:space-between; align-items:center;">
             <h3 style="margin:0; font-family:'Playfair Display', serif; color:var(--primary-dark);">Notas / Sensaciones del Día</h3>
-            <button class="btn-back" onclick="closeNotesPopup()">✕ Listo</button>
+            <button class="btn-back" onclick="closeNotesPopup()">✕</button>
         </div>
         <textarea id="popup-textarea" placeholder="Escribe aquí todas tus sensaciones y notas detalladas..."></textarea>
         <button class="btn-submit" onclick="closeNotesPopup()">Guardar Sensaciones</button>
@@ -1484,9 +1496,13 @@
         document.getElementById('modal-agenda').style.display = 'none';
     }
 
-    /* MOTOR DE ZOOM */
+    /* MOTOR DE ZOOM Y ARRASTRE TÁCTIL (PINCH TO ZOOM + DRAG) */
     let currentScale = 1;
     let initialDistance = 0;
+    let posX = 0, posY = 0;
+    let startX = 0, startY = 0;
+    let isDragging = false;
+
     const zoomModal = document.getElementById('zoom-modal');
     const zoomImg = document.getElementById('zoom-target-img');
 
@@ -1494,7 +1510,8 @@
         if (!src) return;
         zoomImg.src = src;
         currentScale = 1;
-        zoomImg.style.transform = `scale(${currentScale})`;
+        posX = 0; posY = 0;
+        updateTransform();
         zoomModal.style.display = 'flex';
     }
 
@@ -1502,35 +1519,55 @@
         zoomModal.style.display = 'none';
     }
 
+    function updateTransform() {
+        zoomImg.style.transform = `translate(${posX}px, ${posY}px) scale(${currentScale})`;
+    }
+
     zoomModal.addEventListener('touchstart', (e) => {
         if (e.touches.length === 2) {
+            isDragging = false;
             initialDistance = Math.hypot(
-                e.touches[0].pageX - e.touches[1].pageX,
-                e.touches[0].pageY - e.touches[1].pageY
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
             );
+        } else if (e.touches.length === 1 && currentScale > 1) {
+            isDragging = true;
+            startX = e.touches[0].clientX - posX;
+            startY = e.touches[0].clientY - posY;
         }
-    });
+    }, { passive: true });
 
     zoomModal.addEventListener('touchmove', (e) => {
         if (e.touches.length === 2 && initialDistance > 0) {
             const currentDistance = Math.hypot(
-                e.touches[0].pageX - e.touches[1].pageX,
-                e.touches[0].pageY - e.touches[1].pageY
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
             );
             const factor = currentDistance / initialDistance;
             let newScale = currentScale * factor;
+            
             if (newScale >= 1 && newScale <= 4) {
-                zoomImg.style.transform = `scale(${newScale})`;
+                currentScale = newScale;
+                updateTransform();
             }
+            initialDistance = currentDistance;
+        } else if (e.touches.length === 1 && isDragging && currentScale > 1) {
+            posX = e.touches[0].clientX - startX;
+            posY = e.touches[0].clientY - startY;
+            updateTransform();
         }
-    });
+    }, { passive: true });
 
     zoomModal.addEventListener('touchend', (e) => {
         if (e.touches.length < 2) {
-            const transform = zoomImg.style.transform;
-            const match = transform.match(/scale\(([^)]+)\)/);
-            if (match) {
-                currentScale = parseFloat(match[1]);
+            initialDistance = 0;
+        }
+        if (e.touches.length === 0) {
+            isDragging = false;
+            if (currentScale <= 1) {
+                posX = 0; posY = 0;
+                currentScale = 1;
+                updateTransform();
             }
         }
     });

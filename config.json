@@ -12,6 +12,18 @@
   "infusionesDB": [],
   "novedadesDB": [
     {
+      "titulo": "Zoom Jueves 03 a las 20 hs",
+      "link": "https://youtu.be/cDky5vTbp9U",
+      "desde": "2026-09-02",
+      "hasta": "2026-09-03"
+    },
+    {
+      "titulo": "[2/9/2026] Actualización en Propuesta Diaria y Caminatas: Nuevo Podcast asignado - \"Orden externo - Orden interno\"",
+      "link": "",
+      "desde": "2026-09-02",
+      "hasta": "2026-09-02"
+    },
+    {
       "titulo": "[2/9/2026] Actualización en Prácticas: Nueva incorporación - \"Practica 1. Fluidos corporales\"",
       "link": "",
       "desde": "2026-09-02",
@@ -41,6 +53,12 @@
       "nombre": " Caminando con las Diosas. Atenea.",
       "desc": "",
       "link": "https://youtu.be/LM7DKdEvF0I",
+      "dias": "Todos"
+    },
+    {
+      "nombre": "Orden externo - Orden interno",
+      "desc": "",
+      "link": "https://youtu.be/oILo4Ht4AZM",
       "dias": "Todos"
     }
   ],
