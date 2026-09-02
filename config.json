@@ -1,0 +1,31 @@
+{
+  "practicasDB": [],
+  "infusionesDB": [],
+  "novedadesDB": [],
+  "podcastsDB": [],
+  "actividadesDB": [],
+  "carruseles": {
+    "modalidad": [
+      "1-Bienvenida.jpeg",
+      "modalidad1.jpeg",
+      "modalidad2.jpeg"
+    ],
+    "pocimas": [
+      "yuyos del bien.jpeg",
+      "yuyos.jpeg"
+    ]
+  },
+  "cfgCalendario": {
+    "diaInicio": 1,
+    "diaFin": 28,
+    "horaInicio": 7,
+    "horaFin": 21
+  },
+  "configVisual": {
+    "bgColor": "#fcf8f3",
+    "bgImage": "",
+    "btn3D": false,
+    "cardTitleColor": "#f4a291",
+    "cardTitleSize": "1.05rem"
+  }
+}
