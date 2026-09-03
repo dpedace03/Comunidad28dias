@@ -99,6 +99,16 @@
             box-shadow: var(--btn-3d-shadow, 0 2px 5px rgba(0,0,0,0.04)); cursor: pointer; text-align: center;
             display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
             border: 1px solid rgba(244, 162, 145, 0.4); position: relative;
+            transition: transform 0.1s, box-shadow 0.2s ease;
+        }
+
+        .menu-card.btn-3d {
+            box-shadow: 0 6px 0px rgba(0, 0, 0, 0.15), 0 8px 12px rgba(0,0,0,0.1);
+            border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+        }
+        .menu-card.btn-3d:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px rgba(0, 0, 0, 0.15);
         }
 
         .menu-card h2 {
@@ -107,19 +117,37 @@
         }
 
         .card-icon { font-size: calc(var(--card-title-size) * 1.8); display: flex; align-items: center; justify-content: center; }
-        .card-icon img { width: 32px; height: 32px; object-fit: contain; }
+
+        .featured-days-container {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 8px; margin-bottom: 12px;
+        }
+
+        .cal-day {
+            background: var(--pastel-pink); padding: 8px 4px; border-radius: 12px;
+            cursor: pointer; border: 1px solid #f2c6be; font-weight: bold;
+            font-size: var(--agenda-font-size); display: flex; flex-direction: column;
+            align-items: center; min-height: 70px; justify-content: space-between;
+            color: var(--primary-dark); transition: transform 0.1s, background-color 0.2s;
+        }
+
+        .cal-day.today-card {
+            background: var(--pastel-green);
+            border: 2px solid #a3d99b;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            transform: scale(1.02);
+        }
 
         .calendar-grid {
             display: grid; grid-template-columns: repeat(7, 1fr);
             gap: 6px; text-align: center; font-family: var(--agenda-font-family);
         }
 
-        .cal-day {
-            background: var(--pastel-pink); padding: 6px 0; border-radius: 10px;
-            cursor: pointer; border: 1px solid #f2c6be; font-weight: bold;
-            font-size: var(--agenda-font-size); display: flex; flex-direction: column;
-            align-items: center; min-height: 58px; justify-content: space-between;
-            color: var(--primary-dark);
+        .toggle-cal-btn {
+            background: #fff; border: 1px solid var(--salmon); color: var(--primary-dark);
+            padding: 10px; border-radius: var(--border-radius); font-weight: bold;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            gap: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); font-size: 1rem;
         }
 
         .hours-container {
@@ -127,7 +155,7 @@
             padding: 8px; border-radius: 12px; background: #fff8f6;
         }
 
-        .hour-row { display: flex; flex-direction: column; margin-bottom: 8px; background: #fff; border: 1px solid #e8d5d0; border-radius: 8px; padding: 6px; }
+        .hour-row { display: flex; flex-direction: column; margin-bottom: 8px; background: #fff; border: 1px solid #e8d5d0; border-radius: 8px; padding: 6px; gap: 4px; }
         .hour-row-top { display: flex; align-items: center; gap: 8px; }
         .hour-label { font-size: var(--agenda-font-size); font-weight: bold; width: 75px; flex-shrink: 0; color: var(--primary-dark); }
         .hour-input {
@@ -135,13 +163,21 @@
             background: #ffffff; border: 1px solid #e8d5d0; border-radius: 8px; padding: 4px 8px; width: 100%;
         }
 
+        .hour-combo-select {
+            font-family: var(--agenda-font-family);
+            font-size: 0.9rem;
+            border: 1px dashed var(--salmon);
+            border-radius: 6px;
+            padding: 3px;
+            background: #fffdfa;
+            color: var(--primary-dark);
+            width: 100%;
+        }
+
         .agenda-attached-card {
-            margin-top: 6px; padding: 6px; border-radius: 8px; background: var(--pastel-pink);
+            padding: 6px; border-radius: 8px; background: var(--pastel-pink);
             border: 1px solid var(--salmon); font-size: 0.95rem; display: flex; flex-direction: column; gap: 4px;
         }
-        .agenda-attached-card b { color: var(--primary-dark); }
-        .agenda-attached-card img { max-width: 100%; max-height: 120px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 1px solid #fff; }
-        .agenda-attached-card a { color: var(--primary-dark); font-weight: bold; font-size: 0.85rem; text-decoration: underline; }
 
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -171,8 +207,8 @@
         .crud-list-container { margin-top: 6px; border-top: 1px dashed #e8d5d0; padding-top: 6px; }
         .crud-item { display: flex; justify-content: space-between; align-items: center; background: #faf8f5; border: 1px solid #eee; padding: 6px 8px; border-radius: 6px; margin-bottom: 4px; font-size: 0.75rem; }
         .crud-actions { display: flex; gap: 4px; }
-        .btn-edit { background: #6b5b7b; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
-        .btn-delete { background: #e06d53; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
+        .btn-edit { background: #6b5b7b; color: #fff; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
+        .btn-delete { background: #e06d53; color: #fff; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
 
         .item-attached-img { max-width: 100%; max-height: 160px; object-fit: cover; border-radius: 8px; border: 1px solid var(--salmon); margin-top: 6px; cursor: pointer; }
         .practica-card-item { background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid rgba(244, 162, 145, 0.4); margin-bottom: 8px; display: flex; flex-direction: column; gap: 4px; }
@@ -189,7 +225,7 @@
         <button class="icon-btn" onclick="openWhatsApp()" style="color:#25D366; font-weight:bold;">💬 WhatsApp</button>
     </div>
 
-    <!-- PANTALLA PRINCIPAL DE BOTONES -->
+    <!-- PANTALLA PRINCIPAL -->
     <div id="screen-home" class="screen active">
         <div class="home-container-full">
             <div class="menu-grid-full">
@@ -244,18 +280,34 @@
             <button class="btn-back" onclick="nav('home')">←</button>
         </div>
         <div class="screen-body">
-            <p style="font-size: 1rem; margin: 0; font-family: var(--agenda-font-family);">Selecciona un día para organizar tus rutinas:</p>
-            <div class="calendar-grid" id="calendar-grid"></div>
+            <p style="font-size: 0.9rem; margin: 0; font-family: var(--agenda-font-family);">Día actual y accesos directos:</p>
+            
+            <div class="featured-days-container" id="featured-days-container"></div>
+
+            <button class="toggle-cal-btn" onclick="toggleCalendarioCompleto()">
+                <span>📅</span> Ver Calendario Completo
+            </button>
+
+            <div class="calendar-grid" id="calendar-grid" style="display: none; margin-top: 10px;"></div>
         </div>
     </div>
 
-    <!-- PANTALLA CONFIGURACIÓN ADMIN COMPLETA CON TODOS LOS ABM RESTAURADOS -->
+    <!-- PANTALLA CONFIGURACIÓN ADMIN COMPLETA -->
     <div id="screen-config" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Configuración Admin (Anka)</h2>
             <button class="btn-back" onclick="nav('home')">←</button>
         </div>
         <div class="screen-body">
+
+            <!-- APARIENCIA VISUAL GLOBAL -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Apariencia Global y Botones 3D</h3>
+                <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-bottom:0;">
+                    <input type="checkbox" id="cfg-btn-3d" style="width:auto;" onchange="cambiarEstilo3DBotones()">
+                    <label for="cfg-btn-3d" style="margin:0; cursor:pointer;">Activar Botones con Efecto 3D / Relieve</label>
+                </div>
+            </div>
 
             <!-- SINCRONIZACIÓN Y EXPORTACIÓN JSON -->
             <div style="background: var(--pastel-green); padding: 10px; border-radius: var(--border-radius); border: 1px solid #b8e0a8;">
@@ -290,7 +342,7 @@
                 <div class="form-group"><label>Nombre Práctica:</label><input type="text" id="pra-nombre"></div>
                 <div style="display:flex; gap:6px;">
                     <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="pra-fecha"></div>
-                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="pra-hora" placeholder="09:00 hs"></div>
+                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="pra-hora" placeholder="Ej: 09:00 hs"></div>
                 </div>
                 <div class="form-group"><label>Descripción:</label><input type="text" id="pra-desc"></div>
                 <div class="form-group"><label>Link / Recurso:</label><input type="text" id="pra-link" placeholder="https://..."></div>
@@ -308,6 +360,7 @@
                     <div class="form-group" style="flex:1;">
                         <label>Día de la semana:</label>
                         <select id="act-dia">
+                            <option value="">Sin día fijo (Seleccionar libre)</option>
                             <option value="Todos">Todos los días</option>
                             <option value="Lunes">Lunes</option>
                             <option value="Martes">Martes</option>
@@ -348,7 +401,7 @@
                 <div class="form-group"><label>Descripción:</label><input type="text" id="pod-desc"></div>
                 <div class="form-group"><label>Hora en Agenda:</label><input type="text" id="pod-hora" placeholder="Ej: 18:00 hs"></div>
                 <div class="form-group"><label>Link Audio:</label><input type="text" id="pod-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Días para escuchar:</label><input type="text" id="pod-dias" placeholder="Ej: Martes, Jueves, Sábado"></div>
+                <div class="form-group"><label>Días para escuchar:</label><input type="text" id="pod-dias" placeholder="Ej: Martes, Jueves"></div>
                 <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="pod-img-input"></div>
                 <button class="btn-submit" id="btn-save-pod" onclick="agregarPodcast()">Guardar Podcast</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Podcasts Cargados:</small><div id="crud-podcasts-list"></div></div>
@@ -368,7 +421,7 @@
 
 </div>
 
-<!-- MODAL DE LA AGENDA Y SUS RECURSOS POR HORA -->
+<!-- MODAL DE LA AGENDA -->
 <div class="modal-overlay" id="modal-agenda">
     <div class="modal-card-full">
         <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -376,11 +429,7 @@
             <button class="btn-back" onclick="closeModal()">←</button>
         </div>
 
-        <div id="block-infusiones" style="display:none;"><b>🍵 Infusiones:</b> <div id="content-infusiones"></div></div>
-        <div id="block-podcasts" style="display:none;"><b>🎧 Podcasts:</b> <div id="content-podcasts"></div></div>
-        <div id="block-actividades" style="display:none;"><b>✨ Actividades:</b> <div id="content-actividades"></div></div>
-
-        <label style="font-weight:bold; color:var(--primary-dark);">Horarios del día:</label>
+        <label style="font-size: var(--agenda-font-size); font-weight:bold; color:var(--primary-dark);">Horarios del día:</label>
         <div class="hours-container" id="hours-container"></div>
 
         <div class="form-group">
@@ -393,6 +442,7 @@
 
 <script>
     let cfgCalendario = { diaInicio: 1, diaFin: 28, horaInicio: 7, horaFin: 21 };
+    let configVisual = { btn3D: false };
     let practicasDB = [];
     let actividadesDB = [];
     let infusionesDB = [];
@@ -413,6 +463,28 @@
         registro: { id: "registro", titulo: "Registro Fotográfico", bg: "#ffffff", color: "#f4a291", icon: "📷" },
         novedades: { id: "novedades", titulo: "Novedades", bg: "#fbe3e8", color: "#f4a291", icon: "📢" }
     };
+
+    // FUNCIÓN PARA NORMALIZAR TEXTO DE HORAS (Ej: "8:00", "08:00 hs" -> "08:00 hs")
+    function normalizarHora(str) {
+        if (!str) return "";
+        let match = str.match(/(\d{1,2}):(\d{2})/);
+        if (match) {
+            let h = parseInt(match[1], 10);
+            let m = match[2];
+            return `${h < 10 ? '0' + h : h}:${m} hs`;
+        }
+        return str.trim();
+    }
+
+    function cambiarEstilo3DBotones() {
+        const activo = document.getElementById('cfg-btn-3d').checked;
+        configVisual.btn3D = activo;
+        const cards = document.querySelectorAll('.menu-card');
+        cards.forEach(card => {
+            if (activo) card.classList.add('btn-3d');
+            else card.classList.remove('btn-3d');
+        });
+    }
 
     function solicitarAccesoAdmin() {
         const usuario = prompt("Ingrese su Nombre de Usuario:");
@@ -458,10 +530,39 @@
     }
 
     function initCalendar() {
+        const featuredContainer = document.getElementById('featured-days-container');
         const grid = document.getElementById('calendar-grid');
+        featuredContainer.innerHTML = '';
         grid.innerHTML = '';
+
         const diasSemana = ["Jueves", "Viernes", "Sábado", "Domingo", "Lunes", "Martes", "Miércoles"];
         
+        let diaActualNum = 3; 
+        let diaAnteriorNum = Math.max(cfgCalendario.diaInicio, diaActualNum - 1);
+        let diaSiguienteNum = Math.min(cfgCalendario.diaFin, diaActualNum + 1);
+
+        const diasAmostrar = [
+            { num: diaAnteriorNum, tipo: "Anterior" },
+            { num: diaActualNum, tipo: "Hoy" },
+            { num: diaSiguienteNum, tipo: "Siguiente" }
+        ];
+
+        diasAmostrar.forEach(d => {
+            const numDia = (d.num + 2) % 30 || 30;
+            const nombreDia = diasSemana[(d.num - 1) % 7];
+            const fechaKey = `2026-09-${numDia < 10 ? '0' + numDia : numDia}`;
+
+            const dayCard = document.createElement('div');
+            dayCard.className = `cal-day ${d.tipo === 'Hoy' ? 'today-card' : ''}`;
+            dayCard.innerHTML = `
+                <span style="font-size:0.75rem; color:var(--primary); font-weight:bold;">${d.tipo}</span>
+                <span style="font-size:1.1rem; color:var(--primary-dark);">D${d.num}</span>
+                <small style="font-size:0.8rem;">${nombreDia.substring(0,3)} ${numDia}</small>
+            `;
+            dayCard.onclick = () => openAgendaModal(`${nombreDia} ${numDia} de septiembre`, nombreDia, fechaKey);
+            featuredContainer.appendChild(dayCard);
+        });
+
         for (let i = cfgCalendario.diaInicio; i <= cfgCalendario.diaFin; i++) {
             const dayBox = document.createElement('div');
             dayBox.className = 'cal-day';
@@ -475,41 +576,81 @@
         }
     }
 
+    function toggleCalendarioCompleto() {
+        const grid = document.getElementById('calendar-grid');
+        grid.style.display = (grid.style.display === 'none' || grid.style.display === '') ? 'grid' : 'none';
+    }
+
+    /* CARGA COMPLETA Y VERIFICACIÓN EN AGENDA DIARIA */
     function openAgendaModal(fechaTexto, nombreDia, fechaKey) {
         currentFechaKeyModal = fechaKey;
         document.getElementById('modal-date-title').innerText = fechaTexto;
 
-        /* MAPA DE RECURSOS INCORPORADOS POR HORA */
         const itemsPorHora = {};
+        const unassignedItems = [];
 
-        actividadesDB.filter(a => a.dia === "Todos" || (a.dia && a.dia.includes(nombreDia)) || a.fecha === fechaKey).forEach(act => {
-            const hKey = act.hora || "08:00 hs";
-            if (!itemsPorHora[hKey]) itemsPorHora[hKey] = [];
-            itemsPorHora[hKey].push({ tipo: '✨ Actividad', nombre: act.nombre, imgUrl: act.imgUrl, link: act.link });
+        // 1. ACTIVIDADES
+        actividadesDB.forEach(act => {
+            const coincideDia = (act.fecha && act.fecha === fechaKey) || 
+                                (act.dia && (act.dia === "Todos" || act.dia.toLowerCase().includes(nombreDia.toLowerCase())));
+            
+            const horaNorm = normalizarHora(act.hora);
+            if (coincideDia && horaNorm) {
+                if (!itemsPorHora[horaNorm]) itemsPorHora[horaNorm] = [];
+                itemsPorHora[horaNorm].push({ tipo: '✨ Actividad', nombre: act.nombre, imgUrl: act.imgUrl, link: act.link });
+            } else if (!horaNorm && !act.fecha && !act.dia) {
+                unassignedItems.push(`✨ Actividad: ${act.nombre}`);
+            }
         });
 
-        practicasDB.filter(p => p.fecha === fechaKey || p.hora).forEach(p => {
-            const hKey = p.hora || "09:00 hs";
-            if (!itemsPorHora[hKey]) itemsPorHora[hKey] = [];
-            itemsPorHora[hKey].push({ tipo: '🧘‍♀️ Práctica', nombre: p.nombre, imgUrl: p.imgUrl, link: p.link });
+        // 2. PRÁCTICAS
+        practicasDB.forEach(p => {
+            const coincideDia = !p.fecha || p.fecha === fechaKey;
+            const horaNorm = normalizarHora(p.hora);
+            if (coincideDia && horaNorm) {
+                if (!itemsPorHora[horaNorm]) itemsPorHora[horaNorm] = [];
+                itemsPorHora[horaNorm].push({ tipo: '🧘‍♀️ Práctica', nombre: p.nombre, imgUrl: p.imgUrl, link: p.link });
+            } else if (!horaNorm && !p.fecha) {
+                unassignedItems.push(`🧘‍♀️ Práctica: ${p.nombre}`);
+            }
         });
 
-        infusionesDB.filter(i => i.dias === "Todos" || (i.dias && i.dias.includes(nombreDia))).forEach(inf => {
-            const hKey = inf.hora || "07:00 hs";
-            if (!itemsPorHora[hKey]) itemsPorHora[hKey] = [];
-            itemsPorHora[hKey].push({ tipo: '🍵 Infusión', nombre: inf.nombre, imgUrl: inf.imgUrl, link: inf.link });
+        // 3. INFUSIONES
+        infusionesDB.forEach(inf => {
+            const coincideDia = !inf.dias || inf.dias === "Todos" || inf.dias.toLowerCase().includes(nombreDia.toLowerCase());
+            const horaNorm = normalizarHora(inf.hora);
+            if (coincideDia && horaNorm) {
+                if (!itemsPorHora[horaNorm]) itemsPorHora[horaNorm] = [];
+                itemsPorHora[horaNorm].push({ tipo: '🍵 Infusión', nombre: inf.nombre, imgUrl: inf.imgUrl, link: inf.link });
+            } else if (!horaNorm && !inf.dias) {
+                unassignedItems.push(`🍵 Infusión: ${inf.nombre}`);
+            }
         });
 
-        podcastsDB.filter(p => p.dias === "Todos" || (p.dias && p.dias.includes(nombreDia))).forEach(pod => {
-            const hKey = pod.hora || "18:00 hs";
+        // 4. PODCASTS
+        podcastsDB.forEach(pod => {
+            const coincideDia = !pod.dias || pod.dias === "Todos" || pod.dias.toLowerCase().includes(nombreDia.toLowerCase());
+            const horaNorm = normalizarHora(pod.hora);
+            if (coincideDia && horaNorm) {
+                if (!itemsPorHora[horaNorm]) itemsPorHora[horaNorm] = [];
+                itemsPorHora[horaNorm].push({ tipo: '🎧 Podcast', nombre: pod.nombre, imgUrl: pod.imgUrl, link: pod.link });
+            } else if (!horaNorm && !pod.dias) {
+                unassignedItems.push(`🎧 Podcast: ${pod.nombre}`);
+            }
+        });
+
+        // 5. NOVEDADES VIGENTES
+        novedadesDB.filter(nov => (!nov.desde || fechaKey >= nov.desde) && (!nov.hasta || fechaKey <= nov.hasta)).forEach(nov => {
+            const hKey = "10:00 hs";
             if (!itemsPorHora[hKey]) itemsPorHora[hKey] = [];
-            itemsPorHora[hKey].push({ tipo: '🎧 Podcast', nombre: pod.nombre, imgUrl: pod.imgUrl, link: pod.link });
+            itemsPorHora[hKey].push({ tipo: '📢 Novedad', nombre: nov.titulo, imgUrl: nov.imgUrl, link: nov.link });
         });
 
         const hoursContainer = document.getElementById('hours-container');
         hoursContainer.innerHTML = '';
         const registroPrevio = agendaGuardadaBD[fechaKey] || { horarios: {}, notas: "" };
 
+        // CONSTRUCCIÓN DE CADA FILA DE HORARIO EN LA AGENDA
         for (let h = cfgCalendario.horaInicio; h <= cfgCalendario.horaFin; h++) {
             const horaStr = `${h < 10 ? '0' + h : h}:00 hs`;
             const itemsEnHora = itemsPorHora[horaStr] || [];
@@ -519,10 +660,21 @@
                 attachedHTML = itemsEnHora.map(it => `
                     <div class="agenda-attached-card">
                         <div><b>${it.tipo}:</b> ${it.nombre}</div>
-                        ${it.imgUrl ? `<img src="${it.imgUrl}">` : ''}
-                        ${it.link ? `<a href="${it.link}" target="_blank">🔗 Abrir Enlace / Recurso</a>` : ''}
+                        ${it.imgUrl ? `<img src="${it.imgUrl}" class="item-attached-img">` : ''}
+                        ${it.link ? `<a href="${it.link}" target="_blank" style="color:var(--primary-dark); font-weight:bold;">🔗 Abrir Enlace / Recurso</a>` : ''}
                     </div>
                 `).join('');
+            }
+
+            // COMBO / SELECT DE ELEMENTOS LIBRES
+            let comboHTML = '';
+            if (unassignedItems.length > 0) {
+                comboHTML = `
+                    <select class="hour-combo-select" onchange="seleccionarItemEnHora('${horaStr}', this.value)">
+                        <option value="">➕ Asignar elemento libre de ABM...</option>
+                        ${unassignedItems.map(item => `<option value="${item}">${item}</option>`).join('')}
+                    </select>
+                `;
             }
 
             const row = document.createElement('div');
@@ -530,15 +682,28 @@
             row.innerHTML = `
                 <div class="hour-row-top">
                     <span class="hour-label">${horaStr}</span>
-                    <input type="text" class="hour-input" data-hora="${horaStr}" value="${registroPrevio.horarios[horaStr] || ''}" placeholder="Nota personal / Actividad...">
+                    <input type="text" class="hour-input" id="input-hora-${horaStr}" data-hora="${horaStr}" value="${registroPrevio.horarios[horaStr] || ''}" placeholder="Nota personal / Actividad...">
                 </div>
                 ${attachedHTML}
+                ${comboHTML}
             `;
             hoursContainer.appendChild(row);
         }
 
         document.getElementById('modal-text').value = registroPrevio.notas || '';
         document.getElementById('modal-agenda').style.display = 'flex';
+    }
+
+    function seleccionarItemEnHora(horaStr, valor) {
+        if (!valor) return;
+        const input = document.getElementById(`input-hora-${horaStr}`);
+        if (input) {
+            if (input.value.trim() !== "") {
+                input.value += ` | ${valor}`;
+            } else {
+                input.value = valor;
+            }
+        }
     }
 
     function guardarRegistroAgenda() {
@@ -560,7 +725,7 @@
 
     function closeModal() { document.getElementById('modal-agenda').style.display = 'none'; }
 
-    /* LÓGICA ABM RESTAURADA */
+    /* LÓGICA DE ABM (PUBLICAR / AGREGAR / EDITAR) */
     function publicarNovedadManual() {
         const titulo = document.getElementById('nov-titulo').value;
         const link = document.getElementById('nov-link').value;
@@ -574,19 +739,38 @@
             if (editIndices.nov >= 0) {
                 novedadesDB[editIndices.nov] = { titulo, link, desde, hasta, imgUrl: imgFinal };
                 editIndices.nov = -1;
+                document.getElementById('btn-save-nov').innerText = "Publicar Novedad";
             } else {
                 novedadesDB.unshift({ titulo, link, desde, hasta, imgUrl: imgFinal });
             }
-            document.getElementById('nov-titulo').value = '';
-            document.getElementById('nov-link').value = '';
+            limpiarFormNov();
             renderConfigLists();
         });
+    }
+
+    function editarNovedad(idx) {
+        const item = novedadesDB[idx];
+        document.getElementById('nov-titulo').value = item.titulo || '';
+        document.getElementById('nov-link').value = item.link || '';
+        document.getElementById('nov-desde').value = item.desde || '';
+        document.getElementById('nov-hasta').value = item.hasta || '';
+        editIndices.nov = idx;
+        document.getElementById('btn-save-nov').innerText = "Actualizar Novedad";
+    }
+
+    function limpiarFormNov() {
+        document.getElementById('nov-titulo').value = '';
+        document.getElementById('nov-link').value = '';
+        document.getElementById('nov-desde').value = '';
+        document.getElementById('nov-hasta').value = '';
+        const f = document.getElementById('nov-img-input');
+        if (f) f.value = '';
     }
 
     function agregarPractica() {
         const nombre = document.getElementById('pra-nombre').value;
         const fecha = document.getElementById('pra-fecha').value;
-        const hora = document.getElementById('pra-hora').value || "09:00 hs";
+        const hora = document.getElementById('pra-hora').value || "";
         const desc = document.getElementById('pra-desc').value;
         const link = document.getElementById('pra-link').value;
         const comentario = document.getElementById('pra-comentario').value;
@@ -598,19 +782,43 @@
             if (editIndices.pra >= 0) {
                 practicasDB[editIndices.pra] = { id: Date.now(), nombre, fecha, hora, desc, link, comentario, imgUrl: imgFinal };
                 editIndices.pra = -1;
+                document.getElementById('btn-save-pra').innerText = "Guardar Práctica";
             } else {
                 practicasDB.push({ id: Date.now(), nombre, fecha, hora, desc, link, comentario, imgUrl: imgFinal });
             }
-            document.getElementById('pra-nombre').value = '';
+            limpiarFormPra();
             renderConfigLists();
         });
+    }
+
+    function editarPractica(idx) {
+        const p = practicasDB[idx];
+        document.getElementById('pra-nombre').value = p.nombre || '';
+        document.getElementById('pra-fecha').value = p.fecha || '';
+        document.getElementById('pra-hora').value = p.hora || '';
+        document.getElementById('pra-desc').value = p.desc || '';
+        document.getElementById('pra-link').value = p.link || '';
+        document.getElementById('pra-comentario').value = p.comentario || '';
+        editIndices.pra = idx;
+        document.getElementById('btn-save-pra').innerText = "Actualizar Práctica";
+    }
+
+    function limpiarFormPra() {
+        document.getElementById('pra-nombre').value = '';
+        document.getElementById('pra-fecha').value = '';
+        document.getElementById('pra-hora').value = '';
+        document.getElementById('pra-desc').value = '';
+        document.getElementById('pra-link').value = '';
+        document.getElementById('pra-comentario').value = '';
+        const f = document.getElementById('pra-img-input');
+        if (f) f.value = '';
     }
 
     function agregarActividadConfig() {
         const nombre = document.getElementById('act-nombre').value;
         const dia = document.getElementById('act-dia').value;
         const fecha = document.getElementById('act-fecha').value;
-        const hora = document.getElementById('act-hora').value || "08:00 hs";
+        const hora = document.getElementById('act-hora').value || "";
         const link = document.getElementById('act-link').value || "";
         const fileInput = document.getElementById('act-img-input');
 
@@ -620,20 +828,41 @@
             if (editIndices.act >= 0) {
                 actividadesDB[editIndices.act] = { nombre, dia, fecha, hora, link, imgUrl: imgFinal };
                 editIndices.act = -1;
+                document.getElementById('btn-save-act').innerText = "Guardar Actividad";
             } else {
                 actividadesDB.push({ nombre, dia, fecha, hora, link, imgUrl: imgFinal });
             }
-            document.getElementById('act-nombre').value = '';
+            limpiarFormAct();
             renderConfigLists();
         });
+    }
+
+    function editarActividad(idx) {
+        const item = actividadesDB[idx];
+        document.getElementById('act-nombre').value = item.nombre || '';
+        document.getElementById('act-dia').value = item.dia || '';
+        document.getElementById('act-fecha').value = item.fecha || '';
+        document.getElementById('act-hora').value = item.hora || '';
+        document.getElementById('act-link').value = item.link || '';
+        editIndices.act = idx;
+        document.getElementById('btn-save-act').innerText = "Actualizar Actividad";
+    }
+
+    function limpiarFormAct() {
+        document.getElementById('act-nombre').value = '';
+        document.getElementById('act-fecha').value = '';
+        document.getElementById('act-hora').value = '';
+        document.getElementById('act-link').value = '';
+        const f = document.getElementById('act-img-input');
+        if (f) f.value = '';
     }
 
     function agregarInfusion() {
         const nombre = document.getElementById('inf-nombre').value;
         const desc = document.getElementById('inf-desc').value;
         const efecto = document.getElementById('inf-efecto').value;
-        const hora = document.getElementById('inf-hora').value || "07:00 hs";
-        const dias = document.getElementById('inf-dias').value || "Todos";
+        const hora = document.getElementById('inf-hora').value || "";
+        const dias = document.getElementById('inf-dias').value || "";
         const link = document.getElementById('inf-link').value || "";
         const fileInput = document.getElementById('inf-img-input');
 
@@ -643,20 +872,44 @@
             if (editIndices.inf >= 0) {
                 infusionesDB[editIndices.inf] = { nombre, desc, efecto, hora, dias, link, imgUrl: imgFinal };
                 editIndices.inf = -1;
+                document.getElementById('btn-save-inf').innerText = "Guardar Infusión";
             } else {
                 infusionesDB.push({ nombre, desc, efecto, hora, dias, link, imgUrl: imgFinal });
             }
-            document.getElementById('inf-nombre').value = '';
+            limpiarFormInf();
             renderConfigLists();
         });
+    }
+
+    function editarInfusion(idx) {
+        const item = infusionesDB[idx];
+        document.getElementById('inf-nombre').value = item.nombre || '';
+        document.getElementById('inf-desc').value = item.desc || '';
+        document.getElementById('inf-efecto').value = item.efecto || '';
+        document.getElementById('inf-hora').value = item.hora || '';
+        document.getElementById('inf-dias').value = item.dias || '';
+        document.getElementById('inf-link').value = item.link || '';
+        editIndices.inf = idx;
+        document.getElementById('btn-save-inf').innerText = "Actualizar Infusión";
+    }
+
+    function limpiarFormInf() {
+        document.getElementById('inf-nombre').value = '';
+        document.getElementById('inf-desc').value = '';
+        document.getElementById('inf-efecto').value = '';
+        document.getElementById('inf-hora').value = '';
+        document.getElementById('inf-dias').value = '';
+        document.getElementById('inf-link').value = '';
+        const f = document.getElementById('inf-img-input');
+        if (f) f.value = '';
     }
 
     function agregarPodcast() {
         const nombre = document.getElementById('pod-nombre').value;
         const desc = document.getElementById('pod-desc').value;
-        const hora = document.getElementById('pod-hora').value || "18:00 hs";
+        const hora = document.getElementById('pod-hora').value || "";
         const link = document.getElementById('pod-link').value || "#";
-        const dias = document.getElementById('pod-dias').value || "Todos";
+        const dias = document.getElementById('pod-dias').value || "";
         const fileInput = document.getElementById('pod-img-input');
 
         if (!nombre) return;
@@ -665,33 +918,85 @@
             if (editIndices.pod >= 0) {
                 podcastsDB[editIndices.pod] = { nombre, desc, hora, link, dias, imgUrl: imgFinal };
                 editIndices.pod = -1;
+                document.getElementById('btn-save-pod').innerText = "Guardar Podcast";
             } else {
                 podcastsDB.push({ nombre, desc, hora, link, dias, imgUrl: imgFinal });
             }
-            document.getElementById('pod-nombre').value = '';
+            limpiarFormPod();
             renderConfigLists();
         });
     }
 
+    function editarPodcast(idx) {
+        const item = podcastsDB[idx];
+        document.getElementById('pod-nombre').value = item.nombre || '';
+        document.getElementById('pod-desc').value = item.desc || '';
+        document.getElementById('pod-hora').value = item.hora || '';
+        document.getElementById('pod-link').value = item.link || '';
+        document.getElementById('pod-dias').value = item.dias || '';
+        editIndices.pod = idx;
+        document.getElementById('btn-save-pod').innerText = "Actualizar Podcast";
+    }
+
+    function limpiarFormPod() {
+        document.getElementById('pod-nombre').value = '';
+        document.getElementById('pod-desc').value = '';
+        document.getElementById('pod-hora').value = '';
+        document.getElementById('pod-link').value = '';
+        document.getElementById('pod-dias').value = '';
+        const f = document.getElementById('pod-img-input');
+        if (f) f.value = '';
+    }
+
     function renderConfigLists() {
         document.getElementById('novedades-abm-list').innerHTML = novedadesDB.map((item, idx) => `
-            <div class="crud-item"><span><b>${item.titulo}</b></span><button class="btn-delete" onclick="novedadesDB.splice(${idx},1); renderConfigLists();">Eliminar</button></div>
+            <div class="crud-item">
+                <span><b>${item.titulo}</b></span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarNovedad(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="novedadesDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
+                </div>
+            </div>
         `).join('');
 
         document.getElementById('crud-practicas-list').innerHTML = practicasDB.map((item, idx) => `
-            <div class="crud-item"><span><b>${item.nombre}</b></span><button class="btn-delete" onclick="practicasDB.splice(${idx},1); renderConfigLists();">Eliminar</button></div>
+            <div class="crud-item">
+                <span><b>${item.nombre}</b></span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarPractica(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="practicasDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
+                </div>
+            </div>
         `).join('');
 
         document.getElementById('crud-actividades-list').innerHTML = actividadesDB.map((item, idx) => `
-            <div class="crud-item"><span><b>${item.nombre}</b></span><button class="btn-delete" onclick="actividadesDB.splice(${idx},1); renderConfigLists();">Eliminar</button></div>
+            <div class="crud-item">
+                <span><b>${item.nombre}</b></span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarActividad(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="actividadesDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
+                </div>
+            </div>
         `).join('');
 
         document.getElementById('crud-infusiones-list').innerHTML = infusionesDB.map((item, idx) => `
-            <div class="crud-item"><span><b>${item.nombre}</b></span><button class="btn-delete" onclick="infusionesDB.splice(${idx},1); renderConfigLists();">Eliminar</button></div>
+            <div class="crud-item">
+                <span><b>${item.nombre}</b></span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarInfusion(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="infusionesDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
+                </div>
+            </div>
         `).join('');
 
         document.getElementById('crud-podcasts-list').innerHTML = podcastsDB.map((item, idx) => `
-            <div class="crud-item"><span><b>${item.nombre}</b></span><button class="btn-delete" onclick="podcastsDB.splice(${idx},1); renderConfigLists();">Eliminar</button></div>
+            <div class="crud-item">
+                <span><b>${item.nombre}</b></span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarPodcast(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="podcastsDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
+                </div>
+            </div>
         `).join('');
     }
 
@@ -749,7 +1054,7 @@
     }
 
     function descargarConfigJSON() {
-        const configData = { practicasDB, infusionesDB, novedadesDB, podcastsDB, actividadesDB, cfgCalendario, botonesConfig };
+        const configData = { practicasDB, infusionesDB, novedadesDB, podcastsDB, actividadesDB, cfgCalendario, botonesConfig, configVisual };
         const blob = new Blob([JSON.stringify(configData, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
