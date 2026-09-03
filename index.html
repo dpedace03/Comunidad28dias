@@ -73,7 +73,6 @@
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
 
-        /* BOTÓN VOLVER ICONO VERDE Y MÁS GRANDE */
         .btn-back {
             background: var(--pastel-green);
             border: 2px solid #a3d99b;
@@ -136,7 +135,8 @@
             font-weight: 700; line-height: 1.2;
         }
 
-        .card-icon { font-size: calc(var(--card-title-size) * 1.8); }
+        .card-icon { font-size: calc(var(--card-title-size) * 1.8); display: flex; align-items: center; justify-content: center; }
+        .card-icon img { width: 32px; height: 32px; object-fit: contain; }
 
         .card-badge-alert {
             display: none; position: absolute; top: -6px; right: -4px;
@@ -260,50 +260,26 @@
         .walk-icon { font-size: 1rem; }
         .podcast-link { font-size: 0.8rem; color: var(--primary); text-decoration: underline; }
 
-        .crud-list-container { margin-top: 6px; border-top: 1px dashed #e8d5d0; padding-top: 6px; }
-        .crud-item {
-            display: flex; justify-content: space-between; align-items: center;
-            background: #faf8f5; border: 1px solid #eee; padding: 6px 8px;
-            border-radius: 6px; margin-bottom: 4px; font-size: 0.75rem;
-        }
-        .crud-actions { display: flex; gap: 4px; }
-        .btn-edit { background: #6b5b7b; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
-        .btn-delete { background: #e06d53; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
-
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-color); justify-content: center; align-items: center; z-index: 200;
-        }
-
-        .modal-card-full {
-            background: #fffdfa; width: 100%; height: 100dvh; padding: 14px;
-            box-sizing: border-box; display: flex; flex-direction: column; gap: 8px;
-            overflow-y: auto; font-family: var(--agenda-font-family); max-width: 850px; margin: 0 auto;
-        }
-
-        .modal-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--primary-dark); margin: 0; }
-
-        .day-info-block { background: #fff; border: 1px solid #f2c6be; border-radius: 10px; padding: 8px; font-size: var(--agenda-font-size); }
-        .day-info-block h4 { margin: 0 0 4px 0; color: var(--salmon); font-size: 1rem; }
-
-        .podcast-audio-link {
-            display: inline-block; margin-top: 3px; padding: 4px 10px;
-            background: var(--pastel-pink); color: var(--primary-dark);
-            border-radius: 12px; text-decoration: none; font-weight: bold;
-            font-size: var(--agenda-font-size); border: 1px solid var(--salmon);
-        }
-
         .hours-container {
             flex: 1; min-height: 140px; overflow-y: auto; border: 1px solid #f2c6be;
             padding: 8px; border-radius: 12px; background: #fff8f6;
         }
 
-        .hour-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+        .hour-row { display: flex; flex-direction: column; margin-bottom: 8px; background: #fff; border: 1px solid #e8d5d0; border-radius: 8px; padding: 6px; }
+        .hour-row-top { display: flex; align-items: center; gap: 8px; }
         .hour-label { font-size: var(--agenda-font-size); font-weight: bold; width: 75px; flex-shrink: 0; color: var(--primary-dark); }
         .hour-input {
             font-family: var(--agenda-font-family); font-size: var(--agenda-font-size); color: #333;
             background: #ffffff; border: 1px solid #e8d5d0; border-radius: 8px; padding: 4px 8px; width: 100%;
         }
+
+        .agenda-attached-card {
+            margin-top: 6px; padding: 6px; border-radius: 8px; background: var(--pastel-pink);
+            border: 1px solid var(--salmon); font-size: 0.95rem; display: flex; flex-direction: column; gap: 4px;
+        }
+        .agenda-attached-card b { color: var(--primary-dark); }
+        .agenda-attached-card img { max-width: 100%; max-height: 120px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 1px solid #fff; }
+        .agenda-attached-card a { color: var(--primary-dark); font-weight: bold; font-size: 0.85rem; text-decoration: underline; }
 
         .notes-popup-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -337,6 +313,20 @@
             cursor: pointer; font-size: 1rem; font-weight: bold; font-family: var(--agenda-font-family);
         }
 
+        .btn-config-card {
+            background: #faf8f5; border: 1px solid #e8d5d0; border-radius: 8px; padding: 8px; margin-bottom: 8px;
+        }
+
+        .crud-list-container { margin-top: 6px; border-top: 1px dashed #e8d5d0; padding-top: 6px; }
+        .crud-item {
+            display: flex; justify-content: space-between; align-items: center;
+            background: #faf8f5; border: 1px solid #eee; padding: 6px 8px;
+            border-radius: 6px; margin-bottom: 4px; font-size: 0.75rem;
+        }
+        .crud-actions { display: flex; gap: 4px; }
+        .btn-edit { background: #6b5b7b; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
+        .btn-delete { background: #e06d53; color: #fff; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
+
         .zoom-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.92); z-index: 300;
@@ -367,30 +357,63 @@
         <button class="icon-btn" onclick="openWhatsApp()" style="color:#25D366; font-weight:bold;" title="Enviar WhatsApp">💬 WhatsApp</button>
     </div>
 
-    <!-- PANTALLA INICIAL -->
+    <!-- PANTALLA INICIAL DE BOTONES -->
     <div id="screen-home" class="screen active">
         <div class="home-container-full">
             <div class="menu-grid-full">
                 <div class="menu-row">
-                    <div class="menu-card" onclick="nav('modalidad')"><span class="card-icon">🌸</span><h2>Modalidad</h2></div>
-                    <div class="menu-card" onclick="nav('pocimas')"><span class="card-icon">🍵</span><h2>Pócimas y Yuyos del Bien</h2></div>
+                    <div class="menu-card" id="card-btn-modalidad" onclick="nav('modalidad')">
+                        <span class="card-icon" id="icon-btn-modalidad">🌸</span>
+                        <h2 id="title-btn-modalidad">Modalidad</h2>
+                    </div>
+                    <div class="menu-card" id="card-btn-pocimas" onclick="nav('pocimas')">
+                        <span class="card-icon" id="icon-btn-pocimas">🍵</span>
+                        <h2 id="title-btn-pocimas">Pócimas y Yuyos del Bien</h2>
+                    </div>
                 </div>
                 <div class="menu-row">
-                    <div class="menu-card" onclick="nav('caminatas')"><span class="card-icon">🚶‍♀️</span><h2>Propuesta Diaria y Caminatas</h2></div>
-                    <div class="menu-card" onclick="nav('practicas')"><span class="card-icon">🧘‍♀️</span><h2>Prácticas</h2></div>
+                    <div class="menu-card" id="card-btn-caminatas" onclick="nav('caminatas')">
+                        <span class="card-icon" id="icon-btn-caminatas">🚶‍♀️</span>
+                        <h2 id="title-btn-caminatas">Propuesta Diaria y Caminatas</h2>
+                    </div>
+                    <div class="menu-card" id="card-btn-practicas" onclick="nav('practicas')">
+                        <span class="card-icon" id="icon-btn-practicas">🧘‍♀️</span>
+                        <h2 id="title-btn-practicas">Prácticas</h2>
+                    </div>
                 </div>
                 <div class="menu-row">
-                    <div class="menu-card" onclick="nav('agenda')"><span class="card-icon">📅</span><h2>Mi Agenda Diaria y Sensaciones</h2></div>
-                    <div class="menu-card" onclick="nav('registro')"><span class="card-icon">📷</span><h2>Registro Fotográfico</h2></div>
+                    <div class="menu-card" id="card-btn-actividades" onclick="nav('actividades')">
+                        <span class="card-icon" id="icon-btn-actividades">✨</span>
+                        <h2 id="title-btn-actividades">Actividades</h2>
+                    </div>
+                    <div class="menu-card" id="card-btn-agenda" onclick="nav('agenda')">
+                        <span class="card-icon" id="icon-btn-agenda">📅</span>
+                        <h2 id="title-btn-agenda">Mi Agenda Diaria y Sensaciones</h2>
+                    </div>
                 </div>
                 <div class="menu-row">
-                    <div class="menu-card" onclick="nav('novedades')" style="background: var(--pastel-pink); border-color: var(--salmon);">
+                    <div class="menu-card" id="card-btn-registro" onclick="nav('registro')">
+                        <span class="card-icon" id="icon-btn-registro">📷</span>
+                        <h2 id="title-btn-registro">Registro Fotográfico</h2>
+                    </div>
+                    <div class="menu-card" id="card-btn-novedades" onclick="nav('novedades')">
                         <span class="card-badge-alert" id="home-novedades-alert">🔔</span>
-                        <span class="card-icon">📢</span>
-                        <h2>Novedades</h2>
+                        <span class="card-icon" id="icon-btn-novedades">📢</span>
+                        <h2 id="title-btn-novedades">Novedades</h2>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- PANTALLA ACTIVIDADES -->
+    <div id="screen-actividades" class="screen">
+        <div class="screen-header">
+            <h2 class="screen-title">Actividades Recomendadas</h2>
+            <button class="btn-back" onclick="nav('home')">←</button>
+        </div>
+        <div class="screen-body" id="public-actividades-list">
+            <i style="font-size:0.8rem; color:#888; text-align:center;">No hay actividades cargadas.</i>
         </div>
     </div>
 
@@ -528,7 +551,7 @@
                 <button class="btn-submit" style="background:#52b788;" onclick="descargarConfigJSON()">Descargar config.json Actualizado</button>
             </div>
 
-            <!-- APARIENCIA VISUAL: FONDO, BOTONES 3D, IMAGEN DE FONDO -->
+            <!-- APARIENCIA VISUAL GLOBAL -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Apariencia Global y Pantalla</h3>
                 
@@ -538,7 +561,7 @@
                         <input type="color" id="cfg-app-bg" value="#fcf8f3" onchange="cambiarAparienciaGlobal()">
                     </div>
                     <div class="form-group" style="flex:1;">
-                        <label>Color Letra Cards:</label>
+                        <label>Color Letra Cards General:</label>
                         <input type="color" id="cfg-card-color" value="#f4a291" onchange="cambiarEstiloCards()">
                     </div>
                 </div>
@@ -554,13 +577,20 @@
                 </div>
 
                 <div class="form-group" style="margin-bottom:0; margin-top:6px;">
-                    <label>Tamaño de Letra del Título:</label>
+                    <label>Tamaño de Letra de Títulos:</label>
                     <select id="cfg-card-size" onchange="cambiarEstiloCards()">
                         <option value="0.85rem">Chico (0.85rem)</option>
                         <option value="1.05rem" selected>Normal (1.05rem)</option>
                         <option value="1.25rem">Grande (1.25rem)</option>
                     </select>
                 </div>
+            </div>
+
+            <!-- CONFIGURACIÓN DE CADA BOTÓN (COLOR FONDO, LETRA, ÍCONO DE IMAGEN) -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Personalizar Botones de la Pantalla Principal</h3>
+                <p style="font-size: 0.75rem; color: #666; margin: 0 0 8px 0;">Modifica el fondo, color de letra e ícono/imagen de cada botón individualmente.</p>
+                <div id="buttons-customizer-container"></div>
             </div>
 
             <!-- ABM DE NOVEDADES -->
@@ -636,6 +666,7 @@
                     <div class="form-group" style="flex:1;"><label>o Fecha Específica:</label><input type="date" id="act-fecha"></div>
                 </div>
                 <div class="form-group"><label>Hora en Agenda:</label><input type="text" id="act-hora" placeholder="Ej: 08:00 hs"></div>
+                <div class="form-group"><label>Link / Enlace Recurso:</label><input type="text" id="act-link" placeholder="https://..."></div>
                 <div class="form-group">
                     <label>Adjuntar Imagen Ilustrativa:</label>
                     <input type="file" accept="image/*" id="act-img-input">
@@ -696,7 +727,9 @@
                 <div class="form-group"><label>Nombre:</label><input type="text" id="inf-nombre"></div>
                 <div class="form-group"><label>Descripción / Preparación:</label><input type="text" id="inf-desc"></div>
                 <div class="form-group"><label>Efecto / Propiedad:</label><input type="text" id="inf-efecto"></div>
+                <div class="form-group"><label>Hora por defecto en Agenda:</label><input type="text" id="inf-hora" placeholder="Ej: 07:00 hs"></div>
                 <div class="form-group"><label>Días de toma:</label><input type="text" id="inf-dias" placeholder="Ej: Todos, Lunes, Martes"></div>
+                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="inf-link" placeholder="https://..."></div>
                 <div class="form-group">
                     <label>Adjuntar Imagen Ilustrativa:</label>
                     <input type="file" accept="image/*" id="inf-img-input">
@@ -714,6 +747,7 @@
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem;">Gestión Podcasts</h3>
                 <div class="form-group"><label>Nombre:</label><input type="text" id="pod-nombre"></div>
                 <div class="form-group"><label>Descripción:</label><input type="text" id="pod-desc"></div>
+                <div class="form-group"><label>Hora en Agenda:</label><input type="text" id="pod-hora" placeholder="Ej: 18:00 hs"></div>
                 <div class="form-group"><label>Link Audio:</label><input type="text" id="pod-link" placeholder="https://..."></div>
                 <div class="form-group"><label>Días para escuchar:</label><input type="text" id="pod-dias" placeholder="Ej: Martes, Jueves, Sábado"></div>
                 <div class="form-group">
@@ -801,6 +835,18 @@
     let cfgCalendario = { diaInicio: 1, diaFin: 28, horaInicio: 7, horaFin: 21 };
     let configVisual = { bgColor: '#fcf8f3', bgImage: '', btn3D: false, cardTitleColor: '#f4a291', cardTitleSize: '1.05rem' };
     
+    /* CONFIGURACIÓN INDIVIDUAL DE CADA BOTÓN DEL MENÚ PRINCIPAL */
+    let botonesConfig = {
+        modalidad: { id: "modalidad", titulo: "Modalidad", bg: "#ffffff", color: "#f4a291", icon: "🌸" },
+        pocimas: { id: "pocimas", titulo: "Pócimas y Yuyos del Bien", bg: "#ffffff", color: "#f4a291", icon: "🍵" },
+        caminatas: { id: "caminatas", titulo: "Propuesta Diaria y Caminatas", bg: "#ffffff", color: "#f4a291", icon: "🚶‍♀️" },
+        practicas: { id: "practicas", titulo: "Prácticas", bg: "#ffffff", color: "#f4a291", icon: "🧘‍♀️" },
+        actividades: { id: "actividades", titulo: "Actividades", bg: "#ffffff", color: "#f4a291", icon: "✨" },
+        agenda: { id: "agenda", titulo: "Mi Agenda Diaria y Sensaciones", bg: "#ffffff", color: "#f4a291", icon: "📅" },
+        registro: { id: "registro", titulo: "Registro Fotográfico", bg: "#ffffff", color: "#f4a291", icon: "📷" },
+        novedades: { id: "novedades", titulo: "Novedades", bg: "#fbe3e8", color: "#f4a291", icon: "📢" }
+    };
+
     let carruseles = {
         modalidad: ["1-Bienvenida.jpeg", "modalidad1.jpeg", "modalidad2.jpeg"],
         pocimas: ["yuyos del bien.jpeg", "yuyos.jpeg"]
@@ -830,6 +876,9 @@
                 if (data.actividadesDB) actividadesDB = data.actividadesDB;
                 if (data.carruseles) carruseles = data.carruseles;
                 if (data.cfgCalendario) cfgCalendario = data.cfgCalendario;
+                if (data.botonesConfig) {
+                    botonesConfig = { ...botonesConfig, ...data.botonesConfig };
+                }
                 if (data.configVisual) {
                     configVisual = data.configVisual;
                     aplicarEstilosVisualesCargados();
@@ -839,11 +888,14 @@
             console.warn("No se pudo cargar config.json local, iniciando con valores por defecto.");
         }
 
+        aplicarEstilosBotones();
         initCalendar();
         renderPocimasList();
         renderPracticasScreen();
+        renderPublicActividades();
         renderPublicNovedades();
         renderConfigLists();
+        renderButtonsCustomizer();
         updateCarouselDisplay('modalidad');
         updateCarouselDisplay('pocimas');
     }
@@ -873,7 +925,8 @@
             actividadesDB,
             carruseles,
             cfgCalendario,
-            configVisual
+            configVisual,
+            botonesConfig
         };
 
         const jsonStr = JSON.stringify(configData, null, 2);
@@ -932,6 +985,80 @@
         }
     }
 
+    /* APLICAR COLORES E ÍCONOS A CADA BOTÓN EN LA PANTALLA PRINCIPAL */
+    function aplicarEstilosBotones() {
+        Object.keys(botonesConfig).forEach(key => {
+            const btn = botonesConfig[key];
+            const cardEl = document.getElementById(`card-btn-${key}`);
+            const titleEl = document.getElementById(`title-btn-${key}`);
+            const iconEl = document.getElementById(`icon-btn-${key}`);
+
+            if (cardEl) {
+                cardEl.style.backgroundColor = btn.bg || "#ffffff";
+            }
+            if (titleEl) {
+                titleEl.style.color = btn.color || "#f4a291";
+            }
+            if (iconEl) {
+                if (btn.icon.startsWith("http://") || btn.icon.startsWith("https://") || btn.icon.startsWith("data:image")) {
+                    iconEl.innerHTML = `<img src="${btn.icon}" alt="Icono">`;
+                } else {
+                    iconEl.innerText = btn.icon || "🌸";
+                }
+            }
+        });
+    }
+
+    /* RENDERIZAR PANEL DE PERSONALIZACIÓN DE BOTONES EN CONFIGURACIÓN */
+    function renderButtonsCustomizer() {
+        const container = document.getElementById('buttons-customizer-container');
+        if (!container) return;
+
+        container.innerHTML = Object.keys(botonesConfig).map(key => {
+            const btn = botonesConfig[key];
+            return `
+                <div class="btn-config-card">
+                    <b style="font-size:0.85rem; color:var(--primary-dark);">Botón: ${btn.titulo}</b>
+                    <div style="display:flex; gap:6px; margin-top:4px;">
+                        <div class="form-group" style="flex:1; margin-bottom:0;">
+                            <label style="font-size:0.75rem;">Color Fondo:</label>
+                            <input type="color" value="${btn.bg || '#ffffff'}" onchange="actualizarBotonConfig('${key}', 'bg', this.value)">
+                        </div>
+                        <div class="form-group" style="flex:1; margin-bottom:0;">
+                            <label style="font-size:0.75rem;">Color Letra:</label>
+                            <input type="color" value="${btn.color || '#f4a291'}" onchange="actualizarBotonConfig('${key}', 'color', this.value)">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top:4px; margin-bottom:0;">
+                        <label style="font-size:0.75rem;">Ícono (Emoji o URL Imagen):</label>
+                        <div style="display:flex; gap:4px;">
+                            <input type="text" value="${btn.icon || ''}" placeholder="Ej: 🌸 o https://..." onchange="actualizarBotonConfig('${key}', 'icon', this.value)" style="flex:1;">
+                            <input type="file" accept="image/*" style="display:none;" id="file-icon-${key}" onchange="cargarImagenIconoBoton('${key}', event)">
+                            <button onclick="document.getElementById('file-icon-${key}').click()" style="background:var(--salmon); color:#fff; border:none; padding:4px 8px; border-radius:6px; font-size:0.75rem; cursor:pointer;">📁 Subir</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function actualizarBotonConfig(key, propiedad, valor) {
+        if (!botonesConfig[key]) return;
+        botonesConfig[key][propiedad] = valor;
+        aplicarEstilosBotones();
+    }
+
+    function cargarImagenIconoBoton(key, event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            actualizarBotonConfig(key, 'icon', e.target.result);
+            renderButtonsCustomizer();
+        };
+        reader.readAsDataURL(file);
+    }
+
     function readInputImage(fileInput, callback) {
         if (fileInput && fileInput.files && fileInput.files[0]) {
             const reader = new FileReader();
@@ -960,6 +1087,23 @@
 
         renderNovedadesABMList();
         renderPublicNovedades();
+    }
+
+    function renderPublicActividades() {
+        const container = document.getElementById('public-actividades-list');
+        if (actividadesDB.length === 0) {
+            container.innerHTML = '<i style="font-size:0.8rem; color:#888; text-align:center;">No hay actividades cargadas.</i>';
+            return;
+        }
+
+        container.innerHTML = actividadesDB.map(act => `
+            <div class="practica-card-item">
+                <h3>✨ ${act.nombre} ${act.hora ? `<small style="font-size:0.75rem; color:var(--salmon);">(${act.hora})</small>` : ''}</h3>
+                <p><b>Día / Fecha:</b> ${act.fecha || act.dia || 'Todos los días'}</p>
+                ${act.imgUrl ? `<img src="${act.imgUrl}" class="item-attached-img" onclick="openZoomModal(this.src)"><br>` : ''}
+                ${act.link ? `<a href="${act.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
+            </div>
+        `).join('');
     }
 
     function renderPublicNovedades() {
@@ -1097,6 +1241,7 @@
         const dia = document.getElementById('act-dia').value;
         const fecha = document.getElementById('act-fecha').value;
         const hora = document.getElementById('act-hora').value || "08:00 hs";
+        const link = document.getElementById('act-link').value || "";
         const fileInput = document.getElementById('act-img-input');
 
         if (!nombre) return;
@@ -1105,20 +1250,22 @@
             const imgFinal = base64Img || (editIndices.act >= 0 ? actividadesDB[editIndices.act].imgUrl : null);
 
             if (editIndices.act >= 0) {
-                actividadesDB[editIndices.act] = { nombre, dia, fecha, hora, imgUrl: imgFinal };
+                actividadesDB[editIndices.act] = { nombre, dia, fecha, hora, link, imgUrl: imgFinal };
                 editIndices.act = -1;
                 document.getElementById('btn-save-act').innerText = "Guardar Actividad";
                 generarNovedadAutomatica("Actividades", "Modificación", nombre);
             } else {
-                actividadesDB.push({ nombre, dia, fecha, hora, imgUrl: imgFinal });
+                actividadesDB.push({ nombre, dia, fecha, hora, link, imgUrl: imgFinal });
                 generarNovedadAutomatica("Actividades", "Nueva incorporación", nombre);
             }
 
             document.getElementById('act-nombre').value = '';
             document.getElementById('act-fecha').value = '';
             document.getElementById('act-hora').value = '';
+            document.getElementById('act-link').value = '';
             if (fileInput) fileInput.value = '';
             renderConfigLists();
+            renderPublicActividades();
         });
     }
 
@@ -1128,6 +1275,7 @@
         document.getElementById('act-dia').value = item.dia || "Todos";
         document.getElementById('act-fecha').value = item.fecha || "";
         document.getElementById('act-hora').value = item.hora || "";
+        document.getElementById('act-link').value = item.link || "";
         editIndices.act = idx;
         document.getElementById('btn-save-act').innerText = "Actualizar Actividad";
     }
@@ -1137,13 +1285,16 @@
         actividadesDB.splice(idx, 1);
         generarNovedadAutomatica("Actividades", "Eliminación", a.nombre);
         renderConfigLists();
+        renderPublicActividades();
     }
 
     function agregarInfusion() {
         const nombre = document.getElementById('inf-nombre').value;
         const desc = document.getElementById('inf-desc').value;
         const efecto = document.getElementById('inf-efecto').value;
+        const hora = document.getElementById('inf-hora').value || "07:00 hs";
         const dias = document.getElementById('inf-dias').value || "Todos";
+        const link = document.getElementById('inf-link').value || "";
         const fileInput = document.getElementById('inf-img-input');
 
         if (!nombre) return;
@@ -1152,12 +1303,12 @@
             const imgFinal = base64Img || (editIndices.inf >= 0 ? infusionesDB[editIndices.inf].imgUrl : null);
 
             if (editIndices.inf >= 0) {
-                infusionesDB[editIndices.inf] = { nombre, desc, efecto, dias, imgUrl: imgFinal };
+                infusionesDB[editIndices.inf] = { nombre, desc, efecto, hora, dias, link, imgUrl: imgFinal };
                 editIndices.inf = -1;
                 document.getElementById('btn-save-inf').innerText = "Guardar Infusión";
                 generarNovedadAutomatica("Pócimas y Yuyos", "Modificación", nombre);
             } else {
-                infusionesDB.push({ nombre, desc, efecto, dias, imgUrl: imgFinal });
+                infusionesDB.push({ nombre, desc, efecto, hora, dias, link, imgUrl: imgFinal });
                 generarNovedadAutomatica("Pócimas y Yuyos", "Nueva incorporación", nombre);
             }
 
@@ -1204,6 +1355,7 @@
     function agregarPodcast() {
         const nombre = document.getElementById('pod-nombre').value;
         const desc = document.getElementById('pod-desc').value;
+        const hora = document.getElementById('pod-hora').value || "18:00 hs";
         const link = document.getElementById('pod-link').value || "#";
         const dias = document.getElementById('pod-dias').value || "Todos";
         const fileInput = document.getElementById('pod-img-input');
@@ -1214,12 +1366,12 @@
             const imgFinal = base64Img || (editIndices.pod >= 0 ? podcastsDB[editIndices.pod].imgUrl : null);
 
             if (editIndices.pod >= 0) {
-                podcastsDB[editIndices.pod] = { nombre, desc, link, dias, imgUrl: imgFinal };
+                podcastsDB[editIndices.pod] = { nombre, desc, hora, link, dias, imgUrl: imgFinal };
                 editIndices.pod = -1;
                 document.getElementById('btn-save-pod').innerText = "Guardar Podcast";
                 generarNovedadAutomatica("Propuesta Diaria y Caminatas", "Modificación de Podcast", nombre);
             } else {
-                podcastsDB.push({ nombre, desc, link, dias, imgUrl: imgFinal });
+                podcastsDB.push({ nombre, desc, hora, link, dias, imgUrl: imgFinal });
                 generarNovedadAutomatica("Propuesta Diaria y Caminatas", "Nuevo Podcast asignado", nombre);
             }
 
@@ -1404,8 +1556,12 @@
             renderPocimasList();
         }
         if (screenId === 'practicas') renderPracticasScreen();
+        if (screenId === 'actividades') renderPublicActividades();
         if (screenId === 'novedades') renderPublicNovedades();
-        if (screenId === 'config') renderConfigLists();
+        if (screenId === 'config') {
+            renderConfigLists();
+            renderButtonsCustomizer();
+        }
         
         renderPublicNovedades();
     }
@@ -1489,7 +1645,9 @@
         document.getElementById('inf-nombre').value = item.nombre;
         document.getElementById('inf-desc').value = item.desc;
         document.getElementById('inf-efecto').value = item.efecto;
+        document.getElementById('inf-hora').value = item.hora || '07:00 hs';
         document.getElementById('inf-dias').value = item.dias;
+        document.getElementById('inf-link').value = item.link || '';
         editIndices.inf = idx;
         document.getElementById('btn-save-inf').innerText = "Actualizar Infusión";
     }
@@ -1498,7 +1656,9 @@
         document.getElementById('inf-nombre').value = '';
         document.getElementById('inf-desc').value = '';
         document.getElementById('inf-efecto').value = '';
+        document.getElementById('inf-hora').value = '';
         document.getElementById('inf-dias').value = '';
+        document.getElementById('inf-link').value = '';
         const f = document.getElementById('inf-img-input');
         if (f) f.value = '';
     }
@@ -1507,6 +1667,7 @@
         const item = podcastsDB[idx];
         document.getElementById('pod-nombre').value = item.nombre;
         document.getElementById('pod-desc').value = item.desc;
+        document.getElementById('pod-hora').value = item.hora || '18:00 hs';
         document.getElementById('pod-link').value = item.link;
         document.getElementById('pod-dias').value = item.dias;
         editIndices.pod = idx;
@@ -1516,6 +1677,7 @@
     function limpiarPodForm() {
         document.getElementById('pod-nombre').value = '';
         document.getElementById('pod-desc').value = '';
+        document.getElementById('pod-hora').value = '';
         document.getElementById('pod-link').value = '';
         document.getElementById('pod-dias').value = '';
         const f = document.getElementById('pod-img-input');
@@ -1620,39 +1782,94 @@
             actBlock.style.display = 'block';
         } else actBlock.style.display = 'none';
 
-        const registroPrevio = agendaGuardadaBD[fechaKey] || { horarios: {}, notas: "" };
-        const autoInsertMap = { ...registroPrevio.horarios };
+        const itemsPorHora = {};
 
         acts.forEach(act => {
             const hKey = act.hora || "08:00 hs";
-            if (!autoInsertMap[hKey]) {
-                autoInsertMap[hKey] = act.nombre;
-            }
+            if (!itemsPorHora[hKey]) itemsPorHora[hKey] = [];
+            itemsPorHora[hKey].push({
+                tipo: '✨ Actividad',
+                nombre: act.nombre,
+                imgUrl: act.imgUrl,
+                link: act.link
+            });
         });
 
-        practicasDB.filter(p => p.fecha === fechaKey).forEach(p => {
+        practicasDB.filter(p => p.fecha === fechaKey || p.hora).forEach(p => {
             const hKey = p.hora || "09:00 hs";
-            if (!autoInsertMap[hKey]) {
-                autoInsertMap[hKey] = p.nombre;
-            }
+            if (!itemsPorHora[hKey]) itemsPorHora[hKey] = [];
+            itemsPorHora[hKey].push({
+                tipo: '🧘‍♀️ Práctica',
+                nombre: p.nombre,
+                imgUrl: p.imgUrl,
+                link: p.link
+            });
+        });
+
+        infs.forEach(inf => {
+            const hKey = inf.hora || "07:00 hs";
+            if (!itemsPorHora[hKey]) itemsPorHora[hKey] = [];
+            itemsPorHora[hKey].push({
+                tipo: '🍵 Infusión',
+                nombre: inf.nombre,
+                imgUrl: inf.imgUrl,
+                link: inf.link
+            });
+        });
+
+        pods.forEach(pod => {
+            const hKey = pod.hora || "18:00 hs";
+            if (!itemsPorHora[hKey]) itemsPorHora[hKey] = [];
+            itemsPorHora[hKey].push({
+                tipo: '🎧 Podcast',
+                nombre: pod.nombre,
+                imgUrl: pod.imgUrl,
+                link: pod.link
+            });
         });
 
         novedadesDB.filter(nov => (!nov.desde || fechaKey >= nov.desde) && (!nov.hasta || fechaKey <= nov.hasta)).forEach(nov => {
             const hKey = "10:00 hs";
-            if (!autoInsertMap[hKey]) {
-                autoInsertMap[hKey] = nov.titulo;
-            }
+            if (!itemsPorHora[hKey]) itemsPorHora[hKey] = [];
+            itemsPorHora[hKey].push({
+                tipo: '📢 Novedad',
+                nombre: nov.titulo,
+                imgUrl: nov.imgUrl,
+                link: nov.link
+            });
         });
 
+        const registroPrevio = agendaGuardadaBD[fechaKey] || { horarios: {}, notas: "" };
         const hoursContainer = document.getElementById('hours-container');
         hoursContainer.innerHTML = '';
 
         for (let h = cfgCalendario.horaInicio; h <= cfgCalendario.horaFin; h++) {
             const horaStr = `${h < 10 ? '0' + h : h}:00 hs`;
-            const valorPrevio = autoInsertMap[horaStr] || '';
+            const valorPrevio = registroPrevio.horarios[horaStr] || '';
+            const itemsEnHora = itemsPorHora[horaStr] || [];
+
             const row = document.createElement('div');
             row.className = 'hour-row';
-            row.innerHTML = `<span class="hour-label">${horaStr}</span><input type="text" class="hour-input" data-hora="${horaStr}" value="${valorPrevio}" placeholder="Actividad...">`;
+
+            let attachedHTML = '';
+            if (itemsEnHora.length > 0) {
+                attachedHTML = itemsEnHora.map(it => `
+                    <div class="agenda-attached-card">
+                        <div><b>${it.tipo}:</b> ${it.nombre}</div>
+                        ${it.imgUrl ? `<img src="${it.imgUrl}" onclick="openZoomModal(this.src)">` : ''}
+                        ${it.link ? `<a href="${it.link}" target="_blank">🔗 Abrir Enlace / Recurso</a>` : ''}
+                    </div>
+                `).join('');
+            }
+
+            row.innerHTML = `
+                <div class="hour-row-top">
+                    <span class="hour-label">${horaStr}</span>
+                    <input type="text" class="hour-input" data-hora="${horaStr}" value="${valorPrevio}" placeholder="Nota personal / Actividad...">
+                </div>
+                ${attachedHTML}
+            `;
+
             hoursContainer.appendChild(row);
         }
 
