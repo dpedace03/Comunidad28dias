@@ -20,7 +20,6 @@
             --agenda-font-family: 'Patrick Hand', cursive;
             --agenda-font-size: 1.15rem;
             
-            /* VARIABLES DINÁMICAS CARDS INICIO */
             --card-bg-color: #ffffff;
             --card-title-color: #f4a291;
             --card-title-size: 1.05rem;
@@ -74,13 +73,27 @@
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
 
-        /* BOTÓN VOLVER CON SOLO LA FLECHA ← */
+        /* BOTÓN VOLVER ICONO VERDE Y MÁS GRANDE */
         .btn-back {
-            background: #fff; border: 1px solid var(--primary);
-            color: var(--primary); width: 32px; height: 32px; border-radius: 50%;
-            cursor: pointer; font-weight: bold; font-size: 1.1rem; flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            background: var(--pastel-green);
+            border: 2px solid #a3d99b;
+            color: #2b6d2e;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: transform 0.1s, background-color 0.2s;
+        }
+        .btn-back:active {
+            transform: scale(0.92);
+            background: #d0e8c5;
         }
 
         .screen-body {
@@ -189,6 +202,12 @@
             background: var(--pastel-green); color: var(--primary-dark);
             border-radius: 12px; text-decoration: none; font-weight: bold;
             font-size: 0.8rem; border: 1px solid #b8e0a8; align-self: flex-start;
+        }
+
+        .item-attached-img {
+            max-width: 100%; max-height: 160px; object-fit: cover;
+            border-radius: 8px; border: 1px solid var(--salmon);
+            margin-top: 6px; cursor: pointer;
         }
 
         .obs-container {
@@ -318,7 +337,6 @@
             cursor: pointer; font-size: 1rem; font-weight: bold; font-family: var(--agenda-font-family);
         }
 
-        /* ZOOM MODAL CON MOTOR TÁCTIL MEJORADO */
         .zoom-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.92); z-index: 300;
@@ -376,7 +394,7 @@
         </div>
     </div>
 
-    <!-- PANTALLA NOVEDADES (SOLO LECTURA) -->
+    <!-- PANTALLA NOVEDADES -->
     <div id="screen-novedades" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Novedades del Grupo</h2>
@@ -561,6 +579,10 @@
                         <input type="date" id="nov-hasta">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label>Adjuntar Imagen Ilustrativa:</label>
+                    <input type="file" accept="image/*" id="nov-img-input">
+                </div>
 
                 <button class="btn-submit" id="btn-save-nov" onclick="publicarNovedadManual()">Publicar Novedad</button>
 
@@ -570,18 +592,59 @@
                 </div>
             </div>
 
-            <!-- GESTIÓN DE PRÁCTICAS (ABM) -->
+            <!-- GESTIÓN DE PRÁCTICAS -->
             <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Prácticas</h3>
                 <div class="form-group"><label>Nombre Práctica:</label><input type="text" id="pra-nombre"></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="pra-fecha"></div>
+                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="pra-hora" placeholder="09:00 hs"></div>
+                </div>
                 <div class="form-group"><label>Descripción:</label><input type="text" id="pra-desc"></div>
                 <div class="form-group"><label>Link / Recurso:</label><input type="text" id="pra-link" placeholder="https://..."></div>
                 <div class="form-group"><label>Comentario / Nota Inicial:</label><input type="text" id="pra-comentario"></div>
+                <div class="form-group">
+                    <label>Adjuntar Imagen Ilustrativa:</label>
+                    <input type="file" accept="image/*" id="pra-img-input">
+                </div>
                 <button class="btn-submit" id="btn-save-pra" onclick="agregarPractica()">Guardar Práctica</button>
 
                 <div class="crud-list-container">
                     <small style="font-weight:bold;">Prácticas Cargadas:</small>
                     <div id="crud-practicas-list"></div>
+                </div>
+            </div>
+
+            <!-- GESTIÓN DE ACTIVIDADES -->
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Actividades</h3>
+                <div class="form-group"><label>Nombre Actividad:</label><input type="text" id="act-nombre"></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Día de la semana:</label>
+                        <select id="act-dia">
+                            <option value="Todos">Todos los días</option>
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+                            <option value="Sábado">Sábado</option>
+                            <option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;"><label>o Fecha Específica:</label><input type="date" id="act-fecha"></div>
+                </div>
+                <div class="form-group"><label>Hora en Agenda:</label><input type="text" id="act-hora" placeholder="Ej: 08:00 hs"></div>
+                <div class="form-group">
+                    <label>Adjuntar Imagen Ilustrativa:</label>
+                    <input type="file" accept="image/*" id="act-img-input">
+                </div>
+                <button class="btn-submit" id="btn-save-act" onclick="agregarActividadConfig()">Guardar Actividad</button>
+
+                <div class="crud-list-container">
+                    <small style="font-weight:bold;">Actividades Cargadas:</small>
+                    <div id="crud-actividades-list"></div>
                 </div>
             </div>
 
@@ -634,6 +697,10 @@
                 <div class="form-group"><label>Descripción / Preparación:</label><input type="text" id="inf-desc"></div>
                 <div class="form-group"><label>Efecto / Propiedad:</label><input type="text" id="inf-efecto"></div>
                 <div class="form-group"><label>Días de toma:</label><input type="text" id="inf-dias" placeholder="Ej: Todos, Lunes, Martes"></div>
+                <div class="form-group">
+                    <label>Adjuntar Imagen Ilustrativa:</label>
+                    <input type="file" accept="image/*" id="inf-img-input">
+                </div>
                 <button class="btn-submit" id="btn-save-inf" onclick="agregarInfusion()">Guardar Infusión</button>
                 
                 <div class="crud-list-container">
@@ -649,6 +716,10 @@
                 <div class="form-group"><label>Descripción:</label><input type="text" id="pod-desc"></div>
                 <div class="form-group"><label>Link Audio:</label><input type="text" id="pod-link" placeholder="https://..."></div>
                 <div class="form-group"><label>Días para escuchar:</label><input type="text" id="pod-dias" placeholder="Ej: Martes, Jueves, Sábado"></div>
+                <div class="form-group">
+                    <label>Adjuntar Imagen Ilustrativa:</label>
+                    <input type="file" accept="image/*" id="pod-img-input">
+                </div>
                 <button class="btn-submit" id="btn-save-pod" onclick="agregarPodcast()">Guardar Podcast</button>
 
                 <div class="crud-list-container">
@@ -667,7 +738,7 @@
     <div class="modal-card-full">
         <div style="display:flex; justify-content:space-between; align-items:center;">
             <h2 class="modal-title" id="modal-date-title">Día de la semana</h2>
-            <button class="btn-back" onclick="closeModal()">✕</button>
+            <button class="btn-back" onclick="closeModal()">←</button>
         </div>
         
         <div id="modal-gallery-box" style="display:none;">
@@ -713,7 +784,7 @@
     <div class="notes-popup-card">
         <div style="display:flex; justify-content:space-between; align-items:center;">
             <h3 style="margin:0; font-family:'Playfair Display', serif; color:var(--primary-dark);">Notas / Sensaciones del Día</h3>
-            <button class="btn-back" onclick="closeNotesPopup()">✕</button>
+            <button class="btn-back" onclick="closeNotesPopup()">←</button>
         </div>
         <textarea id="popup-textarea" placeholder="Escribe aquí todas tus sensaciones y notas detalladas..."></textarea>
         <button class="btn-submit" onclick="closeNotesPopup()">Guardar Sensaciones</button>
@@ -747,7 +818,6 @@
     let agendaGuardadaBD = {}; 
     let currentFechaKeyModal = "";
 
-    /* CARGA AUTOMÁTICA DE CONFIG.JSON AL INICIAR */
     async function cargarConfiguracionInicial() {
         try {
             const res = await fetch('./config.json');
@@ -778,7 +848,6 @@
         updateCarouselDisplay('pocimas');
     }
 
-    /* SEGURIDAD DE ACCESO ADMIN (ANKA / 1234) */
     function solicitarAccesoAdmin() {
         const usuario = prompt("Ingrese su Nombre de Usuario:");
         if (!usuario || usuario.trim().toUpperCase() !== "ANKA") {
@@ -795,7 +864,6 @@
         nav('config');
     }
 
-    /* DESCARGA Y EXPORTACIÓN DE CONFIG.JSON */
     function descargarConfigJSON() {
         const configData = {
             practicasDB,
@@ -818,7 +886,6 @@
         URL.revokeObjectURL(url);
     }
 
-    /* APARIENCIA GLOBAL: COLOR, IMAGEN Y BOTONES 3D */
     function cambiarAparienciaGlobal() {
         const color = document.getElementById('cfg-app-bg').value;
         document.documentElement.style.setProperty('--bg-color', color);
@@ -865,7 +932,18 @@
         }
     }
 
-    /* AUTO GENERACIÓN DE NOVEDAD AL EDITAR ABM */
+    function readInputImage(fileInput, callback) {
+        if (fileInput && fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                callback(e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            callback(null);
+        }
+    }
+
     function generarNovedadAutomatica(seccion, accion, detalle) {
         const hoy = new Date();
         const hoyStr = hoy.toISOString().split('T')[0];
@@ -876,7 +954,8 @@
             titulo: titulo,
             link: "",
             desde: hoyStr,
-            hasta: hoyStr
+            hasta: hoyStr,
+            imgUrl: null
         });
 
         renderNovedadesABMList();
@@ -908,6 +987,7 @@
         container.innerHTML = novVigentes.map(nov => `
             <div class="novedad-card-item">
                 <b style="color:var(--primary-dark); font-size:0.95rem;">📢 ${nov.titulo}</b><br>
+                ${nov.imgUrl ? `<img src="${nov.imgUrl}" class="item-attached-img" onclick="openZoomModal(this.src)"><br>` : ''}
                 ${nov.link ? `<a href="${nov.link}" target="_blank" style="color:var(--primary); font-weight:bold; display:inline-block; margin-top:4px;">🔗 Abrir Enlace / Recurso</a>` : ''}
             </div>
         `).join('');
@@ -931,24 +1011,30 @@
         const link = document.getElementById('nov-link').value;
         const desde = document.getElementById('nov-desde').value;
         const hasta = document.getElementById('nov-hasta').value;
+        const fileInput = document.getElementById('nov-img-input');
 
         if (!titulo) return;
 
-        if (editIndices.nov >= 0) {
-            novedadesDB[editIndices.nov] = { titulo, link, desde, hasta };
-            editIndices.nov = -1;
-            document.getElementById('btn-save-nov').innerText = "Publicar Novedad";
-        } else {
-            novedadesDB.unshift({ titulo, link, desde, hasta });
-        }
+        readInputImage(fileInput, (base64Img) => {
+            const imgFinal = base64Img || (editIndices.nov >= 0 ? novedadesDB[editIndices.nov].imgUrl : null);
 
-        document.getElementById('nov-titulo').value = '';
-        document.getElementById('nov-link').value = '';
-        document.getElementById('nov-desde').value = '';
-        document.getElementById('nov-hasta').value = '';
+            if (editIndices.nov >= 0) {
+                novedadesDB[editIndices.nov] = { titulo, link, desde, hasta, imgUrl: imgFinal };
+                editIndices.nov = -1;
+                document.getElementById('btn-save-nov').innerText = "Publicar Novedad";
+            } else {
+                novedadesDB.unshift({ titulo, link, desde, hasta, imgUrl: imgFinal });
+            }
 
-        renderNovedadesABMList();
-        renderPublicNovedades();
+            document.getElementById('nov-titulo').value = '';
+            document.getElementById('nov-link').value = '';
+            document.getElementById('nov-desde').value = '';
+            document.getElementById('nov-hasta').value = '';
+            if (fileInput) fileInput.value = '';
+
+            renderNovedadesABMList();
+            renderPublicNovedades();
+        });
     }
 
     function editarNovedad(idx) {
@@ -969,26 +1055,33 @@
 
     function agregarPractica() {
         const nombre = document.getElementById('pra-nombre').value;
+        const fecha = document.getElementById('pra-fecha').value;
+        const hora = document.getElementById('pra-hora').value || "09:00 hs";
         const desc = document.getElementById('pra-desc').value;
         const link = document.getElementById('pra-link').value;
         const comentario = document.getElementById('pra-comentario').value;
+        const fileInput = document.getElementById('pra-img-input');
 
         if (!nombre) return;
 
-        if (editIndices.pra >= 0) {
-            const obsPrevias = practicasDB[editIndices.pra].observaciones || [];
-            practicasDB[editIndices.pra] = { id: Date.now(), nombre, desc, link, comentario, observaciones: obsPrevias };
-            editIndices.pra = -1;
-            document.getElementById('btn-save-pra').innerText = "Guardar Práctica";
-            generarNovedadAutomatica("Prácticas", "Modificación", nombre);
-        } else {
-            practicasDB.push({ id: Date.now(), nombre, desc, link, comentario, observaciones: [] });
-            generarNovedadAutomatica("Prácticas", "Nueva incorporación", nombre);
-        }
+        readInputImage(fileInput, (base64Img) => {
+            const imgFinal = base64Img || (editIndices.pra >= 0 ? practicasDB[editIndices.pra].imgUrl : null);
 
-        limpiarPraForm();
-        renderConfigLists();
-        renderPracticasScreen();
+            if (editIndices.pra >= 0) {
+                const obsPrevias = practicasDB[editIndices.pra].observaciones || [];
+                practicasDB[editIndices.pra] = { id: Date.now(), nombre, fecha, hora, desc, link, comentario, imgUrl: imgFinal, observaciones: obsPrevias };
+                editIndices.pra = -1;
+                document.getElementById('btn-save-pra').innerText = "Guardar Práctica";
+                generarNovedadAutomatica("Prácticas", "Modificación", nombre);
+            } else {
+                practicasDB.push({ id: Date.now(), nombre, fecha, hora, desc, link, comentario, imgUrl: imgFinal, observaciones: [] });
+                generarNovedadAutomatica("Prácticas", "Nueva incorporación", nombre);
+            }
+
+            limpiarPraForm();
+            renderConfigLists();
+            renderPracticasScreen();
+        });
     }
 
     function eliminarPractica(idx) {
@@ -999,26 +1092,78 @@
         renderPracticasScreen();
     }
 
+    function agregarActividadConfig() {
+        const nombre = document.getElementById('act-nombre').value;
+        const dia = document.getElementById('act-dia').value;
+        const fecha = document.getElementById('act-fecha').value;
+        const hora = document.getElementById('act-hora').value || "08:00 hs";
+        const fileInput = document.getElementById('act-img-input');
+
+        if (!nombre) return;
+
+        readInputImage(fileInput, (base64Img) => {
+            const imgFinal = base64Img || (editIndices.act >= 0 ? actividadesDB[editIndices.act].imgUrl : null);
+
+            if (editIndices.act >= 0) {
+                actividadesDB[editIndices.act] = { nombre, dia, fecha, hora, imgUrl: imgFinal };
+                editIndices.act = -1;
+                document.getElementById('btn-save-act').innerText = "Guardar Actividad";
+                generarNovedadAutomatica("Actividades", "Modificación", nombre);
+            } else {
+                actividadesDB.push({ nombre, dia, fecha, hora, imgUrl: imgFinal });
+                generarNovedadAutomatica("Actividades", "Nueva incorporación", nombre);
+            }
+
+            document.getElementById('act-nombre').value = '';
+            document.getElementById('act-fecha').value = '';
+            document.getElementById('act-hora').value = '';
+            if (fileInput) fileInput.value = '';
+            renderConfigLists();
+        });
+    }
+
+    function editarActividad(idx) {
+        const item = actividadesDB[idx];
+        document.getElementById('act-nombre').value = item.nombre;
+        document.getElementById('act-dia').value = item.dia || "Todos";
+        document.getElementById('act-fecha').value = item.fecha || "";
+        document.getElementById('act-hora').value = item.hora || "";
+        editIndices.act = idx;
+        document.getElementById('btn-save-act').innerText = "Actualizar Actividad";
+    }
+
+    function eliminarActividad(idx) {
+        const a = actividadesDB[idx];
+        actividadesDB.splice(idx, 1);
+        generarNovedadAutomatica("Actividades", "Eliminación", a.nombre);
+        renderConfigLists();
+    }
+
     function agregarInfusion() {
         const nombre = document.getElementById('inf-nombre').value;
         const desc = document.getElementById('inf-desc').value;
         const efecto = document.getElementById('inf-efecto').value;
         const dias = document.getElementById('inf-dias').value || "Todos";
+        const fileInput = document.getElementById('inf-img-input');
 
         if (!nombre) return;
 
-        if (editIndices.inf >= 0) {
-            infusionesDB[editIndices.inf] = { nombre, desc, efecto, dias };
-            editIndices.inf = -1;
-            document.getElementById('btn-save-inf').innerText = "Guardar Infusión";
-            generarNovedadAutomatica("Pócimas y Yuyos", "Modificación", nombre);
-        } else {
-            infusionesDB.push({ nombre, desc, efecto, dias });
-            generarNovedadAutomatica("Pócimas y Yuyos", "Nueva incorporación", nombre);
-        }
+        readInputImage(fileInput, (base64Img) => {
+            const imgFinal = base64Img || (editIndices.inf >= 0 ? infusionesDB[editIndices.inf].imgUrl : null);
 
-        limpiarInfForm();
-        renderConfigLists();
+            if (editIndices.inf >= 0) {
+                infusionesDB[editIndices.inf] = { nombre, desc, efecto, dias, imgUrl: imgFinal };
+                editIndices.inf = -1;
+                document.getElementById('btn-save-inf').innerText = "Guardar Infusión";
+                generarNovedadAutomatica("Pócimas y Yuyos", "Modificación", nombre);
+            } else {
+                infusionesDB.push({ nombre, desc, efecto, dias, imgUrl: imgFinal });
+                generarNovedadAutomatica("Pócimas y Yuyos", "Nueva incorporación", nombre);
+            }
+
+            limpiarInfForm();
+            renderConfigLists();
+        });
     }
 
     function eliminarInfusion(idx) {
@@ -1061,21 +1206,26 @@
         const desc = document.getElementById('pod-desc').value;
         const link = document.getElementById('pod-link').value || "#";
         const dias = document.getElementById('pod-dias').value || "Todos";
+        const fileInput = document.getElementById('pod-img-input');
 
         if (!nombre) return;
 
-        if (editIndices.pod >= 0) {
-            podcastsDB[editIndices.pod] = { nombre, desc, link, dias };
-            editIndices.pod = -1;
-            document.getElementById('btn-save-pod').innerText = "Guardar Podcast";
-            generarNovedadAutomatica("Propuesta Diaria y Caminatas", "Modificación de Podcast", nombre);
-        } else {
-            podcastsDB.push({ nombre, desc, link, dias });
-            generarNovedadAutomatica("Propuesta Diaria y Caminatas", "Nuevo Podcast asignado", nombre);
-        }
+        readInputImage(fileInput, (base64Img) => {
+            const imgFinal = base64Img || (editIndices.pod >= 0 ? podcastsDB[editIndices.pod].imgUrl : null);
 
-        limpiarPodForm();
-        renderConfigLists();
+            if (editIndices.pod >= 0) {
+                podcastsDB[editIndices.pod] = { nombre, desc, link, dias, imgUrl: imgFinal };
+                editIndices.pod = -1;
+                document.getElementById('btn-save-pod').innerText = "Guardar Podcast";
+                generarNovedadAutomatica("Propuesta Diaria y Caminatas", "Modificación de Podcast", nombre);
+            } else {
+                podcastsDB.push({ nombre, desc, link, dias, imgUrl: imgFinal });
+                generarNovedadAutomatica("Propuesta Diaria y Caminatas", "Nuevo Podcast asignado", nombre);
+            }
+
+            limpiarPodForm();
+            renderConfigLists();
+        });
     }
 
     function eliminarPodcast(idx) {
@@ -1136,8 +1286,9 @@
             const obsList = p.observaciones || [];
             return `
                 <div class="practica-card-item">
-                    <h3>🧘‍♀️ ${p.nombre}</h3>
+                    <h3>🧘‍♀️ ${p.nombre} ${p.fecha ? `<small style="font-size:0.75rem; color:var(--salmon);">(${p.fecha})</small>` : ''}</h3>
                     <p>${p.desc || ''}</p>
+                    ${p.imgUrl ? `<img src="${p.imgUrl}" class="item-attached-img" onclick="openZoomModal(this.src)"><br>` : ''}
                     ${p.link ? `<a href="${p.link}" target="_blank" class="practica-link-btn">🔗 Abrir Práctica / Enlace</a>` : ''}
                     ${p.comentario ? `<div class="comentario">💡 ${p.comentario}</div>` : ''}
 
@@ -1187,6 +1338,8 @@
     function editarPractica(idx) {
         const p = practicasDB[idx];
         document.getElementById('pra-nombre').value = p.nombre;
+        document.getElementById('pra-fecha').value = p.fecha || '';
+        document.getElementById('pra-hora').value = p.hora || '';
         document.getElementById('pra-desc').value = p.desc || '';
         document.getElementById('pra-link').value = p.link || '';
         document.getElementById('pra-comentario').value = p.comentario || '';
@@ -1196,9 +1349,13 @@
 
     function limpiarPraForm() {
         document.getElementById('pra-nombre').value = '';
+        document.getElementById('pra-fecha').value = '';
+        document.getElementById('pra-hora').value = '';
         document.getElementById('pra-desc').value = '';
         document.getElementById('pra-link').value = '';
         document.getElementById('pra-comentario').value = '';
+        const f = document.getElementById('pra-img-input');
+        if (f) f.value = '';
     }
 
     function openWhatsApp() {
@@ -1285,10 +1442,21 @@
         const praBox = document.getElementById('crud-practicas-list');
         praBox.innerHTML = practicasDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>${item.nombre}</b></span>
+                <span><b>${item.nombre}</b> ${item.fecha ? `(${item.fecha})` : ''}</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarPractica(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="eliminarPractica(${idx})">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+
+        const actBox = document.getElementById('crud-actividades-list');
+        actBox.innerHTML = actividadesDB.map((item, idx) => `
+            <div class="crud-item">
+                <span><b>${item.nombre}</b> (${item.fecha || item.dia || 'Todos'})</span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarActividad(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="eliminarActividad(${idx})">Eliminar</button>
                 </div>
             </div>
         `).join('');
@@ -1331,6 +1499,8 @@
         document.getElementById('inf-desc').value = '';
         document.getElementById('inf-efecto').value = '';
         document.getElementById('inf-dias').value = '';
+        const f = document.getElementById('inf-img-input');
+        if (f) f.value = '';
     }
 
     function editarPodcast(idx) {
@@ -1348,6 +1518,8 @@
         document.getElementById('pod-desc').value = '';
         document.getElementById('pod-link').value = '';
         document.getElementById('pod-dias').value = '';
+        const f = document.getElementById('pod-img-input');
+        if (f) f.value = '';
     }
 
     function renderPocimasList() {
@@ -1359,7 +1531,8 @@
         container.innerHTML = infusionesDB.map(item => `
             <div class="pocima-item-card">
                 <b>${item.nombre}</b> ${item.dias ? `(${item.dias})` : ''}<br>
-                <span>${item.desc || ''} ${item.efecto ? `- ${item.efecto}` : ''}</span>
+                <span>${item.desc || ''} ${item.efecto ? `- ${item.efecto}` : ''}</span><br>
+                ${item.imgUrl ? `<img src="${item.imgUrl}" class="item-attached-img" onclick="openZoomModal(this.src)"><br>` : ''}
             </div>
         `).join('');
     }
@@ -1411,7 +1584,12 @@
         const infContent = document.getElementById('content-infusiones');
         const infs = infusionesDB.filter(i => i.dias === "Todos" || i.dias.includes(nombreDia));
         if (infs.length > 0) {
-            infContent.innerHTML = infs.map(i => `<div>• <b>${i.nombre}</b>: ${i.desc} (${i.efecto})</div>`).join('');
+            infContent.innerHTML = infs.map(i => `
+                <div style="margin-bottom:6px;">
+                    • <b>${i.nombre}</b>: ${i.desc} (${i.efecto})<br>
+                    ${i.imgUrl ? `<img src="${i.imgUrl}" class="item-attached-img" onclick="openZoomModal(this.src)">` : ''}
+                </div>
+            `).join('');
             infBlock.style.display = 'block';
         } else infBlock.style.display = 'none';
 
@@ -1420,8 +1598,9 @@
         const pods = podcastsDB.filter(p => p.dias === "Todos" || p.dias.includes(nombreDia));
         if (pods.length > 0) {
             podContent.innerHTML = pods.map(p => `
-                <div style="margin-bottom: 4px;">
+                <div style="margin-bottom: 6px;">
                     🎧 <b>${p.nombre}</b> - ${p.desc}<br>
+                    ${p.imgUrl ? `<img src="${p.imgUrl}" class="item-attached-img" onclick="openZoomModal(this.src)"><br>` : ''}
                     <a href="${p.link || '#'}" target="_blank" class="podcast-audio-link">▶ Escuchar Audio Podcast</a>
                 </div>
             `).join('');
@@ -1430,19 +1609,47 @@
 
         const actBlock = document.getElementById('block-actividades');
         const actContent = document.getElementById('content-actividades');
-        const acts = actividadesDB.filter(a => a.dia === "Todos" || a.dia.includes(nombreDia));
+        const acts = actividadesDB.filter(a => a.dia === "Todos" || a.dia.includes(nombreDia) || a.fecha === fechaKey);
         if (acts.length > 0) {
-            actContent.innerHTML = acts.map(a => `<div>✨ ${a.nombre}</div>`).join('');
+            actContent.innerHTML = acts.map(a => `
+                <div style="margin-bottom:6px;">
+                    ✨ <b>${a.nombre}</b> ${a.hora ? `(${a.hora})` : ''}<br>
+                    ${a.imgUrl ? `<img src="${a.imgUrl}" class="item-attached-img" onclick="openZoomModal(this.src)">` : ''}
+                </div>
+            `).join('');
             actBlock.style.display = 'block';
         } else actBlock.style.display = 'none';
 
         const registroPrevio = agendaGuardadaBD[fechaKey] || { horarios: {}, notas: "" };
+        const autoInsertMap = { ...registroPrevio.horarios };
+
+        acts.forEach(act => {
+            const hKey = act.hora || "08:00 hs";
+            if (!autoInsertMap[hKey]) {
+                autoInsertMap[hKey] = act.nombre;
+            }
+        });
+
+        practicasDB.filter(p => p.fecha === fechaKey).forEach(p => {
+            const hKey = p.hora || "09:00 hs";
+            if (!autoInsertMap[hKey]) {
+                autoInsertMap[hKey] = p.nombre;
+            }
+        });
+
+        novedadesDB.filter(nov => (!nov.desde || fechaKey >= nov.desde) && (!nov.hasta || fechaKey <= nov.hasta)).forEach(nov => {
+            const hKey = "10:00 hs";
+            if (!autoInsertMap[hKey]) {
+                autoInsertMap[hKey] = nov.titulo;
+            }
+        });
+
         const hoursContainer = document.getElementById('hours-container');
         hoursContainer.innerHTML = '';
 
         for (let h = cfgCalendario.horaInicio; h <= cfgCalendario.horaFin; h++) {
             const horaStr = `${h < 10 ? '0' + h : h}:00 hs`;
-            const valorPrevio = registroPrevio.horarios[horaStr] || '';
+            const valorPrevio = autoInsertMap[horaStr] || '';
             const row = document.createElement('div');
             row.className = 'hour-row';
             row.innerHTML = `<span class="hour-label">${horaStr}</span><input type="text" class="hour-input" data-hora="${horaStr}" value="${valorPrevio}" placeholder="Actividad...">`;
@@ -1496,7 +1703,7 @@
         document.getElementById('modal-agenda').style.display = 'none';
     }
 
-    /* MOTOR DE ZOOM Y ARRASTRE TÁCTIL (PINCH TO ZOOM + DRAG) */
+    /* MOTOR DE ZOOM Y ARRASTRE TÁCTIL */
     let currentScale = 1;
     let initialDistance = 0;
     let posX = 0, posY = 0;
