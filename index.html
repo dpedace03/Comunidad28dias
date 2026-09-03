@@ -77,22 +77,11 @@
             background: var(--pastel-green);
             border: 2px solid #a3d99b;
             color: #2b6d2e;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: 900;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 42px; height: 42px;
+            border-radius: 50%; cursor: pointer;
+            font-weight: 900; font-size: 1.5rem;
+            flex-shrink: 0; display: flex; align-items: center; justify-content: center;
             box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-            transition: transform 0.1s, background-color 0.2s;
-        }
-        .btn-back:active {
-            transform: scale(0.92);
-            background: #d0e8c5;
         }
 
         .screen-body {
@@ -101,33 +90,15 @@
         }
         .screen-body::-webkit-scrollbar { display: none; }
 
-        .home-container-full {
-            flex: 1; display: flex; flex-direction: column; gap: 8px; height: 100%;
-        }
-
-        .menu-grid-full {
-            flex: 1; display: flex; flex-direction: column; gap: 8px; width: 100%;
-        }
-
-        .menu-row {
-            flex: 1; display: flex; gap: 8px; width: 100%;
-        }
+        .home-container-full { flex: 1; display: flex; flex-direction: column; gap: 8px; height: 100%; }
+        .menu-grid-full { flex: 1; display: flex; flex-direction: column; gap: 8px; width: 100%; }
+        .menu-row { flex: 1; display: flex; gap: 8px; width: 100%; }
 
         .menu-card {
             flex: 1; background: var(--card-bg-color); padding: 8px; border-radius: var(--border-radius);
             box-shadow: var(--btn-3d-shadow, 0 2px 5px rgba(0,0,0,0.04)); cursor: pointer; text-align: center;
             display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-            border: 1px solid rgba(244, 162, 145, 0.4); transition: transform 0.1s, background-color 0.2s ease, box-shadow 0.2s ease;
-            position: relative;
-        }
-
-        .menu-card.btn-3d {
-            box-shadow: 0 6px 0px rgba(0, 0, 0, 0.15), 0 8px 12px rgba(0,0,0,0.1);
-            border-bottom: 3px solid rgba(0, 0, 0, 0.2);
-        }
-        .menu-card.btn-3d:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(244, 162, 145, 0.4); position: relative;
         }
 
         .menu-card h2 {
@@ -138,76 +109,9 @@
         .card-icon { font-size: calc(var(--card-title-size) * 1.8); display: flex; align-items: center; justify-content: center; }
         .card-icon img { width: 32px; height: 32px; object-fit: contain; }
 
-        .card-badge-alert {
-            display: none; position: absolute; top: -6px; right: -4px;
-            background: #ff3b30; color: #fff; border-radius: 50%;
-            width: 26px; height: 26px; font-size: 0.9rem; font-weight: bold;
-            line-height: 26px; text-align: center; box-shadow: 0 2px 6px rgba(255,59,48,0.5);
-            animation: ringPulse 1.2s infinite ease-in-out; z-index: 10;
-        }
-
-        @keyframes ringPulse {
-            0% { transform: scale(1) rotate(0deg); }
-            20% { transform: scale(1.2) rotate(15deg); }
-            40% { transform: scale(1.2) rotate(-15deg); }
-            60% { transform: scale(1.1) rotate(10deg); }
-            80% { transform: scale(1.1) rotate(0deg); }
-            100% { transform: scale(1) rotate(0deg); }
-        }
-
-        .carousel-container {
-            flex: 1; min-height: 200px; border-radius: var(--border-radius);
-            overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            display: flex; align-items: center; justify-content: center; background: #fff;
-            position: relative;
-        }
-
-        .carousel-img { width: 100%; height: 100%; object-fit: contain; display: block; cursor: pointer; }
-
-        .carousel-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.8); border: 1px solid var(--salmon);
-            color: var(--primary-dark); width: 32px; height: 32px; border-radius: 50%;
-            font-size: 1rem; font-weight: bold; cursor: pointer; display: flex;
-            align-items: center; justify-content: center; z-index: 10;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-        }
-        .carousel-btn.prev { left: 8px; }
-        .carousel-btn.next { right: 8px; }
-
-        .carousel-indicator {
-            position: absolute; bottom: 8px; background: rgba(0,0,0,0.5);
-            color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem;
-        }
-
-        .novedad-card-item {
-            background: var(--pastel-pink); padding: 10px; border-radius: 8px;
-            margin-bottom: 8px; font-size: 0.85rem; border-left: 4px solid var(--salmon);
-            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
-        }
-
-        .practica-card-item {
-            background: #fff; padding: 10px; border-radius: var(--border-radius);
-            border: 1px solid rgba(244, 162, 145, 0.4); margin-bottom: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 4px;
-        }
-        .practica-card-item h3 { margin: 0; color: var(--primary-dark); font-size: 0.95rem; }
-        .practica-card-item p { margin: 0; font-size: 0.85rem; color: #555; }
-
-        .item-attached-img {
-            max-width: 100%; max-height: 160px; object-fit: cover;
-            border-radius: 8px; border: 1px solid var(--salmon);
-            margin-top: 6px; cursor: pointer;
-        }
-
         .calendar-grid {
             display: grid; grid-template-columns: repeat(7, 1fr);
             gap: 6px; text-align: center; font-family: var(--agenda-font-family);
-        }
-
-        @media (min-width: 600px) {
-            .calendar-grid { gap: 10px; }
-            .cal-day { min-height: 75px !important; }
         }
 
         .cal-day {
@@ -215,11 +119,8 @@
             cursor: pointer; border: 1px solid #f2c6be; font-weight: bold;
             font-size: var(--agenda-font-size); display: flex; flex-direction: column;
             align-items: center; min-height: 58px; justify-content: space-between;
-            color: var(--primary-dark); transition: transform 0.1s, background-color 0.2s;
+            color: var(--primary-dark);
         }
-
-        .cal-day:nth-child(even) { background: var(--pastel-purple); border-color: #d8cbe5; }
-        .cal-day:hover { transform: scale(1.03); background: var(--pastel-green); }
 
         .hours-container {
             flex: 1; min-height: 140px; overflow-y: auto; border: 1px solid #f2c6be;
@@ -238,9 +139,6 @@
             margin-top: 6px; padding: 6px; border-radius: 8px; background: var(--pastel-pink);
             border: 1px solid var(--salmon); font-size: 0.95rem; display: flex; flex-direction: column; gap: 4px;
         }
-        .agenda-attached-card b { color: var(--primary-dark); }
-        .agenda-attached-card img { max-width: 100%; max-height: 120px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 1px solid #fff; }
-        .agenda-attached-card a { color: var(--primary-dark); font-weight: bold; font-size: 0.85rem; text-decoration: underline; }
 
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -251,28 +149,6 @@
             background: #fffdfa; width: 100%; height: 100dvh; padding: 14px;
             box-sizing: border-box; display: flex; flex-direction: column; gap: 8px;
             overflow-y: auto; font-family: var(--agenda-font-family); max-width: 850px; margin: 0 auto;
-        }
-
-        .modal-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--primary-dark); margin: 0; }
-
-        .day-info-block { background: #fff; border: 1px solid #f2c6be; border-radius: 10px; padding: 8px; font-size: var(--agenda-font-size); }
-        .day-info-block h4 { margin: 0 0 4px 0; color: var(--salmon); font-size: 1rem; }
-
-        .notes-popup-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6); z-index: 400; justify-content: center; align-items: center; padding: 12px; box-sizing: border-box;
-        }
-
-        .notes-popup-card {
-            background: #fff; width: 100%; max-width: 650px; height: 80vh;
-            border-radius: var(--border-radius); padding: 16px; box-sizing: border-box;
-            display: flex; flex-direction: column; gap: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .notes-popup-card textarea {
-            flex: 1; width: 100%; font-family: var(--agenda-font-family);
-            font-size: 1.25rem; padding: 10px; border: 1px solid #ccc;
-            border-radius: 8px; box-sizing: border-box; resize: none;
         }
 
         .form-group { margin-bottom: 8px; }
@@ -287,36 +163,21 @@
             cursor: pointer; font-size: 1rem; font-weight: bold; font-family: var(--agenda-font-family);
         }
 
-        .zoom-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.92); z-index: 300;
-            justify-content: center; align-items: center; overflow: hidden; touch-action: none;
-        }
-
-        .zoom-img-target {
-            max-width: 95%; max-height: 90%;
-            transform-origin: center center;
-            will-change: transform;
-            cursor: grab;
-        }
-        .zoom-close-btn {
-            position: absolute; top: 15px; right: 15px; background: #fff;
-            color: #000; border: none; width: 38px; height: 38px; border-radius: 50%;
-            font-size: 1.2rem; font-weight: bold; cursor: pointer; z-index: 310;
-        }
+        .btn-config-card { background: #faf8f5; border: 1px solid #e8d5d0; border-radius: 8px; padding: 8px; margin-bottom: 8px; }
+        .crud-item { display: flex; justify-content: space-between; align-items: center; background: #faf8f5; border: 1px solid #eee; padding: 6px 8px; border-radius: 6px; margin-bottom: 4px; font-size: 0.75rem; }
     </style>
 </head>
 <body>
 
 <div class="app-viewport" id="app-viewport">
 
-    <!-- BARRA SUPERIOR -->
+    <!-- BARRA SUPERIOR DE ACCESO RÁPIDO -->
     <div class="top-admin-bar">
         <button class="icon-btn" onclick="solicitarAccesoAdmin()">⚙️ Config</button>
         <button class="icon-btn" onclick="openWhatsApp()" style="color:#25D366; font-weight:bold;">💬 WhatsApp</button>
     </div>
 
-    <!-- PANTALLA PRINCIPAL -->
+    <!-- PANTALLA PRINCIPAL DE BOTONES -->
     <div id="screen-home" class="screen active">
         <div class="home-container-full">
             <div class="menu-grid-full">
@@ -356,7 +217,6 @@
                         <h2 id="title-btn-registro">Registro Fotográfico</h2>
                     </div>
                     <div class="menu-card" id="card-btn-novedades" onclick="nav('novedades')">
-                        <span class="card-badge-alert" id="home-novedades-alert">🔔</span>
                         <span class="card-icon" id="icon-btn-novedades">📢</span>
                         <h2 id="title-btn-novedades">Novedades</h2>
                     </div>
@@ -377,106 +237,58 @@
         </div>
     </div>
 
-    <!-- OTRAS PANTALLAS (MODALIDAD, ACTIVIDADES, ETC.) -->
-    <div id="screen-actividades" class="screen">
-        <div class="screen-header"><h2 class="screen-title">Actividades</h2><button class="btn-back" onclick="nav('home')">←</button></div>
-        <div class="screen-body" id="public-actividades-list"></div>
-    </div>
-    
-    <div id="screen-modalidad" class="screen">
-        <div class="screen-header"><h2 class="screen-title">Modalidad</h2><button class="btn-back" onclick="nav('home')">←</button></div>
-        <div class="screen-body"><div class="carousel-container"><img id="img-carousel-modalidad" src="1-Bienvenida.jpeg" class="carousel-img" onclick="openZoomModal(this.src)"></div></div>
-    </div>
-
-    <div id="screen-pocimas" class="screen">
-        <div class="screen-header"><h2 class="screen-title">Pócimas</h2><button class="btn-back" onclick="nav('home')">←</button></div>
-        <div class="screen-body" id="pocimas-dynamic-list"></div>
-    </div>
-
-    <div id="screen-practicas" class="screen">
-        <div class="screen-header"><h2 class="screen-title">Prácticas</h2><button class="btn-back" onclick="nav('home')">←</button></div>
-        <div class="screen-body" id="practicas-dynamic-list"></div>
-    </div>
-
-    <div id="screen-caminatas" class="screen">
-        <div class="screen-header"><h2 class="screen-title">Caminatas</h2><button class="btn-back" onclick="nav('home')">←</button></div>
-        <div class="screen-body"><img src="Caminatas.jpeg" class="fit-img" onclick="openZoomModal(this.src)"></div>
-    </div>
-
-    <div id="screen-novedades" class="screen">
-        <div class="screen-header"><h2 class="screen-title">Novedades</h2><button class="btn-back" onclick="nav('home')">←</button></div>
-        <div class="screen-body" id="public-novedades-list"></div>
-    </div>
-
-    <div id="screen-registro" class="screen">
-        <div class="screen-header"><h2 class="screen-title">Registro</h2><button class="btn-back" onclick="nav('home')">←</button></div>
-        <div class="screen-body"><p style="text-align:center;">Módulo de Registro Fotográfico</p></div>
-    </div>
-
+    <!-- PANTALLA CONFIGURACIÓN ADMIN COMPLETA -->
     <div id="screen-config" class="screen">
-        <div class="screen-header"><h2 class="screen-title">Configuración Admin</h2><button class="btn-back" onclick="nav('home')">←</button></div>
-        <div class="screen-body"><p style="text-align:center;">Panel de administración de Anka</p></div>
+        <div class="screen-header">
+            <h2 class="screen-title">Configuración Admin (Anka)</h2>
+            <button class="btn-back" onclick="nav('home')">←</button>
+        </div>
+        <div class="screen-body">
+            <div style="background: var(--pastel-green); padding: 10px; border-radius: var(--border-radius); border: 1px solid #b8e0a8;">
+                <small style="font-weight:bold; color:var(--primary-dark);">💾 Exportación / Sincronización de Datos:</small>
+                <p style="font-size:0.75rem; margin:4px 0 8px 0;">Descarga el archivo <b>config.json</b> actualizado para subirlo a tu repositorio de GitHub.</p>
+                <button class="btn-submit" style="background:#52b788;" onclick="descargarConfigJSON()">Descargar config.json Actualizado</button>
+            </div>
+
+            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Personalizar Botones de la Pantalla Principal</h3>
+                <div id="buttons-customizer-container"></div>
+            </div>
+        </div>
     </div>
+
+    <!-- PANTALLAS SECUNDARIAS -->
+    <div id="screen-actividades" class="screen"><div class="screen-header"><h2 class="screen-title">Actividades</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-actividades-list"></div></div>
+    <div id="screen-modalidad" class="screen"><div class="screen-header"><h2 class="screen-title">Modalidad</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body">🌸 Información de modalidad</div></div>
+    <div id="screen-pocimas" class="screen"><div class="screen-header"><h2 class="screen-title">Pócimas</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body">🍵 Pócimas y Yuyos</div></div>
+    <div id="screen-practicas" class="screen"><div class="screen-header"><h2 class="screen-title">Prácticas</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body">🧘‍♀️ Prácticas Guiadas</div></div>
+    <div id="screen-caminatas" class="screen"><div class="screen-header"><h2 class="screen-title">Caminatas</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body">🚶‍♀️ Propuesta Diaria</div></div>
+    <div id="screen-novedades" class="screen"><div class="screen-header"><h2 class="screen-title">Novedades</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body">📢 Novedades del grupo</div></div>
+    <div id="screen-registro" class="screen"><div class="screen-header"><h2 class="screen-title">Registro</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body">📷 Registro Fotográfico</div></div>
 
 </div>
 
-<!-- MODAL DETALLE DEL DÍA Y HORARIOS -->
+<!-- MODAL DETALLE DEL DÍA -->
 <div class="modal-overlay" id="modal-agenda">
     <div class="modal-card-full">
         <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h2 class="modal-title" id="modal-date-title">Día de la semana</h2>
+            <h2 class="modal-title" id="modal-date-title">Día</h2>
             <button class="btn-back" onclick="closeModal()">←</button>
         </div>
 
-        <div class="day-info-block" id="block-infusiones" style="display:none;">
-            <h4>🍵 Infusiones del día:</h4>
-            <div id="content-infusiones"></div>
-        </div>
+        <div id="block-infusiones" style="display:none;"><b>Infusiones:</b> <div id="content-infusiones"></div></div>
+        <div id="block-podcasts" style="display:none;"><b>Podcasts:</b> <div id="content-podcasts"></div></div>
+        <div id="block-actividades" style="display:none;"><b>Actividades:</b> <div id="content-actividades"></div></div>
 
-        <div class="day-info-block" id="block-podcasts" style="display:none;">
-            <h4>🎧 Podcast de hoy:</h4>
-            <div id="content-podcasts"></div>
-        </div>
-
-        <div class="day-info-block" id="block-actividades" style="display:none;">
-            <h4>✨ Actividades recomendadas:</h4>
-            <div id="content-actividades"></div>
-        </div>
-
-        <div class="form-group">
-            <label style="font-family: var(--agenda-font-family); font-size: var(--agenda-font-size);">Seleccionar Actividad Configurada:</label>
-            <select id="select-actividad-config" style="font-family: var(--agenda-font-family); font-size: var(--agenda-font-size);" onchange="cargarActividadEnHorario(this.value)">
-                <option value="">-- Seleccionar --</option>
-            </select>
-        </div>
-
-        <label style="font-size: var(--agenda-font-size); font-weight:bold; color:var(--primary-dark);">Horarios del día:</label>
+        <label style="font-weight:bold; color:var(--primary-dark);">Horarios del día:</label>
         <div class="hours-container" id="hours-container"></div>
 
-        <div class="form-group" style="margin-top:2px;">
-            <label style="font-family: var(--agenda-font-family); font-size: var(--agenda-font-size);">Notas / Sensaciones del día:</label>
-            <textarea id="modal-text" rows="2" style="font-family: var(--agenda-font-family); font-size: var(--agenda-font-size);" placeholder="Escribe tus sensaciones aquí..." onfocus="openNotesPopup()"></textarea>
+        <div class="form-group">
+            <label>Notas / Sensaciones:</label>
+            <textarea id="modal-text" rows="2" placeholder="Escribe tus sensaciones..."></textarea>
         </div>
         <button class="btn-submit" onclick="guardarRegistroAgenda()">Guardar en Agenda</button>
     </div>
-</div>
-
-<!-- POPUP DE NOTAS -->
-<div class="notes-popup-overlay" id="notes-popup">
-    <div class="notes-popup-card">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h3 style="margin:0; color:var(--primary-dark);">Notas / Sensaciones del Día</h3>
-            <button class="btn-back" onclick="closeNotesPopup()">←</button>
-        </div>
-        <textarea id="popup-textarea" placeholder="Escribe tus sensaciones detalladas..."></textarea>
-        <button class="btn-submit" onclick="closeNotesPopup()">Guardar Sensaciones</button>
-    </div>
-</div>
-
-<!-- ZOOM -->
-<div class="zoom-overlay" id="zoom-modal" onclick="closeZoomModal()">
-    <button class="zoom-close-btn" onclick="closeZoomModal()">✕</button>
-    <img id="zoom-target-img" class="zoom-img-target" src="">
 </div>
 
 <script>
@@ -489,13 +301,49 @@
     let agendaGuardadaBD = {}; 
     let currentFechaKeyModal = "";
 
+    let botonesConfig = {
+        modalidad: { id: "modalidad", titulo: "Modalidad", bg: "#ffffff", color: "#f4a291", icon: "🌸" },
+        pocimas: { id: "pocimas", titulo: "Pócimas y Yuyos del Bien", bg: "#ffffff", color: "#f4a291", icon: "🍵" },
+        caminatas: { id: "caminatas", titulo: "Propuesta Diaria y Caminatas", bg: "#ffffff", color: "#f4a291", icon: "🚶‍♀️" },
+        practicas: { id: "practicas", titulo: "Prácticas", bg: "#ffffff", color: "#f4a291", icon: "🧘‍♀️" },
+        actividades: { id: "actividades", titulo: "Actividades", bg: "#ffffff", color: "#f4a291", icon: "✨" },
+        agenda: { id: "agenda", titulo: "Mi Agenda Diaria y Sensaciones", bg: "#ffffff", color: "#f4a291", icon: "📅" },
+        registro: { id: "registro", titulo: "Registro Fotográfico", bg: "#ffffff", color: "#f4a291", icon: "📷" },
+        novedades: { id: "novedades", titulo: "Novedades", bg: "#fbe3e8", color: "#f4a291", icon: "📢" }
+    };
+
+    /* AUTENTICACIÓN ADMIN RESTAURADA */
+    function solicitarAccesoAdmin() {
+        const usuario = prompt("Ingrese su Nombre de Usuario:");
+        if (!usuario || usuario.trim().toUpperCase() !== "ANKA") {
+            alert("Acceso denegado: Usuario incorrecto.");
+            return;
+        }
+
+        const clave = prompt("Ingrese su Clave:");
+        if (clave !== "1234") {
+            alert("Acceso denegado: Clave incorrecta.");
+            return;
+        }
+
+        nav('config');
+    }
+
     function nav(screenId) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        document.getElementById('screen-' + screenId).classList.add('active');
+        const targetScreen = document.getElementById('screen-' + screenId);
+        if (targetScreen) {
+            targetScreen.classList.add('active');
+        }
+        
         if (screenId === 'agenda') {
             document.getElementById('app-viewport').classList.add('wide-view');
         } else {
             document.getElementById('app-viewport').classList.remove('wide-view');
+        }
+
+        if (screenId === 'config') {
+            renderButtonsCustomizer();
         }
     }
 
@@ -507,148 +355,48 @@
         for (let i = cfgCalendario.diaInicio; i <= cfgCalendario.diaFin; i++) {
             const dayBox = document.createElement('div');
             dayBox.className = 'cal-day';
-            
             const numDia = (i + 2) % 30 || 30; 
             const nombreDia = diasSemana[(i - 1) % 7];
-            const esCaminata = (nombreDia === "Martes" || nombreDia === "Jueves" || nombreDia === "Sábado");
 
-            dayBox.innerHTML = `
-                <span>D${i}</span>
-                <small style="font-size:0.8rem;">${nombreDia.substring(0,3)} ${numDia}</small>
-                ${esCaminata ? '<span style="font-size:1rem;">🚶‍♀️</span>' : ''}
-            `;
-            
+            dayBox.innerHTML = `<span>D${i}</span><small style="font-size:0.8rem;">${nombreDia.substring(0,3)} ${numDia}</small>`;
             const fechaKey = `2026-09-${numDia < 10 ? '0' + numDia : numDia}`;
             dayBox.onclick = () => openAgendaModal(`${nombreDia} ${numDia} de septiembre`, nombreDia, fechaKey);
             grid.appendChild(dayBox);
         }
     }
 
-    /* FUNCIÓN CORREGIDA PARA ABRIR LA AGENDA DEL DÍA SELECCIONADO */
     function openAgendaModal(fechaTexto, nombreDia, fechaKey) {
         currentFechaKeyModal = fechaKey;
         document.getElementById('modal-date-title').innerText = fechaTexto;
 
-        /* BLOQUE INFUSIONES */
-        const infBlock = document.getElementById('block-infusiones');
-        const infContent = document.getElementById('content-infusiones');
-        const infs = infusionesDB.filter(i => i.dias === "Todos" || (i.dias && i.dias.includes(nombreDia)));
-        if (infs.length > 0) {
-            infContent.innerHTML = infs.map(i => `• <b>${i.nombre}</b>: ${i.desc || ''}`).join('<br>');
-            infBlock.style.display = 'block';
-        } else infBlock.style.display = 'none';
-
-        /* BLOQUE PODCASTS */
-        const podBlock = document.getElementById('block-podcasts');
-        const podContent = document.getElementById('content-podcasts');
-        const pods = podcastsDB.filter(p => p.dias === "Todos" || (p.dias && p.dias.includes(nombreDia)));
-        if (pods.length > 0) {
-            podContent.innerHTML = pods.map(p => `🎧 <b>${p.nombre}</b> - ${p.desc || ''}`).join('<br>');
-            podBlock.style.display = 'block';
-        } else podBlock.style.display = 'none';
-
-        /* BLOQUE ACTIVIDADES (CORREGIDA EVALUACIÓN "Todos") */
-        const actBlock = document.getElementById('block-actividades');
-        const actContent = document.getElementById('content-actividades');
-        const acts = actividadesDB.filter(a => a.dia === "Todos" || (a.dia && a.dia.includes(nombreDia)) || a.fecha === fechaKey);
-        if (acts.length > 0) {
-            actContent.innerHTML = acts.map(a => `✨ <b>${a.nombre}</b> ${a.hora ? `(${a.hora})` : ''}`).join('<br>');
-            actBlock.style.display = 'block';
-        } else actBlock.style.display = 'none';
-
-        /* MAPA DE ASIGNACIÓN DE RECURSOS POR HORA */
-        const itemsPorHora = {};
-
-        acts.forEach(act => {
-            const hKey = act.hora || "08:00 hs";
-            if (!itemsPorHora[hKey]) itemsPorHora[hKey] = [];
-            itemsPorHora[hKey].push({ tipo: '✨ Actividad', nombre: act.nombre, imgUrl: act.imgUrl, link: act.link });
-        });
-
-        practicasDB.filter(p => p.fecha === fechaKey || p.hora).forEach(p => {
-            const hKey = p.hora || "09:00 hs";
-            if (!itemsPorHora[hKey]) itemsPorHora[hKey] = [];
-            itemsPorHora[hKey].push({ tipo: '🧘‍♀️ Práctica', nombre: p.nombre, imgUrl: p.imgUrl, link: p.link });
-        });
-
-        infs.forEach(inf => {
-            const hKey = inf.hora || "07:00 hs";
-            if (!itemsPorHora[hKey]) itemsPorHora[hKey] = [];
-            itemsPorHora[hKey].push({ tipo: '🍵 Infusión', nombre: inf.nombre, imgUrl: inf.imgUrl, link: inf.link });
-        });
-
-        pods.forEach(pod => {
-            const hKey = pod.hora || "18:00 hs";
-            if (!itemsPorHora[hKey]) itemsPorHora[hKey] = [];
-            itemsPorHora[hKey].push({ tipo: '🎧 Podcast', nombre: pod.nombre, imgUrl: pod.imgUrl, link: pod.link });
-        });
-
-        /* RENDER DE TARJETAS Y FILAS DE CADA HORA */
-        const registroPrevio = agendaGuardadaBD[fechaKey] || { horarios: {}, notas: "" };
         const hoursContainer = document.getElementById('hours-container');
         hoursContainer.innerHTML = '';
 
+        const registroPrevio = agendaGuardadaBD[fechaKey] || { horarios: {}, notas: "" };
+
         for (let h = cfgCalendario.horaInicio; h <= cfgCalendario.horaFin; h++) {
             const horaStr = `${h < 10 ? '0' + h : h}:00 hs`;
-            const valorPrevio = registroPrevio.horarios[horaStr] || '';
-            const itemsEnHora = itemsPorHora[horaStr] || [];
-
             const row = document.createElement('div');
             row.className = 'hour-row';
-
-            let attachedHTML = '';
-            if (itemsEnHora.length > 0) {
-                attachedHTML = itemsEnHora.map(it => `
-                    <div class="agenda-attached-card">
-                        <div><b>${it.tipo}:</b> ${it.nombre}</div>
-                        ${it.imgUrl ? `<img src="${it.imgUrl}" onclick="openZoomModal(this.src)">` : ''}
-                        ${it.link ? `<a href="${it.link}" target="_blank">🔗 Abrir Enlace / Recurso</a>` : ''}
-                    </div>
-                `).join('');
-            }
-
             row.innerHTML = `
                 <div class="hour-row-top">
                     <span class="hour-label">${horaStr}</span>
-                    <input type="text" class="hour-input" data-hora="${horaStr}" value="${valorPrevio}" placeholder="Nota personal / Actividad...">
+                    <input type="text" class="hour-input" data-hora="${horaStr}" value="${registroPrevio.horarios[horaStr] || ''}" placeholder="Nota personal / Actividad...">
                 </div>
-                ${attachedHTML}
             `;
-
             hoursContainer.appendChild(row);
         }
 
         document.getElementById('modal-text').value = registroPrevio.notas || '';
-
-        const select = document.getElementById('select-actividad-config');
-        select.innerHTML = '<option value="">-- Seleccionar --</option>';
-        acts.forEach(a => {
-            const opt = document.createElement('option');
-            opt.value = a.nombre;
-            opt.innerText = a.nombre;
-            select.appendChild(opt);
-        });
-
-        /* MOSTRAR MODAL */
         document.getElementById('modal-agenda').style.display = 'flex';
-    }
-
-    function cargarActividadEnHorario(valor) {
-        if (!valor) return;
-        const inputs = document.querySelectorAll('.hour-input');
-        if (inputs[0] && inputs[0].value === "") {
-            inputs[0].value = valor;
-        }
     }
 
     function guardarRegistroAgenda() {
         if (!currentFechaKeyModal) return;
-
         const inputs = document.querySelectorAll('.hour-input');
         let horariosMap = {};
         inputs.forEach(input => {
-            const h = input.getAttribute('data-hora');
-            horariosMap[h] = input.value;
+            horariosMap[input.getAttribute('data-hora')] = input.value;
         });
 
         agendaGuardadaBD[currentFechaKeyModal] = {
@@ -656,20 +404,43 @@
             notas: document.getElementById('modal-text').value
         };
 
-        alert('¡Agenda guardada correctamente!');
+        alert('¡Agenda guardada!');
         closeModal();
     }
 
     function closeModal() { document.getElementById('modal-agenda').style.display = 'none'; }
-    function openNotesPopup() { document.getElementById('notes-popup').style.display = 'flex'; document.getElementById('popup-textarea').value = document.getElementById('modal-text').value; }
-    function closeNotesPopup() { document.getElementById('modal-text').value = document.getElementById('popup-textarea').value; document.getElementById('notes-popup').style.display = 'none'; }
-    function openZoomModal(src) { document.getElementById('zoom-target-img').src = src; document.getElementById('zoom-modal').style.display = 'flex'; }
-    function closeZoomModal() { document.getElementById('zoom-modal').style.display = 'none'; }
-    function solicitarAccesoAdmin() { alert('Acceso admin'); nav('config'); }
+
+    function renderButtonsCustomizer() {
+        const container = document.getElementById('buttons-customizer-container');
+        if (!container) return;
+        container.innerHTML = Object.keys(botonesConfig).map(key => {
+            const btn = botonesConfig[key];
+            return `
+                <div class="btn-config-card">
+                    <b>${btn.titulo}</b>
+                    <div style="display:flex; gap:6px;">
+                        <label>Fondo: <input type="color" value="${btn.bg}" onchange="botonesConfig['${key}'].bg=this.value; aplicarEstilosBotones();"></label>
+                        <label>Letra: <input type="color" value="${btn.color}" onchange="botonesConfig['${key}'].color=this.value; aplicarEstilosBotones();"></label>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function aplicarEstilosBotones() {
+        Object.keys(botonesConfig).forEach(key => {
+            const btn = botonesConfig[key];
+            const cardEl = document.getElementById(`card-btn-${key}`);
+            const titleEl = document.getElementById(`title-btn-${key}`);
+            if (cardEl) cardEl.style.backgroundColor = btn.bg;
+            if (titleEl) titleEl.style.color = btn.color;
+        });
+    }
+
     function openWhatsApp() { window.open('https://wa.me/5491112345678', '_blank'); }
 
-    /* INICIALIZACIÓN */
     initCalendar();
+    aplicarEstilosBotones();
 </script>
 
 </body>
