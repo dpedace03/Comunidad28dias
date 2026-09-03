@@ -475,11 +475,15 @@
                 </div>
             </div>
 
-            <!-- EXPORTACIÓN JSON -->
+            <!-- EXPORTACIÓN E IMPORTACIÓN JSON -->
             <div style="background: var(--pastel-green); padding: 10px; border-radius: var(--border-radius); border: 1px solid #b8e0a8;">
                 <small style="font-weight:bold; color:var(--primary-dark);">💾 Exportación / Sincronización de Datos:</small>
-                <p style="font-size:0.75rem; margin:4px 0 8px 0;">Descarga el archivo <b>config.json</b> actualizado para subirlo a tu repositorio de GitHub.</p>
-                <button class="btn-submit" style="background:#52b788;" onclick="descargarConfigJSON()">Descargar config.json Actualizado</button>
+                <p style="font-size:0.75rem; margin:4px 0 8px 0;">Descarga o carga manualmente tu archivo <b>config.json</b>.</p>
+                <button class="btn-submit" style="background:#52b788; margin-bottom:8px;" onclick="descargarConfigJSON()">Descargar config.json Actualizado</button>
+                <div class="form-group" style="margin-bottom:0;">
+                    <label style="font-size:0.75rem;">📂 Cargar config.json manualmente:</label>
+                    <input type="file" accept=".json" onchange="cargarConfigDesdeArchivoLocal(this)">
+                </div>
             </div>
 
             <!-- PERSONALIZADOR DE BOTONES -->
@@ -670,7 +674,7 @@
     
     let modalidadDB = {
         titulo: "Modalidad del Programa 28 Días",
-        desc: "Bienvenidos a nuestro espacio de transformación y bienestar consciente. Durante estos 28 días nos conectaremos con hábitos saludables, nutrición consciente y sincronización biológica.",
+        desc: "Bienvenidos a nuestro espacio de transformación y bienestar consciente. Durante estos 28 días nos conectaremos con hábitos saludables, nutrición consciente y synchronización biológica.",
         imagenes: []
     };
 
@@ -1748,6 +1752,77 @@
         window.open(`https://wa.me/${whatsappNumber}`, '_blank'); 
     }
 
+    async function cargarConfigInicial() {
+        try {
+            // Intentar cargar desde localStorage primero si existe
+            const localSaved = localStorage.getItem('app_config_json');
+            if (localSaved) {
+                aplicarObjetoConfig(JSON.parse(localSaved));
+            }
+
+            // Petición a config.json evadiendo la caché del navegador
+            const resp = await fetch('config.json?v=' + Date.now());
+            if (resp.ok) {
+                const data = await resp.json();
+                aplicarObjetoConfig(data);
+                // Guardar copia local de respaldo
+                localStorage.setItem('app_config_json', JSON.stringify(data));
+            }
+        } catch (e) {
+            console.log("Aviso: No se pudo hacer fetch de config.json (posible protocolo file:// o archivo ausente):", e);
+        }
+    }
+
+    function aplicarObjetoConfig(data) {
+        if (!data) return;
+        if (data.modalidadDB) modalidadDB = data.modalidadDB;
+        if (data.alimentosDB) alimentosDB = data.alimentosDB;
+        if (data.diosasDB) diosasDB = data.diosasDB;
+        if (data.practicasDB) practicasDB = data.practicasDB;
+        if (data.infusionesDB) infusionesDB = data.infusionesDB;
+        if (data.novedadesDB) novedadesDB = data.novedadesDB;
+        if (data.podcastsDB) podcastsDB = data.podcastsDB;
+        if (data.actividadesDB) actividadesDB = data.actividadesDB;
+        if (data.cfgCalendario) cfgCalendario = data.cfgCalendario;
+        if (data.botonesConfig) botonesConfig = data.botonesConfig;
+        if (data.configVisual) configVisual = data.configVisual;
+        if (data.whatsappNumber) whatsappNumber = data.whatsappNumber;
+
+        // Refrescar elementos visuales e interfaz
+        if (document.getElementById('cfg-btn-3d')) {
+            document.getElementById('cfg-btn-3d').checked = !!configVisual.btn3D;
+            cambiarEstilo3DBotones();
+        }
+        if (document.getElementById('cfg-whatsapp-num')) {
+            document.getElementById('cfg-whatsapp-num').value = whatsappNumber || '';
+        }
+        aplicarEstilosBotones();
+        initCalendar();
+        renderPublicModalidad();
+        renderPublicPocimas();
+        renderPublicAlimentos();
+        renderPublicDiosas();
+        renderPublicActividades();
+        renderPracticasScreen();
+    }
+
+    function cargarConfigDesdeArchivoLocal(fileInput) {
+        if (!fileInput.files || fileInput.files.length === 0) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const data = JSON.parse(e.target.result);
+                aplicarObjetoConfig(data);
+                localStorage.setItem('app_config_json', JSON.stringify(data));
+                alert('¡config.json cargado e importado con éxito!');
+            } catch (err) {
+                alert('Error al leer el archivo JSON: ' + err.message);
+            }
+        };
+        reader.readAsText(fileInput.files[0]);
+    }
+
+    cargarConfigInicial();
     initCalendar();
     aplicarEstilosBotones();
 </script>
