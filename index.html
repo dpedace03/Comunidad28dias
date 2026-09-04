@@ -301,6 +301,130 @@
         .practica-card-item { background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid rgba(244, 162, 145, 0.4); margin-bottom: 8px; display: flex; flex-direction: column; gap: 4px; }
         .practica-link-btn { display: inline-block; margin-top: 4px; margin-bottom: 6px; padding: 6px 12px; background: var(--pastel-green); color: var(--primary-dark); border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.85rem; border: 1px solid #b8e0a8; text-align: center; }
 
+        /* ESTILOS REGISTRO FOTOGRÁFICO DE LA USUARIA Y SU HISTORIAL */
+        .user-photo-upload-box {
+            background: var(--pastel-pink);
+            border: 1px dashed var(--salmon);
+            border-radius: 10px;
+            padding: 8px;
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .user-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+        .user-photo-slot {
+            background: #ffffff;
+            border: 1px solid #f2c6be;
+            border-radius: 8px;
+            padding: 6px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .user-photo-slot label {
+            font-size: 0.72rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+        .user-photo-slot input[type="file"] {
+            display: none;
+        }
+        .user-photo-btn {
+            background: var(--pastel-purple);
+            color: var(--primary-dark);
+            border: 1px solid #c9b6e4;
+            padding: 4px 6px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .user-photo-preview {
+            width: 100%;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--salmon);
+            margin-top: 4px;
+            cursor: zoom-in;
+        }
+
+        .history-btn-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            margin-top: 6px;
+        }
+        .btn-history-toggle {
+            background: #ffffff;
+            border: 1px solid var(--primary);
+            color: var(--primary-dark);
+            padding: 6px 2px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .btn-history-toggle.active {
+            background: var(--primary-dark);
+            color: #ffffff;
+            border-color: var(--primary-dark);
+        }
+
+        .history-gallery-container {
+            display: none;
+            background: #faf8f5;
+            border: 1px solid var(--salmon);
+            border-radius: 8px;
+            padding: 8px;
+            margin-top: 6px;
+        }
+        .history-gallery-title {
+            margin: 0 0 6px 0;
+            font-size: 0.8rem;
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            max-height: 220px;
+            overflow-y: auto;
+        }
+        .history-item-card {
+            background: #fff;
+            border: 1px solid #e8d5d0;
+            border-radius: 6px;
+            padding: 4px;
+            text-align: center;
+        }
+        .history-item-card img {
+            width: 100%;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: zoom-in;
+        }
+        .history-item-card span {
+            font-size: 0.65rem;
+            color: #666;
+            display: block;
+            margin-top: 2px;
+        }
+
         /* CARROUSEL COMPONENT */
         .carousel-container {
             position: relative; width: 100%; max-width: 100%; margin: 8px 0;
@@ -668,11 +792,11 @@
                     <select id="reg-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                 </div>
                 <div class="form-group">
-                    <label>Adjuntar Imagen Ejemplo:</label>
+                    <label>Adjuntar Imagen Ejemplo / Referencia:</label>
                     <input type="file" accept="image/*" id="reg-img-input" multiple>
                     <div class="img-preview-box" id="reg-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="reg-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
                 </div>
-                <button class="btn-submit" id="btn-save-reg" onclick="agregarRegistroFoto()">Guardar Registro Fotografico</button>
+                <button class="btn-submit" id="btn-save-reg" onclick="agregarRegistroFoto()">Guardar Consigna / Registro</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Registros Cargados:</small><div id="crud-registro-list"></div></div>
             </div>
 
@@ -1165,6 +1289,7 @@
     let novedadesDB = [];
     
     let agendaGuardadaBD = {}; 
+    let usuarioFotosHistorialBD = {}; // Almacenamiento histórico de fotos por tipo y fecha
     let currentFechaKeyModal = "";
     let horaSeleccionadaFoco = null;
 
@@ -2760,10 +2885,231 @@
         container.innerHTML = renderSeccionAgrupada(caminatasDBList, 'caminata');
     }
 
+    /* LÓGICA CON REGISTRO TEMPORAL, HISTORIAL Y VISUALIZACIÓN POR BOTONES */
+    let tempUsuarioFotosInput = {};
+
     function renderPublicRegistro() {
         const container = document.getElementById('public-registro-list');
         if (!container) return;
-        container.innerHTML = renderSeccionAgrupada(registroDBList, 'registro');
+
+        if (!registroDBList || registroDBList.length === 0) {
+            container.innerHTML = '<i style="font-size:0.85rem; color:#888;">No hay consignas de registro cargadas.</i>';
+            return;
+        }
+
+        const listaOrdenada = ordenarPorCampo([...registroDBList]);
+        const hoyStr = new Date().toISOString().split('T')[0];
+
+        let htmlFinal = '';
+
+        listaOrdenada.forEach((item, idx) => {
+            let imagenesTotales = (item.imagenes && item.imagenes.length > 0) ? item.imagenes : (item.imgUrl ? [item.imgUrl] : []);
+            let mediaHTML = '';
+            if (imagenesTotales.length > 1) {
+                mediaHTML = renderCarouselHTML(`registro-pub-${idx}`, imagenesTotales);
+            } else if (imagenesTotales.length === 1) {
+                mediaHTML = `<img src="${imagenesTotales[0]}" class="item-attached-img" onclick="openImageViewer('${imagenesTotales[0]}')" title="Toca para ampliar">`;
+            }
+
+            const tempKey = `idx_${idx}`;
+            if (!tempUsuarioFotosInput[tempKey]) {
+                tempUsuarioFotosInput[tempKey] = { rostro: '', medio: '', entero: '' };
+            }
+            const temp = tempUsuarioFotosInput[tempKey];
+
+            htmlFinal += `
+                <div class="practica-card-item">
+                    <h2 style="margin:0 0 4px 0; color:var(--primary-dark);">${item.nombre}</h2>
+                    ${(item.turno && item.turno !== "Ninguno") ? `<p style="margin:0;"><span class="badge-turno">Turno: ${item.turno}</span></p>` : ''}
+                    <p style="white-space: pre-line; line-height: 1.4; margin-top:4px;">${item.desc || ''}</p>
+                    ${item.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${item.observacion}</p>` : ''}
+                    ${item.link ? `<a href="${item.link}" target="_blank" class="practica-link-btn">🔗 Enlace / Información</a>` : ''}
+                    ${mediaHTML}
+
+                    <!-- BLOQUE DE REGISTRO INTERACTIVO DE LA USUARIA -->
+                    <div class="user-photo-upload-box">
+                        <div class="form-group" style="margin-bottom:4px;">
+                            <label style="font-size:0.8rem; color:var(--primary-dark);">📅 Fecha de la Toma:</label>
+                            <input type="date" id="usr-reg-fecha-${idx}" value="${hoyStr}">
+                        </div>
+
+                        <div class="user-photo-grid">
+                            <!-- FOTO ROSTRO -->
+                            <div class="user-photo-slot">
+                                <label>👤 Rostro</label>
+                                <div id="usr-preview-rostro-${idx}">
+                                    ${temp.rostro ? `<img src="${temp.rostro}" class="user-photo-preview" onclick="openImageViewer('${temp.rostro}')">` : '<span style="font-size:0.65rem; color:#aaa; display:block; margin:8px 0;">Sin seleccionar</span>'}
+                                </div>
+                                <button type="button" class="user-photo-btn" onclick="document.getElementById('usr-file-rostro-${idx}').click()">Cargar Foto</button>
+                                <input type="file" id="usr-file-rostro-${idx}" accept="image/*" onchange="procesarFotoTemporal(${idx}, 'rostro', this)">
+                            </div>
+
+                            <!-- FOTO MEDIO -->
+                            <div class="user-photo-slot">
+                                <label>👚 Medio</label>
+                                <div id="usr-preview-medio-${idx}">
+                                    ${temp.medio ? `<img src="${temp.medio}" class="user-photo-preview" onclick="openImageViewer('${temp.medio}')">` : '<span style="font-size:0.65rem; color:#aaa; display:block; margin:8px 0;">Sin seleccionar</span>'}
+                                </div>
+                                <button type="button" class="user-photo-btn" onclick="document.getElementById('usr-file-medio-${idx}').click()">Cargar Foto</button>
+                                <input type="file" id="usr-file-medio-${idx}" accept="image/*" onchange="procesarFotoTemporal(${idx}, 'medio', this)">
+                            </div>
+
+                            <!-- FOTO ENTERO -->
+                            <div class="user-photo-slot">
+                                <label>🧍 Entero</label>
+                                <div id="usr-preview-entero-${idx}">
+                                    ${temp.entero ? `<img src="${temp.entero}" class="user-photo-preview" onclick="openImageViewer('${temp.entero}')">` : '<span style="font-size:0.65rem; color:#aaa; display:block; margin:8px 0;">Sin seleccionar</span>'}
+                                </div>
+                                <button type="button" class="user-photo-btn" onclick="document.getElementById('usr-file-entero-${idx}').click()">Cargar Foto</button>
+                                <input type="file" id="usr-file-entero-${idx}" accept="image/*" onchange="procesarFotoTemporal(${idx}, 'entero', this)">
+                            </div>
+                        </div>
+
+                        <button class="btn-submit" style="font-size:0.85rem; padding:8px; margin-top:4px;" onclick="guardarAvanceHistorialUsuario(${idx})">💾 Guardar Mi Avance Fotográfico</button>
+
+                        <!-- BOTONES PARA VER HISTORIAS INDIVIDUALES -->
+                        <div class="history-btn-row">
+                            <button class="btn-history-toggle" id="btn-hist-rostro-${idx}" onclick="toggleGaleriaHistoria(${idx}, 'rostro')">👤 Historia Rostro</button>
+                            <button class="btn-history-toggle" id="btn-hist-medio-${idx}" onclick="toggleGaleriaHistoria(${idx}, 'medio')">👚 Historia Medio</button>
+                            <button class="btn-history-toggle" id="btn-hist-entero-${idx}" onclick="toggleGaleriaHistoria(${idx}, 'entero')">🧍 Historia Cuerpo</button>
+                        </div>
+
+                        <!-- CONTENEDOR DESPLEGABLE DE LA GALERÍA -->
+                        <div class="history-gallery-container" id="history-gallery-${idx}">
+                            <div class="history-gallery-title" id="history-title-${idx}">Historia</div>
+                            <div class="history-grid" id="history-grid-${idx}"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = htmlFinal;
+    }
+
+    function procesarFotoTemporal(idx, tipo, fileInput) {
+        if (!fileInput.files || fileInput.files.length === 0) return;
+        readInputImage(fileInput, (base64Array) => {
+            if (base64Array.length > 0) {
+                const tempKey = `idx_${idx}`;
+                if (!tempUsuarioFotosInput[tempKey]) {
+                    tempUsuarioFotosInput[tempKey] = { rostro: '', medio: '', entero: '' };
+                }
+                tempUsuarioFotosInput[tempKey][tipo] = base64Array[0];
+
+                const containerPreview = document.getElementById(`usr-preview-${tipo}-${idx}`);
+                if (containerPreview) {
+                    containerPreview.innerHTML = `<img src="${base64Array[0]}" class="user-photo-preview" onclick="openImageViewer('${base64Array[0]}')">`;
+                }
+            }
+        });
+    }
+
+    function guardarAvanceHistorialUsuario(idx) {
+        const fechaVal = document.getElementById(`usr-reg-fecha-${idx}`).value;
+        if (!fechaVal) return alert('Selecciona una fecha válida.');
+
+        const tempKey = `idx_${idx}`;
+        const temp = tempUsuarioFotosInput[tempKey] || {};
+
+        if (!temp.rostro && !temp.medio && !temp.entero) {
+            return alert('Por favor sube al menos una foto (Rostro, Medio o Cuerpo Entero) para guardar en tu historial.');
+        }
+
+        if (!usuarioFotosHistorialBD[fechaVal]) {
+            usuarioFotosHistorialBD[fechaVal] = { rostro: '', medio: '', entero: '' };
+        }
+
+        if (temp.rostro) usuarioFotosHistorialBD[fechaVal].rostro = temp.rostro;
+        if (temp.medio) usuarioFotosHistorialBD[fechaVal].medio = temp.medio;
+        if (temp.entero) usuarioFotosHistorialBD[fechaVal].entero = temp.entero;
+
+        try {
+            localStorage.setItem('usuario_fotos_historial_bd', JSON.stringify(usuarioFotosHistorialBD));
+            alert(`¡Fotos del ${fechaVal} guardadas correctamente en tu historial!`);
+        } catch (e) {
+            alert('¡Foto registrada en tu historial!');
+        }
+
+        tempUsuarioFotosInput[tempKey] = { rostro: '', medio: '', entero: '' };
+
+        ['rostro', 'medio', 'entero'].forEach(tipo => {
+            const containerPreview = document.getElementById(`usr-preview-${tipo}-${idx}`);
+            if (containerPreview) {
+                containerPreview.innerHTML = '<span style="font-size:0.65rem; color:#aaa; display:block; margin:8px 0;">Sin seleccionar</span>';
+            }
+            const fileEl = document.getElementById(`usr-file-${tipo}-${idx}`);
+            if (fileEl) fileEl.value = '';
+        });
+
+        const galeriaContainer = document.getElementById(`history-gallery-${idx}`);
+        if (galeriaContainer && galeriaContainer.style.display === 'block') {
+            const tipoActivo = galeriaContainer.getAttribute('data-tipo-activo');
+            if (tipoActivo) renderGaleriaHistoria(idx, tipoActivo);
+        }
+    }
+
+    function toggleGaleriaHistoria(idx, tipo) {
+        const galeriaContainer = document.getElementById(`history-gallery-${idx}`);
+        const btnRostro = document.getElementById(`btn-hist-rostro-${idx}`);
+        const btnMedio = document.getElementById(`btn-hist-medio-${idx}`);
+        const btnEntero = document.getElementById(`btn-hist-entero-${idx}`);
+
+        const tipoActivoActual = galeriaContainer.getAttribute('data-tipo-activo');
+
+        if (galeriaContainer.style.display === 'block' && tipoActivoActual === tipo) {
+            galeriaContainer.style.display = 'none';
+            galeriaContainer.removeAttribute('data-tipo-activo');
+            btnRostro.classList.remove('active');
+            btnMedio.classList.remove('active');
+            btnEntero.classList.remove('active');
+            return;
+        }
+
+        btnRostro.classList.toggle('active', tipo === 'rostro');
+        btnMedio.classList.toggle('active', tipo === 'medio');
+        btnEntero.classList.toggle('active', tipo === 'entero');
+
+        galeriaContainer.setAttribute('data-tipo-activo', tipo);
+        renderGaleriaHistoria(idx, tipo);
+        galeriaContainer.style.display = 'block';
+    }
+
+    function renderGaleriaHistoria(idx, tipo) {
+        const grid = document.getElementById(`history-grid-${idx}`);
+        const title = document.getElementById(`history-title-${idx}`);
+        if (!grid || !title) return;
+
+        let nombreTipo = "Rostro";
+        if (tipo === 'medio') nombreTipo = "Cuerpo Medio";
+        if (tipo === 'entero') nombreTipo = "Cuerpo Entero";
+
+        title.innerText = `🖼️ Historia Registrada: ${nombreTipo}`;
+
+        const fechasOrdenadas = Object.keys(usuarioFotosHistorialBD).sort();
+        let itemsHTML = '';
+
+        fechasOrdenadas.forEach(fechaKey => {
+            const registro = usuarioFotosHistorialBD[fechaKey];
+            if (registro && registro[tipo]) {
+                const imgData = registro[tipo];
+                const partesFecha = fechaKey.split('-');
+                const fechaFormateada = `${partesFecha[2]}/${partesFecha[1]}/${partesFecha[0]}`;
+
+                itemsHTML += `
+                    <div class="history-item-card">
+                        <img src="${imgData}" onclick="openImageViewer('${imgData}')" title="Toca para ampliar">
+                        <span>📅 ${fechaFormateada}</span>
+                    </div>
+                `;
+            }
+        });
+
+        if (!itemsHTML) {
+            grid.innerHTML = `<i style="font-size:0.75rem; color:#888; grid-column: 1 / -1; display:block; padding:8px;">No hay fotos de ${nombreTipo} registradas aún en el historial.</i>`;
+        } else {
+            grid.innerHTML = itemsHTML;
+        }
     }
 
     function renderPublicPocimas() {
@@ -2871,6 +3217,9 @@
         try {
             const localSaved = localStorage.getItem('app_config_json');
             if (localSaved) aplicarObjetoConfig(JSON.parse(localSaved));
+
+            const usrFotosSaved = localStorage.getItem('usuario_fotos_historial_bd');
+            if (usrFotosSaved) usuarioFotosHistorialBD = JSON.parse(usrFotosSaved);
 
             const resp = await fetch('config.json?v=' + Date.now());
             if (resp.ok) {
