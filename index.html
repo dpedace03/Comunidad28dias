@@ -212,7 +212,6 @@
         .btn-edit { background: #6b5b7b; color: #fff; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
         .btn-delete { background: #e06d53; color: #fff; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
 
-        /* IMÁGENES MÁS GRANDES EN CARDS */
         .item-attached-img {
             max-width: 100%;
             max-height: 320px;
@@ -229,7 +228,6 @@
         .practica-card-item { background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid rgba(244, 162, 145, 0.4); margin-bottom: 8px; display: flex; flex-direction: column; gap: 4px; }
         .practica-link-btn { display: inline-block; margin-top: 4px; margin-bottom: 6px; padding: 6px 12px; background: var(--pastel-green); color: var(--primary-dark); border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.85rem; border: 1px solid #b8e0a8; text-align: center; }
 
-        /* CARROUSEL COMPONENT CON MAYOR ALTURA */
         .carousel-container {
             position: relative; width: 100%; max-width: 100%; margin: 8px 0;
             overflow: hidden; border-radius: 10px; border: 1px solid var(--salmon); background: #000;
@@ -247,7 +245,6 @@
         .carousel-dot { width: 8px; height: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; cursor: pointer; }
         .carousel-dot.active { background: var(--salmon); }
 
-        /* VISOR MODAL DE IMÁGENES A PANTALLA COMPLETA CON ZOOM */
         .image-viewer-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(0, 0, 0, 0.92); z-index: 9999; justify-content: center; align-items: center; overflow: hidden; touch-action: none;
@@ -417,8 +414,9 @@
             <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Modalidad (ABM)</h3>
                 <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:3;"><label>Nombre / Título:</label><input type="text" id="mod-nombre" placeholder="Ej: Modalidad del Programa"></div>
+                    <div class="form-group" style="flex:2;"><label>Nombre / Título:</label><input type="text" id="mod-nombre" placeholder="Ej: Modalidad del Programa"></div>
                     <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="mod-orden" placeholder="1" value="1"></div>
+                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="mod-carrousel" placeholder="0" value="0"></div>
                 </div>
                 <div class="form-group"><label>Descripción / Texto explicativo:</label><textarea id="mod-desc" rows="3" placeholder="Detalles de la modalidad..."></textarea></div>
                 <div style="display:flex; gap:6px;">
@@ -437,6 +435,7 @@
                     <div class="form-group" style="flex:1;">
                         <label>Turno:</label>
                         <select id="mod-turno">
+                            <option value="Ninguno">Ninguno</option>
                             <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
                             <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
                         </select>
@@ -448,7 +447,7 @@
                     <label>Mostrar en Agenda:</label>
                     <select id="mod-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                 </div>
-                <div class="form-group"><label>Adjuntar Imagen / Imágenes (Carrousel):</label><input type="file" accept="image/*" id="mod-img-input" multiple></div>
+                <div class="form-group"><label>Adjuntar Imagen / Imágenes:</label><input type="file" accept="image/*" id="mod-img-input" multiple></div>
                 <button class="btn-submit" id="btn-save-mod" onclick="guardarModalidadABM()">Guardar Modalidad</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Registros de Modalidad:</small><div id="crud-modalidad-list"></div></div>
             </div>
@@ -457,8 +456,9 @@
             <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Alimentos (ABM)</h3>
                 <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:3;"><label>Nombre del Alimento / Menú:</label><input type="text" id="ali-nombre" placeholder="Ej: Bowl Nutritivo"></div>
+                    <div class="form-group" style="flex:2;"><label>Nombre del Alimento / Menú:</label><input type="text" id="ali-nombre" placeholder="Ej: Bowl Nutritivo"></div>
                     <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="ali-orden" placeholder="1" value="1"></div>
+                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="ali-carrousel" placeholder="0" value="0"></div>
                 </div>
                 <div class="form-group"><label>Descripción / Receta:</label><textarea id="ali-desc" rows="2" placeholder="Ingredientes o propiedades..."></textarea></div>
                 <div style="display:flex; gap:6px;">
@@ -477,6 +477,7 @@
                     <div class="form-group" style="flex:1;">
                         <label>Turno:</label>
                         <select id="ali-turno">
+                            <option value="Ninguno">Ninguno</option>
                             <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
                             <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
                         </select>
@@ -488,7 +489,7 @@
                     <label>Mostrar en Agenda:</label>
                     <select id="ali-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                 </div>
-                <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="ali-img-input"></div>
+                <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="ali-img-input" multiple></div>
                 <button class="btn-submit" id="btn-save-ali" onclick="agregarAlimento()">Guardar Alimento</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Alimentos Cargados:</small><div id="crud-alimentos-list"></div></div>
             </div>
@@ -497,8 +498,9 @@
             <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Diosas (ABM)</h3>
                 <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:3;"><label>Nombre Diosa:</label><input type="text" id="dio-nombre" placeholder="Ej: Afrodita, Isis..."></div>
+                    <div class="form-group" style="flex:2;"><label>Nombre Diosa:</label><input type="text" id="dio-nombre" placeholder="Ej: Afrodita, Isis..."></div>
                     <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="dio-orden" placeholder="1" value="1"></div>
+                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="dio-carrousel" placeholder="0" value="0"></div>
                 </div>
                 <div class="form-group"><label>Descripción / Atributos:</label><textarea id="dio-desc" rows="2" placeholder="Reseña o propiedades..."></textarea></div>
                 <div style="display:flex; gap:6px;">
@@ -517,6 +519,7 @@
                     <div class="form-group" style="flex:1;">
                         <label>Turno:</label>
                         <select id="dio-turno">
+                            <option value="Ninguno">Ninguno</option>
                             <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
                             <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
                         </select>
@@ -528,7 +531,7 @@
                     <label>Mostrar en Agenda:</label>
                     <select id="dio-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                 </div>
-                <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="dio-img-input"></div>
+                <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="dio-img-input" multiple></div>
                 <button class="btn-submit" id="btn-save-dio" onclick="agregarDiosa()">Guardar Diosa</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Diosas Cargadas:</small><div id="crud-diosas-list"></div></div>
             </div>
@@ -537,8 +540,9 @@
             <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Novedades (ABM)</h3>
                 <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:3;"><label>Nombre / Título:</label><input type="text" id="nov-nombre" placeholder="Ej: Link Zoom Jueves 3"></div>
+                    <div class="form-group" style="flex:2;"><label>Nombre / Título:</label><input type="text" id="nov-nombre" placeholder="Ej: Link Zoom Jueves 3"></div>
                     <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="nov-orden" placeholder="1" value="1"></div>
+                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="nov-carrousel" placeholder="0" value="0"></div>
                 </div>
                 <div class="form-group"><label>Descripción / Detalle:</label><textarea id="nov-desc" rows="2" placeholder="Detalle de la novedad..."></textarea></div>
                 <div style="display:flex; gap:6px;">
@@ -557,6 +561,7 @@
                     <div class="form-group" style="flex:1;">
                         <label>Turno:</label>
                         <select id="nov-turno">
+                            <option value="Ninguno">Ninguno</option>
                             <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
                             <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
                         </select>
@@ -568,7 +573,7 @@
                     <label>Mostrar en Agenda:</label>
                     <select id="nov-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                 </div>
-                <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="nov-img-input"></div>
+                <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="nov-img-input" multiple></div>
                 <button class="btn-submit" id="btn-save-nov" onclick="publicarNovedadManual()">Publicar Novedad</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Novedades Registradas:</small><div id="novedades-abm-list"></div></div>
             </div>
@@ -577,8 +582,9 @@
             <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Prácticas (ABM)</h3>
                 <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:3;"><label>Nombre Práctica:</label><input type="text" id="pra-nombre" placeholder="Ej: Meditación Guiada"></div>
+                    <div class="form-group" style="flex:2;"><label>Nombre Práctica:</label><input type="text" id="pra-nombre" placeholder="Ej: Meditación Guiada"></div>
                     <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="pra-orden" placeholder="1" value="1"></div>
+                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="pra-carrousel" placeholder="0" value="0"></div>
                 </div>
                 <div class="form-group"><label>Descripción:</label><textarea id="pra-desc" rows="2" placeholder="Instrucciones o beneficios..."></textarea></div>
                 <div style="display:flex; gap:6px;">
@@ -597,6 +603,7 @@
                     <div class="form-group" style="flex:1;">
                         <label>Turno:</label>
                         <select id="pra-turno">
+                            <option value="Ninguno">Ninguno</option>
                             <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
                             <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
                         </select>
@@ -608,7 +615,7 @@
                     <label>Mostrar en Agenda:</label>
                     <select id="pra-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                 </div>
-                <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="pra-img-input"></div>
+                <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="pra-img-input" multiple></div>
                 <button class="btn-submit" id="btn-save-pra" onclick="agregarPractica()">Guardar Práctica</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Prácticas Cargadas:</small><div id="crud-practicas-list"></div></div>
             </div>
@@ -617,8 +624,9 @@
             <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Actividades (ABM)</h3>
                 <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:3;"><label>Nombre Actividad:</label><input type="text" id="act-nombre" placeholder="Ej: Caminata consciente"></div>
+                    <div class="form-group" style="flex:2;"><label>Nombre Actividad:</label><input type="text" id="act-nombre" placeholder="Ej: Caminata consciente"></div>
                     <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="act-orden" placeholder="1" value="1"></div>
+                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="act-carrousel" placeholder="0" value="0"></div>
                 </div>
                 <div class="form-group"><label>Descripción:</label><textarea id="act-desc" rows="2" placeholder="Detalle de la actividad..."></textarea></div>
                 <div style="display:flex; gap:6px;">
@@ -637,6 +645,7 @@
                     <div class="form-group" style="flex:1;">
                         <label>Turno:</label>
                         <select id="act-turno">
+                            <option value="Ninguno">Ninguno</option>
                             <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
                             <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
                         </select>
@@ -648,7 +657,7 @@
                     <label>Mostrar en Agenda:</label>
                     <select id="act-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                 </div>
-                <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="act-img-input"></div>
+                <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="act-img-input" multiple></div>
                 <button class="btn-submit" id="btn-save-act" onclick="agregarActividadConfig()">Guardar Actividad</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Actividades Cargadas:</small><div id="crud-actividades-list"></div></div>
             </div>
@@ -657,8 +666,9 @@
             <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Infusiones / Pócimas (ABM)</h3>
                 <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:3;"><label>Nombre Pócima / Infusión:</label><input type="text" id="inf-nombre" placeholder="Ej: Té de Manzanilla"></div>
+                    <div class="form-group" style="flex:2;"><label>Nombre Pócima / Infusión:</label><input type="text" id="inf-nombre" placeholder="Ej: Té de Manzanilla"></div>
                     <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="inf-orden" placeholder="1" value="1"></div>
+                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="inf-carrousel" placeholder="0" value="0"></div>
                 </div>
                 <div class="form-group"><label>Descripción / Preparación:</label><textarea id="inf-desc" rows="2" placeholder="Propiedades o preparación..."></textarea></div>
                 <div style="display:flex; gap:6px;">
@@ -677,6 +687,7 @@
                     <div class="form-group" style="flex:1;">
                         <label>Turno:</label>
                         <select id="inf-turno">
+                            <option value="Ninguno">Ninguno</option>
                             <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
                             <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
                         </select>
@@ -688,7 +699,7 @@
                     <label>Mostrar en Agenda:</label>
                     <select id="inf-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                 </div>
-                <div class="form-group"><label>Adjuntar Imágenes (Selección múltiple para Carrousel):</label><input type="file" accept="image/*" id="inf-img-input" multiple></div>
+                <div class="form-group"><label>Adjuntar Imágenes:</label><input type="file" accept="image/*" id="inf-img-input" multiple></div>
                 <button class="btn-submit" id="btn-save-inf" onclick="agregarInfusion()">Guardar Pócima / Infusión</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Pócimas e Infusiones Cargadas:</small><div id="crud-infusiones-list"></div></div>
             </div>
@@ -697,8 +708,9 @@
             <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Podcasts (ABM)</h3>
                 <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:3;"><label>Nombre Podcast:</label><input type="text" id="pod-nombre" placeholder="Ej: Episodio 1"></div>
+                    <div class="form-group" style="flex:2;"><label>Nombre Podcast:</label><input type="text" id="pod-nombre" placeholder="Ej: Episodio 1"></div>
                     <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="pod-orden" placeholder="1" value="1"></div>
+                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="pod-carrousel" placeholder="0" value="0"></div>
                 </div>
                 <div class="form-group"><label>Descripción:</label><textarea id="pod-desc" rows="2" placeholder="Resumen del episodio..."></textarea></div>
                 <div style="display:flex; gap:6px;">
@@ -717,6 +729,7 @@
                     <div class="form-group" style="flex:1;">
                         <label>Turno:</label>
                         <select id="pod-turno">
+                            <option value="Ninguno">Ninguno</option>
                             <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
                             <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
                         </select>
@@ -728,7 +741,7 @@
                     <label>Mostrar en Agenda:</label>
                     <select id="pod-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                 </div>
-                <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="pod-img-input"></div>
+                <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="pod-img-input" multiple></div>
                 <button class="btn-submit" id="btn-save-pod" onclick="agregarPodcast()">Guardar Podcast</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Podcasts Cargados:</small><div id="crud-podcasts-list"></div></div>
             </div>
@@ -760,7 +773,7 @@
 
 </div>
 
-<!-- VISOR INTERACTIVO A PANTALLA COMPLETA CON ZOOM / PELLIZCO -->
+<!-- VISOR INTERACTIVO A PANTALLA COMPLETA CON ZOOM -->
 <div class="image-viewer-modal" id="image-viewer-modal">
     <button class="image-viewer-close" onclick="closeImageViewer()">✕</button>
     <div class="image-viewer-container" id="image-viewer-container">
@@ -783,12 +796,13 @@
     
     let modalidadDBList = [{
         nombre: "Modalidad del Programa 28 Días",
-        desc: "Bienvenidos a nuestro espacio de transformación y bienestar consciente. Durante estos 28 días nos conectaremos con hábitos saludables, nutrición consciente y sincronización biológica.",
+        desc: "Bienvenidos a nuestro espacio de transformación y bienestar consciente.",
         fecha: "",
         hora: "",
         dias: "Todos",
-        turno: "Mañana",
+        turno: "Ninguno",
         orden: 1,
+        carrousel: 0,
         link: "",
         observacion: "",
         agenda: "Si",
@@ -824,9 +838,7 @@
 
     function getFechaObjetoDia(numDiaReto) {
         let baseDate = new Date(cfgCalendario.fechaInicio + 'T00:00:00');
-        if (isNaN(baseDate.getTime())) {
-            baseDate = new Date();
-        }
+        if (isNaN(baseDate.getTime())) baseDate = new Date();
         baseDate.setDate(baseDate.getDate() + (numDiaReto - 1));
         return baseDate;
     }
@@ -845,12 +857,7 @@
         const fechaKey = getFechaKeyFormatted(numDiaReto);
         const diaNum = String(d.getDate()).padStart(2, '0');
         const mesNum = String(d.getMonth() + 1).padStart(2, '0');
-        return {
-            numDiaReto,
-            nombreDia,
-            fechaKey,
-            labelCorto: `${nombreDia.substring(0,3)} ${diaNum}/${mesNum}`
-        };
+        return { numDiaReto, nombreDia, fechaKey, labelCorto: `${nombreDia.substring(0,3)} ${diaNum}/${mesNum}` };
     }
 
     function normalizarHora(str) {
@@ -923,7 +930,7 @@
         if (e.touches.length === 0) isDragging = false;
     });
 
-    /* CARROUSEL COMPONENT */
+    /* CARROUSEL COMPONENT CON SOPORTE PARA MÚLTIPLES IMÁGENES */
     let carouselState = {};
 
     function renderCarouselHTML(carouselId, imgList) {
@@ -988,15 +995,9 @@
 
     function solicitarAccesoAdmin() {
         const usuario = prompt("Ingrese su Nombre de Usuario:");
-        if (!usuario || usuario.trim().toUpperCase() !== "ANKA") {
-            alert("Acceso denegado: Usuario incorrecto.");
-            return;
-        }
+        if (!usuario || usuario.trim().toUpperCase() !== "ANKA") return alert("Acceso denegado: Usuario incorrecto.");
         const clave = prompt("Ingrese su Clave:");
-        if (clave !== "1234") {
-            alert("Acceso denegado: Clave incorrecta.");
-            return;
-        }
+        if (clave !== "1234") return alert("Acceso denegado: Clave incorrecta.");
         nav('config');
     }
 
@@ -1132,16 +1133,12 @@
 
     function estaElementoParaDia(item, nombreDiaSemana, fechaKeyFormatted) {
         if (item.agenda === "No") return false;
-        
         if (item.fecha && item.fecha === fechaKeyFormatted) return true;
-
         if (item.dias) {
             if (item.dias === "Todos") return true;
             if (item.dias.toLowerCase().includes(nombreDiaSemana.toLowerCase())) return true;
         }
-        
         if (!item.fecha && (!item.dias || item.dias === "Todos")) return true;
-
         return false;
     }
 
@@ -1197,9 +1194,7 @@
         if (!hoursContainer) return;
         hoursContainer.innerHTML = '';
         
-        if (!agendaGuardadaBD[fechaKey]) {
-            agendaGuardadaBD[fechaKey] = { horarios: {}, notas: "", seleccionados: {} };
-        }
+        if (!agendaGuardadaBD[fechaKey]) agendaGuardadaBD[fechaKey] = { horarios: {}, notas: "", seleccionados: {} };
         const registroPrevio = agendaGuardadaBD[fechaKey];
         if (!registroPrevio.seleccionados) registroPrevio.seleccionados = {};
 
@@ -1214,7 +1209,7 @@
                     <div class="agenda-attached-card">
                         <div>
                             <b>${it.tipo}:</b> ${it.nombre} 
-                            ${it.turno ? `<span class="badge-turno">${it.turno}</span>` : ''}
+                            ${(it.turno && it.turno !== "Ninguno") ? `<span class="badge-turno">${it.turno}</span>` : ''}
                         </div>
                         ${it.desc ? `<div style="font-size:0.8rem; color:#555;">${it.desc}</div>` : ''}
                         ${it.link ? `<a href="${it.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
@@ -1264,7 +1259,6 @@
     function seleccionarActividadEnHora(fechaKey, horaStr, selectEl) {
         const valor = selectEl.value;
         if (!valor) return;
-
         if (!agendaGuardadaBD[fechaKey]) agendaGuardadaBD[fechaKey] = { horarios: {}, notas: "", seleccionados: {} };
         if (!agendaGuardadaBD[fechaKey].seleccionados) agendaGuardadaBD[fechaKey].seleccionados = {};
         if (!agendaGuardadaBD[fechaKey].seleccionados[horaStr]) agendaGuardadaBD[fechaKey].seleccionados[horaStr] = [];
@@ -1289,10 +1283,7 @@
             horariosMap[input.getAttribute('data-hora')] = input.value;
         });
 
-        if (!agendaGuardadaBD[currentFechaKeyModal]) {
-            agendaGuardadaBD[currentFechaKeyModal] = { horarios: {}, notas: "", seleccionados: {} };
-        }
-
+        if (!agendaGuardadaBD[currentFechaKeyModal]) agendaGuardadaBD[currentFechaKeyModal] = { horarios: {}, notas: "", seleccionados: {} };
         agendaGuardadaBD[currentFechaKeyModal].horarios = horariosMap;
         agendaGuardadaBD[currentFechaKeyModal].notas = document.getElementById('inline-modal-text').value;
 
@@ -1303,6 +1294,23 @@
         return lista.sort((a, b) => (parseInt(a.orden) || 1) - (parseInt(b.orden) || 1));
     }
 
+    /* FUNCIÓN GENERAL PARA AGRUPAR E IMPRIMIR IMÁGENES SEGÚN NÚMERO DE CARROUSEL */
+    function procesarImagenesYCarrousel(item, prefixId, idx) {
+        let imagenesTotales = [];
+        if (item.imagenes && item.imagenes.length > 0) imagenesTotales = item.imagenes;
+        else if (item.imgUrl) imagenesTotales = [item.imgUrl];
+
+        if (imagenesTotales.length === 0) return '';
+
+        const numCarrousel = parseInt(item.carrousel) || 0;
+
+        if (numCarrousel > 0 || imagenesTotales.length > 1) {
+            return renderCarouselHTML(`${prefixId}-${numCarrousel || idx}`, imagenesTotales);
+        } else {
+            return `<img src="${imagenesTotales[0]}" class="item-attached-img" onclick="openImageViewer('${imagenesTotales[0]}')" title="Toca para ampliar">`;
+        }
+    }
+
     /* ABM MODALIDAD */
     function guardarModalidadABM() {
         const nombre = document.getElementById('mod-nombre').value;
@@ -1310,8 +1318,9 @@
         const fecha = document.getElementById('mod-fecha').value || '';
         const hora = document.getElementById('mod-hora').value || '';
         const dias = document.getElementById('mod-dias').value || 'Todos';
-        const turno = document.getElementById('mod-turno').value || 'Mañana';
+        const turno = document.getElementById('mod-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('mod-orden').value) || 1;
+        const carrousel = parseInt(document.getElementById('mod-carrousel').value) || 0;
         const link = document.getElementById('mod-link').value || '';
         const observacion = document.getElementById('mod-observacion').value || '';
         const agenda = document.getElementById('mod-agenda').value || 'Si';
@@ -1325,7 +1334,7 @@
                 imgsFinales = modalidadDBList[editIndices.mod].imagenes || [];
             }
 
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
 
             if (editIndices.mod >= 0) {
                 modalidadDBList[editIndices.mod] = itemObj;
@@ -1349,8 +1358,9 @@
         document.getElementById('mod-fecha').value = m.fecha || '';
         document.getElementById('mod-hora').value = m.hora || '';
         document.getElementById('mod-dias').value = m.dias || 'Todos';
-        document.getElementById('mod-turno').value = m.turno || 'Mañana';
+        document.getElementById('mod-turno').value = m.turno || 'Ninguno';
         document.getElementById('mod-orden').value = m.orden || 1;
+        document.getElementById('mod-carrousel').value = m.carrousel || 0;
         document.getElementById('mod-link').value = m.link || '';
         document.getElementById('mod-observacion').value = m.observacion || '';
         document.getElementById('mod-agenda').value = m.agenda || 'Si';
@@ -1364,8 +1374,9 @@
         document.getElementById('mod-fecha').value = '';
         document.getElementById('mod-hora').value = '';
         document.getElementById('mod-dias').value = 'Todos';
-        document.getElementById('mod-turno').value = 'Mañana';
+        document.getElementById('mod-turno').value = 'Ninguno';
         document.getElementById('mod-orden').value = 1;
+        document.getElementById('mod-carrousel').value = 0;
         document.getElementById('mod-link').value = '';
         document.getElementById('mod-observacion').value = '';
         document.getElementById('mod-agenda').value = 'Si';
@@ -1379,8 +1390,9 @@
         const fecha = document.getElementById('ali-fecha').value || '';
         const hora = document.getElementById('ali-hora').value || '';
         const dias = document.getElementById('ali-dias').value || 'Todos';
-        const turno = document.getElementById('ali-turno').value || 'Mañana';
+        const turno = document.getElementById('ali-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('ali-orden').value) || 1;
+        const carrousel = parseInt(document.getElementById('ali-carrousel').value) || 0;
         const link = document.getElementById('ali-link').value || '';
         const observacion = document.getElementById('ali-observacion').value || '';
         const agenda = document.getElementById('ali-agenda').value || 'Si';
@@ -1388,8 +1400,11 @@
 
         if (!nombre) return alert('Por favor ingresa el nombre del alimento');
         readInputImage(fileInput, (base64Imgs) => {
-            const imgFinal = base64Imgs[0] || (editIndices.ali >= 0 ? alimentosDB[editIndices.ali].imgUrl : null);
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imgUrl: imgFinal };
+            let imgsFinales = base64Imgs;
+            if (imgsFinales.length === 0 && editIndices.ali >= 0) {
+                imgsFinales = alimentosDB[editIndices.ali].imagenes || (alimentosDB[editIndices.ali].imgUrl ? [alimentosDB[editIndices.ali].imgUrl] : []);
+            }
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
             
             if (editIndices.ali >= 0) {
                 alimentosDB[editIndices.ali] = itemObj;
@@ -1411,8 +1426,9 @@
         document.getElementById('ali-fecha').value = a.fecha || '';
         document.getElementById('ali-hora').value = a.hora || '';
         document.getElementById('ali-dias').value = a.dias || 'Todos';
-        document.getElementById('ali-turno').value = a.turno || 'Mañana';
+        document.getElementById('ali-turno').value = a.turno || 'Ninguno';
         document.getElementById('ali-orden').value = a.orden || 1;
+        document.getElementById('ali-carrousel').value = a.carrousel || 0;
         document.getElementById('ali-link').value = a.link || '';
         document.getElementById('ali-observacion').value = a.observacion || '';
         document.getElementById('ali-agenda').value = a.agenda || 'Si';
@@ -1426,8 +1442,9 @@
         document.getElementById('ali-fecha').value = '';
         document.getElementById('ali-hora').value = '';
         document.getElementById('ali-dias').value = 'Todos';
-        document.getElementById('ali-turno').value = 'Mañana';
+        document.getElementById('ali-turno').value = 'Ninguno';
         document.getElementById('ali-orden').value = 1;
+        document.getElementById('ali-carrousel').value = 0;
         document.getElementById('ali-link').value = '';
         document.getElementById('ali-observacion').value = '';
         document.getElementById('ali-agenda').value = 'Si';
@@ -1441,8 +1458,9 @@
         const fecha = document.getElementById('dio-fecha').value || '';
         const hora = document.getElementById('dio-hora').value || '';
         const dias = document.getElementById('dio-dias').value || 'Todos';
-        const turno = document.getElementById('dio-turno').value || 'Mañana';
+        const turno = document.getElementById('dio-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('dio-orden').value) || 1;
+        const carrousel = parseInt(document.getElementById('dio-carrousel').value) || 0;
         const link = document.getElementById('dio-link').value || '';
         const observacion = document.getElementById('dio-observacion').value || '';
         const agenda = document.getElementById('dio-agenda').value || 'Si';
@@ -1450,8 +1468,11 @@
 
         if (!nombre) return alert('Por favor ingresa el nombre de la Diosa');
         readInputImage(fileInput, (base64Imgs) => {
-            const imgFinal = base64Imgs[0] || (editIndices.dio >= 0 ? diosasDB[editIndices.dio].imgUrl : null);
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imgUrl: imgFinal };
+            let imgsFinales = base64Imgs;
+            if (imgsFinales.length === 0 && editIndices.dio >= 0) {
+                imgsFinales = diosasDB[editIndices.dio].imagenes || (diosasDB[editIndices.dio].imgUrl ? [diosasDB[editIndices.dio].imgUrl] : []);
+            }
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
             
             if (editIndices.dio >= 0) {
                 diosasDB[editIndices.dio] = itemObj;
@@ -1473,8 +1494,9 @@
         document.getElementById('dio-fecha').value = d.fecha || '';
         document.getElementById('dio-hora').value = d.hora || '';
         document.getElementById('dio-dias').value = d.dias || 'Todos';
-        document.getElementById('dio-turno').value = d.turno || 'Mañana';
+        document.getElementById('dio-turno').value = d.turno || 'Ninguno';
         document.getElementById('dio-orden').value = d.orden || 1;
+        document.getElementById('dio-carrousel').value = d.carrousel || 0;
         document.getElementById('dio-link').value = d.link || '';
         document.getElementById('dio-observacion').value = d.observacion || '';
         document.getElementById('dio-agenda').value = d.agenda || 'Si';
@@ -1488,8 +1510,9 @@
         document.getElementById('dio-fecha').value = '';
         document.getElementById('dio-hora').value = '';
         document.getElementById('dio-dias').value = 'Todos';
-        document.getElementById('dio-turno').value = 'Mañana';
+        document.getElementById('dio-turno').value = 'Ninguno';
         document.getElementById('dio-orden').value = 1;
+        document.getElementById('dio-carrousel').value = 0;
         document.getElementById('dio-link').value = '';
         document.getElementById('dio-observacion').value = '';
         document.getElementById('dio-agenda').value = 'Si';
@@ -1503,8 +1526,9 @@
         const fecha = document.getElementById('nov-fecha').value || '';
         const hora = document.getElementById('nov-hora').value || '';
         const dias = document.getElementById('nov-dias').value || 'Todos';
-        const turno = document.getElementById('nov-turno').value || 'Mañana';
+        const turno = document.getElementById('nov-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('nov-orden').value) || 1;
+        const carrousel = parseInt(document.getElementById('nov-carrousel').value) || 0;
         const link = document.getElementById('nov-link').value || '';
         const observacion = document.getElementById('nov-observacion').value || '';
         const agenda = document.getElementById('nov-agenda').value || 'Si';
@@ -1512,8 +1536,11 @@
 
         if (!nombre) return alert('Por favor ingresa el título/nombre de la novedad');
         readInputImage(fileInput, (base64Imgs) => {
-            const imgFinal = base64Imgs[0] || (editIndices.nov >= 0 ? novedadesDB[editIndices.nov].imgUrl : null);
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imgUrl: imgFinal };
+            let imgsFinales = base64Imgs;
+            if (imgsFinales.length === 0 && editIndices.nov >= 0) {
+                imgsFinales = novedadesDB[editIndices.nov].imagenes || (novedadesDB[editIndices.nov].imgUrl ? [novedadesDB[editIndices.nov].imgUrl] : []);
+            }
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
             
             if (editIndices.nov >= 0) {
                 novedadesDB[editIndices.nov] = itemObj;
@@ -1535,8 +1562,9 @@
         document.getElementById('nov-fecha').value = item.fecha || '';
         document.getElementById('nov-hora').value = item.hora || '';
         document.getElementById('nov-dias').value = item.dias || 'Todos';
-        document.getElementById('nov-turno').value = item.turno || 'Mañana';
+        document.getElementById('nov-turno').value = item.turno || 'Ninguno';
         document.getElementById('nov-orden').value = item.orden || 1;
+        document.getElementById('nov-carrousel').value = item.carrousel || 0;
         document.getElementById('nov-link').value = item.link || '';
         document.getElementById('nov-observacion').value = item.observacion || '';
         document.getElementById('nov-agenda').value = item.agenda || 'Si';
@@ -1550,8 +1578,9 @@
         document.getElementById('nov-fecha').value = '';
         document.getElementById('nov-hora').value = '';
         document.getElementById('nov-dias').value = 'Todos';
-        document.getElementById('nov-turno').value = 'Mañana';
+        document.getElementById('nov-turno').value = 'Ninguno';
         document.getElementById('nov-orden').value = 1;
+        document.getElementById('nov-carrousel').value = 0;
         document.getElementById('nov-link').value = '';
         document.getElementById('nov-observacion').value = '';
         document.getElementById('nov-agenda').value = 'Si';
@@ -1565,8 +1594,9 @@
         const fecha = document.getElementById('pra-fecha').value || '';
         const hora = document.getElementById('pra-hora').value || '';
         const dias = document.getElementById('pra-dias').value || 'Todos';
-        const turno = document.getElementById('pra-turno').value || 'Mañana';
+        const turno = document.getElementById('pra-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('pra-orden').value) || 1;
+        const carrousel = parseInt(document.getElementById('pra-carrousel').value) || 0;
         const link = document.getElementById('pra-link').value || '';
         const observacion = document.getElementById('pra-observacion').value || '';
         const agenda = document.getElementById('pra-agenda').value || 'Si';
@@ -1574,8 +1604,11 @@
 
         if (!nombre) return alert('Por favor ingresa el nombre de la práctica');
         readInputImage(fileInput, (base64Imgs) => {
-            const imgFinal = base64Imgs[0] || (editIndices.pra >= 0 ? practicasDB[editIndices.pra].imgUrl : null);
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imgUrl: imgFinal };
+            let imgsFinales = base64Imgs;
+            if (imgsFinales.length === 0 && editIndices.pra >= 0) {
+                imgsFinales = practicasDB[editIndices.pra].imagenes || (practicasDB[editIndices.pra].imgUrl ? [practicasDB[editIndices.pra].imgUrl] : []);
+            }
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
 
             if (editIndices.pra >= 0) {
                 practicasDB[editIndices.pra] = itemObj;
@@ -1597,8 +1630,9 @@
         document.getElementById('pra-fecha').value = p.fecha || '';
         document.getElementById('pra-hora').value = p.hora || '';
         document.getElementById('pra-dias').value = p.dias || 'Todos';
-        document.getElementById('pra-turno').value = p.turno || 'Mañana';
+        document.getElementById('pra-turno').value = p.turno || 'Ninguno';
         document.getElementById('pra-orden').value = p.orden || 1;
+        document.getElementById('pra-carrousel').value = p.carrousel || 0;
         document.getElementById('pra-link').value = p.link || '';
         document.getElementById('pra-observacion').value = p.observacion || p.comentario || '';
         document.getElementById('pra-agenda').value = p.agenda || 'Si';
@@ -1612,8 +1646,9 @@
         document.getElementById('pra-fecha').value = '';
         document.getElementById('pra-hora').value = '';
         document.getElementById('pra-dias').value = 'Todos';
-        document.getElementById('pra-turno').value = 'Mañana';
+        document.getElementById('pra-turno').value = 'Ninguno';
         document.getElementById('pra-orden').value = 1;
+        document.getElementById('pra-carrousel').value = 0;
         document.getElementById('pra-link').value = '';
         document.getElementById('pra-observacion').value = '';
         document.getElementById('pra-agenda').value = 'Si';
@@ -1627,8 +1662,9 @@
         const fecha = document.getElementById('act-fecha').value || '';
         const hora = document.getElementById('act-hora').value || '';
         const dias = document.getElementById('act-dias').value || 'Todos';
-        const turno = document.getElementById('act-turno').value || 'Mañana';
+        const turno = document.getElementById('act-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('act-orden').value) || 1;
+        const carrousel = parseInt(document.getElementById('act-carrousel').value) || 0;
         const link = document.getElementById('act-link').value || '';
         const observacion = document.getElementById('act-observacion').value || '';
         const agenda = document.getElementById('act-agenda').value || 'Si';
@@ -1636,8 +1672,11 @@
 
         if (!nombre) return alert('Por favor ingresa el nombre de la actividad');
         readInputImage(fileInput, (base64Imgs) => {
-            const imgFinal = base64Imgs[0] || (editIndices.act >= 0 ? actividadesDB[editIndices.act].imgUrl : null);
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imgUrl: imgFinal };
+            let imgsFinales = base64Imgs;
+            if (imgsFinales.length === 0 && editIndices.act >= 0) {
+                imgsFinales = actividadesDB[editIndices.act].imagenes || (actividadesDB[editIndices.act].imgUrl ? [actividadesDB[editIndices.act].imgUrl] : []);
+            }
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
 
             if (editIndices.act >= 0) {
                 actividadesDB[editIndices.act] = itemObj;
@@ -1659,8 +1698,9 @@
         document.getElementById('act-fecha').value = item.fecha || '';
         document.getElementById('act-hora').value = item.hora || '';
         document.getElementById('act-dias').value = item.dias || item.dia || 'Todos';
-        document.getElementById('act-turno').value = item.turno || 'Mañana';
+        document.getElementById('act-turno').value = item.turno || 'Ninguno';
         document.getElementById('act-orden').value = item.orden || 1;
+        document.getElementById('act-carrousel').value = item.carrousel || 0;
         document.getElementById('act-link').value = item.link || '';
         document.getElementById('act-observacion').value = item.observacion || '';
         document.getElementById('act-agenda').value = item.agenda || 'Si';
@@ -1674,8 +1714,9 @@
         document.getElementById('act-fecha').value = '';
         document.getElementById('act-hora').value = '';
         document.getElementById('act-dias').value = 'Todos';
-        document.getElementById('act-turno').value = 'Mañana';
+        document.getElementById('act-turno').value = 'Ninguno';
         document.getElementById('act-orden').value = 1;
+        document.getElementById('act-carrousel').value = 0;
         document.getElementById('act-link').value = '';
         document.getElementById('act-observacion').value = '';
         document.getElementById('act-agenda').value = 'Si';
@@ -1689,8 +1730,9 @@
         const fecha = document.getElementById('inf-fecha').value || '';
         const hora = document.getElementById('inf-hora').value || '';
         const dias = document.getElementById('inf-dias').value || 'Todos';
-        const turno = document.getElementById('inf-turno').value || 'Mañana';
+        const turno = document.getElementById('inf-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('inf-orden').value) || 1;
+        const carrousel = parseInt(document.getElementById('inf-carrousel').value) || 0;
         const link = document.getElementById('inf-link').value || '';
         const observacion = document.getElementById('inf-observacion').value || '';
         const agenda = document.getElementById('inf-agenda').value || 'Si';
@@ -1703,7 +1745,7 @@
                 imgsFinales = infusionesDB[editIndices.inf].imagenes || [];
             }
 
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
 
             if (editIndices.inf >= 0) {
                 infusionesDB[editIndices.inf] = itemObj;
@@ -1725,8 +1767,9 @@
         document.getElementById('inf-fecha').value = item.fecha || '';
         document.getElementById('inf-hora').value = item.hora || '';
         document.getElementById('inf-dias').value = item.dias || 'Todos';
-        document.getElementById('inf-turno').value = item.turno || 'Mañana';
+        document.getElementById('inf-turno').value = item.turno || 'Ninguno';
         document.getElementById('inf-orden').value = item.orden || 1;
+        document.getElementById('inf-carrousel').value = item.carrousel || 0;
         document.getElementById('inf-link').value = item.link || '';
         document.getElementById('inf-observacion').value = item.observacion || item.efecto || '';
         document.getElementById('inf-agenda').value = item.agenda || 'Si';
@@ -1740,8 +1783,9 @@
         document.getElementById('inf-fecha').value = '';
         document.getElementById('inf-hora').value = '';
         document.getElementById('inf-dias').value = 'Todos';
-        document.getElementById('inf-turno').value = 'Mañana';
+        document.getElementById('inf-turno').value = 'Ninguno';
         document.getElementById('inf-orden').value = 1;
+        document.getElementById('inf-carrousel').value = 0;
         document.getElementById('inf-link').value = '';
         document.getElementById('inf-observacion').value = '';
         document.getElementById('inf-agenda').value = 'Si';
@@ -1755,8 +1799,9 @@
         const fecha = document.getElementById('pod-fecha').value || '';
         const hora = document.getElementById('pod-hora').value || '';
         const dias = document.getElementById('pod-dias').value || 'Todos';
-        const turno = document.getElementById('pod-turno').value || 'Mañana';
+        const turno = document.getElementById('pod-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('pod-orden').value) || 1;
+        const carrousel = parseInt(document.getElementById('pod-carrousel').value) || 0;
         const link = document.getElementById('pod-link').value || '';
         const observacion = document.getElementById('pod-observacion').value || '';
         const agenda = document.getElementById('pod-agenda').value || 'Si';
@@ -1764,8 +1809,11 @@
 
         if (!nombre) return alert('Por favor ingresa el nombre del podcast');
         readInputImage(fileInput, (base64Imgs) => {
-            const imgFinal = base64Imgs[0] || (editIndices.pod >= 0 ? podcastsDB[editIndices.pod].imgUrl : null);
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imgUrl: imgFinal };
+            let imgsFinales = base64Imgs;
+            if (imgsFinales.length === 0 && editIndices.pod >= 0) {
+                imgsFinales = podcastsDB[editIndices.pod].imagenes || (podcastsDB[editIndices.pod].imgUrl ? [podcastsDB[editIndices.pod].imgUrl] : []);
+            }
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
 
             if (editIndices.pod >= 0) {
                 podcastsDB[editIndices.pod] = itemObj;
@@ -1786,8 +1834,9 @@
         document.getElementById('pod-fecha').value = item.fecha || '';
         document.getElementById('pod-hora').value = item.hora || '';
         document.getElementById('pod-dias').value = item.dias || 'Todos';
-        document.getElementById('pod-turno').value = item.turno || 'Mañana';
+        document.getElementById('pod-turno').value = item.turno || 'Ninguno';
         document.getElementById('pod-orden').value = item.orden || 1;
+        document.getElementById('pod-carrousel').value = item.carrousel || 0;
         document.getElementById('pod-link').value = item.link || '';
         document.getElementById('pod-observacion').value = item.observacion || '';
         document.getElementById('pod-agenda').value = item.agenda || 'Si';
@@ -1801,8 +1850,9 @@
         document.getElementById('pod-fecha').value = '';
         document.getElementById('pod-hora').value = '';
         document.getElementById('pod-dias').value = 'Todos';
-        document.getElementById('pod-turno').value = 'Mañana';
+        document.getElementById('pod-turno').value = 'Ninguno';
         document.getElementById('pod-orden').value = 1;
+        document.getElementById('pod-carrousel').value = 0;
         document.getElementById('pod-link').value = '';
         document.getElementById('pod-observacion').value = '';
         document.getElementById('pod-agenda').value = 'Si';
@@ -1813,7 +1863,7 @@
     function renderConfigLists() {
         document.getElementById('crud-modalidad-list').innerHTML = modalidadDBList.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarModalidad(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="modalidadDBList.splice(${idx},1); renderConfigLists(); renderPublicModalidad();">Eliminar</button>
@@ -1823,7 +1873,7 @@
 
         document.getElementById('crud-alimentos-list').innerHTML = alimentosDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarAlimento(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="alimentosDB.splice(${idx},1); renderConfigLists(); renderPublicAlimentos();">Eliminar</button>
@@ -1833,7 +1883,7 @@
 
         document.getElementById('crud-diosas-list').innerHTML = diosasDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarDiosa(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="diosasDB.splice(${idx},1); renderConfigLists(); renderPublicDiosas();">Eliminar</button>
@@ -1843,7 +1893,7 @@
 
         document.getElementById('novedades-abm-list').innerHTML = novedadesDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre || item.titulo}</b> (${item.turno || 'Mañana'})</span>
+                <span><b>#${item.orden || 1} - ${item.nombre || item.titulo}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarNovedad(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="novedadesDB.splice(${idx},1); renderConfigLists(); renderPublicNovedades();">Eliminar</button>
@@ -1853,7 +1903,7 @@
 
         document.getElementById('crud-practicas-list').innerHTML = practicasDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarPractica(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="practicasDB.splice(${idx},1); renderConfigLists(); renderPracticasScreen();">Eliminar</button>
@@ -1863,7 +1913,7 @@
 
         document.getElementById('crud-actividades-list').innerHTML = actividadesDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarActividad(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="actividadesDB.splice(${idx},1); renderConfigLists(); renderPublicActividades();">Eliminar</button>
@@ -1873,7 +1923,7 @@
 
         document.getElementById('crud-infusiones-list').innerHTML = infusionesDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarInfusion(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="infusionesDB.splice(${idx},1); renderConfigLists(); renderPublicPocimas();">Eliminar</button>
@@ -1883,7 +1933,7 @@
 
         document.getElementById('crud-podcasts-list').innerHTML = podcastsDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarPodcast(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="podcastsDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
@@ -1892,7 +1942,7 @@
         `).join('');
     }
 
-    /* RENDERS VISTAS PÚBLICAS ORDENADAS CON LINK ARRIBA DE LA IMAGEN */
+    /* RENDERS VISTAS PÚBLICAS ORDENADAS CON SOPORTE PARA TURNO "NINGUNO" Y AGRUPAMIENTO DE CARROUSEL */
     function renderPublicModalidad() {
         const container = document.getElementById('public-modalidad-content');
         if (!container) return;
@@ -1904,19 +1954,16 @@
         const listaOrdenada = ordenarPorCampo([...modalidadDBList]);
 
         container.innerHTML = listaOrdenada.map((item, idx) => {
-            let carouselHTML = '';
-            if (item.imagenes && item.imagenes.length > 0) {
-                carouselHTML = renderCarouselHTML(`modalidad-${idx}`, item.imagenes);
-            }
+            const mediaHTML = procesarImagenesYCarrousel(item, 'modalidad', idx);
 
             return `
                 <div class="practica-card-item">
                     <h2 style="margin:0 0 6px 0; color:var(--primary-dark);">${item.nombre}</h2>
-                    ${item.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${item.turno}</span></p>` : ''}
+                    ${(item.turno && item.turno !== "Ninguno") ? `<p style="margin:0;"><span class="badge-turno">Turno: ${item.turno}</span></p>` : ''}
                     <p style="white-space: pre-line; line-height: 1.4;">${item.desc}</p>
                     ${item.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${item.observacion}</p>` : ''}
                     ${item.link ? `<a href="${item.link}" target="_blank" class="practica-link-btn">🔗 Enlace / Información</a>` : ''}
-                    ${carouselHTML}
+                    ${mediaHTML}
                 </div>
             `;
         }).join('');
@@ -1933,20 +1980,17 @@
         const listaOrdenada = ordenarPorCampo([...infusionesDB]);
 
         container.innerHTML = listaOrdenada.map((inf, idx) => {
-            let carouselHTML = '';
-            if (inf.imagenes && inf.imagenes.length > 0) {
-                carouselHTML = renderCarouselHTML(`pocima-${idx}`, inf.imagenes);
-            }
+            const mediaHTML = procesarImagenesYCarrousel(inf, 'pocima', idx);
 
             return `
                 <div class="practica-card-item">
                     <h3 style="margin:0; color:var(--primary-dark);">🍵 ${inf.nombre}</h3>
-                    ${inf.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${inf.turno}</span></p>` : ''}
+                    ${(inf.turno && inf.turno !== "Ninguno") ? `<p style="margin:0;"><span class="badge-turno">Turno: ${inf.turno}</span></p>` : ''}
                     ${inf.desc ? `<p style="margin:2px 0;">${inf.desc}</p>` : ''}
                     ${inf.dias ? `<p style="margin:2px 0; font-size:0.85rem;"><b>Días:</b> ${inf.dias}</p>` : ''}
                     ${inf.observacion ? `<p style="margin:2px 0; font-size:0.85rem; color:#666;"><b>Observación:</b> ${inf.observacion}</p>` : ''}
                     ${inf.link ? `<a href="${inf.link}" target="_blank" class="practica-link-btn">🔗 Abrir Recurso / Enlace</a>` : ''}
-                    ${carouselHTML}
+                    ${mediaHTML}
                 </div>
             `;
         }).join('');
@@ -1956,68 +2000,80 @@
         const container = document.getElementById('public-alimentos-list');
         if (alimentosDB.length === 0) { container.innerHTML = '<i style="font-size:0.8rem; color:#888;">No hay alimentos cargados.</i>'; return; }
         const listaOrdenada = ordenarPorCampo([...alimentosDB]);
-        container.innerHTML = listaOrdenada.map(a => `
-            <div class="practica-card-item">
-                <h3>🥗 ${a.nombre}</h3>
-                ${a.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${a.turno}</span></p>` : ''}
-                <p>${a.desc || ''}</p>
-                ${a.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${a.dias}</p>` : ''}
-                ${a.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${a.observacion}</p>` : ''}
-                ${a.link ? `<a href="${a.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Receta</a>` : ''}
-                ${a.imgUrl ? `<img src="${a.imgUrl}" class="item-attached-img" onclick="openImageViewer('${a.imgUrl}')" title="Toca para ampliar">` : ''}
-            </div>
-        `).join('');
+        container.innerHTML = listaOrdenada.map((a, idx) => {
+            const mediaHTML = procesarImagenesYCarrousel(a, 'alimento', idx);
+            return `
+                <div class="practica-card-item">
+                    <h3>🥗 ${a.nombre}</h3>
+                    ${(a.turno && a.turno !== "Ninguno") ? `<p style="margin:0;"><span class="badge-turno">Turno: ${a.turno}</span></p>` : ''}
+                    <p>${a.desc || ''}</p>
+                    ${a.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${a.dias}</p>` : ''}
+                    ${a.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${a.observacion}</p>` : ''}
+                    ${a.link ? `<a href="${a.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Receta</a>` : ''}
+                    ${mediaHTML}
+                </div>
+            `;
+        }).join('');
     }
 
     function renderPublicDiosas() {
         const container = document.getElementById('public-diosas-list');
         if (diosasDB.length === 0) { container.innerHTML = '<i style="font-size:0.8rem; color:#888;">No hay diosas cargadas.</i>'; return; }
         const listaOrdenada = ordenarPorCampo([...diosasDB]);
-        container.innerHTML = listaOrdenada.map(d => `
-            <div class="practica-card-item">
-                <h3>👑 ${d.nombre}</h3>
-                ${d.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${d.turno}</span></p>` : ''}
-                <p>${d.desc || ''}</p>
-                ${d.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${d.dias}</p>` : ''}
-                ${d.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${d.observacion}</p>` : ''}
-                ${d.link ? `<a href="${d.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
-                ${d.imgUrl ? `<img src="${d.imgUrl}" class="item-attached-img" onclick="openImageViewer('${d.imgUrl}')" title="Toca para ampliar">` : ''}
-            </div>
-        `).join('');
+        container.innerHTML = listaOrdenada.map((d, idx) => {
+            const mediaHTML = procesarImagenesYCarrousel(d, 'diosa', idx);
+            return `
+                <div class="practica-card-item">
+                    <h3>👑 ${d.nombre}</h3>
+                    ${(d.turno && d.turno !== "Ninguno") ? `<p style="margin:0;"><span class="badge-turno">Turno: ${d.turno}</span></p>` : ''}
+                    <p>${d.desc || ''}</p>
+                    ${d.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${d.dias}</p>` : ''}
+                    ${d.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${d.observacion}</p>` : ''}
+                    ${d.link ? `<a href="${d.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
+                    ${mediaHTML}
+                </div>
+            `;
+        }).join('');
     }
 
     function renderPublicActividades() {
         const container = document.getElementById('public-actividades-list');
         if (actividadesDB.length === 0) { container.innerHTML = '<i style="font-size:0.8rem; color:#888;">No hay actividades.</i>'; return; }
         const listaOrdenada = ordenarPorCampo([...actividadesDB]);
-        container.innerHTML = listaOrdenada.map(act => `
-            <div class="practica-card-item">
-                <h3>✨ ${act.nombre}</h3>
-                ${act.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${act.turno}</span></p>` : ''}
-                <p>${act.desc || ''}</p>
-                ${act.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${act.dias}</p>` : ''}
-                ${act.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${act.observacion}</p>` : ''}
-                ${act.link ? `<a href="${act.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace</a>` : ''}
-                ${act.imgUrl ? `<img src="${act.imgUrl}" class="item-attached-img" onclick="openImageViewer('${act.imgUrl}')" title="Toca para ampliar">` : ''}
-            </div>
-        `).join('');
+        container.innerHTML = listaOrdenada.map((act, idx) => {
+            const mediaHTML = procesarImagenesYCarrousel(act, 'actividad', idx);
+            return `
+                <div class="practica-card-item">
+                    <h3>✨ ${act.nombre}</h3>
+                    ${(act.turno && act.turno !== "Ninguno") ? `<p style="margin:0;"><span class="badge-turno">Turno: ${act.turno}</span></p>` : ''}
+                    <p>${act.desc || ''}</p>
+                    ${act.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${act.dias}</p>` : ''}
+                    ${act.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${act.observacion}</p>` : ''}
+                    ${act.link ? `<a href="${act.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace</a>` : ''}
+                    ${mediaHTML}
+                </div>
+            `;
+        }).join('');
     }
 
     function renderPracticasScreen() {
         const container = document.getElementById('practicas-dynamic-list');
         if (practicasDB.length === 0) { container.innerHTML = '<i style="font-size:0.8rem; color:#888;">No hay prácticas.</i>'; return; }
         const listaOrdenada = ordenarPorCampo([...practicasDB]);
-        container.innerHTML = listaOrdenada.map(p => `
-            <div class="practica-card-item">
-                <h3>🧘‍♀️ ${p.nombre}</h3>
-                ${p.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${p.turno}</span></p>` : ''}
-                <p>${p.desc || ''}</p>
-                ${p.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${p.dias}</p>` : ''}
-                ${p.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${p.observacion}</p>` : ''}
-                ${p.link ? `<a href="${p.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace</a>` : ''}
-                ${p.imgUrl ? `<img src="${p.imgUrl}" class="item-attached-img" onclick="openImageViewer('${p.imgUrl}')" title="Toca para ampliar">` : ''}
-            </div>
-        `).join('');
+        container.innerHTML = listaOrdenada.map((p, idx) => {
+            const mediaHTML = procesarImagenesYCarrousel(p, 'practica', idx);
+            return `
+                <div class="practica-card-item">
+                    <h3>🧘‍♀️ ${p.nombre}</h3>
+                    ${(p.turno && p.turno !== "Ninguno") ? `<p style="margin:0;"><span class="badge-turno">Turno: ${p.turno}</span></p>` : ''}
+                    <p>${p.desc || ''}</p>
+                    ${p.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${p.dias}</p>` : ''}
+                    ${p.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${p.observacion}</p>` : ''}
+                    ${p.link ? `<a href="${p.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace</a>` : ''}
+                    ${mediaHTML}
+                </div>
+            `;
+        }).join('');
     }
 
     function renderPublicNovedades() {
@@ -2025,17 +2081,20 @@
         if (!container) return;
         if (novedadesDB.length === 0) { container.innerHTML = '<i style="font-size:0.8rem; color:#888;">No hay novedades.</i>'; return; }
         const listaOrdenada = ordenarPorCampo([...novedadesDB]);
-        container.innerHTML = listaOrdenada.map(n => `
-            <div class="practica-card-item">
-                <h3>📢 ${n.nombre || n.titulo}</h3>
-                ${n.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${n.turno}</span></p>` : ''}
-                <p>${n.desc || ''}</p>
-                ${n.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${n.dias}</p>` : ''}
-                ${n.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${n.observacion}</p>` : ''}
-                ${n.link ? `<a href="${n.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Zoom</a>` : ''}
-                ${n.imgUrl ? `<img src="${n.imgUrl}" class="item-attached-img" onclick="openImageViewer('${n.imgUrl}')" title="Toca para ampliar">` : ''}
-            </div>
-        `).join('');
+        container.innerHTML = listaOrdenada.map((n, idx) => {
+            const mediaHTML = procesarImagenesYCarrousel(n, 'novedad', idx);
+            return `
+                <div class="practica-card-item">
+                    <h3>📢 ${n.nombre || n.titulo}</h3>
+                    ${(n.turno && n.turno !== "Ninguno") ? `<p style="margin:0;"><span class="badge-turno">Turno: ${n.turno}</span></p>` : ''}
+                    <p>${n.desc || ''}</p>
+                    ${n.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${n.dias}</p>` : ''}
+                    ${n.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${n.observacion}</p>` : ''}
+                    ${n.link ? `<a href="${n.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Zoom</a>` : ''}
+                    ${mediaHTML}
+                </div>
+            `;
+        }).join('');
     }
 
     function renderButtonsCustomizer() {
@@ -2069,11 +2128,8 @@
             const titleEl = document.getElementById(`title-btn-${key}`);
             if (cardEl) {
                 cardEl.style.backgroundColor = btn.bg;
-                if (btn.visible === "No") {
-                    cardEl.classList.add('hidden-btn');
-                } else {
-                    cardEl.classList.remove('hidden-btn');
-                }
+                if (btn.visible === "No") cardEl.classList.add('hidden-btn');
+                else cardEl.classList.remove('hidden-btn');
             }
             if (titleEl) titleEl.style.color = btn.color;
         });
