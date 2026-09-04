@@ -225,6 +225,24 @@
             display: block;
             background: #fafafa;
         }
+
+        /* Estilos Portada Fullscreen */
+        .portada-full-mode {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .portada-full-img {
+            width: 100%;
+            flex: 1;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
         .practica-card-item { background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid rgba(244, 162, 145, 0.4); margin-bottom: 8px; display: flex; flex-direction: column; gap: 4px; }
         .practica-link-btn { display: inline-block; margin-top: 4px; margin-bottom: 6px; padding: 6px 12px; background: var(--pastel-green); color: var(--primary-dark); border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.85rem; border: 1px solid #b8e0a8; text-align: center; }
 
@@ -281,9 +299,8 @@
 
     <!-- PANTALLA INICIAL DE PORTADA -->
     <div id="screen-portada" class="screen active">
-        <div class="screen-body" style="justify-content: center; align-items: center; text-align: center;">
-            <div id="portada-content" style="width: 100%;"></div>
-            <button class="btn-submit" style="margin-top: 15px; background: var(--primary-dark); padding: 12px;" onclick="nav('home')">Ingresar a la Comunidad ➔</button>
+        <div class="screen-body" style="justify-content: center; align-items: center; text-align: center; height: 100%;">
+            <div id="portada-content" style="width: 100%; height: 100%; display: flex; flex-direction: column;"></div>
         </div>
     </div>
 
@@ -462,6 +479,10 @@
                 <div class="form-group">
                     <label>Mostrar en Agenda:</label>
                     <select id="por-agenda"><option value="No">No</option><option value="Si">Sí</option></select>
+                </div>
+                <div class="form-group" style="display:flex; align-items:center; gap:8px; background:#fff8f6; padding:8px; border-radius:6px; border:1px solid var(--salmon);">
+                    <input type="checkbox" id="por-pantalla" style="width:auto; margin:0;">
+                    <label for="por-pantalla" style="margin:0; cursor:pointer;"><b>Pantalla:</b> Ocupar toda la pantalla solo con la imagen y botón de ingreso.</label>
                 </div>
                 <div class="form-group"><label>Adjuntar Imagen / Imágenes:</label><input type="file" accept="image/*" id="por-img-input" multiple></div>
                 <button class="btn-submit" id="btn-save-por" onclick="guardarPortadaABM()">Guardar Portada</button>
@@ -852,7 +873,7 @@
     let portadaDBList = [{
         nombre: "Comunidad 28 Días",
         desc: "Bienvenidos a nuestro espacio sagrado de transformación y autoconocimiento.",
-        fecha: "", hora: "", dias: "Todos", turno: "Ninguno", orden: 1, carrousel: 1, link: "", observacion: "", agenda: "No", imagenes: []
+        fecha: "", hora: "", dias: "Todos", turno: "Ninguno", orden: 1, carrousel: 1, link: "", observacion: "", agenda: "No", pantalla: false, imagenes: []
     }];
 
     let modalidadDBList = [{
@@ -1377,7 +1398,7 @@
         }
     }
 
-    /* ABM PORTADA CON PERSISTENCIA DE ARCHIVOS CORREGIDA */
+    /* ABM PORTADA CON CHECKBOX PANTALLA COMPLETA */
     function guardarPortadaABM() {
         const nombre = document.getElementById('por-nombre').value;
         const desc = document.getElementById('por-desc').value;
@@ -1390,6 +1411,7 @@
         const link = document.getElementById('por-link').value || '';
         const observacion = document.getElementById('por-observacion').value || '';
         const agenda = document.getElementById('por-agenda').value || 'No';
+        const pantalla = document.getElementById('por-pantalla').checked;
 
         if (!nombre) return alert("Ingresa el título de la portada.");
 
@@ -1400,7 +1422,7 @@
                 imgsFinales = portadaDBList[editIndices.por].imagenes || [];
             }
 
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, pantalla, imagenes: imgsFinales };
 
             if (editIndices.por >= 0) {
                 portadaDBList[editIndices.por] = itemObj;
@@ -1430,6 +1452,7 @@
         document.getElementById('por-link').value = p.link || '';
         document.getElementById('por-observacion').value = p.observacion || '';
         document.getElementById('por-agenda').value = p.agenda || 'No';
+        document.getElementById('por-pantalla').checked = !!p.pantalla;
         editIndices.por = idx;
         document.getElementById('btn-save-por').innerText = "Actualizar Portada";
     }
@@ -1446,6 +1469,7 @@
         document.getElementById('por-link').value = '';
         document.getElementById('por-observacion').value = '';
         document.getElementById('por-agenda').value = 'No';
+        document.getElementById('por-pantalla').checked = false;
         const f = document.getElementById('por-img-input'); if (f) f.value = '';
     }
 
@@ -2002,7 +2026,7 @@
     function renderConfigLists() {
         document.getElementById('crud-portada-list').innerHTML = portadaDBList.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> ${item.pantalla ? '(Modo Fullscreen)' : ''}</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarPortada(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="portadaDBList.splice(${idx},1); renderConfigLists(); renderPublicPortada();">Eliminar</button>
@@ -2012,7 +2036,7 @@
 
         document.getElementById('crud-modalidad-list').innerHTML = modalidadDBList.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b></span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarModalidad(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="modalidadDBList.splice(${idx},1); renderConfigLists(); renderPublicModalidad();">Eliminar</button>
@@ -2022,7 +2046,7 @@
 
         document.getElementById('crud-alimentos-list').innerHTML = alimentosDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b></span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarAlimento(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="alimentosDB.splice(${idx},1); renderConfigLists(); renderPublicAlimentos();">Eliminar</button>
@@ -2032,7 +2056,7 @@
 
         document.getElementById('crud-diosas-list').innerHTML = diosasDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b></span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarDiosa(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="diosasDB.splice(${idx},1); renderConfigLists(); renderPublicDiosas();">Eliminar</button>
@@ -2042,7 +2066,7 @@
 
         document.getElementById('novedades-abm-list').innerHTML = novedadesDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre || item.titulo}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre || item.titulo}</b></span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarNovedad(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="novedadesDB.splice(${idx},1); renderConfigLists(); renderPublicNovedades();">Eliminar</button>
@@ -2052,7 +2076,7 @@
 
         document.getElementById('crud-practicas-list').innerHTML = practicasDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b></span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarPractica(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="practicasDB.splice(${idx},1); renderConfigLists(); renderPracticasScreen();">Eliminar</button>
@@ -2062,7 +2086,7 @@
 
         document.getElementById('crud-actividades-list').innerHTML = actividadesDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b></span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarActividad(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="actividadesDB.splice(${idx},1); renderConfigLists(); renderPublicActividades();">Eliminar</button>
@@ -2072,7 +2096,7 @@
 
         document.getElementById('crud-infusiones-list').innerHTML = infusionesDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b></span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarInfusion(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="infusionesDB.splice(${idx},1); renderConfigLists(); renderPublicPocimas();">Eliminar</button>
@@ -2082,7 +2106,7 @@
 
         document.getElementById('crud-podcasts-list').innerHTML = podcastsDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b></span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarPodcast(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="podcastsDB.splice(${idx},1); renderConfigLists(); renderPublicPodcasts();">Eliminar</button>
@@ -2096,12 +2120,30 @@
         const container = document.getElementById('portada-content');
         if (!container) return;
         if (portadaDBList.length === 0) {
-            container.innerHTML = '<h2>Comunidad de Mujeres 28 Días</h2><p>Bienvenida a la aplicación.</p>';
+            container.innerHTML = `
+                <h2>Comunidad de Mujeres 28 Días</h2>
+                <p>Bienvenida a la aplicación.</p>
+                <button class="btn-submit" style="margin-top: 15px; background: var(--primary-dark); padding: 12px;" onclick="nav('home')">Ingresar a la Comunidad ➔</button>
+            `;
             return;
         }
 
         const listaOrdenada = ordenarPorCampo([...portadaDBList]);
+        const primerElemento = listaOrdenada[0];
 
+        // MODO PANTALLA COMPLETA / FULLSCREEN
+        if (primerElemento && primerElemento.pantalla) {
+            let imgUrl = (primerElemento.imagenes && primerElemento.imagenes.length > 0) ? primerElemento.imagenes[0] : primerElemento.imgUrl;
+            container.innerHTML = `
+                <div class="portada-full-mode">
+                    ${imgUrl ? `<img src="${imgUrl}" class="portada-full-img" alt="Portada">` : '<div style="flex:1;"></div>'}
+                    <button class="btn-submit" style="margin-top: 10px; background: var(--primary-dark); padding: 14px; font-size:1.1rem;" onclick="nav('home')">Ingresar a la Comunidad ➔</button>
+                </div>
+            `;
+            return;
+        }
+
+        // MODO NORMAL PREDETERMINADO
         container.innerHTML = listaOrdenada.map((item, idx) => {
             const mediaHTML = procesarImagenesYCarrousel(item, 'portada', idx, true);
             return `
@@ -2112,7 +2154,7 @@
                     ${mediaHTML}
                 </div>
             `;
-        }).join('');
+        }).join('') + `<button class="btn-submit" style="margin-top: 15px; background: var(--primary-dark); padding: 12px;" onclick="nav('home')">Ingresar a la Comunidad ➔</button>`;
     }
 
     function renderPublicModalidad() {
