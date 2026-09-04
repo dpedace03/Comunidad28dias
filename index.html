@@ -212,10 +212,11 @@
         .btn-edit { background: #6b5b7b; color: #fff; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
         .btn-delete { background: #e06d53; color: #fff; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
 
+        /* IMÁGENES MÁS GRANDES EN CARDS */
         .item-attached-img {
             max-width: 100%;
-            max-height: 200px;
-            width: auto;
+            max-height: 320px;
+            width: 100%;
             height: auto;
             object-fit: contain;
             border-radius: 8px;
@@ -223,17 +224,18 @@
             margin-top: 6px;
             cursor: zoom-in;
             display: block;
+            background: #fafafa;
         }
         .practica-card-item { background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid rgba(244, 162, 145, 0.4); margin-bottom: 8px; display: flex; flex-direction: column; gap: 4px; }
-        .practica-link-btn { display: inline-block; margin-top: 4px; padding: 4px 10px; background: var(--pastel-green); color: var(--primary-dark); border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.8rem; border: 1px solid #b8e0a8; }
+        .practica-link-btn { display: inline-block; margin-top: 4px; margin-bottom: 6px; padding: 6px 12px; background: var(--pastel-green); color: var(--primary-dark); border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.85rem; border: 1px solid #b8e0a8; text-align: center; }
 
-        /* CARROUSEL COMPONENT */
+        /* CARROUSEL COMPONENT CON MAYOR ALTURA */
         .carousel-container {
             position: relative; width: 100%; max-width: 100%; margin: 8px 0;
             overflow: hidden; border-radius: 10px; border: 1px solid var(--salmon); background: #000;
         }
         .carousel-slide { display: flex; transition: transform 0.3s ease-in-out; width: 100%; }
-        .carousel-img { width: 100%; max-height: 280px; object-fit: contain; flex-shrink: 0; cursor: zoom-in; background: #222; }
+        .carousel-img { width: 100%; max-height: 420px; object-fit: contain; flex-shrink: 0; cursor: zoom-in; background: #222; }
         .carousel-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
             background: rgba(0, 0, 0, 0.5); color: #fff; border: none;
@@ -340,18 +342,14 @@
             <button class="btn-back" onclick="nav('home')">←</button>
         </div>
         <div class="screen-body">
-            <!-- BOTÓN DE CALENDARIO EN LA PARTE SUPERIOR -->
             <button class="toggle-cal-btn" id="btn-toggle-cal" onclick="toggleCalendarioCompleto()">
                 <span>📅</span> Ver Calendario Completo (28 Días)
             </button>
 
-            <!-- CALENDARIO COMPLETO (DESPLEGABLE DE 28 DÍAS) -->
             <div class="calendar-grid" id="calendar-grid" style="display: none; margin-top: 6px; margin-bottom: 8px;"></div>
 
-            <!-- ACCESO RÁPIDO DÍAS (ANTERIOR / SELECCIONADO / SIGUIENTE) -->
             <div class="featured-days-container" id="featured-days-container"></div>
 
-            <!-- VISTA DESPLEGADA DEL DÍA SELECCIONADO -->
             <div style="background: #fffdfa; border: 1px solid #f2c6be; border-radius: var(--border-radius); padding: 10px; display: flex; flex-direction: column; gap: 8px;">
                 <h3 id="inline-day-title" style="margin: 0; font-family: var(--agenda-font-family); color: var(--primary-dark); font-size: 1.25rem;">Día Actual</h3>
                 
@@ -375,7 +373,6 @@
         </div>
         <div class="screen-body">
 
-            <!-- FECHA DE INICIO DEL RETO Y CALENDARIO -->
             <div class="abm-card-box" style="background: var(--pastel-purple); border-color: #c9b6e4;">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.9rem; color: var(--primary-dark);">🗓️ Configuración del Reto de 28 Días</h3>
                 <div class="form-group">
@@ -385,7 +382,6 @@
                 </div>
             </div>
 
-            <!-- CONFIGURACIÓN DE WHATSAPP -->
             <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Configurar Número de WhatsApp</h3>
                 <div class="form-group">
@@ -394,7 +390,6 @@
                 </div>
             </div>
 
-            <!-- APARIENCIA VISUAL GLOBAL -->
             <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Apariencia Global y Botones 3D</h3>
                 <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-bottom:0;">
@@ -403,7 +398,6 @@
                 </div>
             </div>
 
-            <!-- EXPORTACIÓN E IMPORTACIÓN JSON -->
             <div style="background: var(--pastel-green); padding: 10px; border-radius: var(--border-radius); border: 1px solid #b8e0a8; margin-bottom: 12px;">
                 <small style="font-weight:bold; color:var(--primary-dark);">💾 Exportación / Sincronización de Datos:</small>
                 <p style="font-size:0.75rem; margin:4px 0 8px 0;">Descarga o carga manualmente tu archivo <b>config.json</b>.</p>
@@ -414,7 +408,6 @@
                 </div>
             </div>
 
-            <!-- PERSONALIZADOR DE BOTONES CON VISIBILIDAD -->
             <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Personalizar Botones y Visibilidad de Secciones</h3>
                 <div id="buttons-customizer-container"></div>
@@ -788,7 +781,6 @@
     let configVisual = { btn3D: false };
     let whatsappNumber = "5491112345678";
     
-    // Lista para Modalidad con soporte de múltiples registros y edición
     let modalidadDBList = [{
         nombre: "Modalidad del Programa 28 Días",
         desc: "Bienvenidos a nuestro espacio de transformación y bienestar consciente. Durante estos 28 días nos conectaremos con hábitos saludables, nutrición consciente y sincronización biológica.",
@@ -1225,8 +1217,8 @@
                             ${it.turno ? `<span class="badge-turno">${it.turno}</span>` : ''}
                         </div>
                         ${it.desc ? `<div style="font-size:0.8rem; color:#555;">${it.desc}</div>` : ''}
+                        ${it.link ? `<a href="${it.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
                         ${it.imgUrl ? `<img src="${it.imgUrl}" class="item-attached-img" onclick="openImageViewer('${it.imgUrl}')" title="Toca para ampliar">` : ''}
-                        ${it.link ? `<a href="${it.link}" target="_blank" style="color:var(--primary-dark); font-weight:bold;">🔗 Abrir Enlace / Recurso</a>` : ''}
                     </div>
                 `).join('');
             }
@@ -1311,7 +1303,7 @@
         return lista.sort((a, b) => (parseInt(a.orden) || 1) - (parseInt(b.orden) || 1));
     }
 
-    /* ABM MODALIDAD CON OPCIÓN DE EDITAR */
+    /* ABM MODALIDAD */
     function guardarModalidadABM() {
         const nombre = document.getElementById('mod-nombre').value;
         const desc = document.getElementById('mod-desc').value;
@@ -1900,7 +1892,7 @@
         `).join('');
     }
 
-    /* RENDERS VISTAS PÚBLICAS ORDENADAS */
+    /* RENDERS VISTAS PÚBLICAS ORDENADAS CON LINK ARRIBA DE LA IMAGEN */
     function renderPublicModalidad() {
         const container = document.getElementById('public-modalidad-content');
         if (!container) return;
@@ -1923,8 +1915,8 @@
                     ${item.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${item.turno}</span></p>` : ''}
                     <p style="white-space: pre-line; line-height: 1.4;">${item.desc}</p>
                     ${item.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${item.observacion}</p>` : ''}
-                    ${carouselHTML}
                     ${item.link ? `<a href="${item.link}" target="_blank" class="practica-link-btn">🔗 Enlace / Información</a>` : ''}
+                    ${carouselHTML}
                 </div>
             `;
         }).join('');
@@ -1953,8 +1945,8 @@
                     ${inf.desc ? `<p style="margin:2px 0;">${inf.desc}</p>` : ''}
                     ${inf.dias ? `<p style="margin:2px 0; font-size:0.85rem;"><b>Días:</b> ${inf.dias}</p>` : ''}
                     ${inf.observacion ? `<p style="margin:2px 0; font-size:0.85rem; color:#666;"><b>Observación:</b> ${inf.observacion}</p>` : ''}
-                    ${carouselHTML}
                     ${inf.link ? `<a href="${inf.link}" target="_blank" class="practica-link-btn">🔗 Abrir Recurso / Enlace</a>` : ''}
+                    ${carouselHTML}
                 </div>
             `;
         }).join('');
@@ -1971,8 +1963,8 @@
                 <p>${a.desc || ''}</p>
                 ${a.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${a.dias}</p>` : ''}
                 ${a.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${a.observacion}</p>` : ''}
-                ${a.imgUrl ? `<img src="${a.imgUrl}" class="item-attached-img" onclick="openImageViewer('${a.imgUrl}')" title="Toca para ampliar"><br>` : ''}
                 ${a.link ? `<a href="${a.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Receta</a>` : ''}
+                ${a.imgUrl ? `<img src="${a.imgUrl}" class="item-attached-img" onclick="openImageViewer('${a.imgUrl}')" title="Toca para ampliar">` : ''}
             </div>
         `).join('');
     }
@@ -1988,8 +1980,8 @@
                 <p>${d.desc || ''}</p>
                 ${d.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${d.dias}</p>` : ''}
                 ${d.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${d.observacion}</p>` : ''}
-                ${d.imgUrl ? `<img src="${d.imgUrl}" class="item-attached-img" onclick="openImageViewer('${d.imgUrl}')" title="Toca para ampliar"><br>` : ''}
                 ${d.link ? `<a href="${d.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
+                ${d.imgUrl ? `<img src="${d.imgUrl}" class="item-attached-img" onclick="openImageViewer('${d.imgUrl}')" title="Toca para ampliar">` : ''}
             </div>
         `).join('');
     }
@@ -2005,8 +1997,8 @@
                 <p>${act.desc || ''}</p>
                 ${act.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${act.dias}</p>` : ''}
                 ${act.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${act.observacion}</p>` : ''}
-                ${act.imgUrl ? `<img src="${act.imgUrl}" class="item-attached-img" onclick="openImageViewer('${act.imgUrl}')" title="Toca para ampliar"><br>` : ''}
                 ${act.link ? `<a href="${act.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace</a>` : ''}
+                ${act.imgUrl ? `<img src="${act.imgUrl}" class="item-attached-img" onclick="openImageViewer('${act.imgUrl}')" title="Toca para ampliar">` : ''}
             </div>
         `).join('');
     }
@@ -2022,8 +2014,8 @@
                 <p>${p.desc || ''}</p>
                 ${p.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${p.dias}</p>` : ''}
                 ${p.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${p.observacion}</p>` : ''}
-                ${p.imgUrl ? `<img src="${p.imgUrl}" class="item-attached-img" onclick="openImageViewer('${p.imgUrl}')" title="Toca para ampliar"><br>` : ''}
                 ${p.link ? `<a href="${p.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace</a>` : ''}
+                ${p.imgUrl ? `<img src="${p.imgUrl}" class="item-attached-img" onclick="openImageViewer('${p.imgUrl}')" title="Toca para ampliar">` : ''}
             </div>
         `).join('');
     }
@@ -2040,13 +2032,12 @@
                 <p>${n.desc || ''}</p>
                 ${n.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${n.dias}</p>` : ''}
                 ${n.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${n.observacion}</p>` : ''}
-                ${n.imgUrl ? `<img src="${n.imgUrl}" class="item-attached-img" onclick="openImageViewer('${n.imgUrl}')" title="Toca para ampliar"><br>` : ''}
                 ${n.link ? `<a href="${n.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Zoom</a>` : ''}
+                ${n.imgUrl ? `<img src="${n.imgUrl}" class="item-attached-img" onclick="openImageViewer('${n.imgUrl}')" title="Toca para ampliar">` : ''}
             </div>
         `).join('');
     }
 
-    /* PERSONALIZADOR DE BOTONES CON VISIBILIDAD EN PANTALLA PRINCIPAL */
     function renderButtonsCustomizer() {
         const container = document.getElementById('buttons-customizer-container');
         if (!container) return;
