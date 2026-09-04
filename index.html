@@ -228,7 +228,7 @@
         .practica-card-item { background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid rgba(244, 162, 145, 0.4); margin-bottom: 8px; display: flex; flex-direction: column; gap: 4px; }
         .practica-link-btn { display: inline-block; margin-top: 4px; margin-bottom: 6px; padding: 6px 12px; background: var(--pastel-green); color: var(--primary-dark); border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.85rem; border: 1px solid #b8e0a8; text-align: center; }
 
-        /* CARROUSEL COMPONENT COMPATIBLE */
+        /* CARROUSEL COMPONENT */
         .carousel-container {
             position: relative; width: 100%; max-width: 100%; margin: 8px 0;
             overflow: hidden; border-radius: 10px; border: 1px solid var(--salmon); background: #000;
@@ -425,7 +425,10 @@
 
             <!-- ABM DE PORTADA -->
             <div class="abm-card-box">
-                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Portada (ABM)</h3>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                    <h3 style="margin:0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Portada (ABM)</h3>
+                    <button class="btn-submit" style="width:auto; padding:4px 10px; font-size:0.8rem; background:var(--primary-dark);" onclick="nav('portada')">🖼️ Ver Portada</button>
+                </div>
                 <div style="display:flex; gap:6px;">
                     <div class="form-group" style="flex:2;"><label>Nombre / Título:</label><input type="text" id="por-nombre" placeholder="Ej: Bienvenidos al Reto"></div>
                     <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="por-orden" placeholder="1" value="1"></div>
@@ -887,7 +890,8 @@
     const NOMBRES_DIAS_SEMANA = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
     function getFechaObjetoDia(numDiaReto) {
-        let baseDate = new Date(cfgCalendario.fechaInicio + 'T00:00:00');
+        let strFecha = (cfgCalendario && cfgCalendario.fechaInicio) ? cfgCalendario.fechaInicio : "2026-09-01";
+        let baseDate = new Date(strFecha + 'T00:00:00');
         if (isNaN(baseDate.getTime())) baseDate = new Date();
         baseDate.setDate(baseDate.getDate() + (numDiaReto - 1));
         return baseDate;
@@ -903,7 +907,7 @@
 
     function getInfoDiaReto(numDiaReto) {
         const d = getFechaObjetoDia(numDiaReto);
-        const nombreDia = NOMBRES_DIAS_SEMANA[d.getDay()];
+        const nombreDia = NOMBRES_DIAS_SEMANA[d.getDay()] || "Día";
         const fechaKey = getFechaKeyFormatted(numDiaReto);
         const diaNum = String(d.getDate()).padStart(2, '0');
         const mesNum = String(d.getMonth() + 1).padStart(2, '0');
@@ -980,7 +984,7 @@
         if (e.touches.length === 0) isDragging = false;
     });
 
-    /* CARROUSEL DINÁMICO CORREGIDO */
+    /* CARROUSEL DINÁMICO */
     let carouselState = {};
 
     function renderCarouselHTML(carouselId, imgList, autoAdvanceToHome = false) {
@@ -1093,7 +1097,7 @@
             renderButtonsCustomizer();
             renderConfigLists();
             const waInput = document.getElementById('cfg-whatsapp-num'); if (waInput) waInput.value = whatsappNumber;
-            const fechaInput = document.getElementById('cfg-fecha-inicio'); if (fechaInput) fechaInput.value = cfgCalendario.fechaInicio;
+            const fechaInput = document.getElementById('cfg-fecha-inicio'); if (fechaInput) fechaInput.value = (cfgCalendario && cfgCalendario.fechaInicio) ? cfgCalendario.fechaInicio : '2026-09-01';
         }
         if (screenId === 'alimentos') renderPublicAlimentos();
         if (screenId === 'diosas') renderPublicDiosas();
@@ -1105,6 +1109,7 @@
 
     function guardarFechaInicioReto(nuevaFecha) {
         if (!nuevaFecha) return;
+        if (!cfgCalendario) cfgCalendario = {};
         cfgCalendario.fechaInicio = nuevaFecha;
         initCalendar();
         if (document.getElementById('screen-agenda').classList.contains('active')) {
@@ -1117,9 +1122,10 @@
         if (!featuredContainer) return;
         featuredContainer.innerHTML = '';
 
+        let totalDias = (cfgCalendario && cfgCalendario.duracionDias) ? cfgCalendario.duracionDias : 28;
         let dAnt = Math.max(1, diaCentro - 1);
         let dHoy = diaCentro;
-        let dSig = Math.min(cfgCalendario.duracionDias, diaCentro + 1);
+        let dSig = Math.min(totalDias, diaCentro + 1);
 
         const diasAmostrar = [
             { num: dAnt, label: dAnt === diaCentro ? "Seleccionado" : "Anterior" },
@@ -1150,7 +1156,9 @@
         if (!grid) return;
         grid.innerHTML = '';
 
-        for (let i = 1; i <= cfgCalendario.duracionDias; i++) {
+        let totalDias = (cfgCalendario && cfgCalendario.duracionDias) ? cfgCalendario.duracionDias : 28;
+
+        for (let i = 1; i <= totalDias; i++) {
             const info = getInfoDiaReto(i);
             const dayBox = document.createElement('div');
             dayBox.className = `cal-day ${i === diaSeleccionadoActual ? 'today-card' : ''}`;
@@ -1254,7 +1262,10 @@
         const registroPrevio = agendaGuardadaBD[fechaKey];
         if (!registroPrevio.seleccionados) registroPrevio.seleccionados = {};
 
-        for (let h = cfgCalendario.horaInicio; h <= cfgCalendario.horaFin; h++) {
+        let hInicio = (cfgCalendario && cfgCalendario.horaInicio) ? cfgCalendario.horaInicio : 7;
+        let hFin = (cfgCalendario && cfgCalendario.horaFin) ? cfgCalendario.horaFin : 21;
+
+        for (let h = hInicio; h <= hFin; h++) {
             const horaStr = `${h < 10 ? '0' + h : h}:00 hs`;
             const itemsEnHora = itemsPorHora[horaStr] || [];
             const actividadesSeleccionadas = registroPrevio.seleccionados[horaStr] || [];
@@ -1366,7 +1377,7 @@
         }
     }
 
-    /* ABM PORTADA */
+    /* ABM PORTADA CON PERSISTENCIA DE ARCHIVOS CORREGIDA */
     function guardarPortadaABM() {
         const nombre = document.getElementById('por-nombre').value;
         const desc = document.getElementById('por-desc').value;
@@ -2383,7 +2394,7 @@
             cambiarEstilo3DBotones();
         }
         if (document.getElementById('cfg-whatsapp-num')) document.getElementById('cfg-whatsapp-num').value = whatsappNumber || '';
-        if (document.getElementById('cfg-fecha-inicio')) document.getElementById('cfg-fecha-inicio').value = cfgCalendario.fechaInicio || '2026-09-01';
+        if (document.getElementById('cfg-fecha-inicio')) document.getElementById('cfg-fecha-inicio').value = (cfgCalendario && cfgCalendario.fechaInicio) ? cfgCalendario.fechaInicio : '2026-09-01';
 
         aplicarEstilosBotones();
         initCalendar();
