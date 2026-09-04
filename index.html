@@ -102,6 +102,8 @@
             transition: transform 0.1s, box-shadow 0.2s ease;
         }
 
+        .menu-card.hidden-btn { display: none !important; }
+
         .menu-card.btn-3d {
             box-shadow: 0 6px 0px rgba(0, 0, 0, 0.15), 0 8px 12px rgba(0,0,0,0.1);
             border-bottom: 3px solid rgba(0, 0, 0, 0.2);
@@ -190,11 +192,6 @@
             font-weight: bold; font-size: 1rem; margin-left: 6px; padding: 0 4px;
         }
 
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-color); justify-content: center; align-items: center; z-index: 200;
-        }
-
         .form-group { margin-bottom: 8px; }
         .form-group label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 2px; }
         .form-group input, .form-group textarea, .form-group select {
@@ -232,122 +229,43 @@
 
         /* CARROUSEL COMPONENT */
         .carousel-container {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            margin: 8px 0;
-            overflow: hidden;
-            border-radius: 10px;
-            border: 1px solid var(--salmon);
-            background: #000;
+            position: relative; width: 100%; max-width: 100%; margin: 8px 0;
+            overflow: hidden; border-radius: 10px; border: 1px solid var(--salmon); background: #000;
         }
-        .carousel-slide {
-            display: flex;
-            transition: transform 0.3s ease-in-out;
-            width: 100%;
-        }
-        .carousel-img {
-            width: 100%;
-            max-height: 280px;
-            object-fit: contain;
-            flex-shrink: 0;
-            cursor: zoom-in;
-            background: #222;
-        }
+        .carousel-slide { display: flex; transition: transform 0.3s ease-in-out; width: 100%; }
+        .carousel-img { width: 100%; max-height: 280px; object-fit: contain; flex-shrink: 0; cursor: zoom-in; background: #222; }
         .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            border: none;
-            font-size: 1.5rem;
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 50%;
-            z-index: 10;
-            user-select: none;
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5); color: #fff; border: none;
+            font-size: 1.5rem; padding: 8px 12px; cursor: pointer; border-radius: 50%; z-index: 10; user-select: none;
         }
         .carousel-btn.prev { left: 8px; }
         .carousel-btn.next { right: 8px; }
-        .carousel-dots {
-            position: absolute;
-            bottom: 8px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            z-index: 10;
-        }
-        .carousel-dot {
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        .carousel-dot.active {
-            background: var(--salmon);
-        }
+        .carousel-dots { position: absolute; bottom: 8px; width: 100%; display: flex; justify-content: center; gap: 6px; z-index: 10; }
+        .carousel-dot { width: 8px; height: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; cursor: pointer; }
+        .carousel-dot.active { background: var(--salmon); }
 
         /* VISOR MODAL DE IMÁGENES A PANTALLA COMPLETA CON ZOOM */
         .image-viewer-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.92);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            touch-action: none;
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.92); z-index: 9999; justify-content: center; align-items: center; overflow: hidden; touch-action: none;
         }
-        .image-viewer-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .image-viewer-img {
-            max-width: 95%;
-            max-height: 90vh;
-            object-fit: contain;
-            transition: transform 0.1s ease-out;
-            transform-origin: center center;
-            cursor: grab;
-            user-select: none;
-        }
+        .image-viewer-container { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+        .image-viewer-img { max-width: 95%; max-height: 90vh; object-fit: contain; transition: transform 0.1s ease-out; transform-origin: center center; cursor: grab; user-select: none; }
         .image-viewer-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255,255,255,0.25);
-            color: #fff;
-            border: none;
-            font-size: 1.8rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px);
+            position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.25); color: #fff;
+            border: none; font-size: 1.8rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; z-index: 10000;
+            display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);
         }
         .image-viewer-hint {
-            position: absolute;
-            bottom: 20px;
-            color: rgba(255,255,255,0.8);
-            font-size: 0.85rem;
-            background: rgba(0,0,0,0.5);
-            padding: 6px 14px;
-            border-radius: 20px;
-            pointer-events: none;
-            font-family: sans-serif;
+            position: absolute; bottom: 20px; color: rgba(255,255,255,0.8); font-size: 0.85rem;
+            background: rgba(0,0,0,0.5); padding: 6px 14px; border-radius: 20px; pointer-events: none; font-family: sans-serif;
+        }
+        .abm-card-box {
+            background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon); margin-bottom: 12px;
+        }
+        .badge-turno {
+            display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: bold; background: var(--pastel-purple); color: var(--primary-dark); margin-left: 4px;
         }
     </style>
 </head>
@@ -424,13 +342,13 @@
         <div class="screen-body">
             <!-- BOTÓN DE CALENDARIO EN LA PARTE SUPERIOR -->
             <button class="toggle-cal-btn" id="btn-toggle-cal" onclick="toggleCalendarioCompleto()">
-                <span>📅</span> Ver Calendario Completo
+                <span>📅</span> Ver Calendario Completo (28 Días)
             </button>
 
-            <!-- CALENDARIO COMPLETO (DESPLEGABLE) -->
+            <!-- CALENDARIO COMPLETO (DESPLEGABLE DE 28 DÍAS) -->
             <div class="calendar-grid" id="calendar-grid" style="display: none; margin-top: 6px; margin-bottom: 8px;"></div>
 
-            <!-- ACCESO RÁPIDO DÍAS (ANTERIOR / HOY / SIGUIENTE) -->
+            <!-- ACCESO RÁPIDO DÍAS (ANTERIOR / SELECCIONADO / SIGUIENTE) -->
             <div class="featured-days-container" id="featured-days-container"></div>
 
             <!-- VISTA DESPLEGADA DEL DÍA SELECCIONADO -->
@@ -457,8 +375,18 @@
         </div>
         <div class="screen-body">
 
+            <!-- FECHA DE INICIO DEL RETO Y CALENDARIO -->
+            <div class="abm-card-box" style="background: var(--pastel-purple); border-color: #c9b6e4;">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.9rem; color: var(--primary-dark);">🗓️ Configuración del Reto de 28 Días</h3>
+                <div class="form-group">
+                    <label>Fecha de Comienzo del Reto:</label>
+                    <input type="date" id="cfg-fecha-inicio" onchange="guardarFechaInicioReto(this.value)">
+                    <small style="color:#666; font-size:0.75rem;">El calendario de 28 días se calculará automáticamente a partir de esta fecha.</small>
+                </div>
+            </div>
+
             <!-- CONFIGURACIÓN DE WHATSAPP -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+            <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Configurar Número de WhatsApp</h3>
                 <div class="form-group">
                     <label>Número de WhatsApp (con código de país sin +):</label>
@@ -467,7 +395,7 @@
             </div>
 
             <!-- APARIENCIA VISUAL GLOBAL -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+            <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Apariencia Global y Botones 3D</h3>
                 <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-bottom:0;">
                     <input type="checkbox" id="cfg-btn-3d" style="width:auto;" onchange="cambiarEstilo3DBotones()">
@@ -476,7 +404,7 @@
             </div>
 
             <!-- EXPORTACIÓN E IMPORTACIÓN JSON -->
-            <div style="background: var(--pastel-green); padding: 10px; border-radius: var(--border-radius); border: 1px solid #b8e0a8;">
+            <div style="background: var(--pastel-green); padding: 10px; border-radius: var(--border-radius); border: 1px solid #b8e0a8; margin-bottom: 12px;">
                 <small style="font-weight:bold; color:var(--primary-dark);">💾 Exportación / Sincronización de Datos:</small>
                 <p style="font-size:0.75rem; margin:4px 0 8px 0;">Descarga o carga manualmente tu archivo <b>config.json</b>.</p>
                 <button class="btn-submit" style="background:#52b788; margin-bottom:8px;" onclick="descargarConfigJSON()">Descargar config.json Actualizado</button>
@@ -486,71 +414,166 @@
                 </div>
             </div>
 
-            <!-- PERSONALIZADOR DE BOTONES -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
-                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Personalizar Botones de la Pantalla Principal</h3>
+            <!-- PERSONALIZADOR DE BOTONES CON VISIBILIDAD -->
+            <div class="abm-card-box">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Personalizar Botones y Visibilidad de Secciones</h3>
                 <div id="buttons-customizer-container"></div>
             </div>
 
             <!-- ABM DE MODALIDAD -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+            <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Modalidad (ABM)</h3>
-                <div class="form-group"><label>Título:</label><input type="text" id="mod-titulo" placeholder="Ej: Modalidad del Programa 28 Días"></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:3;"><label>Nombre / Título:</label><input type="text" id="mod-nombre" placeholder="Ej: Modalidad del Programa"></div>
+                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="mod-orden" placeholder="1" value="1"></div>
+                </div>
                 <div class="form-group"><label>Descripción / Texto explicativo:</label><textarea id="mod-desc" rows="3" placeholder="Detalles de la modalidad..."></textarea></div>
-                <div class="form-group"><label>Adjuntar Imagen (se sumará al Carrousel):</label><input type="file" accept="image/*" id="mod-img-input" multiple></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;"><label>Fecha Específica:</label><input type="date" id="mod-fecha"></div>
+                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="mod-hora" placeholder="Ej: 08:00 hs"></div>
+                </div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Días:</label>
+                        <select id="mod-dias">
+                            <option value="Todos">Todos los días</option>
+                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Turno:</label>
+                        <select id="mod-turno">
+                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="mod-link" placeholder="https://..."></div>
+                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="mod-observacion" placeholder="Notas adicionales..."></div>
+                <div class="form-group">
+                    <label>Mostrar en Agenda:</label>
+                    <select id="mod-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                </div>
+                <div class="form-group"><label>Adjuntar Imagen / Imágenes (Carrousel):</label><input type="file" accept="image/*" id="mod-img-input" multiple></div>
                 <button class="btn-submit" id="btn-save-mod" onclick="guardarModalidadABM()">Guardar Modalidad</button>
-                <div class="crud-list-container"><small style="font-weight:bold;">Imágenes cargadas para Modalidad:</small><div id="crud-modalidad-list"></div></div>
+                <div class="crud-list-container"><small style="font-weight:bold;">Registros de Modalidad:</small><div id="crud-modalidad-list"></div></div>
             </div>
 
             <!-- ABM DE ALIMENTOS -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+            <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Alimentos (ABM)</h3>
-                <div class="form-group"><label>Nombre del Alimento / Menú:</label><input type="text" id="ali-nombre" placeholder="Ej: Bowl Nutritivo, Batido Verde..."></div>
-                <div class="form-group">
-                    <label>Categoría / Momento:</label>
-                    <select id="ali-cat">
-                        <option value="General">General</option>
-                        <option value="Desayuno">Desayuno</option>
-                        <option value="Almuerzo">Almuerzo</option>
-                        <option value="Merienda">Merienda</option>
-                        <option value="Cena">Cena</option>
-                        <option value="Snack">Snack / Tentempié</option>
-                    </select>
-                </div>
                 <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;"><label>Día o Fecha:</label><input type="text" id="ali-dias" placeholder="Ej: Lunes, 2026-09-03..."></div>
+                    <div class="form-group" style="flex:3;"><label>Nombre del Alimento / Menú:</label><input type="text" id="ali-nombre" placeholder="Ej: Bowl Nutritivo"></div>
+                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="ali-orden" placeholder="1" value="1"></div>
+                </div>
+                <div class="form-group"><label>Descripción / Receta:</label><textarea id="ali-desc" rows="2" placeholder="Ingredientes o propiedades..."></textarea></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;"><label>Fecha Específica:</label><input type="date" id="ali-fecha"></div>
                     <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="ali-hora" placeholder="Ej: 13:00 hs"></div>
                 </div>
-                <div class="form-group"><label>Descripción / Receta:</label><input type="text" id="ali-desc" placeholder="Ingredientes o propiedades..."></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Días de la semana:</label>
+                        <select id="ali-dias">
+                            <option value="Todos">Todos los días</option>
+                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Turno:</label>
+                        <select id="ali-turno">
+                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group"><label>Link / Recurso:</label><input type="text" id="ali-link" placeholder="https://..."></div>
+                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="ali-observacion" placeholder="Comentario u observación..."></div>
+                <div class="form-group">
+                    <label>Mostrar en Agenda:</label>
+                    <select id="ali-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                </div>
                 <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="ali-img-input"></div>
                 <button class="btn-submit" id="btn-save-ali" onclick="agregarAlimento()">Guardar Alimento</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Alimentos Cargados:</small><div id="crud-alimentos-list"></div></div>
             </div>
 
             <!-- ABM DE DIOSAS -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+            <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Diosas (ABM)</h3>
-                <div class="form-group"><label>Nombre Diosa:</label><input type="text" id="dio-nombre" placeholder="Ej: Afrodita, Isis..."></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:3;"><label>Nombre Diosa:</label><input type="text" id="dio-nombre" placeholder="Ej: Afrodita, Isis..."></div>
+                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="dio-orden" placeholder="1" value="1"></div>
+                </div>
+                <div class="form-group"><label>Descripción / Atributos:</label><textarea id="dio-desc" rows="2" placeholder="Reseña o propiedades..."></textarea></div>
                 <div style="display:flex; gap:6px;">
                     <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="dio-fecha"></div>
                     <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="dio-hora" placeholder="Ej: 11:00 hs"></div>
                 </div>
-                <div class="form-group"><label>Descripción:</label><input type="text" id="dio-desc" placeholder="Reseña o propiedades..."></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Días:</label>
+                        <select id="dio-dias">
+                            <option value="Todos">Todos los días</option>
+                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Turno:</label>
+                        <select id="dio-turno">
+                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group"><label>Link / Recurso:</label><input type="text" id="dio-link" placeholder="https://..."></div>
+                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="dio-observacion" placeholder="Comentario adicional..."></div>
+                <div class="form-group">
+                    <label>Mostrar en Agenda:</label>
+                    <select id="dio-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                </div>
                 <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="dio-img-input"></div>
                 <button class="btn-submit" id="btn-save-dio" onclick="agregarDiosa()">Guardar Diosa</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Diosas Cargadas:</small><div id="crud-diosas-list"></div></div>
             </div>
 
             <!-- ABM DE NOVEDADES -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+            <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Novedades (ABM)</h3>
-                <div class="form-group"><label>Título o Mensaje:</label><input type="text" id="nov-titulo" placeholder="Ej: Link Zoom Jueves 3"></div>
-                <div class="form-group"><label>Enlace / Recurso:</label><input type="text" id="nov-link" placeholder="https://..."></div>
                 <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;"><label>Vigencia Desde:</label><input type="date" id="nov-desde"></div>
-                    <div class="form-group" style="flex:1;"><label>Vigencia Hasta:</label><input type="date" id="nov-hasta"></div>
+                    <div class="form-group" style="flex:3;"><label>Nombre / Título:</label><input type="text" id="nov-nombre" placeholder="Ej: Link Zoom Jueves 3"></div>
+                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="nov-orden" placeholder="1" value="1"></div>
+                </div>
+                <div class="form-group"><label>Descripción / Detalle:</label><textarea id="nov-desc" rows="2" placeholder="Detalle de la novedad..."></textarea></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="nov-fecha"></div>
+                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="nov-hora" placeholder="Ej: 20:00 hs"></div>
+                </div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Días:</label>
+                        <select id="nov-dias">
+                            <option value="Todos">Todos los días</option>
+                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Turno:</label>
+                        <select id="nov-turno">
+                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group"><label>Enlace / Recurso:</label><input type="text" id="nov-link" placeholder="https://..."></div>
+                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="nov-observacion" placeholder="Anotación especial..."></div>
+                <div class="form-group">
+                    <label>Mostrar en Agenda:</label>
+                    <select id="nov-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                 </div>
                 <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="nov-img-input"></div>
                 <button class="btn-submit" id="btn-save-nov" onclick="publicarNovedadManual()">Publicar Novedad</button>
@@ -558,71 +581,160 @@
             </div>
 
             <!-- ABM DE PRÁCTICAS -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+            <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Prácticas (ABM)</h3>
-                <div class="form-group"><label>Nombre Práctica:</label><input type="text" id="pra-nombre"></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:3;"><label>Nombre Práctica:</label><input type="text" id="pra-nombre" placeholder="Ej: Meditación Guiada"></div>
+                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="pra-orden" placeholder="1" value="1"></div>
+                </div>
+                <div class="form-group"><label>Descripción:</label><textarea id="pra-desc" rows="2" placeholder="Instrucciones o beneficios..."></textarea></div>
                 <div style="display:flex; gap:6px;">
                     <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="pra-fecha"></div>
                     <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="pra-hora" placeholder="Ej: 09:00 hs"></div>
                 </div>
-                <div class="form-group"><label>Descripción:</label><input type="text" id="pra-desc"></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Días:</label>
+                        <select id="pra-dias">
+                            <option value="Todos">Todos los días</option>
+                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Turno:</label>
+                        <select id="pra-turno">
+                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group"><label>Link / Recurso:</label><input type="text" id="pra-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Comentario / Nota Inicial:</label><input type="text" id="pra-comentario"></div>
+                <div class="form-group"><label>Observación / Comentario:</label><input type="text" id="pra-observacion" placeholder="Comentario u observación..."></div>
+                <div class="form-group">
+                    <label>Mostrar en Agenda:</label>
+                    <select id="pra-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                </div>
                 <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="pra-img-input"></div>
                 <button class="btn-submit" id="btn-save-pra" onclick="agregarPractica()">Guardar Práctica</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Prácticas Cargadas:</small><div id="crud-practicas-list"></div></div>
             </div>
 
             <!-- ABM DE ACTIVIDADES -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+            <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Actividades (ABM)</h3>
-                <div class="form-group"><label>Nombre Actividad:</label><input type="text" id="act-nombre"></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:3;"><label>Nombre Actividad:</label><input type="text" id="act-nombre" placeholder="Ej: Caminata consciente"></div>
+                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="act-orden" placeholder="1" value="1"></div>
+                </div>
+                <div class="form-group"><label>Descripción:</label><textarea id="act-desc" rows="2" placeholder="Detalle de la actividad..."></textarea></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;"><label>Fecha Específica:</label><input type="date" id="act-fecha"></div>
+                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="act-hora" placeholder="Ej: 08:00 hs"></div>
+                </div>
                 <div style="display:flex; gap:6px;">
                     <div class="form-group" style="flex:1;">
-                        <label>Día de la semana:</label>
-                        <select id="act-dia">
-                            <option value="">Sin día fijo (Seleccionar libre)</option>
+                        <label>Días de la semana:</label>
+                        <select id="act-dias">
                             <option value="Todos">Todos los días</option>
-                            <option value="Lunes">Lunes</option>
-                            <option value="Martes">Martes</option>
-                            <option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option>
-                            <option value="Viernes">Viernes</option>
-                            <option value="Sábado">Sábado</option>
-                            <option value="Domingo">Domingo</option>
+                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
                         </select>
                     </div>
-                    <div class="form-group" style="flex:1;"><label>o Fecha Específica:</label><input type="date" id="act-fecha"></div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Turno:</label>
+                        <select id="act-turno">
+                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group"><label>Hora en Agenda:</label><input type="text" id="act-hora" placeholder="Ej: 08:00 hs"></div>
                 <div class="form-group"><label>Link / Recurso:</label><input type="text" id="act-link" placeholder="https://..."></div>
+                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="act-observacion" placeholder="Comentario u observación..."></div>
+                <div class="form-group">
+                    <label>Mostrar en Agenda:</label>
+                    <select id="act-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                </div>
                 <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="act-img-input"></div>
                 <button class="btn-submit" id="btn-save-act" onclick="agregarActividadConfig()">Guardar Actividad</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Actividades Cargadas:</small><div id="crud-actividades-list"></div></div>
             </div>
 
             <!-- ABM DE INFUSIONES / PÓCIMAS -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+            <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Infusiones / Pócimas (ABM)</h3>
-                <div class="form-group"><label>Nombre:</label><input type="text" id="inf-nombre" placeholder="Ej: Té digestivo de Manzanilla..."></div>
-                <div class="form-group"><label>Descripción / Preparación:</label><input type="text" id="inf-desc"></div>
-                <div class="form-group"><label>Efecto / Propiedad:</label><input type="text" id="inf-efecto"></div>
-                <div class="form-group"><label>Hora por defecto en Agenda:</label><input type="text" id="inf-hora" placeholder="Ej: 07:00 hs"></div>
-                <div class="form-group"><label>Días de toma:</label><input type="text" id="inf-dias" placeholder="Ej: Todos, Lunes, Martes"></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:3;"><label>Nombre Pócima / Infusión:</label><input type="text" id="inf-nombre" placeholder="Ej: Té de Manzanilla"></div>
+                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="inf-orden" placeholder="1" value="1"></div>
+                </div>
+                <div class="form-group"><label>Descripción / Preparación:</label><textarea id="inf-desc" rows="2" placeholder="Propiedades o preparación..."></textarea></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;"><label>Fecha Específica:</label><input type="date" id="inf-fecha"></div>
+                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="inf-hora" placeholder="Ej: 07:00 hs"></div>
+                </div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Días de toma:</label>
+                        <select id="inf-dias">
+                            <option value="Todos">Todos los días</option>
+                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Turno:</label>
+                        <select id="inf-turno">
+                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group"><label>Link / Recurso:</label><input type="text" id="inf-link" placeholder="https://..."></div>
+                <div class="form-group"><label>Observación / Efecto Especial:</label><input type="text" id="inf-observacion" placeholder="Nota u observación..."></div>
+                <div class="form-group">
+                    <label>Mostrar en Agenda:</label>
+                    <select id="inf-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                </div>
                 <div class="form-group"><label>Adjuntar Imágenes (Selección múltiple para Carrousel):</label><input type="file" accept="image/*" id="inf-img-input" multiple></div>
                 <button class="btn-submit" id="btn-save-inf" onclick="agregarInfusion()">Guardar Pócima / Infusión</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Pócimas e Infusiones Cargadas:</small><div id="crud-infusiones-list"></div></div>
             </div>
 
             <!-- ABM DE PODCASTS -->
-            <div style="background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon);">
+            <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Podcasts (ABM)</h3>
-                <div class="form-group"><label>Nombre:</label><input type="text" id="pod-nombre"></div>
-                <div class="form-group"><label>Descripción:</label><input type="text" id="pod-desc"></div>
-                <div class="form-group"><label>Hora en Agenda:</label><input type="text" id="pod-hora" placeholder="Ej: 18:00 hs"></div>
-                <div class="form-group"><label>Link Audio:</label><input type="text" id="pod-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Días para escuchar:</label><input type="text" id="pod-dias" placeholder="Ej: Martes, Jueves"></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:3;"><label>Nombre Podcast:</label><input type="text" id="pod-nombre" placeholder="Ej: Episodio 1"></div>
+                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="pod-orden" placeholder="1" value="1"></div>
+                </div>
+                <div class="form-group"><label>Descripción:</label><textarea id="pod-desc" rows="2" placeholder="Resumen del episodio..."></textarea></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="pod-fecha"></div>
+                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="pod-hora" placeholder="Ej: 18:00 hs"></div>
+                </div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Días para escuchar:</label>
+                        <select id="pod-dias">
+                            <option value="Todos">Todos los días</option>
+                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Turno:</label>
+                        <select id="pod-turno">
+                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group"><label>Link Audio / Recurso:</label><input type="text" id="pod-link" placeholder="https://..."></div>
+                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="pod-observacion" placeholder="Comentario adicional..."></div>
+                <div class="form-group">
+                    <label>Mostrar en Agenda:</label>
+                    <select id="pod-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                </div>
                 <div class="form-group"><label>Adjuntar Imagen:</label><input type="file" accept="image/*" id="pod-img-input"></div>
                 <button class="btn-submit" id="btn-save-pod" onclick="agregarPodcast()">Guardar Podcast</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Podcasts Cargados:</small><div id="crud-podcasts-list"></div></div>
@@ -665,18 +777,31 @@
 </div>
 
 <script>
-    // HOY ES 03/09/2026 -> Día 3 del programa (D3)
-    let diaSeleccionadoActual = 3; 
+    let diaSeleccionadoActual = 1; 
 
-    let cfgCalendario = { diaInicio: 1, diaFin: 28, horaInicio: 7, horaFin: 21 };
+    let cfgCalendario = {
+        fechaInicio: "2026-09-01",
+        duracionDias: 28,
+        horaInicio: 7,
+        horaFin: 21
+    };
     let configVisual = { btn3D: false };
     let whatsappNumber = "5491112345678";
     
-    let modalidadDB = {
-        titulo: "Modalidad del Programa 28 Días",
-        desc: "Bienvenidos a nuestro espacio de transformación y bienestar consciente. Durante estos 28 días nos conectaremos con hábitos saludables, nutrición consciente y synchronización biológica.",
+    // Lista para Modalidad con soporte de múltiples registros y edición
+    let modalidadDBList = [{
+        nombre: "Modalidad del Programa 28 Días",
+        desc: "Bienvenidos a nuestro espacio de transformación y bienestar consciente. Durante estos 28 días nos conectaremos con hábitos saludables, nutrición consciente y sincronización biológica.",
+        fecha: "",
+        hora: "",
+        dias: "Todos",
+        turno: "Mañana",
+        orden: 1,
+        link: "",
+        observacion: "",
+        agenda: "Si",
         imagenes: []
-    };
+    }];
 
     let alimentosDB = [];
     let diosasDB = [];
@@ -686,23 +811,55 @@
     let podcastsDB = [];
     let novedadesDB = [];
     
-    // Guardado por fecha: { '2026-09-03': { notas: "", horarios: {}, seleccionados: { '08:00 hs': ['✨ Actividad: Caminata'] } } }
     let agendaGuardadaBD = {}; 
-    let currentFechaKeyModal = "2026-09-03";
+    let currentFechaKeyModal = "";
 
-    let editIndices = { ali: -1, dio: -1, inf: -1, pod: -1, act: -1, nov: -1, pra: -1 };
+    let editIndices = { mod: -1, ali: -1, dio: -1, inf: -1, pod: -1, act: -1, nov: -1, pra: -1 };
 
     let botonesConfig = {
-        modalidad: { id: "modalidad", titulo: "Modalidad", bg: "#ffffff", color: "#f4a291", icon: "🌸" },
-        pocimas: { id: "pocimas", titulo: "Pócimas y Yuyos del Bien", bg: "#ffffff", color: "#f4a291", icon: "🍵" },
-        caminatas: { id: "caminatas", titulo: "Propuesta Diaria y Caminatas", bg: "#ffffff", color: "#f4a291", icon: "🚶‍♀️" },
-        practicas: { id: "practicas", titulo: "Prácticas", bg: "#ffffff", color: "#f4a291", icon: "🧘‍♀️" },
-        actividades: { id: "actividades", titulo: "Actividades", bg: "#ffffff", color: "#f4a291", icon: "✨" },
-        alimentos: { id: "alimentos", titulo: "Alimentos", bg: "#ffffff", color: "#f4a291", icon: "🥗" },
-        diosas: { id: "diosas", titulo: "Diosas", bg: "#ffffff", color: "#f4a291", icon: "👑" },
-        agenda: { id: "agenda", titulo: "Mi Agenda Diaria y Sensaciones", bg: "#ffffff", color: "#f4a291", icon: "📅" },
-        novedades: { id: "novedades", titulo: "Novedades", bg: "#fbe3e8", color: "#f4a291", icon: "📢" }
+        modalidad: { id: "modalidad", titulo: "Modalidad", bg: "#ffffff", color: "#f4a291", icon: "🌸", visible: "Si" },
+        pocimas: { id: "pocimas", titulo: "Pócimas y Yuyos del Bien", bg: "#ffffff", color: "#f4a291", icon: "🍵", visible: "Si" },
+        caminatas: { id: "caminatas", titulo: "Propuesta Diaria y Caminatas", bg: "#ffffff", color: "#f4a291", icon: "🚶‍♀️", visible: "Si" },
+        practicas: { id: "practicas", titulo: "Prácticas", bg: "#ffffff", color: "#f4a291", icon: "🧘‍♀️", visible: "Si" },
+        actividades: { id: "actividades", titulo: "Actividades", bg: "#ffffff", color: "#f4a291", icon: "✨", visible: "Si" },
+        alimentos: { id: "alimentos", titulo: "Alimentos", bg: "#ffffff", color: "#f4a291", icon: "🥗", visible: "Si" },
+        diosas: { id: "diosas", titulo: "Diosas", bg: "#ffffff", color: "#f4a291", icon: "👑", visible: "Si" },
+        agenda: { id: "agenda", titulo: "Mi Agenda Diaria y Sensaciones", bg: "#ffffff", color: "#f4a291", icon: "📅", visible: "Si" },
+        novedades: { id: "novedades", titulo: "Novedades", bg: "#fbe3e8", color: "#f4a291", icon: "📢", visible: "Si" }
     };
+
+    const NOMBRES_DIAS_SEMANA = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+
+    function getFechaObjetoDia(numDiaReto) {
+        let baseDate = new Date(cfgCalendario.fechaInicio + 'T00:00:00');
+        if (isNaN(baseDate.getTime())) {
+            baseDate = new Date();
+        }
+        baseDate.setDate(baseDate.getDate() + (numDiaReto - 1));
+        return baseDate;
+    }
+
+    function getFechaKeyFormatted(numDiaReto) {
+        const d = getFechaObjetoDia(numDiaReto);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    function getInfoDiaReto(numDiaReto) {
+        const d = getFechaObjetoDia(numDiaReto);
+        const nombreDia = NOMBRES_DIAS_SEMANA[d.getDay()];
+        const fechaKey = getFechaKeyFormatted(numDiaReto);
+        const diaNum = String(d.getDate()).padStart(2, '0');
+        const mesNum = String(d.getMonth() + 1).padStart(2, '0');
+        return {
+            numDiaReto,
+            nombreDia,
+            fechaKey,
+            labelCorto: `${nombreDia.substring(0,3)} ${diaNum}/${mesNum}`
+        };
+    }
 
     function normalizarHora(str) {
         if (!str) return "";
@@ -715,7 +872,7 @@
         return str.trim();
     }
 
-    /* VISOR MODAL CON ZOOM Y PELLIZCO PARA MÓVILES */
+    /* VISOR MODAL DE IMÁGENES */
     let currentScale = 1;
     let startDistance = 0;
     let initialScale = 1;
@@ -727,9 +884,7 @@
         const modal = document.getElementById('image-viewer-modal');
         const img = document.getElementById('image-viewer-img');
         img.src = src;
-        currentScale = 1;
-        translateX = 0;
-        translateY = 0;
+        currentScale = 1; translateX = 0; translateY = 0;
         updateImgTransform();
         modal.style.display = 'flex';
     }
@@ -744,13 +899,9 @@
     }
 
     const viewerContainer = document.getElementById('image-viewer-container');
-
     viewerContainer.addEventListener('touchstart', (e) => {
         if (e.touches.length === 2) {
-            startDistance = Math.hypot(
-                e.touches[0].clientX - e.touches[1].clientX,
-                e.touches[0].clientY - e.touches[1].clientY
-            );
+            startDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
             initialScale = currentScale;
         } else if (e.touches.length === 1) {
             isDragging = true;
@@ -762,10 +913,7 @@
     viewerContainer.addEventListener('touchmove', (e) => {
         if (e.touches.length === 2) {
             e.preventDefault();
-            const currentDistance = Math.hypot(
-                e.touches[0].clientX - e.touches[1].clientX,
-                e.touches[0].clientY - e.touches[1].clientY
-            );
+            const currentDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
             if (startDistance > 0) {
                 currentScale = Math.min(Math.max(initialScale * (currentDistance / startDistance), 1), 4);
                 updateImgTransform();
@@ -783,7 +931,7 @@
         if (e.touches.length === 0) isDragging = false;
     });
 
-    /* REPRODUCTOR DE CARROUSEL DE IMÁGENES */
+    /* CARROUSEL COMPONENT */
     let carouselState = {};
 
     function renderCarouselHTML(carouselId, imgList) {
@@ -825,9 +973,7 @@
     function setCarouselSlide(carouselId, index, total) {
         carouselState[carouselId] = index;
         const slideEl = document.getElementById(`slide-${carouselId}`);
-        if (slideEl) {
-            slideEl.style.transform = `translateX(-${index * 100}%)`;
-        }
+        if (slideEl) slideEl.style.transform = `translateX(-${index * 100}%)`;
         const dotsContainer = document.getElementById(`dots-${carouselId}`);
         if (dotsContainer) {
             const dots = dotsContainer.querySelectorAll('.carousel-dot');
@@ -872,9 +1018,7 @@
                 reader.onload = function(e) {
                     results.push(e.target.result);
                     loaded++;
-                    if (loaded === files.length) {
-                        callback(results);
-                    }
+                    if (loaded === files.length) callback(results);
                 };
                 reader.readAsDataURL(file);
             });
@@ -901,41 +1045,47 @@
             renderButtonsCustomizer();
             renderConfigLists();
             const waInput = document.getElementById('cfg-whatsapp-num'); if (waInput) waInput.value = whatsappNumber;
+            const fechaInput = document.getElementById('cfg-fecha-inicio'); if (fechaInput) fechaInput.value = cfgCalendario.fechaInicio;
         }
         if (screenId === 'alimentos') renderPublicAlimentos();
         if (screenId === 'diosas') renderPublicDiosas();
         if (screenId === 'actividades') renderPublicActividades();
         if (screenId === 'practicas') renderPracticasScreen();
+        if (screenId === 'novedades') renderPublicNovedades();
     }
 
-    /* INICIALIZACIÓN DE DÍAS Y CALENDARIO DE AGENDA */
+    function guardarFechaInicioReto(nuevaFecha) {
+        if (!nuevaFecha) return;
+        cfgCalendario.fechaInicio = nuevaFecha;
+        initCalendar();
+        if (document.getElementById('screen-agenda').classList.contains('active')) {
+            cargarDiaAgendaInline(diaSeleccionadoActual);
+        }
+    }
+
     function renderBarra3Dias(diaCentro) {
         const featuredContainer = document.getElementById('featured-days-container');
         if (!featuredContainer) return;
         featuredContainer.innerHTML = '';
 
-        const diasSemana = ["Jueves", "Viernes", "Sábado", "Domingo", "Lunes", "Martes", "Miércoles"];
-
-        let dAnt = Math.max(cfgCalendario.diaInicio, diaCentro - 1);
+        let dAnt = Math.max(1, diaCentro - 1);
         let dHoy = diaCentro;
-        let dSig = Math.min(cfgCalendario.diaFin, diaCentro + 1);
+        let dSig = Math.min(cfgCalendario.duracionDias, diaCentro + 1);
 
         const diasAmostrar = [
-            { num: dAnt, label: dAnt === 3 ? "Hoy" : (dAnt < 3 ? "Anterior" : "Día " + dAnt) },
-            { num: dHoy, label: dHoy === 3 ? "Hoy (03/09)" : "Seleccionado" },
-            { num: dSig, label: dSig === 3 ? "Hoy" : "Siguiente" }
+            { num: dAnt, label: dAnt === diaCentro ? "Seleccionado" : "Anterior" },
+            { num: dHoy, label: "Día Seleccionado" },
+            { num: dSig, label: dSig === diaCentro ? "Seleccionado" : "Siguiente" }
         ];
 
         diasAmostrar.forEach(d => {
-            const numDiaReal = (d.num + 2) % 30 || 30; // D1 = 1 Sep, D3 = 3 Sep 2026
-            const nombreDia = diasSemana[(d.num - 1) % 7];
-
+            const info = getInfoDiaReto(d.num);
             const dayCard = document.createElement('div');
             dayCard.className = `cal-day ${d.num === diaCentro ? 'today-card' : ''}`;
             dayCard.innerHTML = `
-                <span style="font-size:0.75rem; color:var(--primary); font-weight:bold;">${d.label}</span>
-                <span style="font-size:1.1rem; color:var(--primary-dark);">D${d.num}</span>
-                <small style="font-size:0.8rem;">${nombreDia.substring(0,3)} ${numDiaReal < 10 ? '0'+numDiaReal : numDiaReal}/09</small>
+                <span style="font-size:0.7rem; color:var(--primary); font-weight:bold;">${d.label}</span>
+                <span style="font-size:1.1rem; color:var(--primary-dark);">Día ${d.num}</span>
+                <small style="font-size:0.8rem;">${info.labelCorto}</small>
             `;
             dayCard.onclick = () => {
                 diaSeleccionadoActual = d.num;
@@ -951,15 +1101,11 @@
         if (!grid) return;
         grid.innerHTML = '';
 
-        const diasSemana = ["Jueves", "Viernes", "Sábado", "Domingo", "Lunes", "Martes", "Miércoles"];
-
-        for (let i = cfgCalendario.diaInicio; i <= cfgCalendario.diaFin; i++) {
+        for (let i = 1; i <= cfgCalendario.duracionDias; i++) {
+            const info = getInfoDiaReto(i);
             const dayBox = document.createElement('div');
             dayBox.className = `cal-day ${i === diaSeleccionadoActual ? 'today-card' : ''}`;
-            const numDiaReal = (i + 2) % 30 || 30;
-            const nombreDia = diasSemana[(i - 1) % 7];
-
-            dayBox.innerHTML = `<span>D${i}</span><small style="font-size:0.75rem;">${nombreDia.substring(0,3)} ${numDiaReal < 10 ? '0'+numDiaReal : numDiaReal}</small>`;
+            dayBox.innerHTML = `<span>D${i}</span><small style="font-size:0.75rem;">${info.labelCorto}</small>`;
             dayBox.onclick = () => seleccionarDiaDesdeCalendarioCompleto(i);
             grid.appendChild(dayBox);
         }
@@ -974,98 +1120,85 @@
 
         if (grid.style.display === 'none' || grid.style.display === '') {
             grid.style.display = 'grid';
-            btn.innerHTML = '<span>▲</span> Ver solo 3 días';
+            btn.innerHTML = '<span>▲</span> Ocultar Calendario Completo';
         } else {
             grid.style.display = 'none';
-            btn.innerHTML = '<span>📅</span> Ver Calendario Completo';
+            btn.innerHTML = '<span>📅</span> Ver Calendario Completo (28 Días)';
         }
     }
 
     function seleccionarDiaDesdeCalendarioCompleto(diaNumero) {
         diaSeleccionadoActual = diaNumero;
-        
-        // 1. Ocultar el calendario completo y restablecer el texto del botón
         const grid = document.getElementById('calendar-grid');
         const btn = document.getElementById('btn-toggle-cal');
         if (grid) grid.style.display = 'none';
-        if (btn) btn.innerHTML = '<span>📅</span> Ver Calendario Completo';
+        if (btn) btn.innerHTML = '<span>📅</span> Ver Calendario Completo (28 Días)';
 
-        // 2. Actualizar las 3 tarjetas de acceso rápido (Anterior, Seleccionado, Siguiente)
         renderBarra3Dias(diaNumero);
-
-        // 3. Cargar la grilla del día elegido
         cargarDiaAgendaInline(diaNumero);
     }
 
+    function estaElementoParaDia(item, nombreDiaSemana, fechaKeyFormatted) {
+        if (item.agenda === "No") return false;
+        
+        if (item.fecha && item.fecha === fechaKeyFormatted) return true;
+
+        if (item.dias) {
+            if (item.dias === "Todos") return true;
+            if (item.dias.toLowerCase().includes(nombreDiaSemana.toLowerCase())) return true;
+        }
+        
+        if (!item.fecha && (!item.dias || item.dias === "Todos")) return true;
+
+        return false;
+    }
+
     function cargarDiaAgendaInline(diaNumero) {
-        const diasSemana = ["Jueves", "Viernes", "Sábado", "Domingo", "Lunes", "Martes", "Miércoles"];
-        const numDiaReal = (diaNumero + 2) % 30 || 30;
-        const nombreDia = diasSemana[(diaNumero - 1) % 7];
-        const fechaKey = `2026-09-${numDiaReal < 10 ? '0' + numDiaReal : numDiaReal}`;
+        const info = getInfoDiaReto(diaNumero);
+        const fechaKey = info.fechaKey;
+        const nombreDia = info.nombreDia;
         
         currentFechaKeyModal = fechaKey;
         
         const titleEl = document.getElementById('inline-day-title');
-        if (titleEl) titleEl.innerText = `${nombreDia} ${numDiaReal} de septiembre (Día ${diaNumero})`;
+        if (titleEl) titleEl.innerText = `${nombreDia} (${info.labelCorto}) - Día ${diaNumero} del Reto`;
 
         const itemsPorHora = {};
         const unassignedItems = [];
 
-        // Agrupar elementos del ABM para la agenda
-        alimentosDB.forEach(ali => {
-            const coincideDia = !ali.dias || ali.dias === "Todos" || ali.dias.toLowerCase().includes(nombreDia.toLowerCase()) || ali.dias === fechaKey;
-            const horaNorm = normalizarHora(ali.hora);
-            if (coincideDia && horaNorm) {
-                if (!itemsPorHora[horaNorm]) itemsPorHora[horaNorm] = [];
-                itemsPorHora[horaNorm].push({ tipo: '🥗 Alimento', nombre: `${ali.nombre} (${ali.cat || 'Menú'})`, imgUrl: ali.imgUrl, link: ali.link });
-            } else if (!horaNorm && !ali.dias) {
-                unassignedItems.push(`🥗 Alimento: ${ali.nombre}`);
-            }
-        });
+        const fuentes = [
+            { db: modalidadDBList, tipo: '🌸 Modalidad' },
+            { db: alimentosDB, tipo: '🥗 Alimento' },
+            { db: diosasDB, tipo: '👑 Diosa' },
+            { db: actividadesDB, tipo: '✨ Actividad' },
+            { db: practicasDB, tipo: '🧘‍♀️ Práctica' },
+            { db: infusionesDB, tipo: '🍵 Pócima' },
+            { db: podcastsDB, tipo: '🎙️ Podcast' },
+            { db: novedadesDB, tipo: '📢 Novedad' }
+        ];
 
-        diosasDB.forEach(d => {
-            const coincideDia = !d.fecha || d.fecha === fechaKey;
-            const horaNorm = normalizarHora(d.hora);
-            if (coincideDia && horaNorm) {
-                if (!itemsPorHora[horaNorm]) itemsPorHora[horaNorm] = [];
-                itemsPorHora[horaNorm].push({ tipo: '👑 Diosa', nombre: d.nombre, imgUrl: d.imgUrl, link: d.link });
-            } else if (!horaNorm && !d.fecha) {
-                unassignedItems.push(`👑 Diosa: ${d.nombre}`);
-            }
-        });
+        fuentes.forEach(fuente => {
+            fuente.db.forEach(item => {
+                if (estaElementoParaDia(item, nombreDia, fechaKey)) {
+                    const horaNorm = normalizarHora(item.hora);
+                    const primerImg = (item.imagenes && item.imagenes.length > 0) ? item.imagenes[0] : item.imgUrl;
+                    const itemData = {
+                        tipo: fuente.tipo,
+                        nombre: item.nombre || item.titulo,
+                        imgUrl: primerImg,
+                        link: item.link,
+                        desc: item.desc || item.observacion,
+                        turno: item.turno
+                    };
 
-        actividadesDB.forEach(act => {
-            const coincideDia = (act.fecha && act.fecha === fechaKey) || 
-                                (act.dia && (act.dia === "Todos" || act.dia.toLowerCase().includes(nombreDia.toLowerCase())));
-            const horaNorm = normalizarHora(act.hora);
-            if (coincideDia && horaNorm) {
-                if (!itemsPorHora[horaNorm]) itemsPorHora[horaNorm] = [];
-                itemsPorHora[horaNorm].push({ tipo: '✨ Actividad', nombre: act.nombre, imgUrl: act.imgUrl, link: act.link });
-            } else if (!horaNorm && !act.fecha && !act.dia) {
-                unassignedItems.push(`✨ Actividad: ${act.nombre}`);
-            }
-        });
-
-        practicasDB.forEach(p => {
-            const coincideDia = !p.fecha || p.fecha === fechaKey;
-            const horaNorm = normalizarHora(p.hora);
-            if (coincideDia && horaNorm) {
-                if (!itemsPorHora[horaNorm]) itemsPorHora[horaNorm] = [];
-                itemsPorHora[horaNorm].push({ tipo: '🧘‍♀️ Práctica', nombre: p.nombre, imgUrl: p.imgUrl, link: p.link });
-            } else if (!horaNorm && !p.fecha) {
-                unassignedItems.push(`🧘‍♀️ Práctica: ${p.nombre}`);
-            }
-        });
-
-        infusionesDB.forEach(inf => {
-            const coincideDia = !inf.dias || inf.dias === "Todos" || inf.dias.toLowerCase().includes(nombreDia.toLowerCase());
-            const horaNorm = normalizarHora(inf.hora);
-            if (coincideDia && horaNorm) {
-                if (!itemsPorHora[horaNorm]) itemsPorHora[horaNorm] = [];
-                itemsPorHora[horaNorm].push({ tipo: '🍵 Pócima', nombre: inf.nombre, imgUrl: (inf.imagenes && inf.imagenes.length > 0 ? inf.imagenes[0] : inf.imgUrl), link: inf.link });
-            } else if (!horaNorm && !inf.dias) {
-                unassignedItems.push(`🍵 Pócima: ${inf.nombre}`);
-            }
+                    if (horaNorm) {
+                        if (!itemsPorHora[horaNorm]) itemsPorHora[horaNorm] = [];
+                        itemsPorHora[horaNorm].push(itemData);
+                    } else {
+                        unassignedItems.push(`${fuente.tipo}: ${itemData.nombre}`);
+                    }
+                }
+            });
         });
 
         const hoursContainer = document.getElementById('inline-hours-container');
@@ -1087,14 +1220,17 @@
             if (itemsEnHora.length > 0) {
                 attachedHTML = itemsEnHora.map(it => `
                     <div class="agenda-attached-card">
-                        <div><b>${it.tipo}:</b> ${it.nombre}</div>
+                        <div>
+                            <b>${it.tipo}:</b> ${it.nombre} 
+                            ${it.turno ? `<span class="badge-turno">${it.turno}</span>` : ''}
+                        </div>
+                        ${it.desc ? `<div style="font-size:0.8rem; color:#555;">${it.desc}</div>` : ''}
                         ${it.imgUrl ? `<img src="${it.imgUrl}" class="item-attached-img" onclick="openImageViewer('${it.imgUrl}')" title="Toca para ampliar">` : ''}
                         ${it.link ? `<a href="${it.link}" target="_blank" style="color:var(--primary-dark); font-weight:bold;">🔗 Abrir Enlace / Recurso</a>` : ''}
                     </div>
                 `).join('');
             }
 
-            // Badges para actividades elegidas desde el combo (sin escribir en la caja de texto)
             let badgesHTML = '';
             if (actividadesSeleccionadas.length > 0) {
                 badgesHTML = actividadesSeleccionadas.map((actItem, idx) => `
@@ -1109,7 +1245,7 @@
             if (unassignedItems.length > 0) {
                 comboHTML = `
                     <select class="hour-combo-select" onchange="seleccionarActividadEnHora('${fechaKey}', '${horaStr}', this)">
-                        <option value="">➕ Seleccionar Actividad / Elemento de ABM...</option>
+                        <option value="">➕ Agregar elemento a esta hora...</option>
                         ${unassignedItems.map(item => `<option value="${item}">${item}</option>`).join('')}
                     </select>
                 `;
@@ -1122,9 +1258,7 @@
                     <span class="hour-label">${horaStr}</span>
                     <input type="text" class="hour-input inline-hour-input" id="inline-input-hora-${horaStr}" data-hora="${horaStr}" value="${registroPrevio.horarios[horaStr] || ''}" placeholder="Nota Personal / Comentario...">
                 </div>
-                <div id="badges-container-${horaStr}">
-                    ${badgesHTML}
-                </div>
+                <div id="badges-container-${horaStr}">${badgesHTML}</div>
                 ${attachedHTML}
                 ${comboHTML}
             `;
@@ -1135,25 +1269,16 @@
         if (textEl) textEl.value = registroPrevio.notas || '';
     }
 
-    // Al seleccionar en la lista desplegable, se añade a la lista de seleccionadas PERO NO a la caja de texto
     function seleccionarActividadEnHora(fechaKey, horaStr, selectEl) {
         const valor = selectEl.value;
         if (!valor) return;
 
-        if (!agendaGuardadaBD[fechaKey]) {
-            agendaGuardadaBD[fechaKey] = { horarios: {}, notas: "", seleccionados: {} };
-        }
-        if (!agendaGuardadaBD[fechaKey].seleccionados) {
-            agendaGuardadaBD[fechaKey].seleccionados = {};
-        }
-        if (!agendaGuardadaBD[fechaKey].seleccionados[horaStr]) {
-            agendaGuardadaBD[fechaKey].seleccionados[horaStr] = [];
-        }
+        if (!agendaGuardadaBD[fechaKey]) agendaGuardadaBD[fechaKey] = { horarios: {}, notas: "", seleccionados: {} };
+        if (!agendaGuardadaBD[fechaKey].seleccionados) agendaGuardadaBD[fechaKey].seleccionados = {};
+        if (!agendaGuardadaBD[fechaKey].seleccionados[horaStr]) agendaGuardadaBD[fechaKey].seleccionados[horaStr] = [];
 
         agendaGuardadaBD[fechaKey].seleccionados[horaStr].push(valor);
-        selectEl.value = ""; // Reset dropdown
-
-        // Re-render del día para refrescar badges
+        selectEl.value = ""; 
         cargarDiaAgendaInline(diaSeleccionadoActual);
     }
 
@@ -1182,68 +1307,422 @@
         alert('¡Agenda guardada con éxito!');
     }
 
-    /* ABM DE MODALIDAD */
+    function ordenarPorCampo(lista) {
+        return lista.sort((a, b) => (parseInt(a.orden) || 1) - (parseInt(b.orden) || 1));
+    }
+
+    /* ABM MODALIDAD CON OPCIÓN DE EDITAR */
     function guardarModalidadABM() {
-        const titulo = document.getElementById('mod-titulo').value;
+        const nombre = document.getElementById('mod-nombre').value;
         const desc = document.getElementById('mod-desc').value;
+        const fecha = document.getElementById('mod-fecha').value || '';
+        const hora = document.getElementById('mod-hora').value || '';
+        const dias = document.getElementById('mod-dias').value || 'Todos';
+        const turno = document.getElementById('mod-turno').value || 'Mañana';
+        const orden = parseInt(document.getElementById('mod-orden').value) || 1;
+        const link = document.getElementById('mod-link').value || '';
+        const observacion = document.getElementById('mod-observacion').value || '';
+        const agenda = document.getElementById('mod-agenda').value || 'Si';
+
+        if (!nombre) return alert("Ingresa el nombre de la modalidad.");
+
         const fileInput = document.getElementById('mod-img-input');
-
-        modalidadDB.titulo = titulo || modalidadDB.titulo;
-        modalidadDB.desc = desc || modalidadDB.desc;
-
         readInputImage(fileInput, (base64Array) => {
-            if (base64Array && base64Array.length > 0) {
-                modalidadDB.imagenes = modalidadDB.imagenes.concat(base64Array);
+            let imgsFinales = base64Array;
+            if (imgsFinales.length === 0 && editIndices.mod >= 0) {
+                imgsFinales = modalidadDBList[editIndices.mod].imagenes || [];
             }
-            alert("Modalidad guardada correctamente.");
+
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imagenes: imgsFinales };
+
+            if (editIndices.mod >= 0) {
+                modalidadDBList[editIndices.mod] = itemObj;
+                editIndices.mod = -1;
+                document.getElementById('btn-save-mod').innerText = "Guardar Modalidad";
+            } else {
+                modalidadDBList.push(itemObj);
+            }
+
+            limpiarFormMod();
             renderConfigLists();
+            renderPublicModalidad();
+            alert("Modalidad guardada correctamente.");
         });
     }
 
-    function renderPublicModalidad() {
-        const container = document.getElementById('public-modalidad-content');
-        if (!container) return;
-
-        let carouselHTML = '';
-        if (modalidadDB.imagenes && modalidadDB.imagenes.length > 0) {
-            carouselHTML = renderCarouselHTML('modalidad-main', modalidadDB.imagenes);
-        }
-
-        container.innerHTML = `
-            <div class="practica-card-item">
-                <h2 style="margin:0 0 6px 0; color:var(--primary-dark);">${modalidadDB.titulo}</h2>
-                <p style="white-space: pre-line; line-height: 1.4;">${modalidadDB.desc}</p>
-                ${carouselHTML}
-            </div>
-        `;
+    function editarModalidad(idx) {
+        const m = modalidadDBList[idx];
+        document.getElementById('mod-nombre').value = m.nombre || '';
+        document.getElementById('mod-desc').value = m.desc || '';
+        document.getElementById('mod-fecha').value = m.fecha || '';
+        document.getElementById('mod-hora').value = m.hora || '';
+        document.getElementById('mod-dias').value = m.dias || 'Todos';
+        document.getElementById('mod-turno').value = m.turno || 'Mañana';
+        document.getElementById('mod-orden').value = m.orden || 1;
+        document.getElementById('mod-link').value = m.link || '';
+        document.getElementById('mod-observacion').value = m.observacion || '';
+        document.getElementById('mod-agenda').value = m.agenda || 'Si';
+        editIndices.mod = idx;
+        document.getElementById('btn-save-mod').innerText = "Actualizar Modalidad";
     }
 
-    /* PÓCIMAS Y YUYOS DEL BIEN (INFUSIONES ABM) CON CARROUSEL */
+    function limpiarFormMod() {
+        document.getElementById('mod-nombre').value = '';
+        document.getElementById('mod-desc').value = '';
+        document.getElementById('mod-fecha').value = '';
+        document.getElementById('mod-hora').value = '';
+        document.getElementById('mod-dias').value = 'Todos';
+        document.getElementById('mod-turno').value = 'Mañana';
+        document.getElementById('mod-orden').value = 1;
+        document.getElementById('mod-link').value = '';
+        document.getElementById('mod-observacion').value = '';
+        document.getElementById('mod-agenda').value = 'Si';
+        const f = document.getElementById('mod-img-input'); if (f) f.value = '';
+    }
+
+    /* ABM ALIMENTOS */
+    function agregarAlimento() {
+        const nombre = document.getElementById('ali-nombre').value;
+        const desc = document.getElementById('ali-desc').value;
+        const fecha = document.getElementById('ali-fecha').value || '';
+        const hora = document.getElementById('ali-hora').value || '';
+        const dias = document.getElementById('ali-dias').value || 'Todos';
+        const turno = document.getElementById('ali-turno').value || 'Mañana';
+        const orden = parseInt(document.getElementById('ali-orden').value) || 1;
+        const link = document.getElementById('ali-link').value || '';
+        const observacion = document.getElementById('ali-observacion').value || '';
+        const agenda = document.getElementById('ali-agenda').value || 'Si';
+        const fileInput = document.getElementById('ali-img-input');
+
+        if (!nombre) return alert('Por favor ingresa el nombre del alimento');
+        readInputImage(fileInput, (base64Imgs) => {
+            const imgFinal = base64Imgs[0] || (editIndices.ali >= 0 ? alimentosDB[editIndices.ali].imgUrl : null);
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imgUrl: imgFinal };
+            
+            if (editIndices.ali >= 0) {
+                alimentosDB[editIndices.ali] = itemObj;
+                editIndices.ali = -1;
+                document.getElementById('btn-save-ali').innerText = "Guardar Alimento";
+            } else {
+                alimentosDB.push(itemObj);
+            }
+            limpiarFormAli();
+            renderConfigLists();
+            renderPublicAlimentos();
+        });
+    }
+
+    function editarAlimento(idx) {
+        const a = alimentosDB[idx];
+        document.getElementById('ali-nombre').value = a.nombre || '';
+        document.getElementById('ali-desc').value = a.desc || '';
+        document.getElementById('ali-fecha').value = a.fecha || '';
+        document.getElementById('ali-hora').value = a.hora || '';
+        document.getElementById('ali-dias').value = a.dias || 'Todos';
+        document.getElementById('ali-turno').value = a.turno || 'Mañana';
+        document.getElementById('ali-orden').value = a.orden || 1;
+        document.getElementById('ali-link').value = a.link || '';
+        document.getElementById('ali-observacion').value = a.observacion || '';
+        document.getElementById('ali-agenda').value = a.agenda || 'Si';
+        editIndices.ali = idx;
+        document.getElementById('btn-save-ali').innerText = "Actualizar Alimento";
+    }
+
+    function limpiarFormAli() {
+        document.getElementById('ali-nombre').value = '';
+        document.getElementById('ali-desc').value = '';
+        document.getElementById('ali-fecha').value = '';
+        document.getElementById('ali-hora').value = '';
+        document.getElementById('ali-dias').value = 'Todos';
+        document.getElementById('ali-turno').value = 'Mañana';
+        document.getElementById('ali-orden').value = 1;
+        document.getElementById('ali-link').value = '';
+        document.getElementById('ali-observacion').value = '';
+        document.getElementById('ali-agenda').value = 'Si';
+        const f = document.getElementById('ali-img-input'); if (f) f.value = '';
+    }
+
+    /* ABM DIOSAS */
+    function agregarDiosa() {
+        const nombre = document.getElementById('dio-nombre').value;
+        const desc = document.getElementById('dio-desc').value;
+        const fecha = document.getElementById('dio-fecha').value || '';
+        const hora = document.getElementById('dio-hora').value || '';
+        const dias = document.getElementById('dio-dias').value || 'Todos';
+        const turno = document.getElementById('dio-turno').value || 'Mañana';
+        const orden = parseInt(document.getElementById('dio-orden').value) || 1;
+        const link = document.getElementById('dio-link').value || '';
+        const observacion = document.getElementById('dio-observacion').value || '';
+        const agenda = document.getElementById('dio-agenda').value || 'Si';
+        const fileInput = document.getElementById('dio-img-input');
+
+        if (!nombre) return alert('Por favor ingresa el nombre de la Diosa');
+        readInputImage(fileInput, (base64Imgs) => {
+            const imgFinal = base64Imgs[0] || (editIndices.dio >= 0 ? diosasDB[editIndices.dio].imgUrl : null);
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imgUrl: imgFinal };
+            
+            if (editIndices.dio >= 0) {
+                diosasDB[editIndices.dio] = itemObj;
+                editIndices.dio = -1;
+                document.getElementById('btn-save-dio').innerText = "Guardar Diosa";
+            } else {
+                diosasDB.push(itemObj);
+            }
+            limpiarFormDio();
+            renderConfigLists();
+            renderPublicDiosas();
+        });
+    }
+
+    function editarDiosa(idx) {
+        const d = diosasDB[idx];
+        document.getElementById('dio-nombre').value = d.nombre || '';
+        document.getElementById('dio-desc').value = d.desc || '';
+        document.getElementById('dio-fecha').value = d.fecha || '';
+        document.getElementById('dio-hora').value = d.hora || '';
+        document.getElementById('dio-dias').value = d.dias || 'Todos';
+        document.getElementById('dio-turno').value = d.turno || 'Mañana';
+        document.getElementById('dio-orden').value = d.orden || 1;
+        document.getElementById('dio-link').value = d.link || '';
+        document.getElementById('dio-observacion').value = d.observacion || '';
+        document.getElementById('dio-agenda').value = d.agenda || 'Si';
+        editIndices.dio = idx;
+        document.getElementById('btn-save-dio').innerText = "Actualizar Diosa";
+    }
+
+    function limpiarFormDio() {
+        document.getElementById('dio-nombre').value = '';
+        document.getElementById('dio-desc').value = '';
+        document.getElementById('dio-fecha').value = '';
+        document.getElementById('dio-hora').value = '';
+        document.getElementById('dio-dias').value = 'Todos';
+        document.getElementById('dio-turno').value = 'Mañana';
+        document.getElementById('dio-orden').value = 1;
+        document.getElementById('dio-link').value = '';
+        document.getElementById('dio-observacion').value = '';
+        document.getElementById('dio-agenda').value = 'Si';
+        const f = document.getElementById('dio-img-input'); if (f) f.value = '';
+    }
+
+    /* ABM NOVEDADES */
+    function publicarNovedadManual() {
+        const nombre = document.getElementById('nov-nombre').value;
+        const desc = document.getElementById('nov-desc').value;
+        const fecha = document.getElementById('nov-fecha').value || '';
+        const hora = document.getElementById('nov-hora').value || '';
+        const dias = document.getElementById('nov-dias').value || 'Todos';
+        const turno = document.getElementById('nov-turno').value || 'Mañana';
+        const orden = parseInt(document.getElementById('nov-orden').value) || 1;
+        const link = document.getElementById('nov-link').value || '';
+        const observacion = document.getElementById('nov-observacion').value || '';
+        const agenda = document.getElementById('nov-agenda').value || 'Si';
+        const fileInput = document.getElementById('nov-img-input');
+
+        if (!nombre) return alert('Por favor ingresa el título/nombre de la novedad');
+        readInputImage(fileInput, (base64Imgs) => {
+            const imgFinal = base64Imgs[0] || (editIndices.nov >= 0 ? novedadesDB[editIndices.nov].imgUrl : null);
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imgUrl: imgFinal };
+            
+            if (editIndices.nov >= 0) {
+                novedadesDB[editIndices.nov] = itemObj;
+                editIndices.nov = -1;
+                document.getElementById('btn-save-nov').innerText = "Publicar Novedad";
+            } else {
+                novedadesDB.unshift(itemObj);
+            }
+            limpiarFormNov();
+            renderConfigLists();
+            renderPublicNovedades();
+        });
+    }
+
+    function editarNovedad(idx) {
+        const item = novedadesDB[idx];
+        document.getElementById('nov-nombre').value = item.nombre || item.titulo || '';
+        document.getElementById('nov-desc').value = item.desc || '';
+        document.getElementById('nov-fecha').value = item.fecha || '';
+        document.getElementById('nov-hora').value = item.hora || '';
+        document.getElementById('nov-dias').value = item.dias || 'Todos';
+        document.getElementById('nov-turno').value = item.turno || 'Mañana';
+        document.getElementById('nov-orden').value = item.orden || 1;
+        document.getElementById('nov-link').value = item.link || '';
+        document.getElementById('nov-observacion').value = item.observacion || '';
+        document.getElementById('nov-agenda').value = item.agenda || 'Si';
+        editIndices.nov = idx;
+        document.getElementById('btn-save-nov').innerText = "Actualizar Novedad";
+    }
+
+    function limpiarFormNov() {
+        document.getElementById('nov-nombre').value = '';
+        document.getElementById('nov-desc').value = '';
+        document.getElementById('nov-fecha').value = '';
+        document.getElementById('nov-hora').value = '';
+        document.getElementById('nov-dias').value = 'Todos';
+        document.getElementById('nov-turno').value = 'Mañana';
+        document.getElementById('nov-orden').value = 1;
+        document.getElementById('nov-link').value = '';
+        document.getElementById('nov-observacion').value = '';
+        document.getElementById('nov-agenda').value = 'Si';
+        const f = document.getElementById('nov-img-input'); if (f) f.value = '';
+    }
+
+    /* ABM PRÁCTICAS */
+    function agregarPractica() {
+        const nombre = document.getElementById('pra-nombre').value;
+        const desc = document.getElementById('pra-desc').value;
+        const fecha = document.getElementById('pra-fecha').value || '';
+        const hora = document.getElementById('pra-hora').value || '';
+        const dias = document.getElementById('pra-dias').value || 'Todos';
+        const turno = document.getElementById('pra-turno').value || 'Mañana';
+        const orden = parseInt(document.getElementById('pra-orden').value) || 1;
+        const link = document.getElementById('pra-link').value || '';
+        const observacion = document.getElementById('pra-observacion').value || '';
+        const agenda = document.getElementById('pra-agenda').value || 'Si';
+        const fileInput = document.getElementById('pra-img-input');
+
+        if (!nombre) return alert('Por favor ingresa el nombre de la práctica');
+        readInputImage(fileInput, (base64Imgs) => {
+            const imgFinal = base64Imgs[0] || (editIndices.pra >= 0 ? practicasDB[editIndices.pra].imgUrl : null);
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imgUrl: imgFinal };
+
+            if (editIndices.pra >= 0) {
+                practicasDB[editIndices.pra] = itemObj;
+                editIndices.pra = -1;
+                document.getElementById('btn-save-pra').innerText = "Guardar Práctica";
+            } else {
+                practicasDB.push(itemObj);
+            }
+            limpiarFormPra();
+            renderConfigLists();
+            renderPracticasScreen();
+        });
+    }
+
+    function editarPractica(idx) {
+        const p = practicasDB[idx];
+        document.getElementById('pra-nombre').value = p.nombre || '';
+        document.getElementById('pra-desc').value = p.desc || '';
+        document.getElementById('pra-fecha').value = p.fecha || '';
+        document.getElementById('pra-hora').value = p.hora || '';
+        document.getElementById('pra-dias').value = p.dias || 'Todos';
+        document.getElementById('pra-turno').value = p.turno || 'Mañana';
+        document.getElementById('pra-orden').value = p.orden || 1;
+        document.getElementById('pra-link').value = p.link || '';
+        document.getElementById('pra-observacion').value = p.observacion || p.comentario || '';
+        document.getElementById('pra-agenda').value = p.agenda || 'Si';
+        editIndices.pra = idx;
+        document.getElementById('btn-save-pra').innerText = "Actualizar Práctica";
+    }
+
+    function limpiarFormPra() {
+        document.getElementById('pra-nombre').value = '';
+        document.getElementById('pra-desc').value = '';
+        document.getElementById('pra-fecha').value = '';
+        document.getElementById('pra-hora').value = '';
+        document.getElementById('pra-dias').value = 'Todos';
+        document.getElementById('pra-turno').value = 'Mañana';
+        document.getElementById('pra-orden').value = 1;
+        document.getElementById('pra-link').value = '';
+        document.getElementById('pra-observacion').value = '';
+        document.getElementById('pra-agenda').value = 'Si';
+        const f = document.getElementById('pra-img-input'); if (f) f.value = '';
+    }
+
+    /* ABM ACTIVIDADES */
+    function agregarActividadConfig() {
+        const nombre = document.getElementById('act-nombre').value;
+        const desc = document.getElementById('act-desc').value;
+        const fecha = document.getElementById('act-fecha').value || '';
+        const hora = document.getElementById('act-hora').value || '';
+        const dias = document.getElementById('act-dias').value || 'Todos';
+        const turno = document.getElementById('act-turno').value || 'Mañana';
+        const orden = parseInt(document.getElementById('act-orden').value) || 1;
+        const link = document.getElementById('act-link').value || '';
+        const observacion = document.getElementById('act-observacion').value || '';
+        const agenda = document.getElementById('act-agenda').value || 'Si';
+        const fileInput = document.getElementById('act-img-input');
+
+        if (!nombre) return alert('Por favor ingresa el nombre de la actividad');
+        readInputImage(fileInput, (base64Imgs) => {
+            const imgFinal = base64Imgs[0] || (editIndices.act >= 0 ? actividadesDB[editIndices.act].imgUrl : null);
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imgUrl: imgFinal };
+
+            if (editIndices.act >= 0) {
+                actividadesDB[editIndices.act] = itemObj;
+                editIndices.act = -1;
+                document.getElementById('btn-save-act').innerText = "Guardar Actividad";
+            } else {
+                actividadesDB.push(itemObj);
+            }
+            limpiarFormAct();
+            renderConfigLists();
+            renderPublicActividades();
+        });
+    }
+
+    function editarActividad(idx) {
+        const item = actividadesDB[idx];
+        document.getElementById('act-nombre').value = item.nombre || '';
+        document.getElementById('act-desc').value = item.desc || '';
+        document.getElementById('act-fecha').value = item.fecha || '';
+        document.getElementById('act-hora').value = item.hora || '';
+        document.getElementById('act-dias').value = item.dias || item.dia || 'Todos';
+        document.getElementById('act-turno').value = item.turno || 'Mañana';
+        document.getElementById('act-orden').value = item.orden || 1;
+        document.getElementById('act-link').value = item.link || '';
+        document.getElementById('act-observacion').value = item.observacion || '';
+        document.getElementById('act-agenda').value = item.agenda || 'Si';
+        editIndices.act = idx;
+        document.getElementById('btn-save-act').innerText = "Actualizar Actividad";
+    }
+
+    function limpiarFormAct() {
+        document.getElementById('act-nombre').value = '';
+        document.getElementById('act-desc').value = '';
+        document.getElementById('act-fecha').value = '';
+        document.getElementById('act-hora').value = '';
+        document.getElementById('act-dias').value = 'Todos';
+        document.getElementById('act-turno').value = 'Mañana';
+        document.getElementById('act-orden').value = 1;
+        document.getElementById('act-link').value = '';
+        document.getElementById('act-observacion').value = '';
+        document.getElementById('act-agenda').value = 'Si';
+        const f = document.getElementById('act-img-input'); if (f) f.value = '';
+    }
+
+    /* ABM INFUSIONES / PÓCIMAS */
     function agregarInfusion() {
         const nombre = document.getElementById('inf-nombre').value;
         const desc = document.getElementById('inf-desc').value;
-        const efecto = document.getElementById('inf-efecto').value;
-        const hora = document.getElementById('inf-hora').value || "";
-        const dias = document.getElementById('inf-dias').value || "";
-        const link = document.getElementById('inf-link').value || "";
+        const fecha = document.getElementById('inf-fecha').value || '';
+        const hora = document.getElementById('inf-hora').value || '';
+        const dias = document.getElementById('inf-dias').value || 'Todos';
+        const turno = document.getElementById('inf-turno').value || 'Mañana';
+        const orden = parseInt(document.getElementById('inf-orden').value) || 1;
+        const link = document.getElementById('inf-link').value || '';
+        const observacion = document.getElementById('inf-observacion').value || '';
+        const agenda = document.getElementById('inf-agenda').value || 'Si';
         const fileInput = document.getElementById('inf-img-input');
 
-        if (!nombre) return;
+        if (!nombre) return alert('Por favor ingresa el nombre de la pócima');
         readInputImage(fileInput, (base64Array) => {
             let imgsFinales = base64Array;
             if (imgsFinales.length === 0 && editIndices.inf >= 0) {
                 imgsFinales = infusionesDB[editIndices.inf].imagenes || [];
             }
 
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imagenes: imgsFinales };
+
             if (editIndices.inf >= 0) {
-                infusionesDB[editIndices.inf] = { nombre, desc, efecto, hora, dias, link, imagenes: imgsFinales };
+                infusionesDB[editIndices.inf] = itemObj;
                 editIndices.inf = -1;
                 document.getElementById('btn-save-inf').innerText = "Guardar Pócima / Infusión";
             } else {
-                infusionesDB.push({ nombre, desc, efecto, hora, dias, link, imagenes: imgsFinales });
+                infusionesDB.push(itemObj);
             }
             limpiarFormInf();
             renderConfigLists();
+            renderPublicPocimas();
         });
     }
 
@@ -1251,10 +1730,14 @@
         const item = infusionesDB[idx];
         document.getElementById('inf-nombre').value = item.nombre || '';
         document.getElementById('inf-desc').value = item.desc || '';
-        document.getElementById('inf-efecto').value = item.efecto || '';
+        document.getElementById('inf-fecha').value = item.fecha || '';
         document.getElementById('inf-hora').value = item.hora || '';
-        document.getElementById('inf-dias').value = item.dias || '';
+        document.getElementById('inf-dias').value = item.dias || 'Todos';
+        document.getElementById('inf-turno').value = item.turno || 'Mañana';
+        document.getElementById('inf-orden').value = item.orden || 1;
         document.getElementById('inf-link').value = item.link || '';
+        document.getElementById('inf-observacion').value = item.observacion || item.efecto || '';
+        document.getElementById('inf-agenda').value = item.agenda || 'Si';
         editIndices.inf = idx;
         document.getElementById('btn-save-inf').innerText = "Actualizar Pócima / Infusión";
     }
@@ -1262,281 +1745,42 @@
     function limpiarFormInf() {
         document.getElementById('inf-nombre').value = '';
         document.getElementById('inf-desc').value = '';
-        document.getElementById('inf-efecto').value = '';
+        document.getElementById('inf-fecha').value = '';
         document.getElementById('inf-hora').value = '';
-        document.getElementById('inf-dias').value = '';
+        document.getElementById('inf-dias').value = 'Todos';
+        document.getElementById('inf-turno').value = 'Mañana';
+        document.getElementById('inf-orden').value = 1;
         document.getElementById('inf-link').value = '';
-        const f = document.getElementById('inf-img-input');
-        if (f) f.value = '';
+        document.getElementById('inf-observacion').value = '';
+        document.getElementById('inf-agenda').value = 'Si';
+        const f = document.getElementById('inf-img-input'); if (f) f.value = '';
     }
 
-    function renderPublicPocimas() {
-        const container = document.getElementById('public-pocimas-list');
-        if (!container) return;
-        if (infusionesDB.length === 0) {
-            container.innerHTML = '<i style="font-size:0.85rem; color:#888;">No hay pócimas ni infusiones cargadas.</i>';
-            return;
-        }
-
-        container.innerHTML = infusionesDB.map((inf, idx) => {
-            let carouselHTML = '';
-            if (inf.imagenes && inf.imagenes.length > 0) {
-                carouselHTML = renderCarouselHTML(`pocima-${idx}`, inf.imagenes);
-            }
-
-            return `
-                <div class="practica-card-item">
-                    <h3 style="margin:0; color:var(--primary-dark);">🍵 ${inf.nombre}</h3>
-                    ${inf.efecto ? `<p style="margin:2px 0;"><b>Efecto / Propiedad:</b> ${inf.efecto}</p>` : ''}
-                    ${inf.desc ? `<p style="margin:2px 0;">${inf.desc}</p>` : ''}
-                    ${inf.dias ? `<p style="margin:2px 0; font-size:0.85rem;"><b>Días de toma:</b> ${inf.dias}</p>` : ''}
-                    ${carouselHTML}
-                    ${inf.link ? `<a href="${inf.link}" target="_blank" class="practica-link-btn">🔗 Abrir Recurso / Enlace</a>` : ''}
-                </div>
-            `;
-        }).join('');
-    }
-
-    /* OTROS ABMS (ALIMENTOS, DIOSAS, NOVEDADES, PRÁCTICAS, ACTIVIDADES, PODCASTS) */
-    function agregarAlimento() {
-        const nombre = document.getElementById('ali-nombre').value;
-        const cat = document.getElementById('ali-cat').value;
-        const dias = document.getElementById('ali-dias').value || "";
-        const hora = document.getElementById('ali-hora').value || "";
-        const desc = document.getElementById('ali-desc').value;
-        const link = document.getElementById('ali-link').value;
-        const fileInput = document.getElementById('ali-img-input');
-
-        if (!nombre) return;
-        readInputImage(fileInput, (base64Imgs) => {
-            const imgFinal = base64Imgs[0] || (editIndices.ali >= 0 ? alimentosDB[editIndices.ali].imgUrl : null);
-            if (editIndices.ali >= 0) {
-                alimentosDB[editIndices.ali] = { id: Date.now(), nombre, cat, dias, hora, desc, link, imgUrl: imgFinal };
-                editIndices.ali = -1;
-                document.getElementById('btn-save-ali').innerText = "Guardar Alimento";
-            } else {
-                alimentosDB.push({ id: Date.now(), nombre, cat, dias, hora, desc, link, imgUrl: imgFinal });
-            }
-            limpiarFormAli();
-            renderConfigLists();
-        });
-    }
-
-    function editarAlimento(idx) {
-        const a = alimentosDB[idx];
-        document.getElementById('ali-nombre').value = a.nombre || '';
-        document.getElementById('ali-cat').value = a.cat || 'General';
-        document.getElementById('ali-dias').value = a.dias || '';
-        document.getElementById('ali-hora').value = a.hora || '';
-        document.getElementById('ali-desc').value = a.desc || '';
-        document.getElementById('ali-link').value = a.link || '';
-        editIndices.ali = idx;
-        document.getElementById('btn-save-ali').innerText = "Actualizar Alimento";
-    }
-
-    function limpiarFormAli() {
-        document.getElementById('ali-nombre').value = '';
-        document.getElementById('ali-cat').value = 'General';
-        document.getElementById('ali-dias').value = '';
-        document.getElementById('ali-hora').value = '';
-        document.getElementById('ali-desc').value = '';
-        document.getElementById('ali-link').value = '';
-        const f = document.getElementById('ali-img-input');
-        if (f) f.value = '';
-    }
-
-    function agregarDiosa() {
-        const nombre = document.getElementById('dio-nombre').value;
-        const fecha = document.getElementById('dio-fecha').value;
-        const hora = document.getElementById('dio-hora').value || "";
-        const desc = document.getElementById('dio-desc').value;
-        const link = document.getElementById('dio-link').value;
-        const fileInput = document.getElementById('dio-img-input');
-
-        if (!nombre) return;
-        readInputImage(fileInput, (base64Imgs) => {
-            const imgFinal = base64Imgs[0] || (editIndices.dio >= 0 ? diosasDB[editIndices.dio].imgUrl : null);
-            if (editIndices.dio >= 0) {
-                diosasDB[editIndices.dio] = { id: Date.now(), nombre, fecha, hora, desc, link, imgUrl: imgFinal };
-                editIndices.dio = -1;
-                document.getElementById('btn-save-dio').innerText = "Guardar Diosa";
-            } else {
-                diosasDB.push({ id: Date.now(), nombre, fecha, hora, desc, link, imgUrl: imgFinal });
-            }
-            limpiarFormDio();
-            renderConfigLists();
-        });
-    }
-
-    function editarDiosa(idx) {
-        const d = diosasDB[idx];
-        document.getElementById('dio-nombre').value = d.nombre || '';
-        document.getElementById('dio-fecha').value = d.fecha || '';
-        document.getElementById('dio-hora').value = d.hora || '';
-        document.getElementById('dio-desc').value = d.desc || '';
-        document.getElementById('dio-link').value = d.link || '';
-        editIndices.dio = idx;
-        document.getElementById('btn-save-dio').innerText = "Actualizar Diosa";
-    }
-
-    function limpiarFormDio() {
-        document.getElementById('dio-nombre').value = '';
-        document.getElementById('dio-fecha').value = '';
-        document.getElementById('dio-hora').value = '';
-        document.getElementById('dio-desc').value = '';
-        document.getElementById('dio-link').value = '';
-        const f = document.getElementById('dio-img-input');
-        if (f) f.value = '';
-    }
-
-    function publicarNovedadManual() {
-        const titulo = document.getElementById('nov-titulo').value;
-        const link = document.getElementById('nov-link').value;
-        const desde = document.getElementById('nov-desde').value;
-        const hasta = document.getElementById('nov-hasta').value;
-        const fileInput = document.getElementById('nov-img-input');
-
-        if (!titulo) return;
-        readInputImage(fileInput, (base64Imgs) => {
-            const imgFinal = base64Imgs[0] || (editIndices.nov >= 0 ? novedadesDB[editIndices.nov].imgUrl : null);
-            if (editIndices.nov >= 0) {
-                novedadesDB[editIndices.nov] = { titulo, link, desde, hasta, imgUrl: imgFinal };
-                editIndices.nov = -1;
-                document.getElementById('btn-save-nov').innerText = "Publicar Novedad";
-            } else {
-                novedadesDB.unshift({ titulo, link, desde, hasta, imgUrl: imgFinal });
-            }
-            limpiarFormNov();
-            renderConfigLists();
-        });
-    }
-
-    function editarNovedad(idx) {
-        const item = novedadesDB[idx];
-        document.getElementById('nov-titulo').value = item.titulo || '';
-        document.getElementById('nov-link').value = item.link || '';
-        document.getElementById('nov-desde').value = item.desde || '';
-        document.getElementById('nov-hasta').value = item.hasta || '';
-        editIndices.nov = idx;
-        document.getElementById('btn-save-nov').innerText = "Actualizar Novedad";
-    }
-
-    function limpiarFormNov() {
-        document.getElementById('nov-titulo').value = '';
-        document.getElementById('nov-link').value = '';
-        document.getElementById('nov-desde').value = '';
-        document.getElementById('nov-hasta').value = '';
-        const f = document.getElementById('nov-img-input');
-        if (f) f.value = '';
-    }
-
-    function agregarPractica() {
-        const nombre = document.getElementById('pra-nombre').value;
-        const fecha = document.getElementById('pra-fecha').value;
-        const hora = document.getElementById('pra-hora').value || "";
-        const desc = document.getElementById('pra-desc').value;
-        const link = document.getElementById('pra-link').value;
-        const comentario = document.getElementById('pra-comentario').value;
-        const fileInput = document.getElementById('pra-img-input');
-
-        if (!nombre) return;
-        readInputImage(fileInput, (base64Imgs) => {
-            const imgFinal = base64Imgs[0] || (editIndices.pra >= 0 ? practicasDB[editIndices.pra].imgUrl : null);
-            if (editIndices.pra >= 0) {
-                practicasDB[editIndices.pra] = { id: Date.now(), nombre, fecha, hora, desc, link, comentario, imgUrl: imgFinal };
-                editIndices.pra = -1;
-                document.getElementById('btn-save-pra').innerText = "Guardar Práctica";
-            } else {
-                practicasDB.push({ id: Date.now(), nombre, fecha, hora, desc, link, comentario, imgUrl: imgFinal });
-            }
-            limpiarFormPra();
-            renderConfigLists();
-        });
-    }
-
-    function editarPractica(idx) {
-        const p = practicasDB[idx];
-        document.getElementById('pra-nombre').value = p.nombre || '';
-        document.getElementById('pra-fecha').value = p.fecha || '';
-        document.getElementById('pra-hora').value = p.hora || '';
-        document.getElementById('pra-desc').value = p.desc || '';
-        document.getElementById('pra-link').value = p.link || '';
-        document.getElementById('pra-comentario').value = p.comentario || '';
-        editIndices.pra = idx;
-        document.getElementById('btn-save-pra').innerText = "Actualizar Práctica";
-    }
-
-    function limpiarFormPra() {
-        document.getElementById('pra-nombre').value = '';
-        document.getElementById('pra-fecha').value = '';
-        document.getElementById('pra-hora').value = '';
-        document.getElementById('pra-desc').value = '';
-        document.getElementById('pra-link').value = '';
-        document.getElementById('pra-comentario').value = '';
-        const f = document.getElementById('pra-img-input');
-        if (f) f.value = '';
-    }
-
-    function agregarActividadConfig() {
-        const nombre = document.getElementById('act-nombre').value;
-        const dia = document.getElementById('act-dia').value;
-        const fecha = document.getElementById('act-fecha').value;
-        const hora = document.getElementById('act-hora').value || "";
-        const link = document.getElementById('act-link').value || "";
-        const fileInput = document.getElementById('act-img-input');
-
-        if (!nombre) return;
-        readInputImage(fileInput, (base64Imgs) => {
-            const imgFinal = base64Imgs[0] || (editIndices.act >= 0 ? actividadesDB[editIndices.act].imgUrl : null);
-            if (editIndices.act >= 0) {
-                actividadesDB[editIndices.act] = { nombre, dia, fecha, hora, link, imgUrl: imgFinal };
-                editIndices.act = -1;
-                document.getElementById('btn-save-act').innerText = "Guardar Actividad";
-            } else {
-                actividadesDB.push({ nombre, dia, fecha, hora, link, imgUrl: imgFinal });
-            }
-            limpiarFormAct();
-            renderConfigLists();
-        });
-    }
-
-    function editarActividad(idx) {
-        const item = actividadesDB[idx];
-        document.getElementById('act-nombre').value = item.nombre || '';
-        document.getElementById('act-dia').value = item.dia || '';
-        document.getElementById('act-fecha').value = item.fecha || '';
-        document.getElementById('act-hora').value = item.hora || '';
-        document.getElementById('act-link').value = item.link || '';
-        editIndices.act = idx;
-        document.getElementById('btn-save-act').innerText = "Actualizar Actividad";
-    }
-
-    function limpiarFormAct() {
-        document.getElementById('act-nombre').value = '';
-        document.getElementById('act-fecha').value = '';
-        document.getElementById('act-hora').value = '';
-        document.getElementById('act-link').value = '';
-        const f = document.getElementById('act-img-input');
-        if (f) f.value = '';
-    }
-
+    /* ABM PODCASTS */
     function agregarPodcast() {
         const nombre = document.getElementById('pod-nombre').value;
         const desc = document.getElementById('pod-desc').value;
-        const hora = document.getElementById('pod-hora').value || "";
-        const link = document.getElementById('pod-link').value || "#";
-        const dias = document.getElementById('pod-dias').value || "";
+        const fecha = document.getElementById('pod-fecha').value || '';
+        const hora = document.getElementById('pod-hora').value || '';
+        const dias = document.getElementById('pod-dias').value || 'Todos';
+        const turno = document.getElementById('pod-turno').value || 'Mañana';
+        const orden = parseInt(document.getElementById('pod-orden').value) || 1;
+        const link = document.getElementById('pod-link').value || '';
+        const observacion = document.getElementById('pod-observacion').value || '';
+        const agenda = document.getElementById('pod-agenda').value || 'Si';
         const fileInput = document.getElementById('pod-img-input');
 
-        if (!nombre) return;
+        if (!nombre) return alert('Por favor ingresa el nombre del podcast');
         readInputImage(fileInput, (base64Imgs) => {
             const imgFinal = base64Imgs[0] || (editIndices.pod >= 0 ? podcastsDB[editIndices.pod].imgUrl : null);
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, link, observacion, agenda, imgUrl: imgFinal };
+
             if (editIndices.pod >= 0) {
-                podcastsDB[editIndices.pod] = { nombre, desc, hora, link, dias, imgUrl: imgFinal };
+                podcastsDB[editIndices.pod] = itemObj;
                 editIndices.pod = -1;
                 document.getElementById('btn-save-pod').innerText = "Guardar Podcast";
             } else {
-                podcastsDB.push({ nombre, desc, hora, link, dias, imgUrl: imgFinal });
+                podcastsDB.push(itemObj);
             }
             limpiarFormPod();
             renderConfigLists();
@@ -1547,9 +1791,14 @@
         const item = podcastsDB[idx];
         document.getElementById('pod-nombre').value = item.nombre || '';
         document.getElementById('pod-desc').value = item.desc || '';
+        document.getElementById('pod-fecha').value = item.fecha || '';
         document.getElementById('pod-hora').value = item.hora || '';
+        document.getElementById('pod-dias').value = item.dias || 'Todos';
+        document.getElementById('pod-turno').value = item.turno || 'Mañana';
+        document.getElementById('pod-orden').value = item.orden || 1;
         document.getElementById('pod-link').value = item.link || '';
-        document.getElementById('pod-dias').value = item.dias || '';
+        document.getElementById('pod-observacion').value = item.observacion || '';
+        document.getElementById('pod-agenda').value = item.agenda || 'Si';
         editIndices.pod = idx;
         document.getElementById('btn-save-pod').innerText = "Actualizar Podcast";
     }
@@ -1557,86 +1806,92 @@
     function limpiarFormPod() {
         document.getElementById('pod-nombre').value = '';
         document.getElementById('pod-desc').value = '';
+        document.getElementById('pod-fecha').value = '';
         document.getElementById('pod-hora').value = '';
+        document.getElementById('pod-dias').value = 'Todos';
+        document.getElementById('pod-turno').value = 'Mañana';
+        document.getElementById('pod-orden').value = 1;
         document.getElementById('pod-link').value = '';
-        document.getElementById('pod-dias').value = '';
-        const f = document.getElementById('pod-img-input');
-        if (f) f.value = '';
+        document.getElementById('pod-observacion').value = '';
+        document.getElementById('pod-agenda').value = 'Si';
+        const f = document.getElementById('pod-img-input'); if (f) f.value = '';
     }
 
+    /* RENDERS PARA CONFIGURACIÓN Y LISTAS CRUD */
     function renderConfigLists() {
-        document.getElementById('crud-modalidad-list').innerHTML = (modalidadDB.imagenes || []).map((img, idx) => `
+        document.getElementById('crud-modalidad-list').innerHTML = modalidadDBList.map((item, idx) => `
             <div class="crud-item">
-                <span>Imagen Modalidad #${idx + 1}</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
                 <div class="crud-actions">
-                    <button class="btn-delete" onclick="modalidadDB.imagenes.splice(${idx},1); renderConfigLists();">Eliminar</button>
+                    <button class="btn-edit" onclick="editarModalidad(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="modalidadDBList.splice(${idx},1); renderConfigLists(); renderPublicModalidad();">Eliminar</button>
                 </div>
             </div>
         `).join('');
 
         document.getElementById('crud-alimentos-list').innerHTML = alimentosDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>${item.nombre}</b> (${item.cat || 'General'})</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarAlimento(${idx})">Modificar</button>
-                    <button class="btn-delete" onclick="alimentosDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
+                    <button class="btn-delete" onclick="alimentosDB.splice(${idx},1); renderConfigLists(); renderPublicAlimentos();">Eliminar</button>
                 </div>
             </div>
         `).join('');
 
         document.getElementById('crud-diosas-list').innerHTML = diosasDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>${item.nombre}</b> ${item.fecha ? `(${item.fecha})` : ''}</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarDiosa(${idx})">Modificar</button>
-                    <button class="btn-delete" onclick="diosasDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
+                    <button class="btn-delete" onclick="diosasDB.splice(${idx},1); renderConfigLists(); renderPublicDiosas();">Eliminar</button>
                 </div>
             </div>
         `).join('');
 
         document.getElementById('novedades-abm-list').innerHTML = novedadesDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>${item.titulo}</b></span>
+                <span><b>#${item.orden || 1} - ${item.nombre || item.titulo}</b> (${item.turno || 'Mañana'})</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarNovedad(${idx})">Modificar</button>
-                    <button class="btn-delete" onclick="novedadesDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
+                    <button class="btn-delete" onclick="novedadesDB.splice(${idx},1); renderConfigLists(); renderPublicNovedades();">Eliminar</button>
                 </div>
             </div>
         `).join('');
 
         document.getElementById('crud-practicas-list').innerHTML = practicasDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>${item.nombre}</b></span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarPractica(${idx})">Modificar</button>
-                    <button class="btn-delete" onclick="practicasDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
+                    <button class="btn-delete" onclick="practicasDB.splice(${idx},1); renderConfigLists(); renderPracticasScreen();">Eliminar</button>
                 </div>
             </div>
         `).join('');
 
         document.getElementById('crud-actividades-list').innerHTML = actividadesDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>${item.nombre}</b></span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarActividad(${idx})">Modificar</button>
-                    <button class="btn-delete" onclick="actividadesDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
+                    <button class="btn-delete" onclick="actividadesDB.splice(${idx},1); renderConfigLists(); renderPublicActividades();">Eliminar</button>
                 </div>
             </div>
         `).join('');
 
         document.getElementById('crud-infusiones-list').innerHTML = infusionesDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>${item.nombre}</b> (${item.imagenes ? item.imagenes.length : 0} imágenes)</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarInfusion(${idx})">Modificar</button>
-                    <button class="btn-delete" onclick="infusionesDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
+                    <button class="btn-delete" onclick="infusionesDB.splice(${idx},1); renderConfigLists(); renderPublicPocimas();">Eliminar</button>
                 </div>
             </div>
         `).join('');
 
         document.getElementById('crud-podcasts-list').innerHTML = podcastsDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>${item.nombre}</b></span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (${item.turno || 'Mañana'})</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarPodcast(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="podcastsDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
@@ -1645,14 +1900,77 @@
         `).join('');
     }
 
+    /* RENDERS VISTAS PÚBLICAS ORDENADAS */
+    function renderPublicModalidad() {
+        const container = document.getElementById('public-modalidad-content');
+        if (!container) return;
+        if (modalidadDBList.length === 0) {
+            container.innerHTML = '<i style="font-size:0.85rem; color:#888;">No hay modalidades cargadas.</i>';
+            return;
+        }
+
+        const listaOrdenada = ordenarPorCampo([...modalidadDBList]);
+
+        container.innerHTML = listaOrdenada.map((item, idx) => {
+            let carouselHTML = '';
+            if (item.imagenes && item.imagenes.length > 0) {
+                carouselHTML = renderCarouselHTML(`modalidad-${idx}`, item.imagenes);
+            }
+
+            return `
+                <div class="practica-card-item">
+                    <h2 style="margin:0 0 6px 0; color:var(--primary-dark);">${item.nombre}</h2>
+                    ${item.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${item.turno}</span></p>` : ''}
+                    <p style="white-space: pre-line; line-height: 1.4;">${item.desc}</p>
+                    ${item.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${item.observacion}</p>` : ''}
+                    ${carouselHTML}
+                    ${item.link ? `<a href="${item.link}" target="_blank" class="practica-link-btn">🔗 Enlace / Información</a>` : ''}
+                </div>
+            `;
+        }).join('');
+    }
+
+    function renderPublicPocimas() {
+        const container = document.getElementById('public-pocimas-list');
+        if (!container) return;
+        if (infusionesDB.length === 0) {
+            container.innerHTML = '<i style="font-size:0.85rem; color:#888;">No hay pócimas ni infusiones cargadas.</i>';
+            return;
+        }
+
+        const listaOrdenada = ordenarPorCampo([...infusionesDB]);
+
+        container.innerHTML = listaOrdenada.map((inf, idx) => {
+            let carouselHTML = '';
+            if (inf.imagenes && inf.imagenes.length > 0) {
+                carouselHTML = renderCarouselHTML(`pocima-${idx}`, inf.imagenes);
+            }
+
+            return `
+                <div class="practica-card-item">
+                    <h3 style="margin:0; color:var(--primary-dark);">🍵 ${inf.nombre}</h3>
+                    ${inf.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${inf.turno}</span></p>` : ''}
+                    ${inf.desc ? `<p style="margin:2px 0;">${inf.desc}</p>` : ''}
+                    ${inf.dias ? `<p style="margin:2px 0; font-size:0.85rem;"><b>Días:</b> ${inf.dias}</p>` : ''}
+                    ${inf.observacion ? `<p style="margin:2px 0; font-size:0.85rem; color:#666;"><b>Observación:</b> ${inf.observacion}</p>` : ''}
+                    ${carouselHTML}
+                    ${inf.link ? `<a href="${inf.link}" target="_blank" class="practica-link-btn">🔗 Abrir Recurso / Enlace</a>` : ''}
+                </div>
+            `;
+        }).join('');
+    }
+
     function renderPublicAlimentos() {
         const container = document.getElementById('public-alimentos-list');
         if (alimentosDB.length === 0) { container.innerHTML = '<i style="font-size:0.8rem; color:#888;">No hay alimentos cargados.</i>'; return; }
-        container.innerHTML = alimentosDB.map(a => `
+        const listaOrdenada = ordenarPorCampo([...alimentosDB]);
+        container.innerHTML = listaOrdenada.map(a => `
             <div class="practica-card-item">
-                <h3>🥗 ${a.nombre} <small style="font-size:0.8rem; font-weight:normal; color:var(--primary);">(${a.cat || 'General'})</small></h3>
+                <h3>🥗 ${a.nombre}</h3>
+                ${a.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${a.turno}</span></p>` : ''}
                 <p>${a.desc || ''}</p>
-                ${a.dias ? `<p><b>Días / Fecha:</b> ${a.dias}</p>` : ''}
+                ${a.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${a.dias}</p>` : ''}
+                ${a.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${a.observacion}</p>` : ''}
                 ${a.imgUrl ? `<img src="${a.imgUrl}" class="item-attached-img" onclick="openImageViewer('${a.imgUrl}')" title="Toca para ampliar"><br>` : ''}
                 ${a.link ? `<a href="${a.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Receta</a>` : ''}
             </div>
@@ -1662,11 +1980,14 @@
     function renderPublicDiosas() {
         const container = document.getElementById('public-diosas-list');
         if (diosasDB.length === 0) { container.innerHTML = '<i style="font-size:0.8rem; color:#888;">No hay diosas cargadas.</i>'; return; }
-        container.innerHTML = diosasDB.map(d => `
+        const listaOrdenada = ordenarPorCampo([...diosasDB]);
+        container.innerHTML = listaOrdenada.map(d => `
             <div class="practica-card-item">
                 <h3>👑 ${d.nombre}</h3>
+                ${d.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${d.turno}</span></p>` : ''}
                 <p>${d.desc || ''}</p>
-                ${d.fecha ? `<p><b>Fecha:</b> ${d.fecha}</p>` : ''}
+                ${d.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${d.dias}</p>` : ''}
+                ${d.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${d.observacion}</p>` : ''}
                 ${d.imgUrl ? `<img src="${d.imgUrl}" class="item-attached-img" onclick="openImageViewer('${d.imgUrl}')" title="Toca para ampliar"><br>` : ''}
                 ${d.link ? `<a href="${d.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
             </div>
@@ -1676,10 +1997,14 @@
     function renderPublicActividades() {
         const container = document.getElementById('public-actividades-list');
         if (actividadesDB.length === 0) { container.innerHTML = '<i style="font-size:0.8rem; color:#888;">No hay actividades.</i>'; return; }
-        container.innerHTML = actividadesDB.map(act => `
+        const listaOrdenada = ordenarPorCampo([...actividadesDB]);
+        container.innerHTML = listaOrdenada.map(act => `
             <div class="practica-card-item">
                 <h3>✨ ${act.nombre}</h3>
-                <p><b>Día / Fecha:</b> ${act.fecha || act.dia || 'Todos los días'}</p>
+                ${act.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${act.turno}</span></p>` : ''}
+                <p>${act.desc || ''}</p>
+                ${act.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${act.dias}</p>` : ''}
+                ${act.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${act.observacion}</p>` : ''}
                 ${act.imgUrl ? `<img src="${act.imgUrl}" class="item-attached-img" onclick="openImageViewer('${act.imgUrl}')" title="Toca para ampliar"><br>` : ''}
                 ${act.link ? `<a href="${act.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace</a>` : ''}
             </div>
@@ -1689,27 +2014,57 @@
     function renderPracticasScreen() {
         const container = document.getElementById('practicas-dynamic-list');
         if (practicasDB.length === 0) { container.innerHTML = '<i style="font-size:0.8rem; color:#888;">No hay prácticas.</i>'; return; }
-        container.innerHTML = practicasDB.map(p => `
+        const listaOrdenada = ordenarPorCampo([...practicasDB]);
+        container.innerHTML = listaOrdenada.map(p => `
             <div class="practica-card-item">
                 <h3>🧘‍♀️ ${p.nombre}</h3>
+                ${p.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${p.turno}</span></p>` : ''}
                 <p>${p.desc || ''}</p>
+                ${p.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${p.dias}</p>` : ''}
+                ${p.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${p.observacion}</p>` : ''}
                 ${p.imgUrl ? `<img src="${p.imgUrl}" class="item-attached-img" onclick="openImageViewer('${p.imgUrl}')" title="Toca para ampliar"><br>` : ''}
                 ${p.link ? `<a href="${p.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace</a>` : ''}
             </div>
         `).join('');
     }
 
+    function renderPublicNovedades() {
+        const container = document.getElementById('public-novedades-list');
+        if (!container) return;
+        if (novedadesDB.length === 0) { container.innerHTML = '<i style="font-size:0.8rem; color:#888;">No hay novedades.</i>'; return; }
+        const listaOrdenada = ordenarPorCampo([...novedadesDB]);
+        container.innerHTML = listaOrdenada.map(n => `
+            <div class="practica-card-item">
+                <h3>📢 ${n.nombre || n.titulo}</h3>
+                ${n.turno ? `<p style="margin:0;"><span class="badge-turno">Turno: ${n.turno}</span></p>` : ''}
+                <p>${n.desc || ''}</p>
+                ${n.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${n.dias}</p>` : ''}
+                ${n.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${n.observacion}</p>` : ''}
+                ${n.imgUrl ? `<img src="${n.imgUrl}" class="item-attached-img" onclick="openImageViewer('${n.imgUrl}')" title="Toca para ampliar"><br>` : ''}
+                ${n.link ? `<a href="${n.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Zoom</a>` : ''}
+            </div>
+        `).join('');
+    }
+
+    /* PERSONALIZADOR DE BOTONES CON VISIBILIDAD EN PANTALLA PRINCIPAL */
     function renderButtonsCustomizer() {
         const container = document.getElementById('buttons-customizer-container');
         if (!container) return;
         container.innerHTML = Object.keys(botonesConfig).map(key => {
             const btn = botonesConfig[key];
+            const isVis = (btn.visible !== "No");
             return `
                 <div class="btn-config-card">
                     <b>${btn.titulo}</b>
-                    <div style="display:flex; gap:6px;">
-                        <label>Fondo: <input type="color" value="${btn.bg}" onchange="botonesConfig['${key}'].bg=this.value; aplicarEstilosBotones();"></label>
-                        <label>Letra: <input type="color" value="${btn.color}" onchange="botonesConfig['${key}'].color=this.value; aplicarEstilosBotones();"></label>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:4px;">
+                        <label style="font-size:0.8rem;">Fondo: <input type="color" value="${btn.bg}" onchange="botonesConfig['${key}'].bg=this.value; aplicarEstilosBotones();"></label>
+                        <label style="font-size:0.8rem;">Letra: <input type="color" value="${btn.color}" onchange="botonesConfig['${key}'].color=this.value; aplicarEstilosBotones();"></label>
+                        <label style="font-size:0.8rem;">Visible: 
+                            <select onchange="botonesConfig['${key}'].visible=this.value; aplicarEstilosBotones();">
+                                <option value="Si" ${isVis ? 'selected' : ''}>Sí</option>
+                                <option value="No" ${!isVis ? 'selected' : ''}>No</option>
+                            </select>
+                        </label>
                     </div>
                 </div>
             `;
@@ -1721,13 +2076,20 @@
             const btn = botonesConfig[key];
             const cardEl = document.getElementById(`card-btn-${key}`);
             const titleEl = document.getElementById(`title-btn-${key}`);
-            if (cardEl) cardEl.style.backgroundColor = btn.bg;
+            if (cardEl) {
+                cardEl.style.backgroundColor = btn.bg;
+                if (btn.visible === "No") {
+                    cardEl.classList.add('hidden-btn');
+                } else {
+                    cardEl.classList.remove('hidden-btn');
+                }
+            }
             if (titleEl) titleEl.style.color = btn.color;
         });
     }
 
     function descargarConfigJSON() {
-        const configData = { modalidadDB, alimentosDB, diosasDB, practicasDB, infusionesDB, novedadesDB, podcastsDB, actividadesDB, cfgCalendario, botonesConfig, configVisual, whatsappNumber };
+        const configData = { modalidadDBList, alimentosDB, diosasDB, practicasDB, infusionesDB, novedadesDB, podcastsDB, actividadesDB, cfgCalendario, botonesConfig, configVisual, whatsappNumber };
         const blob = new Blob([JSON.stringify(configData, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -1739,43 +2101,35 @@
 
     function guardarNumeroWhatsApp() {
         const val = document.getElementById('cfg-whatsapp-num').value;
-        if (val) {
-            whatsappNumber = val.trim().replace(/[^0-9]/g, '');
-        }
+        if (val) whatsappNumber = val.trim().replace(/[^0-9]/g, '');
     }
 
     function openWhatsApp() { 
-        if (!whatsappNumber) {
-            alert("No hay un número de WhatsApp configurado.");
-            return;
-        }
+        if (!whatsappNumber) return alert("No hay un número de WhatsApp configurado.");
         window.open(`https://wa.me/${whatsappNumber}`, '_blank'); 
     }
 
     async function cargarConfigInicial() {
         try {
-            // Intentar cargar desde localStorage primero si existe
             const localSaved = localStorage.getItem('app_config_json');
-            if (localSaved) {
-                aplicarObjetoConfig(JSON.parse(localSaved));
-            }
+            if (localSaved) aplicarObjetoConfig(JSON.parse(localSaved));
 
-            // Petición a config.json evadiendo la caché del navegador
             const resp = await fetch('config.json?v=' + Date.now());
             if (resp.ok) {
                 const data = await resp.json();
                 aplicarObjetoConfig(data);
-                // Guardar copia local de respaldo
                 localStorage.setItem('app_config_json', JSON.stringify(data));
             }
         } catch (e) {
-            console.log("Aviso: No se pudo hacer fetch de config.json (posible protocolo file:// o archivo ausente):", e);
+            console.log("Aviso: No se pudo hacer fetch de config.json:", e);
         }
     }
 
     function aplicarObjetoConfig(data) {
         if (!data) return;
-        if (data.modalidadDB) modalidadDB = data.modalidadDB;
+        if (data.modalidadDBList) modalidadDBList = data.modalidadDBList;
+        else if (data.modalidadDB) modalidadDBList = [data.modalidadDB];
+        
         if (data.alimentosDB) alimentosDB = data.alimentosDB;
         if (data.diosasDB) diosasDB = data.diosasDB;
         if (data.practicasDB) practicasDB = data.practicasDB;
@@ -1784,18 +2138,23 @@
         if (data.podcastsDB) podcastsDB = data.podcastsDB;
         if (data.actividadesDB) actividadesDB = data.actividadesDB;
         if (data.cfgCalendario) cfgCalendario = data.cfgCalendario;
-        if (data.botonesConfig) botonesConfig = data.botonesConfig;
+        if (data.botonesConfig) {
+            Object.keys(data.botonesConfig).forEach(k => {
+                if (botonesConfig[k]) {
+                    botonesConfig[k] = { ...botonesConfig[k], ...data.botonesConfig[k] };
+                }
+            });
+        }
         if (data.configVisual) configVisual = data.configVisual;
         if (data.whatsappNumber) whatsappNumber = data.whatsappNumber;
 
-        // Refrescar elementos visuales e interfaz
         if (document.getElementById('cfg-btn-3d')) {
             document.getElementById('cfg-btn-3d').checked = !!configVisual.btn3D;
             cambiarEstilo3DBotones();
         }
-        if (document.getElementById('cfg-whatsapp-num')) {
-            document.getElementById('cfg-whatsapp-num').value = whatsappNumber || '';
-        }
+        if (document.getElementById('cfg-whatsapp-num')) document.getElementById('cfg-whatsapp-num').value = whatsappNumber || '';
+        if (document.getElementById('cfg-fecha-inicio')) document.getElementById('cfg-fecha-inicio').value = cfgCalendario.fechaInicio || '2026-09-01';
+
         aplicarEstilosBotones();
         initCalendar();
         renderPublicModalidad();
@@ -1804,6 +2163,7 @@
         renderPublicDiosas();
         renderPublicActividades();
         renderPracticasScreen();
+        renderPublicNovedades();
     }
 
     function cargarConfigDesdeArchivoLocal(fileInput) {
