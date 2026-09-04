@@ -228,6 +228,7 @@
         .practica-card-item { background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid rgba(244, 162, 145, 0.4); margin-bottom: 8px; display: flex; flex-direction: column; gap: 4px; }
         .practica-link-btn { display: inline-block; margin-top: 4px; margin-bottom: 6px; padding: 6px 12px; background: var(--pastel-green); color: var(--primary-dark); border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.85rem; border: 1px solid #b8e0a8; text-align: center; }
 
+        /* CARROUSEL COMPONENT COMPATIBLE */
         .carousel-container {
             position: relative; width: 100%; max-width: 100%; margin: 8px 0;
             overflow: hidden; border-radius: 10px; border: 1px solid var(--salmon); background: #000;
@@ -278,8 +279,16 @@
         <button class="icon-btn" onclick="openWhatsApp()" style="color:#25D366; font-weight:bold;">💬 WhatsApp</button>
     </div>
 
-    <!-- PANTALLA PRINCIPAL -->
-    <div id="screen-home" class="screen active">
+    <!-- PANTALLA INICIAL DE PORTADA -->
+    <div id="screen-portada" class="screen active">
+        <div class="screen-body" style="justify-content: center; align-items: center; text-align: center;">
+            <div id="portada-content" style="width: 100%;"></div>
+            <button class="btn-submit" style="margin-top: 15px; background: var(--primary-dark); padding: 12px;" onclick="nav('home')">Ingresar a la Comunidad ➔</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA PRINCIPAL (MENÚ DE BOTONES) -->
+    <div id="screen-home" class="screen">
         <div class="home-container-full">
             <div class="menu-grid-full">
                 <div class="menu-row">
@@ -326,6 +335,10 @@
                     <div class="menu-card" id="card-btn-novedades" onclick="nav('novedades')">
                         <span class="card-icon" id="icon-btn-novedades">📢</span>
                         <h2 id="title-btn-novedades">Novedades</h2>
+                    </div>
+                    <div class="menu-card" id="card-btn-podcasts" onclick="nav('podcasts')">
+                        <span class="card-icon" id="icon-btn-podcasts">🎧</span>
+                        <h2 id="title-btn-podcasts">Podcast</h2>
                     </div>
                 </div>
             </div>
@@ -408,6 +421,48 @@
             <div class="abm-card-box">
                 <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Personalizar Botones y Visibilidad de Secciones</h3>
                 <div id="buttons-customizer-container"></div>
+            </div>
+
+            <!-- ABM DE PORTADA -->
+            <div class="abm-card-box">
+                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Gestión de Portada (ABM)</h3>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:2;"><label>Nombre / Título:</label><input type="text" id="por-nombre" placeholder="Ej: Bienvenidos al Reto"></div>
+                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="por-orden" placeholder="1" value="1"></div>
+                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="por-carrousel" placeholder="0" value="0"></div>
+                </div>
+                <div class="form-group"><label>Descripción / Texto explicativo:</label><textarea id="por-desc" rows="3" placeholder="Mensaje de bienvenida..."></textarea></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;"><label>Fecha Específica:</label><input type="date" id="por-fecha"></div>
+                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="por-hora" placeholder="Ej: 00:00 hs"></div>
+                </div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Días:</label>
+                        <select id="por-dias">
+                            <option value="Todos">Todos los días</option>
+                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Turno:</label>
+                        <select id="por-turno">
+                            <option value="Ninguno">Ninguno</option>
+                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="por-link" placeholder="https://..."></div>
+                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="por-observacion" placeholder="Notas adicionales..."></div>
+                <div class="form-group">
+                    <label>Mostrar en Agenda:</label>
+                    <select id="por-agenda"><option value="No">No</option><option value="Si">Sí</option></select>
+                </div>
+                <div class="form-group"><label>Adjuntar Imagen / Imágenes:</label><input type="file" accept="image/*" id="por-img-input" multiple></div>
+                <button class="btn-submit" id="btn-save-por" onclick="guardarPortadaABM()">Guardar Portada</button>
+                <div class="crud-list-container"><small style="font-weight:bold;">Registros de Portada:</small><div id="crud-portada-list"></div></div>
             </div>
 
             <!-- ABM DE MODALIDAD -->
@@ -752,16 +807,12 @@
     <!-- PANTALLAS PÚBLICAS -->
     <div id="screen-modalidad" class="screen">
         <div class="screen-header"><h2 class="screen-title">Modalidad</h2><button class="btn-back" onclick="nav('home')">←</button></div>
-        <div class="screen-body" id="public-modalidad-content">
-            <i style="font-size:0.85rem; color:#888;">Cargando información de modalidad...</i>
-        </div>
+        <div class="screen-body" id="public-modalidad-content"></div>
     </div>
 
     <div id="screen-pocimas" class="screen">
         <div class="screen-header"><h2 class="screen-title">Pócimas y Yuyos del Bien</h2><button class="btn-back" onclick="nav('home')">←</button></div>
-        <div class="screen-body" id="public-pocimas-list">
-            <i style="font-size:0.85rem; color:#888;">Cargando Pócimas...</i>
-        </div>
+        <div class="screen-body" id="public-pocimas-list"></div>
     </div>
 
     <div id="screen-alimentos" class="screen"><div class="screen-header"><h2 class="screen-title">Alimentos</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-alimentos-list"></div></div>
@@ -770,6 +821,7 @@
     <div id="screen-practicas" class="screen"><div class="screen-header"><h2 class="screen-title">Prácticas</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="practicas-dynamic-list"></div></div>
     <div id="screen-caminatas" class="screen"><div class="screen-header"><h2 class="screen-title">Caminatas</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body">🚶‍♀️ Propuesta Diaria y Caminatas</div></div>
     <div id="screen-novedades" class="screen"><div class="screen-header"><h2 class="screen-title">Novedades</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-novedades-list"></div></div>
+    <div id="screen-podcasts" class="screen"><div class="screen-header"><h2 class="screen-title">Podcasts</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-podcasts-list"></div></div>
 
 </div>
 
@@ -794,19 +846,16 @@
     let configVisual = { btn3D: false };
     let whatsappNumber = "5491112345678";
     
+    let portadaDBList = [{
+        nombre: "Comunidad 28 Días",
+        desc: "Bienvenidos a nuestro espacio sagrado de transformación y autoconocimiento.",
+        fecha: "", hora: "", dias: "Todos", turno: "Ninguno", orden: 1, carrousel: 1, link: "", observacion: "", agenda: "No", imagenes: []
+    }];
+
     let modalidadDBList = [{
         nombre: "Modalidad del Programa 28 Días",
         desc: "Bienvenidos a nuestro espacio de transformación y bienestar consciente.",
-        fecha: "",
-        hora: "",
-        dias: "Todos",
-        turno: "Ninguno",
-        orden: 1,
-        carrousel: 0,
-        link: "",
-        observacion: "",
-        agenda: "Si",
-        imagenes: []
+        fecha: "", hora: "", dias: "Todos", turno: "Ninguno", orden: 1, carrousel: 0, link: "", observacion: "", agenda: "Si", imagenes: []
     }];
 
     let alimentosDB = [];
@@ -820,7 +869,7 @@
     let agendaGuardadaBD = {}; 
     let currentFechaKeyModal = "";
 
-    let editIndices = { mod: -1, ali: -1, dio: -1, inf: -1, pod: -1, act: -1, nov: -1, pra: -1 };
+    let editIndices = { por: -1, mod: -1, ali: -1, dio: -1, inf: -1, pod: -1, act: -1, nov: -1, pra: -1 };
 
     let botonesConfig = {
         modalidad: { id: "modalidad", titulo: "Modalidad", bg: "#ffffff", color: "#f4a291", icon: "🌸", visible: "Si" },
@@ -831,7 +880,8 @@
         alimentos: { id: "alimentos", titulo: "Alimentos", bg: "#ffffff", color: "#f4a291", icon: "🥗", visible: "Si" },
         diosas: { id: "diosas", titulo: "Diosas", bg: "#ffffff", color: "#f4a291", icon: "👑", visible: "Si" },
         agenda: { id: "agenda", titulo: "Mi Agenda Diaria y Sensaciones", bg: "#ffffff", color: "#f4a291", icon: "📅", visible: "Si" },
-        novedades: { id: "novedades", titulo: "Novedades", bg: "#fbe3e8", color: "#f4a291", icon: "📢", visible: "Si" }
+        novedades: { id: "novedades", titulo: "Novedades", bg: "#fbe3e8", color: "#f4a291", icon: "📢", visible: "Si" },
+        podcasts: { id: "podcasts", titulo: "Podcast", bg: "#ffffff", color: "#f4a291", icon: "🎧", visible: "Si" }
     };
 
     const NOMBRES_DIAS_SEMANA = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
@@ -930,10 +980,10 @@
         if (e.touches.length === 0) isDragging = false;
     });
 
-    /* CARROUSEL COMPONENT CON SOPORTE PARA MÚLTIPLES IMÁGENES */
+    /* CARROUSEL DINÁMICO CORREGIDO */
     let carouselState = {};
 
-    function renderCarouselHTML(carouselId, imgList) {
+    function renderCarouselHTML(carouselId, imgList, autoAdvanceToHome = false) {
         if (!imgList || imgList.length === 0) return '';
         if (imgList.length === 1) {
             return `<img src="${imgList[0]}" class="item-attached-img" onclick="openImageViewer('${imgList[0]}')" title="Toca para ampliar">`;
@@ -946,7 +996,7 @@
         ).join('');
 
         const dotsHTML = imgList.map((_, idx) => 
-            `<div class="carousel-dot ${idx === 0 ? 'active' : ''}" onclick="setCarouselSlide('${carouselId}', ${idx}, ${imgList.length})"></div>`
+            `<div class="carousel-dot ${idx === 0 ? 'active' : ''}" onclick="setCarouselSlide('${carouselId}', ${idx}, ${imgList.length}, ${autoAdvanceToHome})"></div>`
         ).join('');
 
         return `
@@ -954,8 +1004,8 @@
                 <div class="carousel-slide" id="slide-${carouselId}">
                     ${slidesHTML}
                 </div>
-                <button class="carousel-btn prev" onclick="moveCarousel('${carouselId}', -1, ${imgList.length})">❮</button>
-                <button class="carousel-btn next" onclick="moveCarousel('${carouselId}', 1, ${imgList.length})">❯</button>
+                <button class="carousel-btn prev" onclick="moveCarousel('${carouselId}', -1, ${imgList.length}, ${autoAdvanceToHome})">❮</button>
+                <button class="carousel-btn next" onclick="moveCarousel('${carouselId}', 1, ${imgList.length}, ${autoAdvanceToHome})">❯</button>
                 <div class="carousel-dots" id="dots-${carouselId}">
                     ${dotsHTML}
                 </div>
@@ -963,13 +1013,17 @@
         `;
     }
 
-    function moveCarousel(carouselId, direction, total) {
+    function moveCarousel(carouselId, direction, total, autoAdvanceToHome = false) {
         let current = carouselState[carouselId] || 0;
+        if (autoAdvanceToHome && direction === 1 && current === total - 1) {
+            nav('home');
+            return;
+        }
         current = (current + direction + total) % total;
-        setCarouselSlide(carouselId, current, total);
+        setCarouselSlide(carouselId, current, total, autoAdvanceToHome);
     }
 
-    function setCarouselSlide(carouselId, index, total) {
+    function setCarouselSlide(carouselId, index, total, autoAdvanceToHome = false) {
         carouselState[carouselId] = index;
         const slideEl = document.getElementById(`slide-${carouselId}`);
         if (slideEl) slideEl.style.transform = `translateX(-${index * 100}%)`;
@@ -1032,6 +1086,7 @@
             document.getElementById('app-viewport').classList.remove('wide-view');
         }
 
+        if (screenId === 'portada') renderPublicPortada();
         if (screenId === 'modalidad') renderPublicModalidad();
         if (screenId === 'pocimas') renderPublicPocimas();
         if (screenId === 'config') {
@@ -1045,6 +1100,7 @@
         if (screenId === 'actividades') renderPublicActividades();
         if (screenId === 'practicas') renderPracticasScreen();
         if (screenId === 'novedades') renderPublicNovedades();
+        if (screenId === 'podcasts') renderPublicPodcasts();
     }
 
     function guardarFechaInicioReto(nuevaFecha) {
@@ -1162,7 +1218,7 @@
             { db: actividadesDB, tipo: '✨ Actividad' },
             { db: practicasDB, tipo: '🧘‍♀️ Práctica' },
             { db: infusionesDB, tipo: '🍵 Pócima' },
-            { db: podcastsDB, tipo: '🎙️ Podcast' },
+            { db: podcastsDB, tipo: '🎧 Podcast' },
             { db: novedadesDB, tipo: '📢 Novedad' }
         ];
 
@@ -1294,8 +1350,7 @@
         return lista.sort((a, b) => (parseInt(a.orden) || 1) - (parseInt(b.orden) || 1));
     }
 
-    /* FUNCIÓN GENERAL PARA AGRUPAR E IMPRIMIR IMÁGENES SEGÚN NÚMERO DE CARROUSEL */
-    function procesarImagenesYCarrousel(item, prefixId, idx) {
+    function procesarImagenesYCarrousel(item, prefixId, idx, autoAdvance = false) {
         let imagenesTotales = [];
         if (item.imagenes && item.imagenes.length > 0) imagenesTotales = item.imagenes;
         else if (item.imgUrl) imagenesTotales = [item.imgUrl];
@@ -1305,10 +1360,82 @@
         const numCarrousel = parseInt(item.carrousel) || 0;
 
         if (numCarrousel > 0 || imagenesTotales.length > 1) {
-            return renderCarouselHTML(`${prefixId}-${numCarrousel || idx}`, imagenesTotales);
+            return renderCarouselHTML(`${prefixId}-${numCarrousel || idx}`, imagenesTotales, autoAdvance);
         } else {
             return `<img src="${imagenesTotales[0]}" class="item-attached-img" onclick="openImageViewer('${imagenesTotales[0]}')" title="Toca para ampliar">`;
         }
+    }
+
+    /* ABM PORTADA */
+    function guardarPortadaABM() {
+        const nombre = document.getElementById('por-nombre').value;
+        const desc = document.getElementById('por-desc').value;
+        const fecha = document.getElementById('por-fecha').value || '';
+        const hora = document.getElementById('por-hora').value || '';
+        const dias = document.getElementById('por-dias').value || 'Todos';
+        const turno = document.getElementById('por-turno').value || 'Ninguno';
+        const orden = parseInt(document.getElementById('por-orden').value) || 1;
+        const carrousel = parseInt(document.getElementById('por-carrousel').value) || 0;
+        const link = document.getElementById('por-link').value || '';
+        const observacion = document.getElementById('por-observacion').value || '';
+        const agenda = document.getElementById('por-agenda').value || 'No';
+
+        if (!nombre) return alert("Ingresa el título de la portada.");
+
+        const fileInput = document.getElementById('por-img-input');
+        readInputImage(fileInput, (base64Array) => {
+            let imgsFinales = base64Array;
+            if (imgsFinales.length === 0 && editIndices.por >= 0) {
+                imgsFinales = portadaDBList[editIndices.por].imagenes || [];
+            }
+
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
+
+            if (editIndices.por >= 0) {
+                portadaDBList[editIndices.por] = itemObj;
+                editIndices.por = -1;
+                document.getElementById('btn-save-por').innerText = "Guardar Portada";
+            } else {
+                portadaDBList.push(itemObj);
+            }
+
+            limpiarFormPor();
+            renderConfigLists();
+            renderPublicPortada();
+            alert("Portada guardada correctamente.");
+        });
+    }
+
+    function editarPortada(idx) {
+        const p = portadaDBList[idx];
+        document.getElementById('por-nombre').value = p.nombre || '';
+        document.getElementById('por-desc').value = p.desc || '';
+        document.getElementById('por-fecha').value = p.fecha || '';
+        document.getElementById('por-hora').value = p.hora || '';
+        document.getElementById('por-dias').value = p.dias || 'Todos';
+        document.getElementById('por-turno').value = p.turno || 'Ninguno';
+        document.getElementById('por-orden').value = p.orden || 1;
+        document.getElementById('por-carrousel').value = p.carrousel || 0;
+        document.getElementById('por-link').value = p.link || '';
+        document.getElementById('por-observacion').value = p.observacion || '';
+        document.getElementById('por-agenda').value = p.agenda || 'No';
+        editIndices.por = idx;
+        document.getElementById('btn-save-por').innerText = "Actualizar Portada";
+    }
+
+    function limpiarFormPor() {
+        document.getElementById('por-nombre').value = '';
+        document.getElementById('por-desc').value = '';
+        document.getElementById('por-fecha').value = '';
+        document.getElementById('por-hora').value = '';
+        document.getElementById('por-dias').value = 'Todos';
+        document.getElementById('por-turno').value = 'Ninguno';
+        document.getElementById('por-orden').value = 1;
+        document.getElementById('por-carrousel').value = 0;
+        document.getElementById('por-link').value = '';
+        document.getElementById('por-observacion').value = '';
+        document.getElementById('por-agenda').value = 'No';
+        const f = document.getElementById('por-img-input'); if (f) f.value = '';
     }
 
     /* ABM MODALIDAD */
@@ -1824,6 +1951,7 @@
             }
             limpiarFormPod();
             renderConfigLists();
+            renderPublicPodcasts();
         });
     }
 
@@ -1861,6 +1989,16 @@
 
     /* RENDERS PARA CONFIGURACIÓN Y LISTAS CRUD */
     function renderConfigLists() {
+        document.getElementById('crud-portada-list').innerHTML = portadaDBList.map((item, idx) => `
+            <div class="crud-item">
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarPortada(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="portadaDBList.splice(${idx},1); renderConfigLists(); renderPublicPortada();">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+
         document.getElementById('crud-modalidad-list').innerHTML = modalidadDBList.map((item, idx) => `
             <div class="crud-item">
                 <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
@@ -1936,13 +2074,36 @@
                 <span><b>#${item.orden || 1} - ${item.nombre}</b> (Turno: ${item.turno || 'Ninguno'}) [Carrusel: ${item.carrousel || 0}]</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarPodcast(${idx})">Modificar</button>
-                    <button class="btn-delete" onclick="podcastsDB.splice(${idx},1); renderConfigLists();">Eliminar</button>
+                    <button class="btn-delete" onclick="podcastsDB.splice(${idx},1); renderConfigLists(); renderPublicPodcasts();">Eliminar</button>
                 </div>
             </div>
         `).join('');
     }
 
-    /* RENDERS VISTAS PÚBLICAS ORDENADAS CON SOPORTE PARA TURNO "NINGUNO" Y AGRUPAMIENTO DE CARROUSEL */
+    /* RENDERS VISTAS PÚBLICAS */
+    function renderPublicPortada() {
+        const container = document.getElementById('portada-content');
+        if (!container) return;
+        if (portadaDBList.length === 0) {
+            container.innerHTML = '<h2>Comunidad de Mujeres 28 Días</h2><p>Bienvenida a la aplicación.</p>';
+            return;
+        }
+
+        const listaOrdenada = ordenarPorCampo([...portadaDBList]);
+
+        container.innerHTML = listaOrdenada.map((item, idx) => {
+            const mediaHTML = procesarImagenesYCarrousel(item, 'portada', idx, true);
+            return `
+                <div class="practica-card-item" style="border:none; background:transparent;">
+                    <h1 style="margin:0 0 8px 0; color:var(--primary-dark); font-family: 'Playfair Display', serif;">${item.nombre}</h1>
+                    ${item.desc ? `<p style="font-size:1.1rem; line-height: 1.4; color:var(--primary-dark);">${item.desc}</p>` : ''}
+                    ${item.link ? `<a href="${item.link}" target="_blank" class="practica-link-btn">🔗 Más Información</a>` : ''}
+                    ${mediaHTML}
+                </div>
+            `;
+        }).join('');
+    }
+
     function renderPublicModalidad() {
         const container = document.getElementById('public-modalidad-content');
         if (!container) return;
@@ -2097,6 +2258,27 @@
         }).join('');
     }
 
+    function renderPublicPodcasts() {
+        const container = document.getElementById('public-podcasts-list');
+        if (!container) return;
+        if (podcastsDB.length === 0) { container.innerHTML = '<i style="font-size:0.8rem; color:#888;">No hay podcasts cargados.</i>'; return; }
+        const listaOrdenada = ordenarPorCampo([...podcastsDB]);
+        container.innerHTML = listaOrdenada.map((p, idx) => {
+            const mediaHTML = procesarImagenesYCarrousel(p, 'podcast', idx);
+            return `
+                <div class="practica-card-item">
+                    <h3>🎧 ${p.nombre}</h3>
+                    ${(p.turno && p.turno !== "Ninguno") ? `<p style="margin:0;"><span class="badge-turno">Turno: ${p.turno}</span></p>` : ''}
+                    <p>${p.desc || ''}</p>
+                    ${p.dias ? `<p style="font-size:0.85rem;"><b>Días:</b> ${p.dias}</p>` : ''}
+                    ${p.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${p.observacion}</p>` : ''}
+                    ${p.link ? `<a href="${p.link}" target="_blank" class="practica-link-btn">🎧 Escuchar Podcast</a>` : ''}
+                    ${mediaHTML}
+                </div>
+            `;
+        }).join('');
+    }
+
     function renderButtonsCustomizer() {
         const container = document.getElementById('buttons-customizer-container');
         if (!container) return;
@@ -2136,7 +2318,7 @@
     }
 
     function descargarConfigJSON() {
-        const configData = { modalidadDBList, alimentosDB, diosasDB, practicasDB, infusionesDB, novedadesDB, podcastsDB, actividadesDB, cfgCalendario, botonesConfig, configVisual, whatsappNumber };
+        const configData = { portadaDBList, modalidadDBList, alimentosDB, diosasDB, practicasDB, infusionesDB, novedadesDB, podcastsDB, actividadesDB, cfgCalendario, botonesConfig, configVisual, whatsappNumber };
         const blob = new Blob([JSON.stringify(configData, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -2174,6 +2356,7 @@
 
     function aplicarObjetoConfig(data) {
         if (!data) return;
+        if (data.portadaDBList) portadaDBList = data.portadaDBList;
         if (data.modalidadDBList) modalidadDBList = data.modalidadDBList;
         else if (data.modalidadDB) modalidadDBList = [data.modalidadDB];
         
@@ -2204,6 +2387,7 @@
 
         aplicarEstilosBotones();
         initCalendar();
+        renderPublicPortada();
         renderPublicModalidad();
         renderPublicPocimas();
         renderPublicAlimentos();
@@ -2211,6 +2395,7 @@
         renderPublicActividades();
         renderPracticasScreen();
         renderPublicNovedades();
+        renderPublicPodcasts();
     }
 
     function cargarConfigDesdeArchivoLocal(fileInput) {
@@ -2232,6 +2417,7 @@
     cargarConfigInicial();
     initCalendar();
     aplicarEstilosBotones();
+    renderPublicPortada();
 </script>
 
 </body>
