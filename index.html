@@ -121,11 +121,13 @@
         .card-icon { font-size: calc(var(--card-title-size) * 1.8); display: flex; align-items: center; justify-content: center; }
 
         .featured-days-container {
-            display: grid; grid-template-columns: repeat(3, 1fr);
+            display: flex;
             gap: 8px; margin-bottom: 4px;
+            width: 100%;
         }
 
         .cal-day {
+            flex: 1;
             background: var(--pastel-pink); padding: 8px 4px; border-radius: 12px;
             cursor: pointer; border: 1px solid #f2c6be; font-weight: bold;
             font-size: var(--agenda-font-size); display: flex; flex-direction: column;
@@ -1577,21 +1579,25 @@
         }
     }
 
+    /* BARRA DE DÍAS CON CONTROL DE LÍMITES (DÍA 1 Y DÍA 28) */
     function renderBarra3Dias(diaCentro) {
         const featuredContainer = document.getElementById('featured-days-container');
         if (!featuredContainer) return;
         featuredContainer.innerHTML = '';
 
         let totalDias = (cfgCalendario && cfgCalendario.duracionDias) ? cfgCalendario.duracionDias : 28;
-        let dAnt = Math.max(1, diaCentro - 1);
-        let dHoy = diaCentro;
-        let dSig = Math.min(totalDias, diaCentro + 1);
 
-        const diasAmostrar = [
-            { num: dAnt, label: dAnt === diaCentro ? "Seleccionado" : "Anterior" },
-            { num: dHoy, label: "Día Seleccionado" },
-            { num: dSig, label: dSig === diaCentro ? "Seleccionado" : "Siguiente" }
-        ];
+        let diasAmostrar = [];
+
+        if (diaCentro > 1) {
+            diasAmostrar.push({ num: diaCentro - 1, label: "Anterior" });
+        }
+
+        diasAmostrar.push({ num: diaCentro, label: "Día Seleccionado" });
+
+        if (diaCentro < totalDias) {
+            diasAmostrar.push({ num: diaCentro + 1, label: "Siguiente" });
+        }
 
         diasAmostrar.forEach(d => {
             const info = getInfoDiaReto(d.num);
