@@ -152,7 +152,6 @@
             gap: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); font-size: 1rem;
         }
 
-        /* DISEÑO DE MATRIZ DE 24 HORAS EN CUADRADITOS */
         .hours-grid-24 {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -408,16 +407,22 @@
                         <span class="card-icon" id="icon-btn-diosas">👑</span>
                         <h2 id="title-btn-diosas">Diosas</h2>
                     </div>
+                    <div class="menu-card" id="card-btn-registro" onclick="nav('registro')">
+                        <span class="card-icon" id="icon-btn-registro">📷</span>
+                        <h2 id="title-btn-registro">Registro Fotográfico / Diario</h2>
+                    </div>
+                </div>
+                <div class="menu-row">
                     <div class="menu-card" id="card-btn-agenda" onclick="nav('agenda')">
                         <span class="card-icon" id="icon-btn-agenda">📅</span>
                         <h2 id="title-btn-agenda">Mi Agenda Diaria y Sensaciones</h2>
                     </div>
-                </div>
-                <div class="menu-row">
                     <div class="menu-card" id="card-btn-novedades" onclick="nav('novedades')">
                         <span class="card-icon" id="icon-btn-novedades">📢</span>
                         <h2 id="title-btn-novedades">Novedades</h2>
                     </div>
+                </div>
+                <div class="menu-row">
                     <div class="menu-card" id="card-btn-podcasts" onclick="nav('podcasts')">
                         <span class="card-icon" id="icon-btn-podcasts">🎧</span>
                         <h2 id="title-btn-podcasts">Podcast</h2>
@@ -447,10 +452,8 @@
                 
                 <label style="font-size: var(--agenda-font-size); font-weight:bold; color:var(--primary-dark);">Horarios (Matriz de 24 hs):</label>
                 
-                <!-- MATRIZ DE 24 CUADRADITOS PARA LAS HORAS -->
                 <div class="hours-grid-24" id="hours-grid-24"></div>
 
-                <!-- PANEL INTERACTIVO DE EDICIÓN PARA LA HORA SELECCIONADA -->
                 <div id="focused-hour-editor" style="display: none;"></div>
 
                 <div class="form-group" style="margin-top: 4px; margin-bottom: 4px;">
@@ -619,6 +622,58 @@
                 </div>
                 <button class="btn-submit" id="btn-save-mod" onclick="guardarModalidadABM()">Guardar Modalidad</button>
                 <div class="crud-list-container"><small style="font-weight:bold;">Registros de Modalidad:</small><div id="crud-modalidad-list"></div></div>
+            </div>
+
+            <!-- ABM DE REGISTRO FOTOGRÁFICO / DIARIO -->
+            <div class="abm-card-box">
+                <div class="abm-header-title">
+                    <h3>Gestión de Registro Fotografico / Diario</h3>
+                    <label class="abm-toggle-label">
+                        <input type="checkbox" id="chk-vis-registro" onchange="toggleVisibilidadBoton('registro', this.checked)">
+                        Visible en Pantalla
+                    </label>
+                </div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:2;"><label>Título / Consigna:</label><input type="text" id="reg-nombre" placeholder="Ej: Captura de tu avance"></div>
+                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="reg-orden" placeholder="1" value="1"></div>
+                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="reg-carrousel" placeholder="0" value="0"></div>
+                </div>
+                <div class="form-group"><label>Descripción / Guía:</label><textarea id="reg-desc" rows="2" placeholder="Indicaciones para subir la foto..."></textarea></div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="reg-fecha"></div>
+                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="reg-hora" placeholder="Ej: 21:00 hs"></div>
+                </div>
+                <div style="display:flex; gap:6px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Días:</label>
+                        <select id="reg-dias">
+                            <option value="Todos">Todos los días</option>
+                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Turno:</label>
+                        <select id="reg-turno">
+                            <option value="Ninguno">Ninguno</option>
+                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="reg-link" placeholder="https://..."></div>
+                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="reg-observacion" placeholder="Comentario u observación..."></div>
+                <div class="form-group">
+                    <label>Mostrar en Agenda:</label>
+                    <select id="reg-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                </div>
+                <div class="form-group">
+                    <label>Adjuntar Imagen Ejemplo:</label>
+                    <input type="file" accept="image/*" id="reg-img-input" multiple>
+                    <div class="img-preview-box" id="reg-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="reg-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
+                </div>
+                <button class="btn-submit" id="btn-save-reg" onclick="agregarRegistroFoto()">Guardar Registro Fotografico</button>
+                <div class="crud-list-container"><small style="font-weight:bold;">Registros Cargados:</small><div id="crud-registro-list"></div></div>
             </div>
 
             <!-- ABM DE PROPUESTA DIARIA Y CAMINATAS -->
@@ -1051,6 +1106,11 @@
         <div class="screen-body" id="public-pocimas-list"></div>
     </div>
 
+    <div id="screen-registro" class="screen">
+        <div class="screen-header"><h2 class="screen-title">Registro Fotográfico / Diario</h2><button class="btn-back" onclick="nav('home')">←</button></div>
+        <div class="screen-body" id="public-registro-list"></div>
+    </div>
+
     <div id="screen-alimentos" class="screen"><div class="screen-header"><h2 class="screen-title">Alimentos</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-alimentos-list"></div></div>
     <div id="screen-diosas" class="screen"><div class="screen-header"><h2 class="screen-title">Diosas</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-diosas-list"></div></div>
     <div id="screen-actividades" class="screen"><div class="screen-header"><h2 class="screen-title">Actividades</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-actividades-list"></div></div>
@@ -1095,6 +1155,7 @@
     }];
 
     let caminatasDBList = [];
+    let registroDBList = [];
     let alimentosDB = [];
     let diosasDB = [];
     let practicasDB = [];
@@ -1107,7 +1168,7 @@
     let currentFechaKeyModal = "";
     let horaSeleccionadaFoco = null;
 
-    let editIndices = { por: -1, mod: -1, cam: -1, ali: -1, dio: -1, inf: -1, pod: -1, act: -1, nov: -1, pra: -1 };
+    let editIndices = { por: -1, mod: -1, cam: -1, reg: -1, ali: -1, dio: -1, inf: -1, pod: -1, act: -1, nov: -1, pra: -1 };
 
     let botonesConfig = {
         portada: { id: "portada", titulo: "Portada", bg: "#ffffff", color: "#f4a291", icon: "🖼️", visible: "Si" },
@@ -1118,6 +1179,7 @@
         actividades: { id: "actividades", titulo: "Actividades", bg: "#ffffff", color: "#f4a291", icon: "✨", visible: "Si" },
         alimentos: { id: "alimentos", titulo: "Alimentos", bg: "#ffffff", color: "#f4a291", icon: "🥗", visible: "Si" },
         diosas: { id: "diosas", titulo: "Diosas", bg: "#ffffff", color: "#f4a291", icon: "👑", visible: "Si" },
+        registro: { id: "registro", titulo: "Registro Fotográfico / Diario", bg: "#ffffff", color: "#f4a291", icon: "📷", visible: "Si" },
         agenda: { id: "agenda", titulo: "Mi Agenda Diaria y Sensaciones", bg: "#ffffff", color: "#f4a291", icon: "📅", visible: "Si" },
         novedades: { id: "novedades", titulo: "Novedades", bg: "#fbe3e8", color: "#f4a291", icon: "📢", visible: "Si" },
         podcasts: { id: "podcasts", titulo: "Podcast", bg: "#ffffff", color: "#f4a291", icon: "🎧", visible: "Si" }
@@ -1136,7 +1198,7 @@
     }
 
     function syncCheckboxesVisibilidad() {
-        const keys = ['portada', 'modalidad', 'caminatas', 'pocimas', 'practicas', 'actividades', 'alimentos', 'diosas', 'novedades', 'podcasts'];
+        const keys = ['portada', 'modalidad', 'caminatas', 'registro', 'pocimas', 'practicas', 'actividades', 'alimentos', 'diosas', 'novedades', 'podcasts'];
         keys.forEach(k => {
             const chk = document.getElementById(`chk-vis-${k}`);
             if (chk) {
@@ -1363,6 +1425,7 @@
         if (screenId === 'portada') renderPublicPortada();
         if (screenId === 'modalidad') renderPublicModalidad();
         if (screenId === 'caminatas') renderPublicCaminatas();
+        if (screenId === 'registro') renderPublicRegistro();
         if (screenId === 'pocimas') renderPublicPocimas();
         if (screenId === 'config') {
             renderButtonsCustomizer();
@@ -1495,6 +1558,7 @@
         const fuentes = [
             { db: modalidadDBList, tipo: '🌸 Modalidad' },
             { db: caminatasDBList, tipo: '🚶‍♀️ Caminata' },
+            { db: registroDBList, tipo: '📷 Registro' },
             { db: alimentosDB, tipo: '🥗 Alimento' },
             { db: diosasDB, tipo: '👑 Diosa' },
             { db: actividadesDB, tipo: '✨ Actividad' },
@@ -1899,6 +1963,77 @@
         document.getElementById('mod-agenda').value = 'Si';
         const f = document.getElementById('mod-img-input'); if (f) f.value = '';
         mostrarVistaPreviaEdicion('mod', []);
+    }
+
+    /* ABM REGISTRO FOTOGRÁFICO */
+    function agregarRegistroFoto() {
+        const nombre = document.getElementById('reg-nombre').value;
+        const desc = document.getElementById('reg-desc').value;
+        const fecha = document.getElementById('reg-fecha').value || '';
+        const hora = document.getElementById('reg-hora').value || '';
+        const dias = document.getElementById('reg-dias').value || 'Todos';
+        const turno = document.getElementById('reg-turno').value || 'Ninguno';
+        const orden = parseInt(document.getElementById('reg-orden').value) || 1;
+        const carrousel = parseInt(document.getElementById('reg-carrousel').value) || 0;
+        const link = document.getElementById('reg-link').value || '';
+        const observacion = document.getElementById('reg-observacion').value || '';
+        const agenda = document.getElementById('reg-agenda').value || 'Si';
+        const fileInput = document.getElementById('reg-img-input');
+
+        if (!nombre) return alert('Por favor ingresa el título del registro fotográfico');
+        readInputImage(fileInput, (base64Imgs) => {
+            let imgsFinales = base64Imgs;
+            if (imgsFinales.length === 0 && editIndices.reg >= 0) {
+                imgsFinales = registroDBList[editIndices.reg].imagenes || (registroDBList[editIndices.reg].imgUrl ? [registroDBList[editIndices.reg].imgUrl] : []);
+            }
+            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
+
+            if (editIndices.reg >= 0) {
+                registroDBList[editIndices.reg] = itemObj;
+                editIndices.reg = -1;
+                document.getElementById('btn-save-reg').innerText = "Guardar Registro Fotografico";
+            } else {
+                registroDBList.push(itemObj);
+            }
+            limpiarFormReg();
+            renderConfigLists();
+            renderPublicRegistro();
+        });
+    }
+
+    function editarRegistroFoto(idx) {
+        const r = registroDBList[idx];
+        document.getElementById('reg-nombre').value = r.nombre || '';
+        document.getElementById('reg-desc').value = r.desc || '';
+        document.getElementById('reg-fecha').value = r.fecha || '';
+        document.getElementById('reg-hora').value = r.hora || '';
+        document.getElementById('reg-dias').value = r.dias || 'Todos';
+        document.getElementById('reg-turno').value = r.turno || 'Ninguno';
+        document.getElementById('reg-orden').value = r.orden || 1;
+        document.getElementById('reg-carrousel').value = r.carrousel || 0;
+        document.getElementById('reg-link').value = r.link || '';
+        document.getElementById('reg-observacion').value = r.observacion || '';
+        document.getElementById('reg-agenda').value = r.agenda || 'Si';
+
+        mostrarVistaPreviaEdicion('reg', r.imagenes || (r.imgUrl ? [r.imgUrl] : []));
+        editIndices.reg = idx;
+        document.getElementById('btn-save-reg').innerText = "Actualizar Registro Fotografico";
+    }
+
+    function limpiarFormReg() {
+        document.getElementById('reg-nombre').value = '';
+        document.getElementById('reg-desc').value = '';
+        document.getElementById('reg-fecha').value = '';
+        document.getElementById('reg-hora').value = '';
+        document.getElementById('reg-dias').value = 'Todos';
+        document.getElementById('reg-turno').value = 'Ninguno';
+        document.getElementById('reg-orden').value = 1;
+        document.getElementById('reg-carrousel').value = 0;
+        document.getElementById('reg-link').value = '';
+        document.getElementById('reg-observacion').value = '';
+        document.getElementById('reg-agenda').value = 'Si';
+        const f = document.getElementById('reg-img-input'); if (f) f.value = '';
+        mostrarVistaPreviaEdicion('reg', []);
     }
 
     /* ABM PROPUESTA DIARIA Y CAMINATAS */
@@ -2502,6 +2637,16 @@
             </div>
         `).join('');
 
+        document.getElementById('crud-registro-list').innerHTML = registroDBList.map((item, idx) => `
+            <div class="crud-item">
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> [Carrusel: ${item.carrousel || 0}]</span>
+                <div class="crud-actions">
+                    <button class="btn-edit" onclick="editarRegistroFoto(${idx})">Modificar</button>
+                    <button class="btn-delete" onclick="registroDBList.splice(${idx},1); renderConfigLists(); renderPublicRegistro();">Eliminar</button>
+                </div>
+            </div>
+        `).join('');
+
         document.getElementById('crud-alimentos-list').innerHTML = alimentosDB.map((item, idx) => `
             <div class="crud-item">
                 <span><b>#${item.orden || 1} - ${item.nombre}</b> [Carrusel: ${item.carrousel || 0}]</span>
@@ -2615,6 +2760,12 @@
         container.innerHTML = renderSeccionAgrupada(caminatasDBList, 'caminata');
     }
 
+    function renderPublicRegistro() {
+        const container = document.getElementById('public-registro-list');
+        if (!container) return;
+        container.innerHTML = renderSeccionAgrupada(registroDBList, 'registro');
+    }
+
     function renderPublicPocimas() {
         const container = document.getElementById('public-pocimas-list');
         if (!container) return;
@@ -2696,7 +2847,7 @@
     }
 
     function descargarConfigJSON() {
-        const configData = { portadaDBList, modalidadDBList, caminatasDBList, alimentosDB, diosasDB, practicasDB, infusionesDB, novedadesDB, podcastsDB, actividadesDB, cfgCalendario, botonesConfig, configVisual, whatsappNumber };
+        const configData = { portadaDBList, modalidadDBList, caminatasDBList, registroDBList, alimentosDB, diosasDB, practicasDB, infusionesDB, novedadesDB, podcastsDB, actividadesDB, cfgCalendario, botonesConfig, configVisual, whatsappNumber };
         const blob = new Blob([JSON.stringify(configData, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -2739,6 +2890,7 @@
         else if (data.modalidadDB) modalidadDBList = [data.modalidadDB];
         
         if (data.caminatasDBList) caminatasDBList = data.caminatasDBList;
+        if (data.registroDBList) registroDBList = data.registroDBList;
         if (data.alimentosDB) alimentosDB = data.alimentosDB;
         if (data.diosasDB) diosasDB = data.diosasDB;
         if (data.practicasDB) practicasDB = data.practicasDB;
@@ -2770,6 +2922,7 @@
         renderPublicPortada();
         renderPublicModalidad();
         renderPublicCaminatas();
+        renderPublicRegistro();
         renderPublicPocimas();
         renderPublicAlimentos();
         renderPublicDiosas();
