@@ -121,14 +121,11 @@
         .card-icon { font-size: calc(var(--card-title-size) * 1.8); display: flex; align-items: center; justify-content: center; }
 
         .featured-days-container {
-            display: flex;
-            gap: 8px; margin-bottom: 4px;
-            width: 100%;
+            display: flex; gap: 8px; margin-bottom: 4px; width: 100%;
         }
 
         .cal-day {
-            flex: 1;
-            background: var(--pastel-pink); padding: 8px 4px; border-radius: 12px;
+            flex: 1; background: var(--pastel-pink); padding: 8px 4px; border-radius: 12px;
             cursor: pointer; border: 1px solid #f2c6be; font-weight: bold;
             font-size: var(--agenda-font-size); display: flex; flex-direction: column;
             align-items: center; min-height: 60px; justify-content: space-between;
@@ -136,10 +133,8 @@
         }
 
         .cal-day.today-card {
-            background: var(--pastel-green);
-            border: 2px solid #a3d99b;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-            transform: scale(1.02);
+            background: var(--pastel-green); border: 2px solid #a3d99b;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12); transform: scale(1.02);
         }
 
         .calendar-grid {
@@ -154,84 +149,58 @@
             gap: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); font-size: 1rem;
         }
 
+        .header-content-box {
+            background: var(--pastel-purple); border: 1px solid #c9b6e4;
+            border-radius: 10px; padding: 10px; margin-top: 6px; display: flex;
+            flex-direction: column; gap: 8px;
+        }
+
         .hours-grid-24 {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 6px;
-            margin-bottom: 8px;
+            display: grid; grid-template-columns: repeat(6, 1fr);
+            gap: 6px; margin-bottom: 8px;
         }
 
         .hour-square-btn {
-            background: #fff;
-            border: 1px solid #e8d5d0;
-            border-radius: 8px;
-            padding: 6px 2px;
-            text-align: center;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            min-height: 48px;
-            position: relative;
-            transition: all 0.2s ease;
+            background: #fff; border: 1px solid #e8d5d0; border-radius: 8px;
+            padding: 6px 2px; text-align: center; cursor: pointer; display: flex;
+            flex-direction: column; align-items: center; justify-content: center;
+            font-size: 0.75rem; min-height: 48px; position: relative; transition: all 0.2s ease;
         }
 
         .hour-square-btn.has-activity {
-            background: var(--pastel-purple);
-            border-color: #c9b6e4;
-            font-weight: bold;
-            color: var(--primary-dark);
+            background: var(--pastel-purple); border-color: #c9b6e4;
+            font-weight: bold; color: var(--primary-dark);
         }
 
         .hour-square-btn.active-focus {
-            border: 2px solid var(--salmon);
-            box-shadow: 0 0 6px rgba(244, 162, 145, 0.6);
-            transform: scale(1.04);
+            border: 2px solid var(--salmon); box-shadow: 0 0 6px rgba(244, 162, 145, 0.6); transform: scale(1.04);
         }
 
         .hour-square-badge {
-            font-size: 0.65rem;
-            background: var(--salmon);
-            color: #fff;
-            border-radius: 10px;
-            padding: 1px 4px;
-            margin-top: 2px;
+            font-size: 0.65rem; background: var(--salmon); color: #fff;
+            border-radius: 10px; padding: 1px 4px; margin-top: 2px;
         }
 
         .editor-hora-panel {
-            background: #fffdfa;
-            border: 1px solid var(--salmon);
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
+            background: #fffdfa; border: 1px solid var(--salmon); border-radius: 10px;
+            padding: 10px; margin-bottom: 8px; display: flex; flex-direction: column; gap: 6px;
         }
 
         .hour-combo-select {
-            font-family: var(--agenda-font-family);
-            font-size: 0.9rem;
-            border: 1px dashed var(--salmon);
-            border-radius: 6px;
-            padding: 4px;
-            background: #fffdfa;
-            color: var(--primary-dark);
-            width: 100%;
+            font-family: var(--agenda-font-family); font-size: 0.9rem;
+            border: 1px dashed var(--salmon); border-radius: 6px; padding: 4px;
+            background: #fffdfa; color: var(--primary-dark); width: 100%;
         }
 
         .agenda-attached-card {
-            padding: 6px; border-radius: 8px; background: var(--pastel-pink);
-            border: 1px solid var(--salmon); font-size: 0.95rem; display: flex; flex-direction: column; gap: 4px;
+            padding: 8px; border-radius: 8px; background: #ffffff;
+            border: 1px solid var(--salmon); font-size: 0.9rem; display: flex; flex-direction: column; gap: 4px;
         }
 
         .selected-activity-badge {
             display: flex; align-items: center; justify-content: space-between;
             background: #e8dff5; border: 1px solid #c9b6e4; color: var(--primary-dark);
-            padding: 4px 8px; border-radius: 6px; font-size: 0.85rem; font-weight: bold;
-            margin-top: 2px;
+            padding: 4px 8px; border-radius: 6px; font-size: 0.85rem; font-weight: bold; margin-top: 2px;
         }
         .remove-badge-btn {
             background: transparent; border: none; color: #d9534f; cursor: pointer;
@@ -241,12 +210,23 @@
         .form-group { margin-bottom: 8px; }
         .form-group label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 2px; }
         .form-group input, .form-group textarea, .form-group select {
-            width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 0.85rem;
+            width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem;
+        }
+
+        /* TEXTAREA AUTO-EXPANDIBLE DINÁMICO */
+        textarea.auto-expand {
+            resize: none !important;
+            overflow-y: hidden !important;
+            min-height: 70px;
+            box-sizing: border-box;
+            display: block;
+            width: 100%;
+            font-family: inherit;
         }
 
         .btn-submit {
             background: var(--salmon); color: white; border: none;
-            padding: 8px; border-radius: 8px; width: 100%;
+            padding: 10px; border-radius: 8px; width: 100%;
             cursor: pointer; font-size: 1rem; font-weight: bold; font-family: var(--agenda-font-family);
         }
 
@@ -259,173 +239,61 @@
         .btn-delete { background: #e06d53; color: #fff; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
 
         .item-attached-img {
-            max-width: 100%;
-            max-height: 320px;
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 8px;
-            border: 1px solid var(--salmon);
-            margin-top: 6px;
-            cursor: zoom-in;
-            display: block;
-            background: #fafafa;
+            max-width: 100%; max-height: 320px; width: 100%; height: auto;
+            object-fit: contain; border-radius: 8px; border: 1px solid var(--salmon);
+            margin-top: 6px; cursor: zoom-in; display: block; background: #fafafa;
         }
 
         .img-preview-box {
-            display: none;
-            margin-top: 4px;
-            margin-bottom: 6px;
-            padding: 6px;
-            background: #fdf6f0;
-            border: 1px dashed var(--salmon);
-            border-radius: 6px;
-            font-size: 0.75rem;
+            display: none; margin-top: 4px; margin-bottom: 6px; padding: 6px;
+            background: #fdf6f0; border: 1px dashed var(--salmon); border-radius: 6px; font-size: 0.75rem;
         }
-        .img-preview-box img {
-            max-height: 70px;
-            border-radius: 4px;
-            margin-top: 4px;
-            display: block;
-        }
+        .img-preview-box img { max-height: 70px; border-radius: 4px; margin-top: 4px; display: block; }
 
         .portada-full-mode {
-            width: 100%; height: 100%;
-            display: flex; flex-direction: column;
+            width: 100%; height: 100%; display: flex; flex-direction: column;
             justify-content: space-between; align-items: center;
         }
         .portada-full-img {
-            width: 100%; flex: 1;
-            object-fit: cover; border-radius: var(--border-radius);
+            width: 100%; flex: 1; object-fit: cover; border-radius: var(--border-radius);
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .practica-card-item { background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid rgba(244, 162, 145, 0.4); margin-bottom: 8px; display: flex; flex-direction: column; gap: 4px; }
         .practica-link-btn { display: inline-block; margin-top: 4px; margin-bottom: 6px; padding: 6px 12px; background: var(--pastel-green); color: var(--primary-dark); border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.85rem; border: 1px solid #b8e0a8; text-align: center; }
 
-        /* ESTILOS REGISTRO FOTOGRÁFICO DE LA USUARIA Y SU HISTORIAL */
         .user-photo-upload-box {
-            background: var(--pastel-pink);
-            border: 1px dashed var(--salmon);
-            border-radius: 10px;
-            padding: 8px;
-            margin-top: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+            background: var(--pastel-pink); border: 1px dashed var(--salmon); border-radius: 10px;
+            padding: 8px; margin-top: 8px; display: flex; flex-direction: column; gap: 8px;
         }
-        .user-photo-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-        }
+        .user-photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
         .user-photo-slot {
-            background: #ffffff;
-            border: 1px solid #f2c6be;
-            border-radius: 8px;
-            padding: 6px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
+            background: #ffffff; border: 1px solid #f2c6be; border-radius: 8px; padding: 6px;
+            text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between;
         }
-        .user-photo-slot label {
-            font-size: 0.72rem;
-            font-weight: bold;
-            color: var(--primary-dark);
-            margin-bottom: 4px;
-        }
-        .user-photo-slot input[type="file"] {
-            display: none;
-        }
+        .user-photo-slot label { font-size: 0.72rem; font-weight: bold; color: var(--primary-dark); margin-bottom: 4px; }
+        .user-photo-slot input[type="file"] { display: none; }
         .user-photo-btn {
-            background: var(--pastel-purple);
-            color: var(--primary-dark);
-            border: 1px solid #c9b6e4;
-            padding: 4px 6px;
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            box-sizing: border-box;
+            background: var(--pastel-purple); color: var(--primary-dark); border: 1px solid #c9b6e4;
+            padding: 4px 6px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; cursor: pointer; width: 100%; box-sizing: border-box;
         }
-        .user-photo-preview {
-            width: 100%;
-            height: 70px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid var(--salmon);
-            margin-top: 4px;
-            cursor: zoom-in;
-        }
+        .user-photo-preview { width: 100%; height: 70px; object-fit: cover; border-radius: 6px; border: 1px solid var(--salmon); margin-top: 4px; cursor: zoom-in; }
 
-        .history-btn-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4px;
-            margin-top: 6px;
-        }
+        .history-btn-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 6px; }
         .btn-history-toggle {
-            background: #ffffff;
-            border: 1px solid var(--primary);
-            color: var(--primary-dark);
-            padding: 6px 2px;
-            border-radius: 8px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            cursor: pointer;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            background: #ffffff; border: 1px solid var(--primary); color: var(--primary-dark);
+            padding: 6px 2px; border-radius: 8px; font-size: 0.7rem; font-weight: bold; cursor: pointer; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        .btn-history-toggle.active {
-            background: var(--primary-dark);
-            color: #ffffff;
-            border-color: var(--primary-dark);
-        }
+        .btn-history-toggle.active { background: var(--primary-dark); color: #ffffff; border-color: var(--primary-dark); }
 
         .history-gallery-container {
-            display: none;
-            background: #faf8f5;
-            border: 1px solid var(--salmon);
-            border-radius: 8px;
-            padding: 8px;
-            margin-top: 6px;
+            display: none; background: #faf8f5; border: 1px solid var(--salmon); border-radius: 8px; padding: 8px; margin-top: 6px;
         }
-        .history-gallery-title {
-            margin: 0 0 6px 0;
-            font-size: 0.8rem;
-            color: var(--primary-dark);
-            font-weight: bold;
-        }
-        .history-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            max-height: 220px;
-            overflow-y: auto;
-        }
-        .history-item-card {
-            background: #fff;
-            border: 1px solid #e8d5d0;
-            border-radius: 6px;
-            padding: 4px;
-            text-align: center;
-        }
-        .history-item-card img {
-            width: 100%;
-            height: 65px;
-            object-fit: cover;
-            border-radius: 4px;
-            cursor: zoom-in;
-        }
-        .history-item-card span {
-            font-size: 0.65rem;
-            color: #666;
-            display: block;
-            margin-top: 2px;
-        }
+        .history-gallery-title { margin: 0 0 6px 0; font-size: 0.8rem; color: var(--primary-dark); font-weight: bold; }
+        .history-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; max-height: 220px; overflow-y: auto; }
+        .history-item-card { background: #fff; border: 1px solid #e8d5d0; border-radius: 6px; padding: 4px; text-align: center; }
+        .history-item-card img { width: 100%; height: 65px; object-fit: cover; border-radius: 4px; cursor: zoom-in; }
+        .history-item-card span { font-size: 0.65rem; color: #666; display: block; margin-top: 2px; }
 
         /* CARROUSEL COMPONENT */
         .carousel-container {
@@ -460,20 +328,35 @@
             position: absolute; bottom: 20px; color: rgba(255,255,255,0.8); font-size: 0.85rem;
             background: rgba(0,0,0,0.5); padding: 6px 14px; border-radius: 20px; pointer-events: none; font-family: sans-serif;
         }
+
+        /* CARDS DE ABM DESPLEGABLES EN CONFIG */
         .abm-card-box {
             background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon); margin-bottom: 12px;
         }
+        .abm-card-header {
+            display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none;
+        }
+        .abm-card-header-title {
+            display: flex; align-items: center; gap: 8px; font-weight: bold; color: var(--primary-dark); font-size: 0.95rem;
+        }
+        .abm-toggle-icon {
+            font-size: 0.85rem; transition: transform 0.2s ease;
+        }
+        .abm-card-body {
+            display: none; margin-top: 10px; border-top: 1px dashed #f2c6be; padding-top: 10px;
+        }
+        .abm-card-box.open .abm-card-body { display: block; }
+        .abm-card-box.open .abm-toggle-icon { transform: rotate(90deg); }
+
         .abm-header-title {
             display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; flex-wrap: wrap; gap: 4px;
         }
-        .abm-header-title h3 {
-            margin: 0; font-size: 0.85rem; color: var(--primary-dark);
-        }
-        .abm-toggle-label {
-            font-size: 0.75rem; color: var(--primary-dark); display: flex; align-items: center; gap: 4px; cursor: pointer; user-select: none;
-        }
-        .badge-turno {
-            display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: bold; background: var(--pastel-purple); color: var(--primary-dark); margin-left: 4px;
+        .abm-header-title h3 { margin: 0; font-size: 0.85rem; color: var(--primary-dark); }
+        .abm-toggle-label { font-size: 0.75rem; color: var(--primary-dark); display: flex; align-items: center; gap: 4px; cursor: pointer; user-select: none; }
+        .badge-turno { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: bold; background: var(--pastel-purple); color: var(--primary-dark); margin-left: 4px; }
+        
+        .novedad-alert-badge {
+            background: #ff4d4d; color: white; border-radius: 50%; width: 22px; height: 22px; display: inline-flex; justify-content: center; align-items: center; font-size: 0.8rem; font-weight: bold; margin-left: 6px;
         }
     </style>
 </head>
@@ -494,10 +377,19 @@
         </div>
     </div>
 
-    <!-- PANTALLA PRINCIPAL -->
+    <!-- PANTALLA PRINCIPAL CON MI AGENDA DIARIA EN PRIMER LUGAR -->
     <div id="screen-home" class="screen">
         <div class="home-container-full">
             <div class="menu-grid-full">
+                <!-- PRIMERA FILA: MI AGENDA DIARIA DESTACADA ARRIBA DE TODO -->
+                <div class="menu-row">
+                    <div class="menu-card" id="card-btn-agenda" onclick="nav('agenda')" style="background: var(--pastel-pink); border-color: var(--salmon);">
+                        <span class="card-icon" id="icon-btn-agenda">📅</span>
+                        <h2 id="title-btn-agenda" style="font-size:1.15rem; color:var(--primary-dark);">Mi Agenda Diaria y Sensaciones</h2>
+                    </div>
+                </div>
+
+                <!-- FILAS SIGUIENTES: RESTO DE BOTONES EN PARES DEL MISMO TAMAÑO -->
                 <div class="menu-row">
                     <div class="menu-card" id="card-btn-modalidad" onclick="nav('modalidad')">
                         <span class="card-icon" id="icon-btn-modalidad">🌸</span>
@@ -539,16 +431,10 @@
                     </div>
                 </div>
                 <div class="menu-row">
-                    <div class="menu-card" id="card-btn-agenda" onclick="nav('agenda')">
-                        <span class="card-icon" id="icon-btn-agenda">📅</span>
-                        <h2 id="title-btn-agenda">Mi Agenda Diaria y Sensaciones</h2>
-                    </div>
                     <div class="menu-card" id="card-btn-novedades" onclick="nav('novedades')">
                         <span class="card-icon" id="icon-btn-novedades">📢</span>
-                        <h2 id="title-btn-novedades">Novedades</h2>
+                        <h2 id="title-btn-novedades">Novedades <span id="home-novedad-alert" style="display:none;" class="novedad-alert-badge">!</span></h2>
                     </div>
-                </div>
-                <div class="menu-row">
                     <div class="menu-card" id="card-btn-podcasts" onclick="nav('podcasts')">
                         <span class="card-icon" id="icon-btn-podcasts">🎧</span>
                         <h2 id="title-btn-podcasts">Podcast</h2>
@@ -576,7 +462,10 @@
             <div style="background: #fffdfa; border: 1px solid #f2c6be; border-radius: var(--border-radius); padding: 10px; display: flex; flex-direction: column; gap: 8px;">
                 <h3 id="inline-day-title" style="margin: 0; font-family: var(--agenda-font-family); color: var(--primary-dark); font-size: 1.25rem;">Día Actual</h3>
                 
-                <label style="font-size: var(--agenda-font-size); font-weight:bold; color:var(--primary-dark);">Horarios (Matriz de 24 hs):</label>
+                <!-- CABECERA DEL DÍA -->
+                <div id="header-day-resources" class="header-content-box" style="display:none;"></div>
+
+                <label style="font-size: var(--agenda-font-size); font-weight:bold; color:var(--primary-dark); margin-top:4px;">Horarios (Matriz de 24 hs):</label>
                 
                 <div class="hours-grid-24" id="hours-grid-24"></div>
 
@@ -584,14 +473,14 @@
 
                 <div class="form-group" style="margin-top: 4px; margin-bottom: 4px;">
                     <label>Nota Personal / Sensaciones del Día:</label>
-                    <textarea id="inline-modal-text" rows="2" placeholder="Escribe tus notas personales o sensaciones..."></textarea>
+                    <textarea id="inline-modal-text" class="auto-expand" rows="2" placeholder="Escribe tus notas personales o sensaciones..." oninput="autoExpandTextarea(this)" onkeyup="autoExpandTextarea(this)" onfocus="autoExpandTextarea(this)"></textarea>
                 </div>
                 <button class="btn-submit" onclick="guardarRegistroAgendaInline()">Guardar en Agenda</button>
             </div>
         </div>
     </div>
 
-    <!-- PANTALLA CONFIGURACIÓN ADMIN COMPLETA -->
+    <!-- PANTALLA CONFIGURACIÓN ADMIN COMPLETA CON CARDS COLLAPSIBLES -->
     <div id="screen-config" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Configuración Admin (Anka)</h2>
@@ -599,623 +488,723 @@
         </div>
         <div class="screen-body">
 
-            <div class="abm-card-box" style="background: var(--pastel-purple); border-color: #c9b6e4;">
-                <h3 style="margin: 0 0 6px 0; font-size: 0.9rem; color: var(--primary-dark);">🗓️ Configuración del Reto de 28 Días</h3>
-                <div class="form-group">
-                    <label>Fecha de Comienzo del Reto:</label>
-                    <input type="date" id="cfg-fecha-inicio" onchange="guardarFechaInicioReto(this.value)">
-                    <small style="color:#666; font-size:0.75rem;">El calendario de 28 días se calculará automáticamente a partir de esta fecha.</small>
+            <div class="abm-card-box open">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">🗓️ Configuración del Reto de 28 Días</div>
+                    <span class="abm-toggle-icon">►</span>
+                </div>
+                <div class="abm-card-body">
+                    <div class="form-group">
+                        <label>Fecha de Comienzo del Reto:</label>
+                        <input type="date" id="cfg-fecha-inicio" onchange="guardarFechaInicioReto(this.value)">
+                        <small style="color:#666; font-size:0.75rem;">El calendario de 28 días se calculará automáticamente a partir de esta fecha.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="abm-card-box open">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">💬 Configurar WhatsApp</div>
+                    <span class="abm-toggle-icon">►</span>
+                </div>
+                <div class="abm-card-body">
+                    <div class="form-group">
+                        <label>Número de WhatsApp (con código de país sin +):</label>
+                        <input type="text" id="cfg-whatsapp-num" placeholder="Ej: 5491112345678" value="5491112345678" onchange="guardarNumeroWhatsApp()">
+                    </div>
+                </div>
+            </div>
+
+            <div class="abm-card-box open">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">✨ Apariencia Global</div>
+                    <span class="abm-toggle-icon">►</span>
+                </div>
+                <div class="abm-card-body">
+                    <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-bottom:0;">
+                        <input type="checkbox" id="cfg-btn-3d" style="width:auto;" onchange="cambiarEstilo3DBotones()">
+                        <label for="cfg-btn-3d" style="margin:0; cursor:pointer;">Activar Botones con Efecto 3D / Relieve</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="abm-card-box open">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">💾 Sincronización de Datos</div>
+                    <span class="abm-toggle-icon">►</span>
+                </div>
+                <div class="abm-card-body">
+                    <p style="font-size:0.75rem; margin:4px 0 8px 0;">Descarga o carga manualmente tu archivo <b>config.json</b>.</p>
+                    <button class="btn-submit" style="background:#52b788; margin-bottom:8px;" onclick="descargarConfigJSON()">Descargar config.json Actualizado</button>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label style="font-size:0.75rem;">📂 Cargar config.json manualmente:</label>
+                        <input type="file" accept=".json" onchange="cargarConfigDesdeArchivoLocal(this)">
+                    </div>
                 </div>
             </div>
 
             <div class="abm-card-box">
-                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Configurar Número de WhatsApp</h3>
-                <div class="form-group">
-                    <label>Número de WhatsApp (con código de país sin +):</label>
-                    <input type="text" id="cfg-whatsapp-num" placeholder="Ej: 5491112345678" value="5491112345678" onchange="guardarNumeroWhatsApp()">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">🎨 Personalizar Botones de Navegación</div>
+                    <span class="abm-toggle-icon">►</span>
                 </div>
-            </div>
-
-            <div class="abm-card-box">
-                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Apariencia Global y Botones 3D</h3>
-                <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-bottom:0;">
-                    <input type="checkbox" id="cfg-btn-3d" style="width:auto;" onchange="cambiarEstilo3DBotones()">
-                    <label for="cfg-btn-3d" style="margin:0; cursor:pointer;">Activar Botones con Efecto 3D / Relieve</label>
+                <div class="abm-card-body">
+                    <div id="buttons-customizer-container"></div>
                 </div>
-            </div>
-
-            <div style="background: var(--pastel-green); padding: 10px; border-radius: var(--border-radius); border: 1px solid #b8e0a8; margin-bottom: 12px;">
-                <small style="font-weight:bold; color:var(--primary-dark);">💾 Exportación / Sincronización de Datos:</small>
-                <p style="font-size:0.75rem; margin:4px 0 8px 0;">Descarga o carga manualmente tu archivo <b>config.json</b>.</p>
-                <button class="btn-submit" style="background:#52b788; margin-bottom:8px;" onclick="descargarConfigJSON()">Descargar config.json Actualizado</button>
-                <div class="form-group" style="margin-bottom:0;">
-                    <label style="font-size:0.75rem;">📂 Cargar config.json manualmente:</label>
-                    <input type="file" accept=".json" onchange="cargarConfigDesdeArchivoLocal(this)">
-                </div>
-            </div>
-
-            <div class="abm-card-box">
-                <h3 style="margin: 0 0 6px 0; font-size: 0.85rem; color: var(--primary-dark);">Personalizar Botones y Visibilidad de Secciones</h3>
-                <div id="buttons-customizer-container"></div>
             </div>
 
             <!-- ABM DE PORTADA -->
-            <div class="abm-card-box">
-                <div class="abm-header-title">
-                    <div style="display:flex; align-items:center; gap:8px;">
-                        <h3>Gestión de Portada</h3>
+            <div class="abm-card-box" id="abm-card-portada">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">🖼️ Gestión de Portada</div>
+                    <span class="abm-toggle-icon">►</span>
+                </div>
+                <div class="abm-card-body">
+                    <div class="abm-header-title">
                         <label class="abm-toggle-label">
                             <input type="checkbox" id="chk-vis-portada" onchange="toggleVisibilidadBoton('portada', this.checked)">
                             Visible en Pantalla
                         </label>
+                        <button class="btn-submit" style="width:auto; padding:4px 10px; font-size:0.8rem; background:var(--primary-dark);" onclick="nav('portada')">🖼️ Ver Portada</button>
                     </div>
-                    <button class="btn-submit" style="width:auto; padding:4px 10px; font-size:0.8rem; background:var(--primary-dark);" onclick="nav('portada')">🖼️ Ver Portada</button>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:2;"><label>Nombre / Título:</label><input type="text" id="por-nombre" placeholder="Ej: Bienvenidos al Reto"></div>
-                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="por-orden" placeholder="1" value="1"></div>
-                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="por-carrousel" placeholder="0" value="0"></div>
-                </div>
-                <div class="form-group"><label>Descripción / Texto explicativo:</label><textarea id="por-desc" rows="3" placeholder="Mensaje de bienvenida..."></textarea></div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;"><label>Fecha Específica:</label><input type="date" id="por-fecha"></div>
-                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="por-hora" placeholder="Ej: 00:00 hs"></div>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;">
-                        <label>Días:</label>
-                        <select id="por-dias">
-                            <option value="Todos">Todos los días</option>
-                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
-                        </select>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:2;"><label>Nombre / Título:</label><input type="text" id="por-nombre" placeholder="Ej: Bienvenidos al Reto"></div>
+                        <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="por-orden" placeholder="1" value="1"></div>
+                        <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="por-carrousel" placeholder="0" value="0"></div>
                     </div>
-                    <div class="form-group" style="flex:1;">
-                        <label>Turno:</label>
-                        <select id="por-turno">
-                            <option value="Ninguno">Ninguno</option>
-                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
-                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
-                        </select>
+                    <div class="form-group"><label>Descripción / Texto explicativo:</label><textarea id="por-desc" rows="3" placeholder="Mensaje de bienvenida..."></textarea></div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;"><label>Día Reto (1 a 28):</label><input type="number" id="por-diareto" min="1" max="28" placeholder="Ej: 1"></div>
+                        <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="por-fecha"></div>
+                        <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="por-hora" placeholder="Ej: 00:00 hs"></div>
                     </div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Días:</label>
+                            <select id="por-dias">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Todos">Todos los días</option>
+                                <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Turno:</label>
+                            <select id="por-turno">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                                <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Link / Recurso:</label><input type="text" id="por-link" placeholder="https://..."></div>
+                    <div class="form-group"><label>Observación / Nota:</label><input type="text" id="por-observacion" placeholder="Notas adicionales..."></div>
+                    <div class="form-group">
+                        <label>Mostrar en Agenda:</label>
+                        <select id="por-agenda"><option value="No">No</option><option value="Si">Sí</option></select>
+                    </div>
+                    <div class="form-group" style="display:flex; align-items:center; gap:8px; background:#fff8f6; padding:8px; border-radius:6px; border:1px solid var(--salmon);">
+                        <input type="checkbox" id="por-pantalla" style="width:auto; margin:0;">
+                        <label for="por-pantalla" style="margin:0; cursor:pointer;"><b>Pantalla:</b> Ocupar toda la pantalla solo con la imagen y botón de ingreso.</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Adjuntar Imagen / Imágenes:</label>
+                        <input type="file" accept="image/*" id="por-img-input" multiple>
+                        <div class="img-preview-box" id="por-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="por-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
+                    </div>
+                    <button class="btn-submit" id="btn-save-por" onclick="guardarPortadaABM()">Guardar Portada</button>
+                    <div class="crud-list-container"><small style="font-weight:bold;">Registros de Portada:</small><div id="crud-portada-list"></div></div>
                 </div>
-                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="por-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="por-observacion" placeholder="Notas adicionales..."></div>
-                <div class="form-group">
-                    <label>Mostrar en Agenda:</label>
-                    <select id="por-agenda"><option value="No">No</option><option value="Si">Sí</option></select>
-                </div>
-                <div class="form-group" style="display:flex; align-items:center; gap:8px; background:#fff8f6; padding:8px; border-radius:6px; border:1px solid var(--salmon);">
-                    <input type="checkbox" id="por-pantalla" style="width:auto; margin:0;">
-                    <label for="por-pantalla" style="margin:0; cursor:pointer;"><b>Pantalla:</b> Ocupar toda la pantalla solo con la imagen y botón de ingreso.</label>
-                </div>
-                <div class="form-group">
-                    <label>Adjuntar Imagen / Imágenes:</label>
-                    <input type="file" accept="image/*" id="por-img-input" multiple>
-                    <div class="img-preview-box" id="por-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="por-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
-                </div>
-                <button class="btn-submit" id="btn-save-por" onclick="guardarPortadaABM()">Guardar Portada</button>
-                <div class="crud-list-container"><small style="font-weight:bold;">Registros de Portada:</small><div id="crud-portada-list"></div></div>
             </div>
 
             <!-- ABM DE MODALIDAD -->
-            <div class="abm-card-box">
-                <div class="abm-header-title">
-                    <h3>Gestión de Modalidad</h3>
-                    <label class="abm-toggle-label">
-                        <input type="checkbox" id="chk-vis-modalidad" onchange="toggleVisibilidadBoton('modalidad', this.checked)">
-                        Visible en Pantalla
-                    </label>
+            <div class="abm-card-box" id="abm-card-modalidad">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">🌸 Gestión de Modalidad</div>
+                    <span class="abm-toggle-icon">►</span>
                 </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:2;"><label>Nombre / Título:</label><input type="text" id="mod-nombre" placeholder="Ej: Modalidad del Programa"></div>
-                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="mod-orden" placeholder="1" value="1"></div>
-                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="mod-carrousel" placeholder="0" value="0"></div>
-                </div>
-                <div class="form-group"><label>Descripción / Texto explicativo:</label><textarea id="mod-desc" rows="3" placeholder="Detalles de la modalidad..."></textarea></div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;"><label>Fecha Específica:</label><input type="date" id="mod-fecha"></div>
-                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="mod-hora" placeholder="Ej: 08:00 hs"></div>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;">
-                        <label>Días:</label>
-                        <select id="mod-dias">
-                            <option value="Todos">Todos los días</option>
-                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
-                        </select>
+                <div class="abm-card-body">
+                    <div class="abm-header-title">
+                        <label class="abm-toggle-label">
+                            <input type="checkbox" id="chk-vis-modalidad" onchange="toggleVisibilidadBoton('modalidad', this.checked)">
+                            Visible en Pantalla
+                        </label>
                     </div>
-                    <div class="form-group" style="flex:1;">
-                        <label>Turno:</label>
-                        <select id="mod-turno">
-                            <option value="Ninguno">Ninguno</option>
-                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
-                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
-                        </select>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:2;"><label>Nombre / Título:</label><input type="text" id="mod-nombre" placeholder="Ej: Modalidad del Programa"></div>
+                        <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="mod-orden" placeholder="1" value="1"></div>
+                        <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="mod-carrousel" placeholder="0" value="0"></div>
                     </div>
+                    <div class="form-group"><label>Descripción / Texto explicativo:</label><textarea id="mod-desc" rows="3" placeholder="Detalles de la modalidad..."></textarea></div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;"><label>Día Reto (1 a 28):</label><input type="number" id="mod-diareto" min="1" max="28" placeholder="Ej: 1"></div>
+                        <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="mod-fecha"></div>
+                        <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="mod-hora" placeholder="Ej: 08:00 hs"></div>
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Días:</label>
+                            <select id="mod-dias">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Todos">Todos los días</option>
+                                <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Turno:</label>
+                            <select id="mod-turno">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                                <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Link / Recurso:</label><input type="text" id="mod-link" placeholder="https://..."></div>
+                    <div class="form-group"><label>Observación / Nota:</label><input type="text" id="mod-observacion" placeholder="Notas adicionales..."></div>
+                    <div class="form-group">
+                        <label>Mostrar en Agenda:</label>
+                        <select id="mod-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Adjuntar Imagen / Imágenes:</label>
+                        <input type="file" accept="image/*" id="mod-img-input" multiple>
+                        <div class="img-preview-box" id="mod-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="mod-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
+                    </div>
+                    <button class="btn-submit" id="btn-save-mod" onclick="guardarModalidadABM()">Guardar Modalidad</button>
+                    <div class="crud-list-container"><small style="font-weight:bold;">Registros de Modalidad:</small><div id="crud-modalidad-list"></div></div>
                 </div>
-                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="mod-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="mod-observacion" placeholder="Notas adicionales..."></div>
-                <div class="form-group">
-                    <label>Mostrar en Agenda:</label>
-                    <select id="mod-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
-                </div>
-                <div class="form-group">
-                    <label>Adjuntar Imagen / Imágenes:</label>
-                    <input type="file" accept="image/*" id="mod-img-input" multiple>
-                    <div class="img-preview-box" id="mod-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="mod-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
-                </div>
-                <button class="btn-submit" id="btn-save-mod" onclick="guardarModalidadABM()">Guardar Modalidad</button>
-                <div class="crud-list-container"><small style="font-weight:bold;">Registros de Modalidad:</small><div id="crud-modalidad-list"></div></div>
             </div>
 
             <!-- ABM DE REGISTRO FOTOGRÁFICO / DIARIO -->
-            <div class="abm-card-box">
-                <div class="abm-header-title">
-                    <h3>Gestión de Registro Fotografico / Diario</h3>
-                    <label class="abm-toggle-label">
-                        <input type="checkbox" id="chk-vis-registro" onchange="toggleVisibilidadBoton('registro', this.checked)">
-                        Visible en Pantalla
-                    </label>
+            <div class="abm-card-box" id="abm-card-registro">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">📷 Gestión de Registro Fotográfico / Diario</div>
+                    <span class="abm-toggle-icon">►</span>
                 </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:2;"><label>Título / Consigna:</label><input type="text" id="reg-nombre" placeholder="Ej: Captura de tu avance"></div>
-                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="reg-orden" placeholder="1" value="1"></div>
-                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="reg-carrousel" placeholder="0" value="0"></div>
-                </div>
-                <div class="form-group"><label>Descripción / Guía:</label><textarea id="reg-desc" rows="2" placeholder="Indicaciones para subir la foto..."></textarea></div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="reg-fecha"></div>
-                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="reg-hora" placeholder="Ej: 21:00 hs"></div>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;">
-                        <label>Días:</label>
-                        <select id="reg-dias">
-                            <option value="Todos">Todos los días</option>
-                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
-                        </select>
+                <div class="abm-card-body">
+                    <div class="abm-header-title">
+                        <label class="abm-toggle-label">
+                            <input type="checkbox" id="chk-vis-registro" onchange="toggleVisibilidadBoton('registro', this.checked)">
+                            Visible en Pantalla
+                        </label>
                     </div>
-                    <div class="form-group" style="flex:1;">
-                        <label>Turno:</label>
-                        <select id="reg-turno">
-                            <option value="Ninguno">Ninguno</option>
-                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
-                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
-                        </select>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:2;"><label>Título / Consigna:</label><input type="text" id="reg-nombre" placeholder="Ej: Captura de tu avance"></div>
+                        <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="reg-orden" placeholder="1" value="1"></div>
+                        <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="reg-carrousel" placeholder="0" value="0"></div>
                     </div>
+                    <div class="form-group"><label>Descripción / Guía:</label><textarea id="reg-desc" rows="2" placeholder="Indicaciones para subir la foto..."></textarea></div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;"><label>Día Reto (1 a 28):</label><input type="number" id="reg-diareto" min="1" max="28" placeholder="Ej: 1"></div>
+                        <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="reg-fecha"></div>
+                        <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="reg-hora" placeholder="Ej: 21:00 hs"></div>
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Días:</label>
+                            <select id="reg-dias">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Todos">Todos los días</option>
+                                <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Turno:</label>
+                            <select id="reg-turno">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                                <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Link / Recurso:</label><input type="text" id="reg-link" placeholder="https://..."></div>
+                    <div class="form-group"><label>Observación / Nota:</label><input type="text" id="reg-observacion" placeholder="Comentario u observación..."></div>
+                    <div class="form-group">
+                        <label>Mostrar en Agenda:</label>
+                        <select id="reg-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Adjuntar Imagen Ejemplo / Referencia:</label>
+                        <input type="file" accept="image/*" id="reg-img-input" multiple>
+                        <div class="img-preview-box" id="reg-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="reg-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
+                    </div>
+                    <button class="btn-submit" id="btn-save-reg" onclick="agregarRegistroFoto()">Guardar Consigna / Registro</button>
+                    <div class="crud-list-container"><small style="font-weight:bold;">Registros Cargados:</small><div id="crud-registro-list"></div></div>
                 </div>
-                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="reg-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="reg-observacion" placeholder="Comentario u observación..."></div>
-                <div class="form-group">
-                    <label>Mostrar en Agenda:</label>
-                    <select id="reg-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
-                </div>
-                <div class="form-group">
-                    <label>Adjuntar Imagen Ejemplo / Referencia:</label>
-                    <input type="file" accept="image/*" id="reg-img-input" multiple>
-                    <div class="img-preview-box" id="reg-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="reg-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
-                </div>
-                <button class="btn-submit" id="btn-save-reg" onclick="agregarRegistroFoto()">Guardar Consigna / Registro</button>
-                <div class="crud-list-container"><small style="font-weight:bold;">Registros Cargados:</small><div id="crud-registro-list"></div></div>
             </div>
 
             <!-- ABM DE PROPUESTA DIARIA Y CAMINATAS -->
-            <div class="abm-card-box">
-                <div class="abm-header-title">
-                    <h3>Gestión de Propuesta Diaria y Caminatas</h3>
-                    <label class="abm-toggle-label">
-                        <input type="checkbox" id="chk-vis-caminatas" onchange="toggleVisibilidadBoton('caminatas', this.checked)">
-                        Visible en Pantalla
-                    </label>
+            <div class="abm-card-box" id="abm-card-caminatas">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">🚶‍♀️ Gestión de Propuesta Diaria y Caminatas</div>
+                    <span class="abm-toggle-icon">►</span>
                 </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:2;"><label>Título / Caminata:</label><input type="text" id="cam-nombre" placeholder="Ej: Caminata Matutina Consciente"></div>
-                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="cam-orden" placeholder="1" value="1"></div>
-                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="cam-carrousel" placeholder="0" value="0"></div>
-                </div>
-                <div class="form-group"><label>Descripción / Consigna:</label><textarea id="cam-desc" rows="2" placeholder="Detalle de la propuesta o caminata..."></textarea></div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;"><label>Fecha Específica:</label><input type="date" id="cam-fecha"></div>
-                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="cam-hora" placeholder="Ej: 07:30 hs"></div>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;">
-                        <label>Días:</label>
-                        <select id="cam-dias">
-                            <option value="Todos">Todos los días</option>
-                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
-                        </select>
+                <div class="abm-card-body">
+                    <div class="abm-header-title">
+                        <label class="abm-toggle-label">
+                            <input type="checkbox" id="chk-vis-caminatas" onchange="toggleVisibilidadBoton('caminatas', this.checked)">
+                            Visible en Pantalla
+                        </label>
                     </div>
-                    <div class="form-group" style="flex:1;">
-                        <label>Turno:</label>
-                        <select id="cam-turno">
-                            <option value="Ninguno">Ninguno</option>
-                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
-                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
-                        </select>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:2;"><label>Título / Caminata:</label><input type="text" id="cam-nombre" placeholder="Ej: Caminata Matutina Consciente"></div>
+                        <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="cam-orden" placeholder="1" value="1"></div>
+                        <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="cam-carrousel" placeholder="0" value="0"></div>
                     </div>
+                    <div class="form-group"><label>Descripción / Consigna:</label><textarea id="cam-desc" rows="2" placeholder="Detalle de la propuesta o caminata..."></textarea></div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;"><label>Día Reto (1 a 28):</label><input type="number" id="cam-diareto" min="1" max="28" placeholder="Ej: 1"></div>
+                        <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="cam-fecha"></div>
+                        <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="cam-hora" placeholder="Ej: 07:30 hs"></div>
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Días:</label>
+                            <select id="cam-dias">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Todos">Todos los días</option>
+                                <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Turno:</label>
+                            <select id="cam-turno">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                                <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Link / Recurso:</label><input type="text" id="cam-link" placeholder="https://..."></div>
+                    <div class="form-group"><label>Observación / Nota:</label><input type="text" id="cam-observacion" placeholder="Comentario u observación..."></div>
+                    <div class="form-group">
+                        <label>Mostrar en Agenda:</label>
+                        <select id="cam-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Adjuntar Imagen:</label>
+                        <input type="file" accept="image/*" id="cam-img-input" multiple>
+                        <div class="img-preview-box" id="cam-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="cam-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
+                    </div>
+                    <button class="btn-submit" id="btn-save-cam" onclick="agregarCaminata()">Guardar Propuesta / Caminata</button>
+                    <div class="crud-list-container"><small style="font-weight:bold;">Propuestas Cargadas:</small><div id="crud-caminatas-list"></div></div>
                 </div>
-                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="cam-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="cam-observacion" placeholder="Comentario u observación..."></div>
-                <div class="form-group">
-                    <label>Mostrar en Agenda:</label>
-                    <select id="cam-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
-                </div>
-                <div class="form-group">
-                    <label>Adjuntar Imagen:</label>
-                    <input type="file" accept="image/*" id="cam-img-input" multiple>
-                    <div class="img-preview-box" id="cam-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="cam-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
-                </div>
-                <button class="btn-submit" id="btn-save-cam" onclick="agregarCaminata()">Guardar Propuesta / Caminata</button>
-                <div class="crud-list-container"><small style="font-weight:bold;">Propuestas Cargadas:</small><div id="crud-caminatas-list"></div></div>
             </div>
 
             <!-- ABM DE ALIMENTOS -->
-            <div class="abm-card-box">
-                <div class="abm-header-title">
-                    <h3>Gestión de Alimentos</h3>
-                    <label class="abm-toggle-label">
-                        <input type="checkbox" id="chk-vis-alimentos" onchange="toggleVisibilidadBoton('alimentos', this.checked)">
-                        Visible en Pantalla
-                    </label>
+            <div class="abm-card-box" id="abm-card-alimentos">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">🥗 Gestión de Alimentos</div>
+                    <span class="abm-toggle-icon">►</span>
                 </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:2;"><label>Nombre del Alimento / Menú:</label><input type="text" id="ali-nombre" placeholder="Ej: Bowl Nutritivo"></div>
-                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="ali-orden" placeholder="1" value="1"></div>
-                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="ali-carrousel" placeholder="0" value="0"></div>
-                </div>
-                <div class="form-group"><label>Descripción / Receta:</label><textarea id="ali-desc" rows="2" placeholder="Ingredientes o propiedades..."></textarea></div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;"><label>Fecha Específica:</label><input type="date" id="ali-fecha"></div>
-                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="ali-hora" placeholder="Ej: 13:00 hs"></div>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;">
-                        <label>Días de la semana:</label>
-                        <select id="ali-dias">
-                            <option value="Todos">Todos los días</option>
-                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
-                        </select>
+                <div class="abm-card-body">
+                    <div class="abm-header-title">
+                        <label class="abm-toggle-label">
+                            <input type="checkbox" id="chk-vis-alimentos" onchange="toggleVisibilidadBoton('alimentos', this.checked)">
+                            Visible en Pantalla
+                        </label>
                     </div>
-                    <div class="form-group" style="flex:1;">
-                        <label>Turno:</label>
-                        <select id="ali-turno">
-                            <option value="Ninguno">Ninguno</option>
-                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
-                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
-                        </select>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:2;"><label>Nombre del Alimento / Menú:</label><input type="text" id="ali-nombre" placeholder="Ej: Bowl Nutritivo"></div>
+                        <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="ali-orden" placeholder="1" value="1"></div>
+                        <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="ali-carrousel" placeholder="0" value="0"></div>
                     </div>
+                    <div class="form-group"><label>Descripción / Receta:</label><textarea id="ali-desc" rows="2" placeholder="Ingredientes o propiedades..."></textarea></div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;"><label>Día Reto (1 a 28):</label><input type="number" id="ali-diareto" min="1" max="28" placeholder="Ej: 1"></div>
+                        <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="ali-fecha"></div>
+                        <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="ali-hora" placeholder="Ej: 13:00 hs"></div>
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Días de la semana:</label>
+                            <select id="ali-dias">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Todos">Todos los días</option>
+                                <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Turno:</label>
+                            <select id="ali-turno">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                                <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Link / Recurso:</label><input type="text" id="ali-link" placeholder="https://..."></div>
+                    <div class="form-group"><label>Observación / Nota:</label><input type="text" id="ali-observacion" placeholder="Comentario u observación..."></div>
+                    <div class="form-group">
+                        <label>Mostrar en Agenda:</label>
+                        <select id="ali-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Adjuntar Imagen:</label>
+                        <input type="file" accept="image/*" id="ali-img-input" multiple>
+                        <div class="img-preview-box" id="ali-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="ali-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
+                    </div>
+                    <button class="btn-submit" id="btn-save-ali" onclick="agregarAlimento()">Guardar Alimento</button>
+                    <div class="crud-list-container"><small style="font-weight:bold;">Alimentos Cargados:</small><div id="crud-alimentos-list"></div></div>
                 </div>
-                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="ali-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="ali-observacion" placeholder="Comentario u observación..."></div>
-                <div class="form-group">
-                    <label>Mostrar en Agenda:</label>
-                    <select id="ali-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
-                </div>
-                <div class="form-group">
-                    <label>Adjuntar Imagen:</label>
-                    <input type="file" accept="image/*" id="ali-img-input" multiple>
-                    <div class="img-preview-box" id="ali-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="ali-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
-                </div>
-                <button class="btn-submit" id="btn-save-ali" onclick="agregarAlimento()">Guardar Alimento</button>
-                <div class="crud-list-container"><small style="font-weight:bold;">Alimentos Cargados:</small><div id="crud-alimentos-list"></div></div>
             </div>
 
             <!-- ABM DE DIOSAS -->
-            <div class="abm-card-box">
-                <div class="abm-header-title">
-                    <h3>Gestión de Diosas</h3>
-                    <label class="abm-toggle-label">
-                        <input type="checkbox" id="chk-vis-diosas" onchange="toggleVisibilidadBoton('diosas', this.checked)">
-                        Visible en Pantalla
-                    </label>
+            <div class="abm-card-box" id="abm-card-diosas">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">👑 Gestión de Diosas</div>
+                    <span class="abm-toggle-icon">►</span>
                 </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:2;"><label>Nombre Diosa:</label><input type="text" id="dio-nombre" placeholder="Ej: Afrodita, Isis..."></div>
-                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="dio-orden" placeholder="1" value="1"></div>
-                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="dio-carrousel" placeholder="0" value="0"></div>
-                </div>
-                <div class="form-group"><label>Descripción / Atributos:</label><textarea id="dio-desc" rows="2" placeholder="Reseña o propiedades..."></textarea></div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="dio-fecha"></div>
-                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="dio-hora" placeholder="Ej: 11:00 hs"></div>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;">
-                        <label>Días:</label>
-                        <select id="dio-dias">
-                            <option value="Todos">Todos los días</option>
-                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
-                        </select>
+                <div class="abm-card-body">
+                    <div class="abm-header-title">
+                        <label class="abm-toggle-label">
+                            <input type="checkbox" id="chk-vis-diosas" onchange="toggleVisibilidadBoton('diosas', this.checked)">
+                            Visible en Pantalla
+                        </label>
                     </div>
-                    <div class="form-group" style="flex:1;">
-                        <label>Turno:</label>
-                        <select id="dio-turno">
-                            <option value="Ninguno">Ninguno</option>
-                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
-                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
-                        </select>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:2;"><label>Nombre Diosa:</label><input type="text" id="dio-nombre" placeholder="Ej: Afrodita, Isis..."></div>
+                        <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="dio-orden" placeholder="1" value="1"></div>
+                        <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="dio-carrousel" placeholder="0" value="0"></div>
                     </div>
+                    <div class="form-group"><label>Descripción / Atributos:</label><textarea id="dio-desc" rows="2" placeholder="Reseña o propiedades..."></textarea></div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;"><label>Día Reto (1 a 28):</label><input type="number" id="dio-diareto" min="1" max="28" placeholder="Ej: 1"></div>
+                        <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="dio-fecha"></div>
+                        <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="dio-hora" placeholder="Ej: 11:00 hs"></div>
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Días:</label>
+                            <select id="dio-dias">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Todos">Todos los días</option>
+                                <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Turno:</label>
+                            <select id="dio-turno">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                                <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Link / Recurso:</label><input type="text" id="dio-link" placeholder="https://..."></div>
+                    <div class="form-group"><label>Observación / Nota:</label><input type="text" id="dio-observacion" placeholder="Comentario adicional..."></div>
+                    <div class="form-group">
+                        <label>Mostrar en Agenda:</label>
+                        <select id="dio-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Adjuntar Imagen:</label>
+                        <input type="file" accept="image/*" id="dio-img-input" multiple>
+                        <div class="img-preview-box" id="dio-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="dio-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
+                    </div>
+                    <button class="btn-submit" id="btn-save-dio" onclick="agregarDiosa()">Guardar Diosa</button>
+                    <div class="crud-list-container"><small style="font-weight:bold;">Diosas Cargadas:</small><div id="crud-diosas-list"></div></div>
                 </div>
-                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="dio-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="dio-observacion" placeholder="Comentario adicional..."></div>
-                <div class="form-group">
-                    <label>Mostrar en Agenda:</label>
-                    <select id="dio-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
-                </div>
-                <div class="form-group">
-                    <label>Adjuntar Imagen:</label>
-                    <input type="file" accept="image/*" id="dio-img-input" multiple>
-                    <div class="img-preview-box" id="dio-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="dio-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
-                </div>
-                <button class="btn-submit" id="btn-save-dio" onclick="agregarDiosa()">Guardar Diosa</button>
-                <div class="crud-list-container"><small style="font-weight:bold;">Diosas Cargadas:</small><div id="crud-diosas-list"></div></div>
             </div>
 
             <!-- ABM DE NOVEDADES -->
-            <div class="abm-card-box">
-                <div class="abm-header-title">
-                    <h3>Gestión de Novedades</h3>
-                    <label class="abm-toggle-label">
-                        <input type="checkbox" id="chk-vis-novedades" onchange="toggleVisibilidadBoton('novedades', this.checked)">
-                        Visible en Pantalla
-                    </label>
+            <div class="abm-card-box" id="abm-card-novedades">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">📢 Gestión de Novedades</div>
+                    <span class="abm-toggle-icon">►</span>
                 </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:2;"><label>Nombre / Título:</label><input type="text" id="nov-nombre" placeholder="Ej: Link Zoom Jueves 3"></div>
-                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="nov-orden" placeholder="1" value="1"></div>
-                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="nov-carrousel" placeholder="0" value="0"></div>
-                </div>
-                <div class="form-group"><label>Descripción / Detalle:</label><textarea id="nov-desc" rows="2" placeholder="Detalle de la novedad..."></textarea></div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="nov-fecha"></div>
-                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="nov-hora" placeholder="Ej: 20:00 hs"></div>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;">
-                        <label>Días:</label>
-                        <select id="nov-dias">
-                            <option value="Todos">Todos los días</option>
-                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
-                        </select>
+                <div class="abm-card-body">
+                    <div class="abm-header-title">
+                        <label class="abm-toggle-label">
+                            <input type="checkbox" id="chk-vis-novedades" onchange="toggleVisibilidadBoton('novedades', this.checked)">
+                            Visible en Pantalla
+                        </label>
                     </div>
-                    <div class="form-group" style="flex:1;">
-                        <label>Turno:</label>
-                        <select id="nov-turno">
-                            <option value="Ninguno">Ninguno</option>
-                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
-                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
-                        </select>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:2;"><label>Nombre / Título:</label><input type="text" id="nov-nombre" placeholder="Ej: Link Zoom Jueves 3"></div>
+                        <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="nov-orden" placeholder="1" value="1"></div>
+                        <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="nov-carrousel" placeholder="0" value="0"></div>
                     </div>
+                    <div class="form-group"><label>Descripción / Detalle:</label><textarea id="nov-desc" rows="2" placeholder="Detalle de la novedad..."></textarea></div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;"><label>Día Reto (1 a 28):</label><input type="number" id="nov-diareto" min="1" max="28" placeholder="Ej: 1"></div>
+                        <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="nov-fecha"></div>
+                        <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="nov-hora" placeholder="Ej: 20:00 hs"></div>
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Días:</label>
+                            <select id="nov-dias">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Todos">Todos los días</option>
+                                <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Turno:</label>
+                            <select id="nov-turno">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                                <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Enlace / Recurso:</label><input type="text" id="nov-link" placeholder="https://..."></div>
+                    <div class="form-group"><label>Observación / Nota:</label><input type="text" id="nov-observacion" placeholder="Anotación especial..."></div>
+                    <div class="form-group">
+                        <label>Mostrar en Agenda:</label>
+                        <select id="nov-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Adjuntar Imagen:</label>
+                        <input type="file" accept="image/*" id="nov-img-input" multiple>
+                        <div class="img-preview-box" id="nov-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="nov-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
+                    </div>
+                    <button class="btn-submit" id="btn-save-nov" onclick="publicarNovedadManual()">Publicar Novedad</button>
+                    <div class="crud-list-container"><small style="font-weight:bold;">Novedades Registradas:</small><div id="novedades-abm-list"></div></div>
                 </div>
-                <div class="form-group"><label>Enlace / Recurso:</label><input type="text" id="nov-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="nov-observacion" placeholder="Anotación especial..."></div>
-                <div class="form-group">
-                    <label>Mostrar en Agenda:</label>
-                    <select id="nov-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
-                </div>
-                <div class="form-group">
-                    <label>Adjuntar Imagen:</label>
-                    <input type="file" accept="image/*" id="nov-img-input" multiple>
-                    <div class="img-preview-box" id="nov-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="nov-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
-                </div>
-                <button class="btn-submit" id="btn-save-nov" onclick="publicarNovedadManual()">Publicar Novedad</button>
-                <div class="crud-list-container"><small style="font-weight:bold;">Novedades Registradas:</small><div id="novedades-abm-list"></div></div>
             </div>
 
             <!-- ABM DE PRÁCTICAS -->
-            <div class="abm-card-box">
-                <div class="abm-header-title">
-                    <h3>Gestión de Prácticas</h3>
-                    <label class="abm-toggle-label">
-                        <input type="checkbox" id="chk-vis-practicas" onchange="toggleVisibilidadBoton('practicas', this.checked)">
-                        Visible en Pantalla
-                    </label>
+            <div class="abm-card-box" id="abm-card-practicas">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">🧘‍♀️ Gestión de Prácticas</div>
+                    <span class="abm-toggle-icon">►</span>
                 </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:2;"><label>Nombre Práctica:</label><input type="text" id="pra-nombre" placeholder="Ej: Meditación Guiada"></div>
-                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="pra-orden" placeholder="1" value="1"></div>
-                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="pra-carrousel" placeholder="0" value="0"></div>
-                </div>
-                <div class="form-group"><label>Descripción:</label><textarea id="pra-desc" rows="2" placeholder="Instrucciones o beneficios..."></textarea></div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="pra-fecha"></div>
-                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="pra-hora" placeholder="Ej: 09:00 hs"></div>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;">
-                        <label>Días:</label>
-                        <select id="pra-dias">
-                            <option value="Todos">Todos los días</option>
-                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
-                        </select>
+                <div class="abm-card-body">
+                    <div class="abm-header-title">
+                        <label class="abm-toggle-label">
+                            <input type="checkbox" id="chk-vis-practicas" onchange="toggleVisibilidadBoton('practicas', this.checked)">
+                            Visible en Pantalla
+                        </label>
                     </div>
-                    <div class="form-group" style="flex:1;">
-                        <label>Turno:</label>
-                        <select id="pra-turno">
-                            <option value="Ninguno">Ninguno</option>
-                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
-                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
-                        </select>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:2;"><label>Nombre Práctica:</label><input type="text" id="pra-nombre" placeholder="Ej: Meditación Guiada"></div>
+                        <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="pra-orden" placeholder="1" value="1"></div>
+                        <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="pra-carrousel" placeholder="0" value="0"></div>
                     </div>
+                    <div class="form-group"><label>Descripción:</label><textarea id="pra-desc" rows="2" placeholder="Instrucciones o beneficios..."></textarea></div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;"><label>Día Reto (1 a 28):</label><input type="number" id="pra-diareto" min="1" max="28" placeholder="Ej: 1"></div>
+                        <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="pra-fecha"></div>
+                        <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="pra-hora" placeholder="Ej: 09:00 hs"></div>
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Días:</label>
+                            <select id="pra-dias">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Todos">Todos los días</option>
+                                <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Turno:</label>
+                            <select id="pra-turno">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                                <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Link / Recurso:</label><input type="text" id="pra-link" placeholder="https://..."></div>
+                    <div class="form-group"><label>Observación / Comentario:</label><input type="text" id="pra-observacion" placeholder="Comentario u observación..."></div>
+                    <div class="form-group">
+                        <label>Mostrar en Agenda:</label>
+                        <select id="pra-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Adjuntar Imagen:</label>
+                        <input type="file" accept="image/*" id="pra-img-input" multiple>
+                        <div class="img-preview-box" id="pra-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="pra-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
+                    </div>
+                    <button class="btn-submit" id="btn-save-pra" onclick="agregarPractica()">Guardar Práctica</button>
+                    <div class="crud-list-container"><small style="font-weight:bold;">Prácticas Cargadas:</small><div id="crud-practicas-list"></div></div>
                 </div>
-                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="pra-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Observación / Comentario:</label><input type="text" id="pra-observacion" placeholder="Comentario u observación..."></div>
-                <div class="form-group">
-                    <label>Mostrar en Agenda:</label>
-                    <select id="pra-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
-                </div>
-                <div class="form-group">
-                    <label>Adjuntar Imagen:</label>
-                    <input type="file" accept="image/*" id="pra-img-input" multiple>
-                    <div class="img-preview-box" id="pra-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="pra-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
-                </div>
-                <button class="btn-submit" id="btn-save-pra" onclick="agregarPractica()">Guardar Práctica</button>
-                <div class="crud-list-container"><small style="font-weight:bold;">Prácticas Cargadas:</small><div id="crud-practicas-list"></div></div>
             </div>
 
             <!-- ABM DE ACTIVIDADES -->
-            <div class="abm-card-box">
-                <div class="abm-header-title">
-                    <h3>Gestión de Actividades</h3>
-                    <label class="abm-toggle-label">
-                        <input type="checkbox" id="chk-vis-actividades" onchange="toggleVisibilidadBoton('actividades', this.checked)">
-                        Visible en Pantalla
-                    </label>
+            <div class="abm-card-box" id="abm-card-actividades">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">✨ Gestión de Actividades</div>
+                    <span class="abm-toggle-icon">►</span>
                 </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:2;"><label>Nombre Actividad:</label><input type="text" id="act-nombre" placeholder="Ej: Caminata consciente"></div>
-                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="act-orden" placeholder="1" value="1"></div>
-                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="act-carrousel" placeholder="0" value="0"></div>
-                </div>
-                <div class="form-group"><label>Descripción:</label><textarea id="act-desc" rows="2" placeholder="Detalle de la actividad..."></textarea></div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;"><label>Fecha Específica:</label><input type="date" id="act-fecha"></div>
-                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="act-hora" placeholder="Ej: 08:00 hs"></div>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;">
-                        <label>Días de la semana:</label>
-                        <select id="act-dias">
-                            <option value="Todos">Todos los días</option>
-                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
-                        </select>
+                <div class="abm-card-body">
+                    <div class="abm-header-title">
+                        <label class="abm-toggle-label">
+                            <input type="checkbox" id="chk-vis-actividades" onchange="toggleVisibilidadBoton('actividades', this.checked)">
+                            Visible en Pantalla
+                        </label>
                     </div>
-                    <div class="form-group" style="flex:1;">
-                        <label>Turno:</label>
-                        <select id="act-turno">
-                            <option value="Ninguno">Ninguno</option>
-                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
-                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
-                        </select>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:2;"><label>Nombre Actividad:</label><input type="text" id="act-nombre" placeholder="Ej: Caminata consciente"></div>
+                        <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="act-orden" placeholder="1" value="1"></div>
+                        <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="act-carrousel" placeholder="0" value="0"></div>
                     </div>
+                    <div class="form-group"><label>Descripción:</label><textarea id="act-desc" rows="2" placeholder="Detalle de la actividad..."></textarea></div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;"><label>Día Reto (1 a 28):</label><input type="number" id="act-diareto" min="1" max="28" placeholder="Ej: 1"></div>
+                        <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="act-fecha"></div>
+                        <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="act-hora" placeholder="Ej: 08:00 hs"></div>
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Días de la semana:</label>
+                            <select id="act-dias">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Todos">Todos los días</option>
+                                <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Turno:</label>
+                            <select id="act-turno">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                                <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Link / Recurso:</label><input type="text" id="act-link" placeholder="https://..."></div>
+                    <div class="form-group"><label>Observación / Nota:</label><input type="text" id="act-observacion" placeholder="Comentario u observación..."></div>
+                    <div class="form-group">
+                        <label>Mostrar en Agenda:</label>
+                        <select id="act-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Adjuntar Imagen:</label>
+                        <input type="file" accept="image/*" id="act-img-input" multiple>
+                        <div class="img-preview-box" id="act-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="act-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
+                    </div>
+                    <button class="btn-submit" id="btn-save-act" onclick="agregarActividadConfig()">Guardar Actividad</button>
+                    <div class="crud-list-container"><small style="font-weight:bold;">Actividades Cargadas:</small><div id="crud-actividades-list"></div></div>
                 </div>
-                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="act-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="act-observacion" placeholder="Comentario u observación..."></div>
-                <div class="form-group">
-                    <label>Mostrar en Agenda:</label>
-                    <select id="act-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
-                </div>
-                <div class="form-group">
-                    <label>Adjuntar Imagen:</label>
-                    <input type="file" accept="image/*" id="act-img-input" multiple>
-                    <div class="img-preview-box" id="act-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="act-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
-                </div>
-                <button class="btn-submit" id="btn-save-act" onclick="agregarActividadConfig()">Guardar Actividad</button>
-                <div class="crud-list-container"><small style="font-weight:bold;">Actividades Cargadas:</small><div id="crud-actividades-list"></div></div>
             </div>
 
             <!-- ABM DE INFUSIONES / PÓCIMAS -->
-            <div class="abm-card-box">
-                <div class="abm-header-title">
-                    <h3>Gestión de Infusiones / Pócimas</h3>
-                    <label class="abm-toggle-label">
-                        <input type="checkbox" id="chk-vis-pocimas" onchange="toggleVisibilidadBoton('pocimas', this.checked)">
-                        Visible en Pantalla
-                    </label>
+            <div class="abm-card-box" id="abm-card-pocimas">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">🍵 Gestión de Infusiones / Pócimas</div>
+                    <span class="abm-toggle-icon">►</span>
                 </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:2;"><label>Nombre Pócima / Infusión:</label><input type="text" id="inf-nombre" placeholder="Ej: Té de Manzanilla"></div>
-                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="inf-orden" placeholder="1" value="1"></div>
-                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="inf-carrousel" placeholder="0" value="0"></div>
-                </div>
-                <div class="form-group"><label>Descripción / Preparación:</label><textarea id="inf-desc" rows="2" placeholder="Propiedades o preparación..."></textarea></div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;"><label>Fecha Específica:</label><input type="date" id="inf-fecha"></div>
-                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="inf-hora" placeholder="Ej: 07:00 hs"></div>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;">
-                        <label>Días de toma:</label>
-                        <select id="inf-dias">
-                            <option value="Todos">Todos los días</option>
-                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
-                        </select>
+                <div class="abm-card-body">
+                    <div class="abm-header-title">
+                        <label class="abm-toggle-label">
+                            <input type="checkbox" id="chk-vis-pocimas" onchange="toggleVisibilidadBoton('pocimas', this.checked)">
+                            Visible en Pantalla
+                        </label>
                     </div>
-                    <div class="form-group" style="flex:1;">
-                        <label>Turno:</label>
-                        <select id="inf-turno">
-                            <option value="Ninguno">Ninguno</option>
-                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
-                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
-                        </select>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:2;"><label>Nombre Pócima / Infusión:</label><input type="text" id="inf-nombre" placeholder="Ej: Té de Manzanilla"></div>
+                        <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="inf-orden" placeholder="1" value="1"></div>
+                        <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="inf-carrousel" placeholder="0" value="0"></div>
                     </div>
+                    <div class="form-group"><label>Descripción / Preparación:</label><textarea id="inf-desc" rows="2" placeholder="Propiedades o preparación..."></textarea></div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;"><label>Día Reto (1 a 28):</label><input type="number" id="inf-diareto" min="1" max="28" placeholder="Ej: 1"></div>
+                        <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="inf-fecha"></div>
+                        <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="inf-hora" placeholder="Ej: 07:00 hs"></div>
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Días de toma:</label>
+                            <select id="inf-dias">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Todos">Todos los días</option>
+                                <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Turno:</label>
+                            <select id="inf-turno">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                                <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Link / Recurso:</label><input type="text" id="inf-link" placeholder="https://..."></div>
+                    <div class="form-group"><label>Observación / Efecto Especial:</label><input type="text" id="inf-observacion" placeholder="Nota u observación..."></div>
+                    <div class="form-group">
+                        <label>Mostrar en Agenda:</label>
+                        <select id="inf-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Adjuntar Imágenes:</label>
+                        <input type="file" accept="image/*" id="inf-img-input" multiple>
+                        <div class="img-preview-box" id="inf-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="inf-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
+                    </div>
+                    <button class="btn-submit" id="btn-save-inf" onclick="agregarInfusion()">Guardar Pócima / Infusión</button>
+                    <div class="crud-list-container"><small style="font-weight:bold;">Pócimas e Infusiones Cargadas:</small><div id="crud-infusiones-list"></div></div>
                 </div>
-                <div class="form-group"><label>Link / Recurso:</label><input type="text" id="inf-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Observación / Efecto Especial:</label><input type="text" id="inf-observacion" placeholder="Nota u observación..."></div>
-                <div class="form-group">
-                    <label>Mostrar en Agenda:</label>
-                    <select id="inf-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
-                </div>
-                <div class="form-group">
-                    <label>Adjuntar Imágenes:</label>
-                    <input type="file" accept="image/*" id="inf-img-input" multiple>
-                    <div class="img-preview-box" id="inf-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="inf-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
-                </div>
-                <button class="btn-submit" id="btn-save-inf" onclick="agregarInfusion()">Guardar Pócima / Infusión</button>
-                <div class="crud-list-container"><small style="font-weight:bold;">Pócimas e Infusiones Cargadas:</small><div id="crud-infusiones-list"></div></div>
             </div>
 
             <!-- ABM DE PODCASTS -->
-            <div class="abm-card-box">
-                <div class="abm-header-title">
-                    <h3>Gestión de Podcasts</h3>
-                    <label class="abm-toggle-label">
-                        <input type="checkbox" id="chk-vis-podcasts" onchange="toggleVisibilidadBoton('podcasts', this.checked)">
-                        Visible en Pantalla
-                    </label>
+            <div class="abm-card-box" id="abm-card-podcasts">
+                <div class="abm-card-header" onclick="toggleAbmCard(this)">
+                    <div class="abm-card-header-title">🎧 Gestión de Podcasts</div>
+                    <span class="abm-toggle-icon">►</span>
                 </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:2;"><label>Nombre Podcast:</label><input type="text" id="pod-nombre" placeholder="Ej: Episodio 1"></div>
-                    <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="pod-orden" placeholder="1" value="1"></div>
-                    <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="pod-carrousel" placeholder="0" value="0"></div>
-                </div>
-                <div class="form-group"><label>Descripción:</label><textarea id="pod-desc" rows="2" placeholder="Resumen del episodio..."></textarea></div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="pod-fecha"></div>
-                    <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="pod-hora" placeholder="Ej: 18:00 hs"></div>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <div class="form-group" style="flex:1;">
-                        <label>Días para escuchar:</label>
-                        <select id="pod-dias">
-                            <option value="Todos">Todos los días</option>
-                            <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
-                        </select>
+                <div class="abm-card-body">
+                    <div class="abm-header-title">
+                        <label class="abm-toggle-label">
+                            <input type="checkbox" id="chk-vis-podcasts" onchange="toggleVisibilidadBoton('podcasts', this.checked)">
+                            Visible en Pantalla
+                        </label>
                     </div>
-                    <div class="form-group" style="flex:1;">
-                        <label>Turno:</label>
-                        <select id="pod-turno">
-                            <option value="Ninguno">Ninguno</option>
-                            <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
-                            <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
-                        </select>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:2;"><label>Nombre Podcast:</label><input type="text" id="pod-nombre" placeholder="Ej: Episodio 1"></div>
+                        <div class="form-group" style="flex:1;"><label>Orden:</label><input type="number" id="pod-orden" placeholder="1" value="1"></div>
+                        <div class="form-group" style="flex:1;"><label>Carrousel:</label><input type="number" id="pod-carrousel" placeholder="0" value="0"></div>
                     </div>
+                    <div class="form-group"><label>Descripción:</label><textarea id="pod-desc" rows="2" placeholder="Resumen del episodio..."></textarea></div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;"><label>Día Reto (1 a 28):</label><input type="number" id="pod-diareto" min="1" max="28" placeholder="Ej: 1"></div>
+                        <div class="form-group" style="flex:1;"><label>Fecha Asignada:</label><input type="date" id="pod-fecha"></div>
+                        <div class="form-group" style="flex:1;"><label>Hora Agenda:</label><input type="text" id="pod-hora" placeholder="Ej: 18:00 hs"></div>
+                    </div>
+                    <div style="display:flex; gap:6px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Días para escuchar:</label>
+                            <select id="pod-dias">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Todos">Todos los días</option>
+                                <option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sábado">Sábado</option><option value="Domingo">Domingo</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Turno:</label>
+                            <select id="pod-turno">
+                                <option value="Ninguno">Ninguno</option>
+                                <option value="Mañana">Mañana</option><option value="Mediodia">Mediodía</option>
+                                <option value="Tarde">Tarde</option><option value="Tardecita">Tardecita</option><option value="Noche">Noche</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Link Audio / Recurso:</label><input type="text" id="pod-link" placeholder="https://..."></div>
+                    <div class="form-group"><label>Observación / Nota:</label><input type="text" id="pod-observacion" placeholder="Comentario adicional..."></div>
+                    <div class="form-group">
+                        <label>Mostrar en Agenda:</label>
+                        <select id="pod-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Adjuntar Imagen:</label>
+                        <input type="file" accept="image/*" id="pod-img-input" multiple>
+                        <div class="img-preview-box" id="pod-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="pod-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
+                    </div>
+                    <button class="btn-submit" id="btn-save-pod" onclick="agregarPodcast()">Guardar Podcast</button>
+                    <div class="crud-list-container"><small style="font-weight:bold;">Podcasts Cargados:</small><div id="crud-podcasts-list"></div></div>
                 </div>
-                <div class="form-group"><label>Link Audio / Recurso:</label><input type="text" id="pod-link" placeholder="https://..."></div>
-                <div class="form-group"><label>Observación / Nota:</label><input type="text" id="pod-observacion" placeholder="Comentario adicional..."></div>
-                <div class="form-group">
-                    <label>Mostrar en Agenda:</label>
-                    <select id="pod-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
-                </div>
-                <div class="form-group">
-                    <label>Adjuntar Imagen:</label>
-                    <input type="file" accept="image/*" id="pod-img-input" multiple>
-                    <div class="img-preview-box" id="pod-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="pod-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
-                </div>
-                <button class="btn-submit" id="btn-save-pod" onclick="agregarPodcast()">Guardar Podcast</button>
-                <div class="crud-list-container"><small style="font-weight:bold;">Podcasts Cargados:</small><div id="crud-podcasts-list"></div></div>
             </div>
 
         </div>
@@ -1242,7 +1231,7 @@
     <div id="screen-actividades" class="screen"><div class="screen-header"><h2 class="screen-title">Actividades</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-actividades-list"></div></div>
     <div id="screen-practicas" class="screen"><div class="screen-header"><h2 class="screen-title">Prácticas</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="practicas-dynamic-list"></div></div>
     <div id="screen-caminatas" class="screen"><div class="screen-header"><h2 class="screen-title">Propuesta Diaria y Caminatas</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-caminatas-list"></div></div>
-    <div id="screen-novedades" class="screen"><div class="screen-header"><h2 class="screen-title">Novedades</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-novedades-list"></div></div>
+    <div id="screen-novedades" class="screen"><div class="screen-header"><h2 class="screen-title">Novedades del Día ❗️</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-novedades-list"></div></div>
     <div id="screen-podcasts" class="screen"><div class="screen-header"><h2 class="screen-title">Podcasts</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-podcasts-list"></div></div>
 
 </div>
@@ -1271,13 +1260,13 @@
     let portadaDBList = [{
         nombre: "Comunidad 28 Días",
         desc: "Bienvenidos a nuestro espacio sagrado de transformación y autoconocimiento.",
-        fecha: "", hora: "", dias: "Todos", turno: "Ninguno", orden: 1, carrousel: 1, link: "", observacion: "", agenda: "No", pantalla: false, imagenes: []
+        diareto: "", fecha: "", hora: "", dias: "Todos", turno: "Ninguno", orden: 1, carrousel: 1, link: "", observacion: "", agenda: "No", pantalla: false, imagenes: []
     }];
 
     let modalidadDBList = [{
         nombre: "Modalidad del Programa 28 Días",
         desc: "Bienvenidos a nuestro espacio de transformación y bienestar consciente.",
-        fecha: "", hora: "", dias: "Todos", turno: "Ninguno", orden: 1, carrousel: 0, link: "", observacion: "", agenda: "Si", imagenes: []
+        diareto: "", fecha: "", hora: "", dias: "Todos", turno: "Ninguno", orden: 1, carrousel: 0, link: "", observacion: "", agenda: "Si", imagenes: []
     }];
 
     let caminatasDBList = [];
@@ -1291,7 +1280,7 @@
     let novedadesDB = [];
     
     let agendaGuardadaBD = {}; 
-    let usuarioFotosHistorialBD = {}; // Almacenamiento histórico de fotos por tipo y fecha
+    let usuarioFotosHistorialBD = {}; 
     let currentFechaKeyModal = "";
     let horaSeleccionadaFoco = null;
 
@@ -1313,6 +1302,18 @@
     };
 
     const NOMBRES_DIAS_SEMANA = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+
+    function toggleAbmCard(headerEl) {
+        const cardBox = headerEl.closest('.abm-card-box');
+        if (cardBox) cardBox.classList.toggle('open');
+    }
+
+    /* TEXTAREA AUTO-EXPANDIBLE DINÁMICO */
+    function autoExpandTextarea(textareaEl) {
+        if (!textareaEl) return;
+        textareaEl.style.height = 'auto';
+        textareaEl.style.height = (textareaEl.scrollHeight) + 'px';
+    }
 
     function toggleVisibilidadBoton(key, isChecked) {
         if (!botonesConfig[key]) {
@@ -1579,7 +1580,6 @@
         }
     }
 
-    /* BARRA DE DÍAS CON CONTROL DE LÍMITES (DÍA 1 Y DÍA 28) */
     function renderBarra3Dias(diaCentro) {
         const featuredContainer = document.getElementById('featured-days-container');
         if (!featuredContainer) return;
@@ -1612,6 +1612,7 @@
                 diaSeleccionadoActual = d.num;
                 renderBarra3Dias(d.num);
                 cargarDiaAgendaInline(d.num);
+                renderPublicNovedades();
             };
             featuredContainer.appendChild(dayCard);
         });
@@ -1659,19 +1660,29 @@
 
         renderBarra3Dias(diaNumero);
         cargarDiaAgendaInline(diaNumero);
+        renderPublicNovedades();
     }
 
-    function estaElementoParaDia(item, nombreDiaSemana, fechaKeyFormatted) {
-        if (item.agenda === "No") return false;
-        if (item.fecha && item.fecha === fechaKeyFormatted) return true;
+    /* REGLAS DE COINCIDENCIA DE FECHAS/DÍAS */
+    function estaElementoParaDia(item, nombreDiaSemana, fechaKeyFormatted, diaNumeroReto) {
+        if (item.fecha && item.fecha.trim() !== "") {
+            return item.fecha === fechaKeyFormatted;
+        }
+
+        if (item.diareto !== undefined && item.diareto !== null && String(item.diareto).trim() !== "") {
+            return parseInt(item.diareto, 10) === parseInt(diaNumeroReto, 10);
+        }
+
         if (item.dias) {
+            if (item.dias === "Ninguno") return false;
             if (item.dias === "Todos") return true;
             if (item.dias.toLowerCase().includes(nombreDiaSemana.toLowerCase())) return true;
         }
-        if (!item.fecha && (!item.dias || item.dias === "Todos")) return true;
+
         return false;
     }
 
+    /* MI AGENDA DIARIA INTEGRADA */
     function cargarDiaAgendaInline(diaNumero) {
         const info = getInfoDiaReto(diaNumero);
         const fechaKey = info.fechaKey;
@@ -1684,7 +1695,9 @@
         if (titleEl) titleEl.innerText = `${nombreDia} (${info.labelCorto}) - Día ${diaNumero} del Reto`;
 
         const itemsPorHora = {};
-        const unassignedItems = [];
+        const headerItems = [];
+        const unassignedItemsCombo = [];
+        const globalAgendaItemsCombo = [];
 
         const fuentes = [
             { db: modalidadDBList, tipo: '🌸 Modalidad' },
@@ -1701,13 +1714,21 @@
 
         fuentes.forEach(fuente => {
             fuente.db.forEach(item => {
-                if (estaElementoParaDia(item, nombreDia, fechaKey)) {
+                const nombreItem = item.nombre || item.titulo;
+                if (!nombreItem) return;
+
+                if (item.agenda === "Si") {
+                    globalAgendaItemsCombo.push(`${fuente.tipo}: ${nombreItem}`);
+                }
+
+                if (estaElementoParaDia(item, nombreDia, fechaKey, diaNumero)) {
                     const horaNorm = normalizarHora(item.hora);
-                    const primerImg = (item.imagenes && item.imagenes.length > 0) ? item.imagenes[0] : item.imgUrl;
+                    const imagenesList = (item.imagenes && item.imagenes.length > 0) ? item.imagenes : (item.imgUrl ? [item.imgUrl] : []);
                     const itemData = {
                         tipo: fuente.tipo,
-                        nombre: item.nombre || item.titulo,
-                        imgUrl: primerImg,
+                        nombre: nombreItem,
+                        imagenes: imagenesList,
+                        imgUrl: imagenesList[0] || '',
                         link: item.link,
                         desc: item.desc || item.observacion,
                         turno: item.turno
@@ -1717,11 +1738,40 @@
                         if (!itemsPorHora[horaNorm]) itemsPorHora[horaNorm] = [];
                         itemsPorHora[horaNorm].push(itemData);
                     } else {
-                        unassignedItems.push(`${fuente.tipo}: ${itemData.nombre}`);
+                        headerItems.push(itemData);
+                        unassignedItemsCombo.push(`${fuente.tipo}: ${itemData.nombre}`);
                     }
                 }
             });
         });
+
+        const headerBox = document.getElementById('header-day-resources');
+        if (headerBox) {
+            if (headerItems.length > 0) {
+                headerBox.style.display = 'flex';
+                headerBox.innerHTML = `<b style="font-size:0.95rem; color:var(--primary-dark);">📌 Propuestas y Contenidos para el Día ${diaNumero}:</b>` +
+                headerItems.map((it, idx) => {
+                    let mediaHTML = '';
+                    if (it.imagenes.length > 1) {
+                        mediaHTML = renderCarouselHTML(`header-res-${diaNumero}-${idx}`, it.imagenes);
+                    } else if (it.imagenes.length === 1) {
+                        mediaHTML = `<img src="${it.imagenes[0]}" class="item-attached-img" onclick="openImageViewer('${it.imagenes[0]}')" title="Toca para ampliar">`;
+                    }
+
+                    return `
+                        <div class="agenda-attached-card">
+                            <div><b>${it.tipo}:</b> ${it.nombre} ${(it.turno && it.turno !== "Ninguno") ? `<span class="badge-turno">${it.turno}</span>` : ''}</div>
+                            ${it.desc ? `<div style="font-size:0.85rem; color:#555; white-space:pre-line;">${it.desc}</div>` : ''}
+                            ${it.link ? `<a href="${it.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
+                            ${mediaHTML}
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                headerBox.style.display = 'none';
+                headerBox.innerHTML = '';
+            }
+        }
 
         if (!agendaGuardadaBD[fechaKey]) agendaGuardadaBD[fechaKey] = { horarios: {}, notas: "", seleccionados: {} };
         const registroPrevio = agendaGuardadaBD[fechaKey];
@@ -1738,7 +1788,6 @@
             const textoNotaLibre = registroPrevio.horarios[horaStr] || '';
 
             const tieneAlgo = (itemsEnHora.length > 0) || (actividadesSeleccionadas.length > 0) || (textoNotaLibre.trim() !== '');
-
             const totalActividades = itemsEnHora.length + actividadesSeleccionadas.length + (textoNotaLibre ? 1 : 0);
 
             const square = document.createElement('div');
@@ -1748,7 +1797,7 @@
                 <span>${h < 10 ? '0' + h : h}:00</span>
                 ${totalActividades > 0 ? `<span class="hour-square-badge">${totalActividades}</span>` : ''}
             `;
-            square.onclick = () => enfocarHoraEspecifica(fechaKey, horaStr, itemsEnHora, unassignedItems, h);
+            square.onclick = () => enfocarHoraEspecifica(fechaKey, horaStr, itemsEnHora, unassignedItemsCombo, globalAgendaItemsCombo, h);
             grid24.appendChild(square);
         }
 
@@ -1756,10 +1805,13 @@
         document.getElementById('focused-hour-editor').innerHTML = '';
 
         const textEl = document.getElementById('inline-modal-text');
-        if (textEl) textEl.value = registroPrevio.notas || '';
+        if (textEl) {
+            textEl.value = registroPrevio.notas || '';
+            setTimeout(() => autoExpandTextarea(textEl), 50);
+        }
     }
 
-    function enfocarHoraEspecifica(fechaKey, horaStr, itemsEnHora, unassignedItems, hIndex) {
+    function enfocarHoraEspecifica(fechaKey, horaStr, itemsEnHora, unassignedItems, globalAgendaItems, hIndex) {
         horaSeleccionadaFoco = horaStr;
 
         document.querySelectorAll('.hour-square-btn').forEach(sq => sq.classList.remove('active-focus'));
@@ -1774,17 +1826,26 @@
 
         let attachedHTML = '';
         if (itemsEnHora.length > 0) {
-            attachedHTML = itemsEnHora.map(it => `
-                <div class="agenda-attached-card">
-                    <div>
-                        <b>${it.tipo}:</b> ${it.nombre} 
-                        ${(it.turno && it.turno !== "Ninguno") ? `<span class="badge-turno">${it.turno}</span>` : ''}
+            attachedHTML = itemsEnHora.map((it, idx) => {
+                let mediaHTML = '';
+                if (it.imagenes && it.imagenes.length > 1) {
+                    mediaHTML = renderCarouselHTML(`hour-res-${horaStr}-${idx}`, it.imagenes);
+                } else if (it.imagenes && it.imagenes.length === 1) {
+                    mediaHTML = `<img src="${it.imagenes[0]}" class="item-attached-img" onclick="openImageViewer('${it.imagenes[0]}')" title="Toca para ampliar">`;
+                }
+
+                return `
+                    <div class="agenda-attached-card">
+                        <div>
+                            <b>${it.tipo}:</b> ${it.nombre} 
+                            ${(it.turno && it.turno !== "Ninguno") ? `<span class="badge-turno">${it.turno}</span>` : ''}
+                        </div>
+                        ${it.desc ? `<div style="font-size:0.8rem; color:#555;">${it.desc}</div>` : ''}
+                        ${it.link ? `<a href="${it.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
+                        ${mediaHTML}
                     </div>
-                    ${it.desc ? `<div style="font-size:0.8rem; color:#555;">${it.desc}</div>` : ''}
-                    ${it.link ? `<a href="${it.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
-                    ${it.imgUrl ? `<img src="${it.imgUrl}" class="item-attached-img" onclick="openImageViewer('${it.imgUrl}')" title="Toca para ampliar">` : ''}
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         let badgesHTML = '';
@@ -1797,12 +1858,22 @@
             `).join('');
         }
 
-        let comboHTML = '';
+        let comboPropuestaDiaHTML = '';
         if (unassignedItems.length > 0) {
-            comboHTML = `
+            comboPropuestaDiaHTML = `
                 <select class="hour-combo-select" onchange="seleccionarActividadEnHora('${fechaKey}', '${horaStr}', this)">
-                    <option value="">➕ Seleccionar actividad del programa...</option>
+                    <option value="">➕ Seleccionar propuesta del dia...</option>
                     ${unassignedItems.map(item => `<option value="${item}">${item}</option>`).join('')}
+                </select>
+            `;
+        }
+
+        let comboGlobalAgendaHTML = '';
+        if (globalAgendaItems.length > 0) {
+            comboGlobalAgendaHTML = `
+                <select class="hour-combo-select" style="margin-top:4px;" onchange="seleccionarActividadEnHora('${fechaKey}', '${horaStr}', this)">
+                    <option value="">🌟 Seleccionar otras actividades del programa...</option>
+                    ${globalAgendaItems.map(item => `<option value="${item}">${item}</option>`).join('')}
                 </select>
             `;
         }
@@ -1819,7 +1890,8 @@
                 </div>
                 <div id="badges-container-${horaStr}">${badgesHTML}</div>
                 ${attachedHTML}
-                ${comboHTML}
+                ${comboPropuestaDiaHTML}
+                ${comboGlobalAgendaHTML}
             </div>
         `;
         editorBox.style.display = 'block';
@@ -1876,7 +1948,6 @@
         return lista.sort((a, b) => (parseInt(a.orden) || 1) - (parseInt(b.orden) || 1));
     }
 
-    /* RENDER AGRUPADO POR CARROUSEL Y REGISTROS */
     function renderSeccionAgrupada(lista, prefixId, autoAdvance = false) {
         if (!lista || lista.length === 0) return '<i style="font-size:0.85rem; color:#888;">No hay registros cargados.</i>';
 
@@ -1909,8 +1980,11 @@
 
             htmlFinal += `
                 <div class="practica-card-item">
-                    <h2 style="margin:0 0 6px 0; color:var(--primary-dark);">${primerItem.nombre}</h2>
-                    ${(primerItem.turno && primerItem.turno !== "Ninguno") ? `<p style="margin:0;"><span class="badge-turno">Turno: ${primerItem.turno}</span></p>` : ''}
+                    <h2 style="margin:0 0 6px 0; color:var(--primary-dark);">${primerItem.nombre || primerItem.titulo}</h2>
+                    <p style="margin:0; font-size:0.8rem; color:var(--primary);">
+                        ${primerItem.diareto ? `<b>Día Reto:</b> ${primerItem.diareto} ` : ''}
+                        ${(primerItem.turno && primerItem.turno !== "Ninguno") ? `<span class="badge-turno">Turno: ${primerItem.turno}</span>` : ''}
+                    </p>
                     <p style="white-space: pre-line; line-height: 1.4;">${primerItem.desc || ''}</p>
                     ${primerItem.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${primerItem.observacion}</p>` : ''}
                     ${primerItem.link ? `<a href="${primerItem.link}" target="_blank" class="practica-link-btn">🔗 Enlace / Información</a>` : ''}
@@ -1930,8 +2004,11 @@
 
             htmlFinal += `
                 <div class="practica-card-item">
-                    <h2 style="margin:0 0 6px 0; color:var(--primary-dark);">${item.nombre}</h2>
-                    ${(item.turno && item.turno !== "Ninguno") ? `<p style="margin:0;"><span class="badge-turno">Turno: ${item.turno}</span></p>` : ''}
+                    <h2 style="margin:0 0 6px 0; color:var(--primary-dark);">${item.nombre || item.titulo}</h2>
+                    <p style="margin:0; font-size:0.8rem; color:var(--primary);">
+                        ${item.diareto ? `<b>Día Reto:</b> ${item.diareto} ` : ''}
+                        ${(item.turno && item.turno !== "Ninguno") ? `<span class="badge-turno">Turno: ${item.turno}</span>` : ''}
+                    </p>
                     <p style="white-space: pre-line; line-height: 1.4;">${item.desc || ''}</p>
                     ${item.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${item.observacion}</p>` : ''}
                     ${item.link ? `<a href="${item.link}" target="_blank" class="practica-link-btn">🔗 Enlace / Información</a>` : ''}
@@ -1947,9 +2024,10 @@
     function guardarPortadaABM() {
         const nombre = document.getElementById('por-nombre').value;
         const desc = document.getElementById('por-desc').value;
+        const diareto = document.getElementById('por-diareto').value || '';
         const fecha = document.getElementById('por-fecha').value || '';
         const hora = document.getElementById('por-hora').value || '';
-        const dias = document.getElementById('por-dias').value || 'Todos';
+        const dias = document.getElementById('por-dias').value || 'Ninguno';
         const turno = document.getElementById('por-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('por-orden').value) || 1;
         const carrousel = parseInt(document.getElementById('por-carrousel').value) || 0;
@@ -1967,7 +2045,7 @@
                 imgsFinales = portadaDBList[editIndices.por].imagenes || [];
             }
 
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, pantalla, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, diareto, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, pantalla, imagenes: imgsFinales };
 
             if (editIndices.por >= 0) {
                 portadaDBList[editIndices.por] = itemObj;
@@ -1988,9 +2066,10 @@
         const p = portadaDBList[idx];
         document.getElementById('por-nombre').value = p.nombre || '';
         document.getElementById('por-desc').value = p.desc || '';
+        document.getElementById('por-diareto').value = p.diareto || '';
         document.getElementById('por-fecha').value = p.fecha || '';
         document.getElementById('por-hora').value = p.hora || '';
-        document.getElementById('por-dias').value = p.dias || 'Todos';
+        document.getElementById('por-dias').value = p.dias || 'Ninguno';
         document.getElementById('por-turno').value = p.turno || 'Ninguno';
         document.getElementById('por-orden').value = p.orden || 1;
         document.getElementById('por-carrousel').value = p.carrousel || 0;
@@ -2002,14 +2081,18 @@
         mostrarVistaPreviaEdicion('por', p.imagenes);
         editIndices.por = idx;
         document.getElementById('btn-save-por').innerText = "Actualizar Portada";
+
+        const card = document.getElementById('abm-card-portada');
+        if (card) card.classList.add('open');
     }
 
     function limpiarFormPor() {
         document.getElementById('por-nombre').value = '';
         document.getElementById('por-desc').value = '';
+        document.getElementById('por-diareto').value = '';
         document.getElementById('por-fecha').value = '';
         document.getElementById('por-hora').value = '';
-        document.getElementById('por-dias').value = 'Todos';
+        document.getElementById('por-dias').value = 'Ninguno';
         document.getElementById('por-turno').value = 'Ninguno';
         document.getElementById('por-orden').value = 1;
         document.getElementById('por-carrousel').value = 0;
@@ -2025,9 +2108,10 @@
     function guardarModalidadABM() {
         const nombre = document.getElementById('mod-nombre').value;
         const desc = document.getElementById('mod-desc').value;
+        const diareto = document.getElementById('mod-diareto').value || '';
         const fecha = document.getElementById('mod-fecha').value || '';
         const hora = document.getElementById('mod-hora').value || '';
-        const dias = document.getElementById('mod-dias').value || 'Todos';
+        const dias = document.getElementById('mod-dias').value || 'Ninguno';
         const turno = document.getElementById('mod-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('mod-orden').value) || 1;
         const carrousel = parseInt(document.getElementById('mod-carrousel').value) || 0;
@@ -2044,7 +2128,7 @@
                 imgsFinales = modalidadDBList[editIndices.mod].imagenes || [];
             }
 
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, diareto, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
 
             if (editIndices.mod >= 0) {
                 modalidadDBList[editIndices.mod] = itemObj;
@@ -2065,9 +2149,10 @@
         const m = modalidadDBList[idx];
         document.getElementById('mod-nombre').value = m.nombre || '';
         document.getElementById('mod-desc').value = m.desc || '';
+        document.getElementById('mod-diareto').value = m.diareto || '';
         document.getElementById('mod-fecha').value = m.fecha || '';
         document.getElementById('mod-hora').value = m.hora || '';
-        document.getElementById('mod-dias').value = m.dias || 'Todos';
+        document.getElementById('mod-dias').value = m.dias || 'Ninguno';
         document.getElementById('mod-turno').value = m.turno || 'Ninguno';
         document.getElementById('mod-orden').value = m.orden || 1;
         document.getElementById('mod-carrousel').value = m.carrousel || 0;
@@ -2078,14 +2163,18 @@
         mostrarVistaPreviaEdicion('mod', m.imagenes);
         editIndices.mod = idx;
         document.getElementById('btn-save-mod').innerText = "Actualizar Modalidad";
+
+        const card = document.getElementById('abm-card-modalidad');
+        if (card) card.classList.add('open');
     }
 
     function limpiarFormMod() {
         document.getElementById('mod-nombre').value = '';
         document.getElementById('mod-desc').value = '';
+        document.getElementById('mod-diareto').value = '';
         document.getElementById('mod-fecha').value = '';
         document.getElementById('mod-hora').value = '';
-        document.getElementById('mod-dias').value = 'Todos';
+        document.getElementById('mod-dias').value = 'Ninguno';
         document.getElementById('mod-turno').value = 'Ninguno';
         document.getElementById('mod-orden').value = 1;
         document.getElementById('mod-carrousel').value = 0;
@@ -2100,9 +2189,10 @@
     function agregarRegistroFoto() {
         const nombre = document.getElementById('reg-nombre').value;
         const desc = document.getElementById('reg-desc').value;
+        const diareto = document.getElementById('reg-diareto').value || '';
         const fecha = document.getElementById('reg-fecha').value || '';
         const hora = document.getElementById('reg-hora').value || '';
-        const dias = document.getElementById('reg-dias').value || 'Todos';
+        const dias = document.getElementById('reg-dias').value || 'Ninguno';
         const turno = document.getElementById('reg-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('reg-orden').value) || 1;
         const carrousel = parseInt(document.getElementById('reg-carrousel').value) || 0;
@@ -2117,7 +2207,7 @@
             if (imgsFinales.length === 0 && editIndices.reg >= 0) {
                 imgsFinales = registroDBList[editIndices.reg].imagenes || (registroDBList[editIndices.reg].imgUrl ? [registroDBList[editIndices.reg].imgUrl] : []);
             }
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, diareto, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
 
             if (editIndices.reg >= 0) {
                 registroDBList[editIndices.reg] = itemObj;
@@ -2136,9 +2226,10 @@
         const r = registroDBList[idx];
         document.getElementById('reg-nombre').value = r.nombre || '';
         document.getElementById('reg-desc').value = r.desc || '';
+        document.getElementById('reg-diareto').value = r.diareto || '';
         document.getElementById('reg-fecha').value = r.fecha || '';
         document.getElementById('reg-hora').value = r.hora || '';
-        document.getElementById('reg-dias').value = r.dias || 'Todos';
+        document.getElementById('reg-dias').value = r.dias || 'Ninguno';
         document.getElementById('reg-turno').value = r.turno || 'Ninguno';
         document.getElementById('reg-orden').value = r.orden || 1;
         document.getElementById('reg-carrousel').value = r.carrousel || 0;
@@ -2149,14 +2240,18 @@
         mostrarVistaPreviaEdicion('reg', r.imagenes || (r.imgUrl ? [r.imgUrl] : []));
         editIndices.reg = idx;
         document.getElementById('btn-save-reg').innerText = "Actualizar Registro Fotografico";
+
+        const card = document.getElementById('abm-card-registro');
+        if (card) card.classList.add('open');
     }
 
     function limpiarFormReg() {
         document.getElementById('reg-nombre').value = '';
         document.getElementById('reg-desc').value = '';
+        document.getElementById('reg-diareto').value = '';
         document.getElementById('reg-fecha').value = '';
         document.getElementById('reg-hora').value = '';
-        document.getElementById('reg-dias').value = 'Todos';
+        document.getElementById('reg-dias').value = 'Ninguno';
         document.getElementById('reg-turno').value = 'Ninguno';
         document.getElementById('reg-orden').value = 1;
         document.getElementById('reg-carrousel').value = 0;
@@ -2171,9 +2266,10 @@
     function agregarCaminata() {
         const nombre = document.getElementById('cam-nombre').value;
         const desc = document.getElementById('cam-desc').value;
+        const diareto = document.getElementById('cam-diareto').value || '';
         const fecha = document.getElementById('cam-fecha').value || '';
         const hora = document.getElementById('cam-hora').value || '';
-        const dias = document.getElementById('cam-dias').value || 'Todos';
+        const dias = document.getElementById('cam-dias').value || 'Ninguno';
         const turno = document.getElementById('cam-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('cam-orden').value) || 1;
         const carrousel = parseInt(document.getElementById('cam-carrousel').value) || 0;
@@ -2188,7 +2284,7 @@
             if (imgsFinales.length === 0 && editIndices.cam >= 0) {
                 imgsFinales = caminatasDBList[editIndices.cam].imagenes || (caminatasDBList[editIndices.cam].imgUrl ? [caminatasDBList[editIndices.cam].imgUrl] : []);
             }
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, diareto, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
 
             if (editIndices.cam >= 0) {
                 caminatasDBList[editIndices.cam] = itemObj;
@@ -2207,9 +2303,10 @@
         const c = caminatasDBList[idx];
         document.getElementById('cam-nombre').value = c.nombre || '';
         document.getElementById('cam-desc').value = c.desc || '';
+        document.getElementById('cam-diareto').value = c.diareto || '';
         document.getElementById('cam-fecha').value = c.fecha || '';
         document.getElementById('cam-hora').value = c.hora || '';
-        document.getElementById('cam-dias').value = c.dias || 'Todos';
+        document.getElementById('cam-dias').value = c.dias || 'Ninguno';
         document.getElementById('cam-turno').value = c.turno || 'Ninguno';
         document.getElementById('cam-orden').value = c.orden || 1;
         document.getElementById('cam-carrousel').value = c.carrousel || 0;
@@ -2220,14 +2317,18 @@
         mostrarVistaPreviaEdicion('cam', c.imagenes || (c.imgUrl ? [c.imgUrl] : []));
         editIndices.cam = idx;
         document.getElementById('btn-save-cam').innerText = "Actualizar Propuesta / Caminata";
+
+        const card = document.getElementById('abm-card-caminatas');
+        if (card) card.classList.add('open');
     }
 
     function limpiarFormCam() {
         document.getElementById('cam-nombre').value = '';
         document.getElementById('cam-desc').value = '';
+        document.getElementById('cam-diareto').value = '';
         document.getElementById('cam-fecha').value = '';
         document.getElementById('cam-hora').value = '';
-        document.getElementById('cam-dias').value = 'Todos';
+        document.getElementById('cam-dias').value = 'Ninguno';
         document.getElementById('cam-turno').value = 'Ninguno';
         document.getElementById('cam-orden').value = 1;
         document.getElementById('cam-carrousel').value = 0;
@@ -2242,9 +2343,10 @@
     function agregarAlimento() {
         const nombre = document.getElementById('ali-nombre').value;
         const desc = document.getElementById('ali-desc').value;
+        const diareto = document.getElementById('ali-diareto').value || '';
         const fecha = document.getElementById('ali-fecha').value || '';
         const hora = document.getElementById('ali-hora').value || '';
-        const dias = document.getElementById('ali-dias').value || 'Todos';
+        const dias = document.getElementById('ali-dias').value || 'Ninguno';
         const turno = document.getElementById('ali-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('ali-orden').value) || 1;
         const carrousel = parseInt(document.getElementById('ali-carrousel').value) || 0;
@@ -2259,7 +2361,7 @@
             if (imgsFinales.length === 0 && editIndices.ali >= 0) {
                 imgsFinales = alimentosDB[editIndices.ali].imagenes || (alimentosDB[editIndices.ali].imgUrl ? [alimentosDB[editIndices.ali].imgUrl] : []);
             }
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, diareto, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
             
             if (editIndices.ali >= 0) {
                 alimentosDB[editIndices.ali] = itemObj;
@@ -2278,9 +2380,10 @@
         const a = alimentosDB[idx];
         document.getElementById('ali-nombre').value = a.nombre || '';
         document.getElementById('ali-desc').value = a.desc || '';
+        document.getElementById('ali-diareto').value = a.diareto || '';
         document.getElementById('ali-fecha').value = a.fecha || '';
         document.getElementById('ali-hora').value = a.hora || '';
-        document.getElementById('ali-dias').value = a.dias || 'Todos';
+        document.getElementById('ali-dias').value = a.dias || 'Ninguno';
         document.getElementById('ali-turno').value = a.turno || 'Ninguno';
         document.getElementById('ali-orden').value = a.orden || 1;
         document.getElementById('ali-carrousel').value = a.carrousel || 0;
@@ -2291,14 +2394,18 @@
         mostrarVistaPreviaEdicion('ali', a.imagenes || (a.imgUrl ? [a.imgUrl] : []));
         editIndices.ali = idx;
         document.getElementById('btn-save-ali').innerText = "Actualizar Alimento";
+
+        const card = document.getElementById('abm-card-alimentos');
+        if (card) card.classList.add('open');
     }
 
     function limpiarFormAli() {
         document.getElementById('ali-nombre').value = '';
         document.getElementById('ali-desc').value = '';
+        document.getElementById('ali-diareto').value = '';
         document.getElementById('ali-fecha').value = '';
         document.getElementById('ali-hora').value = '';
-        document.getElementById('ali-dias').value = 'Todos';
+        document.getElementById('ali-dias').value = 'Ninguno';
         document.getElementById('ali-turno').value = 'Ninguno';
         document.getElementById('ali-orden').value = 1;
         document.getElementById('ali-carrousel').value = 0;
@@ -2313,9 +2420,10 @@
     function agregarDiosa() {
         const nombre = document.getElementById('dio-nombre').value;
         const desc = document.getElementById('dio-desc').value;
+        const diareto = document.getElementById('dio-diareto').value || '';
         const fecha = document.getElementById('dio-fecha').value || '';
         const hora = document.getElementById('dio-hora').value || '';
-        const dias = document.getElementById('dio-dias').value || 'Todos';
+        const dias = document.getElementById('dio-dias').value || 'Ninguno';
         const turno = document.getElementById('dio-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('dio-orden').value) || 1;
         const carrousel = parseInt(document.getElementById('dio-carrousel').value) || 0;
@@ -2330,7 +2438,7 @@
             if (imgsFinales.length === 0 && editIndices.dio >= 0) {
                 imgsFinales = diosasDB[editIndices.dio].imagenes || (diosasDB[editIndices.dio].imgUrl ? [diosasDB[editIndices.dio].imgUrl] : []);
             }
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, diareto, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
             
             if (editIndices.dio >= 0) {
                 diosasDB[editIndices.dio] = itemObj;
@@ -2349,9 +2457,10 @@
         const d = diosasDB[idx];
         document.getElementById('dio-nombre').value = d.nombre || '';
         document.getElementById('dio-desc').value = d.desc || '';
+        document.getElementById('dio-diareto').value = d.diareto || '';
         document.getElementById('dio-fecha').value = d.fecha || '';
         document.getElementById('dio-hora').value = d.hora || '';
-        document.getElementById('dio-dias').value = d.dias || 'Todos';
+        document.getElementById('dio-dias').value = d.dias || 'Ninguno';
         document.getElementById('dio-turno').value = d.turno || 'Ninguno';
         document.getElementById('dio-orden').value = d.orden || 1;
         document.getElementById('dio-carrousel').value = d.carrousel || 0;
@@ -2362,14 +2471,18 @@
         mostrarVistaPreviaEdicion('dio', d.imagenes || (d.imgUrl ? [d.imgUrl] : []));
         editIndices.dio = idx;
         document.getElementById('btn-save-dio').innerText = "Actualizar Diosa";
+
+        const card = document.getElementById('abm-card-diosas');
+        if (card) card.classList.add('open');
     }
 
     function limpiarFormDio() {
         document.getElementById('dio-nombre').value = '';
         document.getElementById('dio-desc').value = '';
+        document.getElementById('dio-diareto').value = '';
         document.getElementById('dio-fecha').value = '';
         document.getElementById('dio-hora').value = '';
-        document.getElementById('dio-dias').value = 'Todos';
+        document.getElementById('dio-dias').value = 'Ninguno';
         document.getElementById('dio-turno').value = 'Ninguno';
         document.getElementById('dio-orden').value = 1;
         document.getElementById('dio-carrousel').value = 0;
@@ -2384,9 +2497,10 @@
     function publicarNovedadManual() {
         const nombre = document.getElementById('nov-nombre').value;
         const desc = document.getElementById('nov-desc').value;
+        const diareto = document.getElementById('nov-diareto').value || '';
         const fecha = document.getElementById('nov-fecha').value || '';
         const hora = document.getElementById('nov-hora').value || '';
-        const dias = document.getElementById('nov-dias').value || 'Todos';
+        const dias = document.getElementById('nov-dias').value || 'Ninguno';
         const turno = document.getElementById('nov-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('nov-orden').value) || 1;
         const carrousel = parseInt(document.getElementById('nov-carrousel').value) || 0;
@@ -2401,7 +2515,7 @@
             if (imgsFinales.length === 0 && editIndices.nov >= 0) {
                 imgsFinales = novedadesDB[editIndices.nov].imagenes || (novedadesDB[editIndices.nov].imgUrl ? [novedadesDB[editIndices.nov].imgUrl] : []);
             }
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, diareto, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
             
             if (editIndices.nov >= 0) {
                 novedadesDB[editIndices.nov] = itemObj;
@@ -2420,9 +2534,10 @@
         const item = novedadesDB[idx];
         document.getElementById('nov-nombre').value = item.nombre || item.titulo || '';
         document.getElementById('nov-desc').value = item.desc || '';
+        document.getElementById('nov-diareto').value = item.diareto || '';
         document.getElementById('nov-fecha').value = item.fecha || '';
         document.getElementById('nov-hora').value = item.hora || '';
-        document.getElementById('nov-dias').value = item.dias || 'Todos';
+        document.getElementById('nov-dias').value = item.dias || 'Ninguno';
         document.getElementById('nov-turno').value = item.turno || 'Ninguno';
         document.getElementById('nov-orden').value = item.orden || 1;
         document.getElementById('nov-carrousel').value = item.carrousel || 0;
@@ -2433,14 +2548,18 @@
         mostrarVistaPreviaEdicion('nov', item.imagenes || (item.imgUrl ? [item.imgUrl] : []));
         editIndices.nov = idx;
         document.getElementById('btn-save-nov').innerText = "Actualizar Novedad";
+
+        const card = document.getElementById('abm-card-novedades');
+        if (card) card.classList.add('open');
     }
 
     function limpiarFormNov() {
         document.getElementById('nov-nombre').value = '';
         document.getElementById('nov-desc').value = '';
+        document.getElementById('nov-diareto').value = '';
         document.getElementById('nov-fecha').value = '';
         document.getElementById('nov-hora').value = '';
-        document.getElementById('nov-dias').value = 'Todos';
+        document.getElementById('nov-dias').value = 'Ninguno';
         document.getElementById('nov-turno').value = 'Ninguno';
         document.getElementById('nov-orden').value = 1;
         document.getElementById('nov-carrousel').value = 0;
@@ -2455,9 +2574,10 @@
     function agregarPractica() {
         const nombre = document.getElementById('pra-nombre').value;
         const desc = document.getElementById('pra-desc').value;
+        const diareto = document.getElementById('pra-diareto').value || '';
         const fecha = document.getElementById('pra-fecha').value || '';
         const hora = document.getElementById('pra-hora').value || '';
-        const dias = document.getElementById('pra-dias').value || 'Todos';
+        const dias = document.getElementById('pra-dias').value || 'Ninguno';
         const turno = document.getElementById('pra-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('pra-orden').value) || 1;
         const carrousel = parseInt(document.getElementById('pra-carrousel').value) || 0;
@@ -2472,7 +2592,7 @@
             if (imgsFinales.length === 0 && editIndices.pra >= 0) {
                 imgsFinales = practicasDB[editIndices.pra].imagenes || (practicasDB[editIndices.pra].imgUrl ? [practicasDB[editIndices.pra].imgUrl] : []);
             }
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, diareto, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
 
             if (editIndices.pra >= 0) {
                 practicasDB[editIndices.pra] = itemObj;
@@ -2491,9 +2611,10 @@
         const p = practicasDB[idx];
         document.getElementById('pra-nombre').value = p.nombre || '';
         document.getElementById('pra-desc').value = p.desc || '';
+        document.getElementById('pra-diareto').value = p.diareto || '';
         document.getElementById('pra-fecha').value = p.fecha || '';
         document.getElementById('pra-hora').value = p.hora || '';
-        document.getElementById('pra-dias').value = p.dias || 'Todos';
+        document.getElementById('pra-dias').value = p.dias || 'Ninguno';
         document.getElementById('pra-turno').value = p.turno || 'Ninguno';
         document.getElementById('pra-orden').value = p.orden || 1;
         document.getElementById('pra-carrousel').value = p.carrousel || 0;
@@ -2504,14 +2625,18 @@
         mostrarVistaPreviaEdicion('pra', p.imagenes || (p.imgUrl ? [p.imgUrl] : []));
         editIndices.pra = idx;
         document.getElementById('btn-save-pra').innerText = "Actualizar Práctica";
+
+        const card = document.getElementById('abm-card-practicas');
+        if (card) card.classList.add('open');
     }
 
     function limpiarFormPra() {
         document.getElementById('pra-nombre').value = '';
         document.getElementById('pra-desc').value = '';
+        document.getElementById('pra-diareto').value = '';
         document.getElementById('pra-fecha').value = '';
         document.getElementById('pra-hora').value = '';
-        document.getElementById('pra-dias').value = 'Todos';
+        document.getElementById('pra-dias').value = 'Ninguno';
         document.getElementById('pra-turno').value = 'Ninguno';
         document.getElementById('pra-orden').value = 1;
         document.getElementById('pra-carrousel').value = 0;
@@ -2526,9 +2651,10 @@
     function agregarActividadConfig() {
         const nombre = document.getElementById('act-nombre').value;
         const desc = document.getElementById('act-desc').value;
+        const diareto = document.getElementById('act-diareto').value || '';
         const fecha = document.getElementById('act-fecha').value || '';
         const hora = document.getElementById('act-hora').value || '';
-        const dias = document.getElementById('act-dias').value || 'Todos';
+        const dias = document.getElementById('act-dias').value || 'Ninguno';
         const turno = document.getElementById('act-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('act-orden').value) || 1;
         const carrousel = parseInt(document.getElementById('act-carrousel').value) || 0;
@@ -2543,7 +2669,7 @@
             if (imgsFinales.length === 0 && editIndices.act >= 0) {
                 imgsFinales = actividadesDB[editIndices.act].imagenes || (actividadesDB[editIndices.act].imgUrl ? [actividadesDB[editIndices.act].imgUrl] : []);
             }
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, diareto, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
 
             if (editIndices.act >= 0) {
                 actividadesDB[editIndices.act] = itemObj;
@@ -2562,9 +2688,10 @@
         const item = actividadesDB[idx];
         document.getElementById('act-nombre').value = item.nombre || '';
         document.getElementById('act-desc').value = item.desc || '';
+        document.getElementById('act-diareto').value = item.diareto || '';
         document.getElementById('act-fecha').value = item.fecha || '';
         document.getElementById('act-hora').value = item.hora || '';
-        document.getElementById('act-dias').value = item.dias || item.dia || 'Todos';
+        document.getElementById('act-dias').value = item.dias || item.dia || 'Ninguno';
         document.getElementById('act-turno').value = item.turno || 'Ninguno';
         document.getElementById('act-orden').value = item.orden || 1;
         document.getElementById('act-carrousel').value = item.carrousel || 0;
@@ -2575,14 +2702,18 @@
         mostrarVistaPreviaEdicion('act', item.imagenes || (item.imgUrl ? [item.imgUrl] : []));
         editIndices.act = idx;
         document.getElementById('btn-save-act').innerText = "Actualizar Actividad";
+
+        const card = document.getElementById('abm-card-actividades');
+        if (card) card.classList.add('open');
     }
 
     function limpiarFormAct() {
         document.getElementById('act-nombre').value = '';
         document.getElementById('act-desc').value = '';
+        document.getElementById('act-diareto').value = '';
         document.getElementById('act-fecha').value = '';
         document.getElementById('act-hora').value = '';
-        document.getElementById('act-dias').value = 'Todos';
+        document.getElementById('act-dias').value = 'Ninguno';
         document.getElementById('act-turno').value = 'Ninguno';
         document.getElementById('act-orden').value = 1;
         document.getElementById('act-carrousel').value = 0;
@@ -2597,9 +2728,10 @@
     function agregarInfusion() {
         const nombre = document.getElementById('inf-nombre').value;
         const desc = document.getElementById('inf-desc').value;
+        const diareto = document.getElementById('inf-diareto').value || '';
         const fecha = document.getElementById('inf-fecha').value || '';
         const hora = document.getElementById('inf-hora').value || '';
-        const dias = document.getElementById('inf-dias').value || 'Todos';
+        const dias = document.getElementById('inf-dias').value || 'Ninguno';
         const turno = document.getElementById('inf-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('inf-orden').value) || 1;
         const carrousel = parseInt(document.getElementById('inf-carrousel').value) || 0;
@@ -2615,7 +2747,7 @@
                 imgsFinales = infusionesDB[editIndices.inf].imagenes || [];
             }
 
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, diareto, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
 
             if (editIndices.inf >= 0) {
                 infusionesDB[editIndices.inf] = itemObj;
@@ -2634,9 +2766,10 @@
         const item = infusionesDB[idx];
         document.getElementById('inf-nombre').value = item.nombre || '';
         document.getElementById('inf-desc').value = item.desc || '';
+        document.getElementById('inf-diareto').value = item.diareto || '';
         document.getElementById('inf-fecha').value = item.fecha || '';
         document.getElementById('inf-hora').value = item.hora || '';
-        document.getElementById('inf-dias').value = item.dias || 'Todos';
+        document.getElementById('inf-dias').value = item.dias || 'Ninguno';
         document.getElementById('inf-turno').value = item.turno || 'Ninguno';
         document.getElementById('inf-orden').value = item.orden || 1;
         document.getElementById('inf-carrousel').value = item.carrousel || 0;
@@ -2647,14 +2780,18 @@
         mostrarVistaPreviaEdicion('inf', item.imagenes || []);
         editIndices.inf = idx;
         document.getElementById('btn-save-inf').innerText = "Actualizar Pócima / Infusión";
+
+        const card = document.getElementById('abm-card-pocimas');
+        if (card) card.classList.add('open');
     }
 
     function limpiarFormInf() {
         document.getElementById('inf-nombre').value = '';
         document.getElementById('inf-desc').value = '';
+        document.getElementById('inf-diareto').value = '';
         document.getElementById('inf-fecha').value = '';
         document.getElementById('inf-hora').value = '';
-        document.getElementById('inf-dias').value = 'Todos';
+        document.getElementById('inf-dias').value = 'Ninguno';
         document.getElementById('inf-turno').value = 'Ninguno';
         document.getElementById('inf-orden').value = 1;
         document.getElementById('inf-carrousel').value = 0;
@@ -2669,9 +2806,10 @@
     function agregarPodcast() {
         const nombre = document.getElementById('pod-nombre').value;
         const desc = document.getElementById('pod-desc').value;
+        const diareto = document.getElementById('pod-diareto').value || '';
         const fecha = document.getElementById('pod-fecha').value || '';
         const hora = document.getElementById('pod-hora').value || '';
-        const dias = document.getElementById('pod-dias').value || 'Todos';
+        const dias = document.getElementById('pod-dias').value || 'Ninguno';
         const turno = document.getElementById('pod-turno').value || 'Ninguno';
         const orden = parseInt(document.getElementById('pod-orden').value) || 1;
         const carrousel = parseInt(document.getElementById('pod-carrousel').value) || 0;
@@ -2686,7 +2824,7 @@
             if (imgsFinales.length === 0 && editIndices.pod >= 0) {
                 imgsFinales = podcastsDB[editIndices.pod].imagenes || (podcastsDB[editIndices.pod].imgUrl ? [podcastsDB[editIndices.pod].imgUrl] : []);
             }
-            const itemObj = { nombre, desc, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
+            const itemObj = { nombre, desc, diareto, fecha, hora, dias, turno, orden, carrousel, link, observacion, agenda, imagenes: imgsFinales };
 
             if (editIndices.pod >= 0) {
                 podcastsDB[editIndices.pod] = itemObj;
@@ -2705,9 +2843,10 @@
         const item = podcastsDB[idx];
         document.getElementById('pod-nombre').value = item.nombre || '';
         document.getElementById('pod-desc').value = item.desc || '';
+        document.getElementById('pod-diareto').value = item.diareto || '';
         document.getElementById('pod-fecha').value = item.fecha || '';
         document.getElementById('pod-hora').value = item.hora || '';
-        document.getElementById('pod-dias').value = item.dias || 'Todos';
+        document.getElementById('pod-dias').value = item.dias || 'Ninguno';
         document.getElementById('pod-turno').value = item.turno || 'Ninguno';
         document.getElementById('pod-orden').value = item.orden || 1;
         document.getElementById('pod-carrousel').value = item.carrousel || 0;
@@ -2718,14 +2857,18 @@
         mostrarVistaPreviaEdicion('pod', item.imagenes || (item.imgUrl ? [item.imgUrl] : []));
         editIndices.pod = idx;
         document.getElementById('btn-save-pod').innerText = "Actualizar Podcast";
+
+        const card = document.getElementById('abm-card-podcasts');
+        if (card) card.classList.add('open');
     }
 
     function limpiarFormPod() {
         document.getElementById('pod-nombre').value = '';
         document.getElementById('pod-desc').value = '';
+        document.getElementById('pod-diareto').value = '';
         document.getElementById('pod-fecha').value = '';
         document.getElementById('pod-hora').value = '';
-        document.getElementById('pod-dias').value = 'Todos';
+        document.getElementById('pod-dias').value = 'Ninguno';
         document.getElementById('pod-turno').value = 'Ninguno';
         document.getElementById('pod-orden').value = 1;
         document.getElementById('pod-carrousel').value = 0;
@@ -2740,7 +2883,7 @@
     function renderConfigLists() {
         document.getElementById('crud-portada-list').innerHTML = portadaDBList.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> ${item.pantalla ? '(Modo Fullscreen)' : ''} [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> ${item.diareto ? `[Día Reto: ${item.diareto}]` : ''}</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarPortada(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="portadaDBList.splice(${idx},1); renderConfigLists(); renderPublicPortada();">Eliminar</button>
@@ -2750,7 +2893,7 @@
 
         document.getElementById('crud-modalidad-list').innerHTML = modalidadDBList.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> ${item.diareto ? `[Día Reto: ${item.diareto}]` : ''}</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarModalidad(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="modalidadDBList.splice(${idx},1); renderConfigLists(); renderPublicModalidad();">Eliminar</button>
@@ -2760,7 +2903,7 @@
 
         document.getElementById('crud-caminatas-list').innerHTML = caminatasDBList.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> ${item.diareto ? `[Día Reto: ${item.diareto}]` : ''}</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarCaminata(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="caminatasDBList.splice(${idx},1); renderConfigLists(); renderPublicCaminatas();">Eliminar</button>
@@ -2770,7 +2913,7 @@
 
         document.getElementById('crud-registro-list').innerHTML = registroDBList.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> ${item.diareto ? `[Día Reto: ${item.diareto}]` : ''}</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarRegistroFoto(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="registroDBList.splice(${idx},1); renderConfigLists(); renderPublicRegistro();">Eliminar</button>
@@ -2780,7 +2923,7 @@
 
         document.getElementById('crud-alimentos-list').innerHTML = alimentosDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> ${item.diareto ? `[Día Reto: ${item.diareto}]` : ''}</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarAlimento(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="alimentosDB.splice(${idx},1); renderConfigLists(); renderPublicAlimentos();">Eliminar</button>
@@ -2790,7 +2933,7 @@
 
         document.getElementById('crud-diosas-list').innerHTML = diosasDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> ${item.diareto ? `[Día Reto: ${item.diareto}]` : ''}</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarDiosa(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="diosasDB.splice(${idx},1); renderConfigLists(); renderPublicDiosas();">Eliminar</button>
@@ -2800,7 +2943,7 @@
 
         document.getElementById('novedades-abm-list').innerHTML = novedadesDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre || item.titulo}</b> [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre || item.titulo}</b> ${item.diareto ? `[Día Reto: ${item.diareto}]` : ''}</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarNovedad(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="novedadesDB.splice(${idx},1); renderConfigLists(); renderPublicNovedades();">Eliminar</button>
@@ -2810,7 +2953,7 @@
 
         document.getElementById('crud-practicas-list').innerHTML = practicasDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> ${item.diareto ? `[Día Reto: ${item.diareto}]` : ''}</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarPractica(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="practicasDB.splice(${idx},1); renderConfigLists(); renderPracticasScreen();">Eliminar</button>
@@ -2820,7 +2963,7 @@
 
         document.getElementById('crud-actividades-list').innerHTML = actividadesDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> ${item.diareto ? `[Día Reto: ${item.diareto}]` : ''}</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarActividad(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="actividadesDB.splice(${idx},1); renderConfigLists(); renderPublicActividades();">Eliminar</button>
@@ -2830,7 +2973,7 @@
 
         document.getElementById('crud-infusiones-list').innerHTML = infusionesDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> ${item.diareto ? `[Día Reto: ${item.diareto}]` : ''}</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarInfusion(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="infusionesDB.splice(${idx},1); renderConfigLists(); renderPublicPocimas();">Eliminar</button>
@@ -2840,7 +2983,7 @@
 
         document.getElementById('crud-podcasts-list').innerHTML = podcastsDB.map((item, idx) => `
             <div class="crud-item">
-                <span><b>#${item.orden || 1} - ${item.nombre}</b> [Carrusel: ${item.carrousel || 0}]</span>
+                <span><b>#${item.orden || 1} - ${item.nombre}</b> ${item.diareto ? `[Día Reto: ${item.diareto}]` : ''}</span>
                 <div class="crud-actions">
                     <button class="btn-edit" onclick="editarPodcast(${idx})">Modificar</button>
                     <button class="btn-delete" onclick="podcastsDB.splice(${idx},1); renderConfigLists(); renderPublicPodcasts();">Eliminar</button>
@@ -2891,7 +3034,6 @@
         container.innerHTML = renderSeccionAgrupada(caminatasDBList, 'caminata');
     }
 
-    /* LÓGICA CON REGISTRO TEMPORAL, HISTORIAL Y VISUALIZACIÓN POR BOTONES */
     let tempUsuarioFotosInput = {};
 
     function renderPublicRegistro() {
@@ -2926,13 +3068,15 @@
             htmlFinal += `
                 <div class="practica-card-item">
                     <h2 style="margin:0 0 4px 0; color:var(--primary-dark);">${item.nombre}</h2>
-                    ${(item.turno && item.turno !== "Ninguno") ? `<p style="margin:0;"><span class="badge-turno">Turno: ${item.turno}</span></p>` : ''}
+                    <p style="margin:0; font-size:0.8rem; color:var(--primary);">
+                        ${item.diareto ? `<b>Día Reto:</b> ${item.diareto} ` : ''}
+                        ${(item.turno && item.turno !== "Ninguno") ? `<span class="badge-turno">Turno: ${item.turno}</span>` : ''}
+                    </p>
                     <p style="white-space: pre-line; line-height: 1.4; margin-top:4px;">${item.desc || ''}</p>
                     ${item.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${item.observacion}</p>` : ''}
                     ${item.link ? `<a href="${item.link}" target="_blank" class="practica-link-btn">🔗 Enlace / Información</a>` : ''}
                     ${mediaHTML}
 
-                    <!-- BLOQUE DE REGISTRO INTERACTIVO DE LA USUARIA -->
                     <div class="user-photo-upload-box">
                         <div class="form-group" style="margin-bottom:4px;">
                             <label style="font-size:0.8rem; color:var(--primary-dark);">📅 Fecha de la Toma:</label>
@@ -2940,7 +3084,6 @@
                         </div>
 
                         <div class="user-photo-grid">
-                            <!-- FOTO ROSTRO -->
                             <div class="user-photo-slot">
                                 <label>👤 Rostro</label>
                                 <div id="usr-preview-rostro-${idx}">
@@ -2950,7 +3093,6 @@
                                 <input type="file" id="usr-file-rostro-${idx}" accept="image/*" onchange="procesarFotoTemporal(${idx}, 'rostro', this)">
                             </div>
 
-                            <!-- FOTO MEDIO -->
                             <div class="user-photo-slot">
                                 <label>👚 Medio</label>
                                 <div id="usr-preview-medio-${idx}">
@@ -2960,7 +3102,6 @@
                                 <input type="file" id="usr-file-medio-${idx}" accept="image/*" onchange="procesarFotoTemporal(${idx}, 'medio', this)">
                             </div>
 
-                            <!-- FOTO ENTERO -->
                             <div class="user-photo-slot">
                                 <label>🧍 Entero</label>
                                 <div id="usr-preview-entero-${idx}">
@@ -2973,14 +3114,12 @@
 
                         <button class="btn-submit" style="font-size:0.85rem; padding:8px; margin-top:4px;" onclick="guardarAvanceHistorialUsuario(${idx})">💾 Guardar Mi Avance Fotográfico</button>
 
-                        <!-- BOTONES PARA VER HISTORIAS INDIVIDUALES -->
                         <div class="history-btn-row">
                             <button class="btn-history-toggle" id="btn-hist-rostro-${idx}" onclick="toggleGaleriaHistoria(${idx}, 'rostro')">👤 Historia Rostro</button>
                             <button class="btn-history-toggle" id="btn-hist-medio-${idx}" onclick="toggleGaleriaHistoria(${idx}, 'medio')">👚 Historia Medio</button>
                             <button class="btn-history-toggle" id="btn-hist-entero-${idx}" onclick="toggleGaleriaHistoria(${idx}, 'entero')">🧍 Historia Cuerpo</button>
                         </div>
 
-                        <!-- CONTENEDOR DESPLEGABLE DE LA GALERÍA -->
                         <div class="history-gallery-container" id="history-gallery-${idx}">
                             <div class="history-gallery-title" id="history-title-${idx}">Historia</div>
                             <div class="history-grid" id="history-grid-${idx}"></div>
@@ -3148,10 +3287,33 @@
         container.innerHTML = renderSeccionAgrupada(practicasDB, 'practica');
     }
 
+    /* RENDERS VISTA NOVEDADES: SÓLO MUESTRA LO CORRESPONDIENTE AL DÍA SELECCIONADO */
     function renderPublicNovedades() {
         const container = document.getElementById('public-novedades-list');
+        const alertBadge = document.getElementById('home-novedad-alert');
         if (!container) return;
-        container.innerHTML = renderSeccionAgrupada(novedadesDB, 'novedad');
+
+        const info = getInfoDiaReto(diaSeleccionadoActual);
+        const fechaKey = info.fechaKey;
+        const nombreDia = info.nombreDia;
+
+        const novedadesDelDia = novedadesDB.filter(item => estaElementoParaDia(item, nombreDia, fechaKey, diaSeleccionadoActual));
+
+        if (alertBadge) {
+            if (novedadesDelDia.length > 0) alertBadge.style.display = 'inline-flex';
+            else alertBadge.style.display = 'none';
+        }
+
+        if (novedadesDelDia.length === 0) {
+            container.innerHTML = `
+                <div style="background:#fff; padding:12px; border-radius:12px; text-align:center; border:1px solid var(--salmon);">
+                    <b>📢 No hay novedades especificadas para el Día ${diaSeleccionadoActual}.</b>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = renderSeccionAgrupada(novedadesDelDia, 'novedad');
     }
 
     function renderPublicPodcasts() {
