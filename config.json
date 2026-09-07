@@ -14,7 +14,7 @@
       "agenda": "Si",
       "pantalla": true,
       "imagenes": [
-        "imagenes/comunidad_28_d_as_1.jpg"
+        "/comunidad_28_d_as_1.png"
       ]
     }
   ],
@@ -33,7 +33,7 @@
       "observacion": "",
       "agenda": "No",
       "imagenes": [
-        "imagenes/bienvenida_1.jpg"
+        "/bienvenida_1.png"
       ]
     },
     {
@@ -50,7 +50,7 @@
       "observacion": "",
       "agenda": "No",
       "imagenes": [
-        "imagenes/bienvenida_a_la_comunidad_de_mujeres_1.jpg"
+        "/bienvenida_a_la_comunidad_de_mujeres_1.png"
       ]
     },
     {
@@ -67,7 +67,7 @@
       "observacion": "",
       "agenda": "No",
       "imagenes": [
-        "imagenes/modalidad_1.jpg"
+        "/modalidad_1.png"
       ]
     },
     {
@@ -84,7 +84,7 @@
       "observacion": "",
       "agenda": "No",
       "imagenes": [
-        "imagenes/modalidad_1.jpg"
+        "/modalidad_1.png"
       ]
     },
     {
@@ -101,7 +101,7 @@
       "observacion": "",
       "agenda": "No",
       "imagenes": [
-        "imagenes/planificacion_y_estrategia_1.jpg"
+        "/planificacion_y_estrategia_1.png"
       ]
     },
     {
@@ -118,7 +118,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/nuestra_casa_1.jpg"
+        "/nuestra_casa_1.png"
       ]
     },
     {
@@ -135,7 +135,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/como_me_vinculo_conmigo_misma_1.jpg"
+        "/como_me_vinculo_conmigo_misma_1.png"
       ]
     },
     {
@@ -152,7 +152,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/movimientos_con_el_cuerpo_1.jpg"
+        "/movimientos_con_el_cuerpo_1.png"
       ]
     }
   ],
@@ -172,7 +172,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/registro_fotografico_1.jpg"
+        "/registro_fotografico_1.png"
       ]
     }
   ],
@@ -191,7 +191,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/alimentos_del_bien_1.jpg"
+        "/alimentos_del_bien_1.png"
       ]
     },
     {
@@ -208,7 +208,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/nutricion_vibracional_1.jpg"
+        "/nutricion_vibracional_1.png"
       ]
     },
     {
@@ -225,7 +225,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/la_verduleria_1.jpg"
+        "/la_verduleria_1.png"
       ]
     },
     {
@@ -242,7 +242,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/alimentos_que_nutren_1.jpg"
+        "/alimentos_que_nutren_1.png"
       ]
     },
     {
@@ -259,7 +259,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/rejuvelac_1.jpg"
+        "/rejuvelac_1.png"
       ]
     },
     {
@@ -276,7 +276,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/alimentos_fitoestrogenos_1.jpg"
+        "/alimentos_fitoestrogenos_1.png"
       ]
     },
     {
@@ -293,7 +293,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/fenogreco_1.jpg"
+        "/fenogreco_1.png"
       ]
     },
     {
@@ -310,7 +310,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/kefir_de_agua_probiotico_1.jpg"
+        "/kefir_de_agua_probiotico_1.png"
       ]
     },
     {
@@ -327,7 +327,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/yuyos_del_bien_1.jpg"
+        "/yuyos_del_bien_1.png"
       ]
     },
     {
@@ -344,7 +344,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/nutricion_vibracional___clorofila_1.jpg"
+        "/nutricion_vibracional___clorofila_1.png"
       ]
     },
     {
@@ -361,7 +361,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/nutricion_saludable_para_desayuno_o_merienda_1.jpg"
+        "/nutricion_saludable_para_desayuno_o_merienda_1.png"
       ]
     }
   ],
@@ -380,7 +380,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/pachamama_1.jpg"
+        "/pachamama_1.png"
       ]
     },
     {
@@ -397,7 +397,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/athenea_1.jpg"
+        "/athenea_1.png"
       ]
     },
     {
@@ -414,7 +414,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/hera_1.jpg"
+        "/hera_1.png"
       ]
     }
   ],
@@ -433,7 +433,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/practica_2___activando_los_pies__1.jpg"
+        "/practica_2___activando_los_pies__1.png"
       ]
     },
     {
@@ -450,7 +450,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/practica_1____fluidos_corporales_1.jpg"
+        "/practica_1____fluidos_corporales_1.png"
       ]
     }
   ],
@@ -517,7 +517,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/orden_externo__orden_interno_1.jpg"
+        "/orden_externo__orden_interno_1.png"
       ]
     },
     {
@@ -534,7 +534,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/bienvenida_1.jpg"
+        "/bienvenida_1.png"
       ]
     },
     {
@@ -551,7 +551,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/infusiones_y_tinturas_1.jpg"
+        "/infusiones_y_tinturas_1.png"
       ]
     },
     {
@@ -568,7 +568,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/meditacion_amar_nos_1.jpg"
+        "/meditacion_amar_nos_1.png"
       ]
     }
   ],
@@ -602,7 +602,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/1era_reunion_por_zoom_1.jpg"
+        "/1era_reunion_por_zoom_1.png"
       ]
     },
     {
@@ -619,7 +619,7 @@
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "imagenes/iniciando_caminatas_1.jpg"
+        "/iniciando_caminatas_1.png"
       ]
     }
   ],
