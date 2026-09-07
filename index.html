@@ -526,8 +526,16 @@
                     <span class="abm-toggle-icon">►</span>
                 </div>
                 <div class="abm-card-body">
-                    <p style="font-size:0.75rem; margin:4px 0 8px 0;">Descarga o carga manualmente tu archivo <b>config.json</b> ultraliviano.</p>
-                    <button class="btn-submit" style="background:#52b788; margin-bottom:8px;" onclick="descargarConfigJSON()">Descargar config.json Actualizado</button>
+                    <p style="font-size:0.75rem; margin:4px 0 8px 0;">Limpia o descarga tu archivo <b>config.json</b> ultraliviano.</p>
+                    
+                    <button class="btn-submit" style="background:#e06d53; margin-bottom:8px;" onclick="limpiarImagenesBase64DeTodaLaBD()">
+                        🧹 Limpiar Imágenes Base64 (Reducir peso de 32MB a 50KB)
+                    </button>
+
+                    <button class="btn-submit" style="background:#52b788; margin-bottom:8px;" onclick="descargarConfigJSON()">
+                        Descargar config.json Actualizado
+                    </button>
+
                     <div class="form-group" style="margin-bottom:0;">
                         <label style="font-size:0.75rem;">📂 Cargar config.json manualmente:</label>
                         <input type="file" accept=".json" onchange="cargarConfigDesdeArchivoLocal(this)">
@@ -1284,7 +1292,7 @@
 <script>
     let diaSeleccionadoActual = 1; 
 
-    // Fecha base corregida Día 1: 31/08/2026
+    // Fecha base Día 1: 31/08/2026
     let cfgCalendario = {
         fechaInicio: "2026-08-31",
         duracionDias: 28,
@@ -1426,6 +1434,37 @@
         }
 
         callback([]);
+    }
+
+    /* FUNCION DE LIMPIEZA AUTOMATICA DE BASE64 A RUTAS LOCALES */
+    function limpiarImagenesBase64DeTodaLaBD() {
+        if (!confirm("Esta acción convertirá/limpiará las imágenes gigantes almacenadas en Base64 dentro del config.json. ¿Deseas continuar?")) return;
+
+        const listas = [portadaDBList, modalidadDBList, caminatasDBList, registroDBList, alimentosDB, diosasDB, practicasDB, infusionesDB, novedadesDB, podcastsDB, actividadesDB];
+        let contadorLimpiadas = 0;
+
+        listas.forEach(lista => {
+            if (!lista) return;
+            lista.forEach(item => {
+                if (item.imagenes && item.imagenes.length > 0) {
+                    item.imagenes = item.imagenes.map((img, idx) => {
+                        if (typeof img === 'string' && img.startsWith('data:image')) {
+                            contadorLimpiadas++;
+                            return `imagenes/${(item.nombre || 'foto').toLowerCase().replace(/[^a-z0-9]/g, '_')}_${idx + 1}.jpg`;
+                        }
+                        return img;
+                    });
+                }
+                if (item.imgUrl && item.imgUrl.startsWith('data:image')) {
+                    contadorLimpiadas++;
+                    item.imgUrl = `imagenes/${(item.nombre || 'foto').toLowerCase().replace(/[^a-z0-9]/g, '_')}.jpg`;
+                }
+            });
+        });
+
+        localStorage.removeItem('app_config_json');
+        renderConfigLists();
+        alert(`¡Limpieza completada! Se convirtieron ${contadorLimpiadas} imágenes pesadas a rutas de texto. Ahora al hacer clic en "Descargar config.json" pesará menos de 50 KB.`);
     }
 
     /* VISOR MODAL DE IMÁGENES */
