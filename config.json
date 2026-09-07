@@ -3,7 +3,6 @@
     {
       "nombre": "Comunidad 28 Días",
       "desc": "Bienvenidos a nuestro espacio sagrado de transformación y autoconocimiento.",
-      "diareto": "",
       "fecha": "",
       "hora": "",
       "dias": "Todos",
@@ -12,16 +11,157 @@
       "carrousel": 1,
       "link": "",
       "observacion": "",
-      "agenda": "No",
-      "pantalla": false,
-      "imagenes": []
+      "agenda": "Si",
+      "pantalla": true,
+      "imagenes": [
+        "imagenes/comunidad_28_d_as_1.jpg"
+      ]
     }
   ],
   "modalidadDBList": [
     {
-      "nombre": "Modalidad del Programa 28 Días",
-      "desc": "Bienvenidos a nuestro espacio de transformación y bienestar consciente.",
-      "diareto": "",
+      "nombre": "Bienvenida",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 2,
+      "carrousel": 1,
+      "link": "",
+      "observacion": "",
+      "agenda": "No",
+      "imagenes": [
+        "imagenes/bienvenida_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Bienvenida a la Comunidad de mujeres",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Todos",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/Unq2yBKWJ0I?si=EvjfGjd7p6zLKdCk",
+      "observacion": "",
+      "agenda": "No",
+      "imagenes": [
+        "imagenes/bienvenida_a_la_comunidad_de_mujeres_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Modalidad",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Todos",
+      "turno": "Ninguno",
+      "orden": 3,
+      "carrousel": 1,
+      "link": "",
+      "observacion": "",
+      "agenda": "No",
+      "imagenes": [
+        "imagenes/modalidad_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Modalidad",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Todos",
+      "turno": "Ninguno",
+      "orden": 4,
+      "carrousel": 1,
+      "link": "",
+      "observacion": "",
+      "agenda": "No",
+      "imagenes": [
+        "imagenes/modalidad_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Planificacion y Estrategia",
+      "desc": "",
+      "diareto": "2",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "No",
+      "imagenes": [
+        "imagenes/planificacion_y_estrategia_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Nuestra Casa",
+      "desc": "",
+      "diareto": "3",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/nuestra_casa_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Como me vinculo conmigo misma",
+      "desc": "",
+      "diareto": "6",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/como_me_vinculo_conmigo_misma_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Movimientos con el cuerpo",
+      "desc": "",
+      "diareto": "8",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/movimientos_con_el_cuerpo_1.jpg"
+      ]
+    }
+  ],
+  "caminatasDBList": [],
+  "registroDBList": [
+    {
+      "nombre": "Registro fotografico",
+      "desc": "",
+      "diareto": "1",
       "fecha": "",
       "hora": "",
       "dias": "Todos",
@@ -31,23 +171,464 @@
       "link": "",
       "observacion": "",
       "agenda": "Si",
+      "imagenes": [
+        "imagenes/registro_fotografico_1.jpg"
+      ]
+    }
+  ],
+  "alimentosDB": [
+    {
+      "nombre": "Alimentos del bien",
+      "desc": "",
+      "diareto": "4",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/3a9BwCP9yHs",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/alimentos_del_bien_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Nutricion vibracional",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/qKlY4q2pGTk?si=2WLPlYZ-49YVx1JL",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/nutricion_vibracional_1.jpg"
+      ]
+    },
+    {
+      "nombre": "La verduleria",
+      "desc": "",
+      "diareto": "4",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/3a9BwCP9yHs",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/la_verduleria_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Alimentos que nutren",
+      "desc": "",
+      "diareto": "",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/alimentos_que_nutren_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Rejuvelac",
+      "desc": "",
+      "diareto": "7",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/jrvf4ov--nQ",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/rejuvelac_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Alimentos Fitoestrogenos",
+      "desc": "",
+      "diareto": "6",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/alimentos_fitoestrogenos_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Fenogreco",
+      "desc": "",
+      "diareto": "6",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/fenogreco_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Kefir de Agua probiotico",
+      "desc": "",
+      "diareto": "8",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/3HqdeHrsgz4",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/kefir_de_agua_probiotico_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Yuyos del bien",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/yuyos_del_bien_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Nutricion vibracional - Clorofila",
+      "desc": "",
+      "diareto": "5",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/qKlY4q2pGTk",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/nutricion_vibracional___clorofila_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Nutricion Saludable para desayuno o merienda",
+      "desc": "",
+      "diareto": "7",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/hJah8uFqmfA",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/nutricion_saludable_para_desayuno_o_merienda_1.jpg"
+      ]
+    }
+  ],
+  "diosasDB": [
+    {
+      "nombre": "Pachamama",
+      "desc": "",
+      "diareto": "4",
+      "fecha": "2026-09-03",
+      "hora": "",
+      "dias": "Todos",
+      "turno": "Mañana",
+      "orden": 2,
+      "carrousel": 0,
+      "link": "https://youtu.be/fmfiikHZZT0",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/pachamama_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Athenea",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "2026-08-31",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/LM7DKdEvF0I",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/athenea_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Hera",
+      "desc": "",
+      "diareto": "6",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/1vxvCZfxAUQ",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/hera_1.jpg"
+      ]
+    }
+  ],
+  "practicasDB": [
+    {
+      "nombre": "Practica 2 - Activando los pies ",
+      "desc": "",
+      "diareto": "5",
+      "fecha": "",
+      "hora": "",
+      "dias": "Todos",
+      "turno": "Mañana",
+      "orden": 2,
+      "carrousel": 0,
+      "link": "https://youtu.be/1BESczBEZZs",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/practica_2___activando_los_pies__1.jpg"
+      ]
+    },
+    {
+      "nombre": "Practica 1 -  Fluidos Corporales",
+      "desc": "",
+      "diareto": "3",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/cDky5vTbp9U",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/practica_1____fluidos_corporales_1.jpg"
+      ]
+    }
+  ],
+  "infusionesDB": [
+    {
+      "nombre": "20 gotas de Suico en tintura madre",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Todos",
+      "turno": "Tardecita",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "Para los parasitos de la tarde",
+      "agenda": "Si",
+      "imagenes": []
+    },
+    {
+      "nombre": "Te de manzanilla",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Todos",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "Para el hígado y estómago, dos tazas por dia",
+      "agenda": "Si",
+      "imagenes": []
+    },
+    {
+      "nombre": "20 gotas de Pasionaria en agua",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Todos",
+      "turno": "Tardecita",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "Para las emociones, se toma a la tarde",
+      "agenda": "Si",
       "imagenes": []
     }
   ],
-  "caminatasDBList": [],
-  "registroDBList": [],
-  "alimentosDB": [],
-  "diosasDB": [],
-  "practicasDB": [],
-  "infusionesDB": [],
   "novedadesDB": [],
-  "podcastsDB": [],
-  "actividadesDB": [],
+  "podcastsDB": [
+    {
+      "nombre": "Orden externo, Orden interno",
+      "desc": "",
+      "diareto": "3",
+      "fecha": "",
+      "hora": "",
+      "dias": "Todos",
+      "turno": "Ninguno",
+      "orden": 3,
+      "carrousel": 0,
+      "link": "https://youtu.be/oILo4Ht4AZM?si=2d1w0L1kqjrj_yhh",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/orden_externo__orden_interno_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Bienvenida",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/Unq2yBKWJ0I?si=EvjfGjd7p6zLKdCk",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/bienvenida_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Infusiones y tinturas",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Todos",
+      "turno": "Ninguno",
+      "orden": 2,
+      "carrousel": 0,
+      "link": "https://youtu.be/ENW0bbo_82I",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/infusiones_y_tinturas_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Meditacion Amar-Nos",
+      "desc": "",
+      "diareto": "8",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/t5Ml-L4yhfg",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/meditacion_amar_nos_1.jpg"
+      ]
+    }
+  ],
+  "actividadesDB": [
+    {
+      "nombre": "Caminata con podcast",
+      "desc": "",
+      "diareto": "2",
+      "fecha": "",
+      "hora": "",
+      "dias": "Sábado",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": []
+    },
+    {
+      "nombre": "1era Reunion por zoom",
+      "desc": "",
+      "diareto": "4",
+      "fecha": "2026-09-03",
+      "hora": "20:00hs",
+      "dias": "Jueves",
+      "turno": "Noche",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/pyDKfxtyuUE?si=eH78J41F936Wq4nd",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/1era_reunion_por_zoom_1.jpg"
+      ]
+    },
+    {
+      "nombre": "Iniciando Caminatas",
+      "desc": "",
+      "diareto": "2",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "imagenes/iniciando_caminatas_1.jpg"
+      ]
+    }
+  ],
   "cfgCalendario": {
-    "fechaInicio": "2026-08-31",
-    "duracionDias": 28,
-    "horaInicio": 0,
-    "horaFin": 23
+    "diaInicio": 1,
+    "diaFin": 28,
+    "horaInicio": 7,
+    "horaFin": 21,
+    "fechaInicio": "2026-08-31"
   },
   "botonesConfig": {
     "portada": {
@@ -61,94 +642,94 @@
     "modalidad": {
       "id": "modalidad",
       "titulo": "Modalidad",
-      "bg": "#ffffff",
-      "color": "#f4a291",
+      "bg": "#ecdfdf",
+      "color": "#b92a0e",
       "icon": "🌸",
       "visible": "Si"
     },
     "pocimas": {
       "id": "pocimas",
       "titulo": "Pócimas y Yuyos del Bien",
-      "bg": "#ffffff",
-      "color": "#f4a291",
+      "bg": "#f0e0e0",
+      "color": "#2941f5",
       "icon": "🍵",
       "visible": "Si"
     },
     "caminatas": {
       "id": "caminatas",
       "titulo": "Propuesta Diaria y Caminatas",
-      "bg": "#ffffff",
-      "color": "#f4a291",
+      "bg": "#dad2d2",
+      "color": "#17b061",
       "icon": "🚶‍♀️",
-      "visible": "Si"
+      "visible": "No"
     },
     "practicas": {
       "id": "practicas",
       "titulo": "Prácticas",
-      "bg": "#ffffff",
-      "color": "#f4a291",
+      "bg": "#f1e0e0",
+      "color": "#d75023",
       "icon": "🧘‍♀️",
       "visible": "Si"
     },
     "actividades": {
       "id": "actividades",
       "titulo": "Actividades",
-      "bg": "#ffffff",
-      "color": "#f4a291",
+      "bg": "#d5bebe",
+      "color": "#2b2727",
       "icon": "✨",
       "visible": "Si"
     },
     "alimentos": {
       "id": "alimentos",
       "titulo": "Alimentos",
-      "bg": "#ffffff",
-      "color": "#f4a291",
+      "bg": "#e5d7d7",
+      "color": "#8b5dd0",
       "icon": "🥗",
       "visible": "Si"
     },
     "diosas": {
       "id": "diosas",
       "titulo": "Diosas",
-      "bg": "#ffffff",
-      "color": "#f4a291",
+      "bg": "#e8dede",
+      "color": "#a8c63f",
       "icon": "👑",
       "visible": "Si"
     },
     "registro": {
       "id": "registro",
       "titulo": "Registro Fotográfico / Diario",
-      "bg": "#ffffff",
-      "color": "#f4a291",
+      "bg": "#e0e0e0",
+      "color": "#5f6459",
       "icon": "📷",
       "visible": "Si"
     },
     "agenda": {
       "id": "agenda",
       "titulo": "Mi Agenda Diaria y Sensaciones",
-      "bg": "#ffffff",
-      "color": "#f4a291",
+      "bg": "#e1dfdf",
+      "color": "#268687",
       "icon": "📅",
       "visible": "Si"
     },
     "novedades": {
       "id": "novedades",
       "titulo": "Novedades",
-      "bg": "#fbe3e8",
-      "color": "#f4a291",
+      "bg": "#e0d7d9",
+      "color": "#2b2727",
       "icon": "📢",
       "visible": "Si"
     },
     "podcasts": {
       "id": "podcasts",
       "titulo": "Podcast",
-      "bg": "#ffffff",
-      "color": "#f4a291",
+      "bg": "#efebeb",
+      "color": "#18168d",
       "icon": "🎧",
       "visible": "Si"
     }
   },
   "configVisual": {
-    "btn3D": false
+    "btn3D": true
   },
-  "whatsappNumber": "5491112345678"
+  "whatsappNumber": "5491156564717"
 }
