@@ -213,7 +213,6 @@
             width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem;
         }
 
-        /* TEXTAREA AUTO-EXPANDIBLE DINÁMICO */
         textarea.auto-expand {
             resize: none !important;
             overflow-y: hidden !important;
@@ -295,7 +294,6 @@
         .history-item-card img { width: 100%; height: 65px; object-fit: cover; border-radius: 4px; cursor: zoom-in; }
         .history-item-card span { font-size: 0.65rem; color: #666; display: block; margin-top: 2px; }
 
-        /* CARROUSEL COMPONENT */
         .carousel-container {
             position: relative; width: 100%; max-width: 100%; margin: 8px 0;
             overflow: hidden; border-radius: 10px; border: 1px solid var(--salmon); background: #000;
@@ -329,7 +327,6 @@
             background: rgba(0,0,0,0.5); padding: 6px 14px; border-radius: 20px; pointer-events: none; font-family: sans-serif;
         }
 
-        /* CARDS DE ABM DESPLEGABLES EN CONFIG */
         .abm-card-box {
             background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid var(--salmon); margin-bottom: 12px;
         }
@@ -364,7 +361,6 @@
 
 <div class="app-viewport" id="app-viewport">
 
-    <!-- BARRA SUPERIOR DE ACCESO RÁPIDO -->
     <div class="top-admin-bar">
         <button class="icon-btn" onclick="solicitarAccesoAdmin()">⚙️ Config</button>
         <button class="icon-btn" onclick="openWhatsApp()" style="color:#25D366; font-weight:bold;">💬 WhatsApp</button>
@@ -381,7 +377,6 @@
     <div id="screen-home" class="screen">
         <div class="home-container-full">
             <div class="menu-grid-full">
-                <!-- PRIMERA FILA: MI AGENDA DIARIA DESTACADA ARRIBA DE TODO -->
                 <div class="menu-row">
                     <div class="menu-card" id="card-btn-agenda" onclick="nav('agenda')" style="background: var(--pastel-pink); border-color: var(--salmon);">
                         <span class="card-icon" id="icon-btn-agenda">📅</span>
@@ -389,7 +384,6 @@
                     </div>
                 </div>
 
-                <!-- FILAS SIGUIENTES: RESTO DE BOTONES EN PARES DEL MISMO TAMAÑO -->
                 <div class="menu-row">
                     <div class="menu-card" id="card-btn-modalidad" onclick="nav('modalidad')">
                         <span class="card-icon" id="icon-btn-modalidad">🌸</span>
@@ -456,13 +450,11 @@
             </button>
 
             <div class="calendar-grid" id="calendar-grid" style="display: none; margin-top: 6px; margin-bottom: 8px;"></div>
-
             <div class="featured-days-container" id="featured-days-container"></div>
 
             <div style="background: #fffdfa; border: 1px solid #f2c6be; border-radius: var(--border-radius); padding: 10px; display: flex; flex-direction: column; gap: 8px;">
                 <h3 id="inline-day-title" style="margin: 0; font-family: var(--agenda-font-family); color: var(--primary-dark); font-size: 1.25rem;">Día Actual</h3>
                 
-                <!-- CABECERA DEL DÍA -->
                 <div id="header-day-resources" class="header-content-box" style="display:none;"></div>
 
                 <label style="font-size: var(--agenda-font-size); font-weight:bold; color:var(--primary-dark); margin-top:4px;">Horarios (Matriz de 24 hs):</label>
@@ -480,7 +472,7 @@
         </div>
     </div>
 
-    <!-- PANTALLA CONFIGURACIÓN ADMIN COMPLETA CON CARDS COLLAPSIBLES -->
+    <!-- PANTALLA CONFIGURACIÓN ADMIN -->
     <div id="screen-config" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Configuración Admin (Anka)</h2>
@@ -495,7 +487,7 @@
                 </div>
                 <div class="abm-card-body">
                     <div class="form-group">
-                        <label>Fecha de Comienzo del Reto:</label>
+                        <label>Fecha de Comienzo del Reto (Día 1):</label>
                         <input type="date" id="cfg-fecha-inicio" onchange="guardarFechaInicioReto(this.value)">
                         <small style="color:#666; font-size:0.75rem;">El calendario de 28 días se calculará automáticamente a partir de esta fecha.</small>
                     </div>
@@ -534,7 +526,7 @@
                     <span class="abm-toggle-icon">►</span>
                 </div>
                 <div class="abm-card-body">
-                    <p style="font-size:0.75rem; margin:4px 0 8px 0;">Descarga o carga manualmente tu archivo <b>config.json</b>.</p>
+                    <p style="font-size:0.75rem; margin:4px 0 8px 0;">Descarga o carga manualmente tu archivo <b>config.json</b> ultraliviano.</p>
                     <button class="btn-submit" style="background:#52b788; margin-bottom:8px;" onclick="descargarConfigJSON()">Descargar config.json Actualizado</button>
                     <div class="form-group" style="margin-bottom:0;">
                         <label style="font-size:0.75rem;">📂 Cargar config.json manualmente:</label>
@@ -553,7 +545,7 @@
                 </div>
             </div>
 
-            <!-- ABM DE PORTADA -->
+            <!-- ABM PORTADA -->
             <div class="abm-card-box" id="abm-card-portada">
                 <div class="abm-card-header" onclick="toggleAbmCard(this)">
                     <div class="abm-card-header-title">🖼️ Gestión de Portada</div>
@@ -608,7 +600,11 @@
                         <label for="por-pantalla" style="margin:0; cursor:pointer;"><b>Pantalla:</b> Ocupar toda la pantalla solo con la imagen y botón de ingreso.</label>
                     </div>
                     <div class="form-group">
-                        <label>Adjuntar Imagen / Imágenes:</label>
+                        <label>Ruta o URL de la imagen (ej: imagenes/portada.jpg):</label>
+                        <input type="text" id="por-ruta-input" placeholder="imagenes/portada.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>O bien, adjuntar archivo local:</label>
                         <input type="file" accept="image/*" id="por-img-input" multiple>
                         <div class="img-preview-box" id="por-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="por-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
                     </div>
@@ -617,7 +613,7 @@
                 </div>
             </div>
 
-            <!-- ABM DE MODALIDAD -->
+            <!-- ABM MODALIDAD -->
             <div class="abm-card-box" id="abm-card-modalidad">
                 <div class="abm-card-header" onclick="toggleAbmCard(this)">
                     <div class="abm-card-header-title">🌸 Gestión de Modalidad</div>
@@ -667,7 +663,11 @@
                         <select id="mod-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                     </div>
                     <div class="form-group">
-                        <label>Adjuntar Imagen / Imágenes:</label>
+                        <label>Ruta o URL de la imagen (ej: imagenes/modalidad.jpg):</label>
+                        <input type="text" id="mod-ruta-input" placeholder="imagenes/modalidad.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>O bien, adjuntar archivo local:</label>
                         <input type="file" accept="image/*" id="mod-img-input" multiple>
                         <div class="img-preview-box" id="mod-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="mod-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
                     </div>
@@ -676,7 +676,7 @@
                 </div>
             </div>
 
-            <!-- ABM DE REGISTRO FOTOGRÁFICO / DIARIO -->
+            <!-- ABM REGISTRO FOTOGRÁFICO -->
             <div class="abm-card-box" id="abm-card-registro">
                 <div class="abm-card-header" onclick="toggleAbmCard(this)">
                     <div class="abm-card-header-title">📷 Gestión de Registro Fotográfico / Diario</div>
@@ -726,7 +726,11 @@
                         <select id="reg-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                     </div>
                     <div class="form-group">
-                        <label>Adjuntar Imagen Ejemplo / Referencia:</label>
+                        <label>Ruta o URL de la imagen (ej: imagenes/registro.jpg):</label>
+                        <input type="text" id="reg-ruta-input" placeholder="imagenes/registro.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>O bien, adjuntar archivo local:</label>
                         <input type="file" accept="image/*" id="reg-img-input" multiple>
                         <div class="img-preview-box" id="reg-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="reg-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
                     </div>
@@ -735,7 +739,7 @@
                 </div>
             </div>
 
-            <!-- ABM DE PROPUESTA DIARIA Y CAMINATAS -->
+            <!-- ABM CAMINATAS -->
             <div class="abm-card-box" id="abm-card-caminatas">
                 <div class="abm-card-header" onclick="toggleAbmCard(this)">
                     <div class="abm-card-header-title">🚶‍♀️ Gestión de Propuesta Diaria y Caminatas</div>
@@ -785,7 +789,11 @@
                         <select id="cam-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                     </div>
                     <div class="form-group">
-                        <label>Adjuntar Imagen:</label>
+                        <label>Ruta o URL de la imagen (ej: imagenes/caminata.jpg):</label>
+                        <input type="text" id="cam-ruta-input" placeholder="imagenes/caminata.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>O bien, adjuntar archivo local:</label>
                         <input type="file" accept="image/*" id="cam-img-input" multiple>
                         <div class="img-preview-box" id="cam-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="cam-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
                     </div>
@@ -794,7 +802,7 @@
                 </div>
             </div>
 
-            <!-- ABM DE ALIMENTOS -->
+            <!-- ABM ALIMENTOS -->
             <div class="abm-card-box" id="abm-card-alimentos">
                 <div class="abm-card-header" onclick="toggleAbmCard(this)">
                     <div class="abm-card-header-title">🥗 Gestión de Alimentos</div>
@@ -844,7 +852,11 @@
                         <select id="ali-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                     </div>
                     <div class="form-group">
-                        <label>Adjuntar Imagen:</label>
+                        <label>Ruta o URL de la imagen (ej: imagenes/alimento.jpg):</label>
+                        <input type="text" id="ali-ruta-input" placeholder="imagenes/alimento.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>O bien, adjuntar archivo local:</label>
                         <input type="file" accept="image/*" id="ali-img-input" multiple>
                         <div class="img-preview-box" id="ali-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="ali-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
                     </div>
@@ -853,7 +865,7 @@
                 </div>
             </div>
 
-            <!-- ABM DE DIOSAS -->
+            <!-- ABM DIOSAS -->
             <div class="abm-card-box" id="abm-card-diosas">
                 <div class="abm-card-header" onclick="toggleAbmCard(this)">
                     <div class="abm-card-header-title">👑 Gestión de Diosas</div>
@@ -903,7 +915,11 @@
                         <select id="dio-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                     </div>
                     <div class="form-group">
-                        <label>Adjuntar Imagen:</label>
+                        <label>Ruta o URL de la imagen (ej: imagenes/diosa.jpg):</label>
+                        <input type="text" id="dio-ruta-input" placeholder="imagenes/diosa.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>O bien, adjuntar archivo local:</label>
                         <input type="file" accept="image/*" id="dio-img-input" multiple>
                         <div class="img-preview-box" id="dio-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="dio-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
                     </div>
@@ -912,7 +928,7 @@
                 </div>
             </div>
 
-            <!-- ABM DE NOVEDADES -->
+            <!-- ABM NOVEDADES -->
             <div class="abm-card-box" id="abm-card-novedades">
                 <div class="abm-card-header" onclick="toggleAbmCard(this)">
                     <div class="abm-card-header-title">📢 Gestión de Novedades</div>
@@ -962,7 +978,11 @@
                         <select id="nov-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                     </div>
                     <div class="form-group">
-                        <label>Adjuntar Imagen:</label>
+                        <label>Ruta o URL de la imagen (ej: imagenes/novedad.jpg):</label>
+                        <input type="text" id="nov-ruta-input" placeholder="imagenes/novedad.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>O bien, adjuntar archivo local:</label>
                         <input type="file" accept="image/*" id="nov-img-input" multiple>
                         <div class="img-preview-box" id="nov-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="nov-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
                     </div>
@@ -971,7 +991,7 @@
                 </div>
             </div>
 
-            <!-- ABM DE PRÁCTICAS -->
+            <!-- ABM PRÁCTICAS -->
             <div class="abm-card-box" id="abm-card-practicas">
                 <div class="abm-card-header" onclick="toggleAbmCard(this)">
                     <div class="abm-card-header-title">🧘‍♀️ Gestión de Prácticas</div>
@@ -1021,7 +1041,11 @@
                         <select id="pra-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                     </div>
                     <div class="form-group">
-                        <label>Adjuntar Imagen:</label>
+                        <label>Ruta o URL de la imagen (ej: imagenes/practica.jpg):</label>
+                        <input type="text" id="pra-ruta-input" placeholder="imagenes/practica.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>O bien, adjuntar archivo local:</label>
                         <input type="file" accept="image/*" id="pra-img-input" multiple>
                         <div class="img-preview-box" id="pra-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="pra-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
                     </div>
@@ -1030,7 +1054,7 @@
                 </div>
             </div>
 
-            <!-- ABM DE ACTIVIDADES -->
+            <!-- ABM ACTIVIDADES -->
             <div class="abm-card-box" id="abm-card-actividades">
                 <div class="abm-card-header" onclick="toggleAbmCard(this)">
                     <div class="abm-card-header-title">✨ Gestión de Actividades</div>
@@ -1080,7 +1104,11 @@
                         <select id="act-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                     </div>
                     <div class="form-group">
-                        <label>Adjuntar Imagen:</label>
+                        <label>Ruta o URL de la imagen (ej: imagenes/actividad.jpg):</label>
+                        <input type="text" id="act-ruta-input" placeholder="imagenes/actividad.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>O bien, adjuntar archivo local:</label>
                         <input type="file" accept="image/*" id="act-img-input" multiple>
                         <div class="img-preview-box" id="act-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="act-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
                     </div>
@@ -1089,7 +1117,7 @@
                 </div>
             </div>
 
-            <!-- ABM DE INFUSIONES / PÓCIMAS -->
+            <!-- ABM INFUSIONES -->
             <div class="abm-card-box" id="abm-card-pocimas">
                 <div class="abm-card-header" onclick="toggleAbmCard(this)">
                     <div class="abm-card-header-title">🍵 Gestión de Infusiones / Pócimas</div>
@@ -1139,7 +1167,11 @@
                         <select id="inf-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                     </div>
                     <div class="form-group">
-                        <label>Adjuntar Imágenes:</label>
+                        <label>Ruta o URL de la imagen (ej: imagenes/pocima.jpg):</label>
+                        <input type="text" id="inf-ruta-input" placeholder="imagenes/pocima.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>O bien, adjuntar archivo local:</label>
                         <input type="file" accept="image/*" id="inf-img-input" multiple>
                         <div class="img-preview-box" id="inf-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="inf-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
                     </div>
@@ -1148,7 +1180,7 @@
                 </div>
             </div>
 
-            <!-- ABM DE PODCASTS -->
+            <!-- ABM PODCASTS -->
             <div class="abm-card-box" id="abm-card-podcasts">
                 <div class="abm-card-header" onclick="toggleAbmCard(this)">
                     <div class="abm-card-header-title">🎧 Gestión de Podcasts</div>
@@ -1198,7 +1230,11 @@
                         <select id="pod-agenda"><option value="Si">Sí</option><option value="No">No</option></select>
                     </div>
                     <div class="form-group">
-                        <label>Adjuntar Imagen:</label>
+                        <label>Ruta o URL de la imagen (ej: imagenes/podcast.jpg):</label>
+                        <input type="text" id="pod-ruta-input" placeholder="imagenes/podcast.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>O bien, adjuntar archivo local:</label>
                         <input type="file" accept="image/*" id="pod-img-input" multiple>
                         <div class="img-preview-box" id="pod-preview-box"><span>🖼️ Imagen actual guardada:</span><div id="pod-preview-imgs" style="display:flex; gap:4px; flex-wrap:wrap;"></div></div>
                     </div>
@@ -1248,8 +1284,9 @@
 <script>
     let diaSeleccionadoActual = 1; 
 
+    // Fecha base corregida Día 1: 31/08/2026
     let cfgCalendario = {
-        fechaInicio: "2026-09-01",
+        fechaInicio: "2026-08-31",
         duracionDias: 28,
         horaInicio: 0,
         horaFin: 23
@@ -1308,7 +1345,6 @@
         if (cardBox) cardBox.classList.toggle('open');
     }
 
-    /* TEXTAREA AUTO-EXPANDIBLE DINÁMICO */
     function autoExpandTextarea(textareaEl) {
         if (!textareaEl) return;
         textareaEl.style.height = 'auto';
@@ -1336,7 +1372,7 @@
     }
 
     function getFechaObjetoDia(numDiaReto) {
-        let strFecha = (cfgCalendario && cfgCalendario.fechaInicio) ? cfgCalendario.fechaInicio : "2026-09-01";
+        let strFecha = (cfgCalendario && cfgCalendario.fechaInicio) ? cfgCalendario.fechaInicio : "2026-08-31";
         let baseDate = new Date(strFecha + 'T00:00:00');
         if (isNaN(baseDate.getTime())) baseDate = new Date();
         baseDate.setDate(baseDate.getDate() + (numDiaReto - 1));
@@ -1369,6 +1405,27 @@
             return `${h < 10 ? '0' + h : h}:${m} hs`;
         }
         return str.trim();
+    }
+
+    /* OBTENER IMÁGENES: PRIORIZA RUTA / URL EN TEXTO PARA GUARDAR JSON ULTRALIVIANO */
+    function obtenerImagenesEntrada(prefix, fileInputEl, callback) {
+        const rutaInputEl = document.getElementById(`${prefix}-ruta-input`);
+        const rutaTexto = rutaInputEl ? rutaInputEl.value.trim() : "";
+
+        if (rutaTexto !== "") {
+            const listaRutas = rutaTexto.split(',').map(r => r.trim()).filter(r => r !== "");
+            callback(listaRutas);
+            return;
+        }
+
+        if (fileInputEl && fileInputEl.files && fileInputEl.files.length > 0) {
+            readInputImage(fileInputEl, (base64Array) => {
+                callback(base64Array);
+            });
+            return;
+        }
+
+        callback([]);
     }
 
     /* VISOR MODAL DE IMÁGENES */
@@ -1560,7 +1617,7 @@
             renderConfigLists();
             syncCheckboxesVisibilidad();
             const waInput = document.getElementById('cfg-whatsapp-num'); if (waInput) waInput.value = whatsappNumber;
-            const fechaInput = document.getElementById('cfg-fecha-inicio'); if (fechaInput) fechaInput.value = (cfgCalendario && cfgCalendario.fechaInicio) ? cfgCalendario.fechaInicio : '2026-09-01';
+            const fechaInput = document.getElementById('cfg-fecha-inicio'); if (fechaInput) fechaInput.value = (cfgCalendario && cfgCalendario.fechaInicio) ? cfgCalendario.fechaInicio : '2026-08-31';
         }
         if (screenId === 'alimentos') renderPublicAlimentos();
         if (screenId === 'diosas') renderPublicDiosas();
@@ -1586,7 +1643,6 @@
         featuredContainer.innerHTML = '';
 
         let totalDias = (cfgCalendario && cfgCalendario.duracionDias) ? cfgCalendario.duracionDias : 28;
-
         let diasAmostrar = [];
 
         if (diaCentro > 1) {
@@ -1663,7 +1719,6 @@
         renderPublicNovedades();
     }
 
-    /* REGLAS DE COINCIDENCIA DE FECHAS/DÍAS */
     function estaElementoParaDia(item, nombreDiaSemana, fechaKeyFormatted, diaNumeroReto) {
         if (item.fecha && item.fecha.trim() !== "") {
             return item.fecha === fechaKeyFormatted;
@@ -1682,7 +1737,6 @@
         return false;
     }
 
-    /* MI AGENDA DIARIA INTEGRADA */
     function cargarDiaAgendaInline(diaNumero) {
         const info = getInfoDiaReto(diaNumero);
         const fechaKey = info.fechaKey;
@@ -2020,7 +2074,7 @@
         return htmlFinal;
     }
 
-    /* ABM PORTADA */
+    /* ABM PORTADA CON RUTAS O ARCHIVOS */
     function guardarPortadaABM() {
         const nombre = document.getElementById('por-nombre').value;
         const desc = document.getElementById('por-desc').value;
@@ -2039,8 +2093,8 @@
         if (!nombre) return alert("Ingresa el título de la portada.");
 
         const fileInput = document.getElementById('por-img-input');
-        readInputImage(fileInput, (base64Array) => {
-            let imgsFinales = base64Array;
+        obtenerImagenesEntrada('por', fileInput, (imgsFinalesObtenidas) => {
+            let imgsFinales = imgsFinalesObtenidas;
             if (imgsFinales.length === 0 && editIndices.por >= 0) {
                 imgsFinales = portadaDBList[editIndices.por].imagenes || [];
             }
@@ -2077,6 +2131,7 @@
         document.getElementById('por-observacion').value = p.observacion || '';
         document.getElementById('por-agenda').value = p.agenda || 'No';
         document.getElementById('por-pantalla').checked = !!p.pantalla;
+        document.getElementById('por-ruta-input').value = (p.imagenes && p.imagenes.length > 0 && !p.imagenes[0].startsWith('data:')) ? p.imagenes.join(', ') : '';
         
         mostrarVistaPreviaEdicion('por', p.imagenes);
         editIndices.por = idx;
@@ -2100,11 +2155,12 @@
         document.getElementById('por-observacion').value = '';
         document.getElementById('por-agenda').value = 'No';
         document.getElementById('por-pantalla').checked = false;
+        document.getElementById('por-ruta-input').value = '';
         const f = document.getElementById('por-img-input'); if (f) f.value = '';
         mostrarVistaPreviaEdicion('por', []);
     }
 
-    /* ABM MODALIDAD */
+    /* ABM MODALIDAD CON RUTAS O ARCHIVOS */
     function guardarModalidadABM() {
         const nombre = document.getElementById('mod-nombre').value;
         const desc = document.getElementById('mod-desc').value;
@@ -2122,8 +2178,8 @@
         if (!nombre) return alert("Ingresa el nombre de la modalidad.");
 
         const fileInput = document.getElementById('mod-img-input');
-        readInputImage(fileInput, (base64Array) => {
-            let imgsFinales = base64Array;
+        obtenerImagenesEntrada('mod', fileInput, (imgsFinalesObtenidas) => {
+            let imgsFinales = imgsFinalesObtenidas;
             if (imgsFinales.length === 0 && editIndices.mod >= 0) {
                 imgsFinales = modalidadDBList[editIndices.mod].imagenes || [];
             }
@@ -2159,6 +2215,7 @@
         document.getElementById('mod-link').value = m.link || '';
         document.getElementById('mod-observacion').value = m.observacion || '';
         document.getElementById('mod-agenda').value = m.agenda || 'Si';
+        document.getElementById('mod-ruta-input').value = (m.imagenes && m.imagenes.length > 0 && !m.imagenes[0].startsWith('data:')) ? m.imagenes.join(', ') : '';
 
         mostrarVistaPreviaEdicion('mod', m.imagenes);
         editIndices.mod = idx;
@@ -2181,11 +2238,12 @@
         document.getElementById('mod-link').value = '';
         document.getElementById('mod-observacion').value = '';
         document.getElementById('mod-agenda').value = 'Si';
+        document.getElementById('mod-ruta-input').value = '';
         const f = document.getElementById('mod-img-input'); if (f) f.value = '';
         mostrarVistaPreviaEdicion('mod', []);
     }
 
-    /* ABM REGISTRO FOTOGRÁFICO */
+    /* ABM REGISTRO FOTOGRÁFICO CON RUTAS O ARCHIVOS */
     function agregarRegistroFoto() {
         const nombre = document.getElementById('reg-nombre').value;
         const desc = document.getElementById('reg-desc').value;
@@ -2202,8 +2260,8 @@
         const fileInput = document.getElementById('reg-img-input');
 
         if (!nombre) return alert('Por favor ingresa el título del registro fotográfico');
-        readInputImage(fileInput, (base64Imgs) => {
-            let imgsFinales = base64Imgs;
+        obtenerImagenesEntrada('reg', fileInput, (imgsFinalesObtenidas) => {
+            let imgsFinales = imgsFinalesObtenidas;
             if (imgsFinales.length === 0 && editIndices.reg >= 0) {
                 imgsFinales = registroDBList[editIndices.reg].imagenes || (registroDBList[editIndices.reg].imgUrl ? [registroDBList[editIndices.reg].imgUrl] : []);
             }
@@ -2236,8 +2294,11 @@
         document.getElementById('reg-link').value = r.link || '';
         document.getElementById('reg-observacion').value = r.observacion || '';
         document.getElementById('reg-agenda').value = r.agenda || 'Si';
+        
+        const imgs = r.imagenes || (r.imgUrl ? [r.imgUrl] : []);
+        document.getElementById('reg-ruta-input').value = (imgs.length > 0 && !imgs[0].startsWith('data:')) ? imgs.join(', ') : '';
 
-        mostrarVistaPreviaEdicion('reg', r.imagenes || (r.imgUrl ? [r.imgUrl] : []));
+        mostrarVistaPreviaEdicion('reg', imgs);
         editIndices.reg = idx;
         document.getElementById('btn-save-reg').innerText = "Actualizar Registro Fotografico";
 
@@ -2258,11 +2319,12 @@
         document.getElementById('reg-link').value = '';
         document.getElementById('reg-observacion').value = '';
         document.getElementById('reg-agenda').value = 'Si';
+        document.getElementById('reg-ruta-input').value = '';
         const f = document.getElementById('reg-img-input'); if (f) f.value = '';
         mostrarVistaPreviaEdicion('reg', []);
     }
 
-    /* ABM PROPUESTA DIARIA Y CAMINATAS */
+    /* ABM CAMINATAS CON RUTAS O ARCHIVOS */
     function agregarCaminata() {
         const nombre = document.getElementById('cam-nombre').value;
         const desc = document.getElementById('cam-desc').value;
@@ -2279,8 +2341,8 @@
         const fileInput = document.getElementById('cam-img-input');
 
         if (!nombre) return alert('Por favor ingresa el título de la caminata o propuesta');
-        readInputImage(fileInput, (base64Imgs) => {
-            let imgsFinales = base64Imgs;
+        obtenerImagenesEntrada('cam', fileInput, (imgsFinalesObtenidas) => {
+            let imgsFinales = imgsFinalesObtenidas;
             if (imgsFinales.length === 0 && editIndices.cam >= 0) {
                 imgsFinales = caminatasDBList[editIndices.cam].imagenes || (caminatasDBList[editIndices.cam].imgUrl ? [caminatasDBList[editIndices.cam].imgUrl] : []);
             }
@@ -2314,7 +2376,10 @@
         document.getElementById('cam-observacion').value = c.observacion || '';
         document.getElementById('cam-agenda').value = c.agenda || 'Si';
 
-        mostrarVistaPreviaEdicion('cam', c.imagenes || (c.imgUrl ? [c.imgUrl] : []));
+        const imgs = c.imagenes || (c.imgUrl ? [c.imgUrl] : []);
+        document.getElementById('cam-ruta-input').value = (imgs.length > 0 && !imgs[0].startsWith('data:')) ? imgs.join(', ') : '';
+
+        mostrarVistaPreviaEdicion('cam', imgs);
         editIndices.cam = idx;
         document.getElementById('btn-save-cam').innerText = "Actualizar Propuesta / Caminata";
 
@@ -2335,11 +2400,12 @@
         document.getElementById('cam-link').value = '';
         document.getElementById('cam-observacion').value = '';
         document.getElementById('cam-agenda').value = 'Si';
+        document.getElementById('cam-ruta-input').value = '';
         const f = document.getElementById('cam-img-input'); if (f) f.value = '';
         mostrarVistaPreviaEdicion('cam', []);
     }
 
-    /* ABM ALIMENTOS */
+    /* ABM ALIMENTOS CON RUTAS O ARCHIVOS */
     function agregarAlimento() {
         const nombre = document.getElementById('ali-nombre').value;
         const desc = document.getElementById('ali-desc').value;
@@ -2356,8 +2422,8 @@
         const fileInput = document.getElementById('ali-img-input');
 
         if (!nombre) return alert('Por favor ingresa el nombre del alimento');
-        readInputImage(fileInput, (base64Imgs) => {
-            let imgsFinales = base64Imgs;
+        obtenerImagenesEntrada('ali', fileInput, (imgsFinalesObtenidas) => {
+            let imgsFinales = imgsFinalesObtenidas;
             if (imgsFinales.length === 0 && editIndices.ali >= 0) {
                 imgsFinales = alimentosDB[editIndices.ali].imagenes || (alimentosDB[editIndices.ali].imgUrl ? [alimentosDB[editIndices.ali].imgUrl] : []);
             }
@@ -2391,7 +2457,10 @@
         document.getElementById('ali-observacion').value = a.observacion || '';
         document.getElementById('ali-agenda').value = a.agenda || 'Si';
 
-        mostrarVistaPreviaEdicion('ali', a.imagenes || (a.imgUrl ? [a.imgUrl] : []));
+        const imgs = a.imagenes || (a.imgUrl ? [a.imgUrl] : []);
+        document.getElementById('ali-ruta-input').value = (imgs.length > 0 && !imgs[0].startsWith('data:')) ? imgs.join(', ') : '';
+
+        mostrarVistaPreviaEdicion('ali', imgs);
         editIndices.ali = idx;
         document.getElementById('btn-save-ali').innerText = "Actualizar Alimento";
 
@@ -2412,11 +2481,12 @@
         document.getElementById('ali-link').value = '';
         document.getElementById('ali-observacion').value = '';
         document.getElementById('ali-agenda').value = 'Si';
+        document.getElementById('ali-ruta-input').value = '';
         const f = document.getElementById('ali-img-input'); if (f) f.value = '';
         mostrarVistaPreviaEdicion('ali', []);
     }
 
-    /* ABM DIOSAS */
+    /* ABM DIOSAS CON RUTAS O ARCHIVOS */
     function agregarDiosa() {
         const nombre = document.getElementById('dio-nombre').value;
         const desc = document.getElementById('dio-desc').value;
@@ -2433,8 +2503,8 @@
         const fileInput = document.getElementById('dio-img-input');
 
         if (!nombre) return alert('Por favor ingresa el nombre de la Diosa');
-        readInputImage(fileInput, (base64Imgs) => {
-            let imgsFinales = base64Imgs;
+        obtenerImagenesEntrada('dio', fileInput, (imgsFinalesObtenidas) => {
+            let imgsFinales = imgsFinalesObtenidas;
             if (imgsFinales.length === 0 && editIndices.dio >= 0) {
                 imgsFinales = diosasDB[editIndices.dio].imagenes || (diosasDB[editIndices.dio].imgUrl ? [diosasDB[editIndices.dio].imgUrl] : []);
             }
@@ -2468,7 +2538,10 @@
         document.getElementById('dio-observacion').value = d.observacion || '';
         document.getElementById('dio-agenda').value = d.agenda || 'Si';
 
-        mostrarVistaPreviaEdicion('dio', d.imagenes || (d.imgUrl ? [d.imgUrl] : []));
+        const imgs = d.imagenes || (d.imgUrl ? [d.imgUrl] : []);
+        document.getElementById('dio-ruta-input').value = (imgs.length > 0 && !imgs[0].startsWith('data:')) ? imgs.join(', ') : '';
+
+        mostrarVistaPreviaEdicion('dio', imgs);
         editIndices.dio = idx;
         document.getElementById('btn-save-dio').innerText = "Actualizar Diosa";
 
@@ -2489,11 +2562,12 @@
         document.getElementById('dio-link').value = '';
         document.getElementById('dio-observacion').value = '';
         document.getElementById('dio-agenda').value = 'Si';
+        document.getElementById('dio-ruta-input').value = '';
         const f = document.getElementById('dio-img-input'); if (f) f.value = '';
         mostrarVistaPreviaEdicion('dio', []);
     }
 
-    /* ABM NOVEDADES */
+    /* ABM NOVEDADES CON RUTAS O ARCHIVOS */
     function publicarNovedadManual() {
         const nombre = document.getElementById('nov-nombre').value;
         const desc = document.getElementById('nov-desc').value;
@@ -2510,8 +2584,8 @@
         const fileInput = document.getElementById('nov-img-input');
 
         if (!nombre) return alert('Por favor ingresa el título/nombre de la novedad');
-        readInputImage(fileInput, (base64Imgs) => {
-            let imgsFinales = base64Imgs;
+        obtenerImagenesEntrada('nov', fileInput, (imgsFinalesObtenidas) => {
+            let imgsFinales = imgsFinalesObtenidas;
             if (imgsFinales.length === 0 && editIndices.nov >= 0) {
                 imgsFinales = novedadesDB[editIndices.nov].imagenes || (novedadesDB[editIndices.nov].imgUrl ? [novedadesDB[editIndices.nov].imgUrl] : []);
             }
@@ -2545,7 +2619,10 @@
         document.getElementById('nov-observacion').value = item.observacion || '';
         document.getElementById('nov-agenda').value = item.agenda || 'Si';
 
-        mostrarVistaPreviaEdicion('nov', item.imagenes || (item.imgUrl ? [item.imgUrl] : []));
+        const imgs = item.imagenes || (item.imgUrl ? [item.imgUrl] : []);
+        document.getElementById('nov-ruta-input').value = (imgs.length > 0 && !imgs[0].startsWith('data:')) ? imgs.join(', ') : '';
+
+        mostrarVistaPreviaEdicion('nov', imgs);
         editIndices.nov = idx;
         document.getElementById('btn-save-nov').innerText = "Actualizar Novedad";
 
@@ -2566,11 +2643,12 @@
         document.getElementById('nov-link').value = '';
         document.getElementById('nov-observacion').value = '';
         document.getElementById('nov-agenda').value = 'Si';
+        document.getElementById('nov-ruta-input').value = '';
         const f = document.getElementById('nov-img-input'); if (f) f.value = '';
         mostrarVistaPreviaEdicion('nov', []);
     }
 
-    /* ABM PRÁCTICAS */
+    /* ABM PRÁCTICAS CON RUTAS O ARCHIVOS */
     function agregarPractica() {
         const nombre = document.getElementById('pra-nombre').value;
         const desc = document.getElementById('pra-desc').value;
@@ -2587,8 +2665,8 @@
         const fileInput = document.getElementById('pra-img-input');
 
         if (!nombre) return alert('Por favor ingresa el nombre de la práctica');
-        readInputImage(fileInput, (base64Imgs) => {
-            let imgsFinales = base64Imgs;
+        obtenerImagenesEntrada('pra', fileInput, (imgsFinalesObtenidas) => {
+            let imgsFinales = imgsFinalesObtenidas;
             if (imgsFinales.length === 0 && editIndices.pra >= 0) {
                 imgsFinales = practicasDB[editIndices.pra].imagenes || (practicasDB[editIndices.pra].imgUrl ? [practicasDB[editIndices.pra].imgUrl] : []);
             }
@@ -2622,7 +2700,10 @@
         document.getElementById('pra-observacion').value = p.observacion || p.comentario || '';
         document.getElementById('pra-agenda').value = p.agenda || 'Si';
 
-        mostrarVistaPreviaEdicion('pra', p.imagenes || (p.imgUrl ? [p.imgUrl] : []));
+        const imgs = p.imagenes || (p.imgUrl ? [p.imgUrl] : []);
+        document.getElementById('pra-ruta-input').value = (imgs.length > 0 && !imgs[0].startsWith('data:')) ? imgs.join(', ') : '';
+
+        mostrarVistaPreviaEdicion('pra', imgs);
         editIndices.pra = idx;
         document.getElementById('btn-save-pra').innerText = "Actualizar Práctica";
 
@@ -2643,11 +2724,12 @@
         document.getElementById('pra-link').value = '';
         document.getElementById('pra-observacion').value = '';
         document.getElementById('pra-agenda').value = 'Si';
+        document.getElementById('pra-ruta-input').value = '';
         const f = document.getElementById('pra-img-input'); if (f) f.value = '';
         mostrarVistaPreviaEdicion('pra', []);
     }
 
-    /* ABM ACTIVIDADES */
+    /* ABM ACTIVIDADES CON RUTAS O ARCHIVOS */
     function agregarActividadConfig() {
         const nombre = document.getElementById('act-nombre').value;
         const desc = document.getElementById('act-desc').value;
@@ -2664,8 +2746,8 @@
         const fileInput = document.getElementById('act-img-input');
 
         if (!nombre) return alert('Por favor ingresa el nombre de la actividad');
-        readInputImage(fileInput, (base64Imgs) => {
-            let imgsFinales = base64Imgs;
+        obtenerImagenesEntrada('act', fileInput, (imgsFinalesObtenidas) => {
+            let imgsFinales = imgsFinalesObtenidas;
             if (imgsFinales.length === 0 && editIndices.act >= 0) {
                 imgsFinales = actividadesDB[editIndices.act].imagenes || (actividadesDB[editIndices.act].imgUrl ? [actividadesDB[editIndices.act].imgUrl] : []);
             }
@@ -2699,7 +2781,10 @@
         document.getElementById('act-observacion').value = item.observacion || '';
         document.getElementById('act-agenda').value = item.agenda || 'Si';
 
-        mostrarVistaPreviaEdicion('act', item.imagenes || (item.imgUrl ? [item.imgUrl] : []));
+        const imgs = item.imagenes || (item.imgUrl ? [item.imgUrl] : []);
+        document.getElementById('act-ruta-input').value = (imgs.length > 0 && !imgs[0].startsWith('data:')) ? imgs.join(', ') : '';
+
+        mostrarVistaPreviaEdicion('act', imgs);
         editIndices.act = idx;
         document.getElementById('btn-save-act').innerText = "Actualizar Actividad";
 
@@ -2720,11 +2805,12 @@
         document.getElementById('act-link').value = '';
         document.getElementById('act-observacion').value = '';
         document.getElementById('act-agenda').value = 'Si';
+        document.getElementById('act-ruta-input').value = '';
         const f = document.getElementById('act-img-input'); if (f) f.value = '';
         mostrarVistaPreviaEdicion('act', []);
     }
 
-    /* ABM INFUSIONES / PÓCIMAS */
+    /* ABM INFUSIONES CON RUTAS O ARCHIVOS */
     function agregarInfusion() {
         const nombre = document.getElementById('inf-nombre').value;
         const desc = document.getElementById('inf-desc').value;
@@ -2741,8 +2827,8 @@
         const fileInput = document.getElementById('inf-img-input');
 
         if (!nombre) return alert('Por favor ingresa el nombre de la pócima');
-        readInputImage(fileInput, (base64Array) => {
-            let imgsFinales = base64Array;
+        obtenerImagenesEntrada('inf', fileInput, (imgsFinalesObtenidas) => {
+            let imgsFinales = imgsFinalesObtenidas;
             if (imgsFinales.length === 0 && editIndices.inf >= 0) {
                 imgsFinales = infusionesDB[editIndices.inf].imagenes || [];
             }
@@ -2777,7 +2863,10 @@
         document.getElementById('inf-observacion').value = item.observacion || item.efecto || '';
         document.getElementById('inf-agenda').value = item.agenda || 'Si';
 
-        mostrarVistaPreviaEdicion('inf', item.imagenes || []);
+        const imgs = item.imagenes || [];
+        document.getElementById('inf-ruta-input').value = (imgs.length > 0 && !imgs[0].startsWith('data:')) ? imgs.join(', ') : '';
+
+        mostrarVistaPreviaEdicion('inf', imgs);
         editIndices.inf = idx;
         document.getElementById('btn-save-inf').innerText = "Actualizar Pócima / Infusión";
 
@@ -2798,11 +2887,12 @@
         document.getElementById('inf-link').value = '';
         document.getElementById('inf-observacion').value = '';
         document.getElementById('inf-agenda').value = 'Si';
+        document.getElementById('inf-ruta-input').value = '';
         const f = document.getElementById('inf-img-input'); if (f) f.value = '';
         mostrarVistaPreviaEdicion('inf', []);
     }
 
-    /* ABM PODCASTS */
+    /* ABM PODCASTS CON RUTAS O ARCHIVOS */
     function agregarPodcast() {
         const nombre = document.getElementById('pod-nombre').value;
         const desc = document.getElementById('pod-desc').value;
@@ -2819,8 +2909,8 @@
         const fileInput = document.getElementById('pod-img-input');
 
         if (!nombre) return alert('Por favor ingresa el nombre del podcast');
-        readInputImage(fileInput, (base64Imgs) => {
-            let imgsFinales = base64Imgs;
+        obtenerImagenesEntrada('pod', fileInput, (imgsFinalesObtenidas) => {
+            let imgsFinales = imgsFinalesObtenidas;
             if (imgsFinales.length === 0 && editIndices.pod >= 0) {
                 imgsFinales = podcastsDB[editIndices.pod].imagenes || (podcastsDB[editIndices.pod].imgUrl ? [podcastsDB[editIndices.pod].imgUrl] : []);
             }
@@ -2854,7 +2944,10 @@
         document.getElementById('pod-observacion').value = item.observacion || '';
         document.getElementById('pod-agenda').value = item.agenda || 'Si';
 
-        mostrarVistaPreviaEdicion('pod', item.imagenes || (item.imgUrl ? [item.imgUrl] : []));
+        const imgs = item.imagenes || (item.imgUrl ? [item.imgUrl] : []);
+        document.getElementById('pod-ruta-input').value = (imgs.length > 0 && !imgs[0].startsWith('data:')) ? imgs.join(', ') : '';
+
+        mostrarVistaPreviaEdicion('pod', imgs);
         editIndices.pod = idx;
         document.getElementById('btn-save-pod').innerText = "Actualizar Podcast";
 
@@ -2875,6 +2968,7 @@
         document.getElementById('pod-link').value = '';
         document.getElementById('pod-observacion').value = '';
         document.getElementById('pod-agenda').value = 'Si';
+        document.getElementById('pod-ruta-input').value = '';
         const f = document.getElementById('pod-img-input'); if (f) f.value = '';
         mostrarVistaPreviaEdicion('pod', []);
     }
@@ -3287,7 +3381,6 @@
         container.innerHTML = renderSeccionAgrupada(practicasDB, 'practica');
     }
 
-    /* RENDERS VISTA NOVEDADES: SÓLO MUESTRA LO CORRESPONDIENTE AL DÍA SELECCIONADO */
     function renderPublicNovedades() {
         const container = document.getElementById('public-novedades-list');
         const alertBadge = document.getElementById('home-novedad-alert');
@@ -3431,7 +3524,7 @@
             cambiarEstilo3DBotones();
         }
         if (document.getElementById('cfg-whatsapp-num')) document.getElementById('cfg-whatsapp-num').value = whatsappNumber || '';
-        if (document.getElementById('cfg-fecha-inicio')) document.getElementById('cfg-fecha-inicio').value = (cfgCalendario && cfgCalendario.fechaInicio) ? cfgCalendario.fechaInicio : '2026-09-01';
+        if (document.getElementById('cfg-fecha-inicio')) document.getElementById('cfg-fecha-inicio').value = (cfgCalendario && cfgCalendario.fechaInicio) ? cfgCalendario.fechaInicio : '2026-08-31';
 
         aplicarEstilosBotones();
         syncCheckboxesVisibilidad();
