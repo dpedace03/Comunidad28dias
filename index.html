@@ -1450,14 +1450,14 @@
                     item.imagenes = item.imagenes.map((img, idx) => {
                         if (typeof img === 'string' && img.startsWith('data:image')) {
                             contadorLimpiadas++;
-                            return `imagenes/${(item.nombre || 'foto').toLowerCase().replace(/[^a-z0-9]/g, '_')}_${idx + 1}.jpg`;
+                            return `${(item.nombre || 'foto').toLowerCase().replace(/[^a-z0-9]/g, '_')}_${idx + 1}.jpg`;
                         }
                         return img;
                     });
                 }
                 if (item.imgUrl && item.imgUrl.startsWith('data:image')) {
                     contadorLimpiadas++;
-                    item.imgUrl = `imagenes/${(item.nombre || 'foto').toLowerCase().replace(/[^a-z0-9]/g, '_')}.jpg`;
+                    item.imgUrl = `${(item.nombre || 'foto').toLowerCase().replace(/[^a-z0-9]/g, '_')}.jpg`;
                 }
             });
         });
@@ -3532,8 +3532,36 @@
         }
     }
 
+    /* NORMALIZACIÓN DE RUTAS DE IMÁGENES
+       Las imágenes se leen desde archivos ubicados AL MISMO NIVEL que este index.html.
+       El config sólo indica el nombre del archivo: se descarta cualquier carpeta previa
+       (ej: "imagenes/bienvenida_1.jpg"  ->  "bienvenida_1.jpg").
+       Se preservan tal cual las data: URIs y las URLs http(s) por si se usaran. */
+    function nombreArchivoImagen(ruta) {
+        if (typeof ruta !== 'string') return ruta;
+        const r = ruta.trim();
+        if (!r) return r;
+        if (r.startsWith('data:') || /^https?:\/\//i.test(r) || r.startsWith('//')) return r;
+        const limpio = r.split('#')[0].split('?')[0];
+        const partes = limpio.split(/[\\/]/);
+        return partes[partes.length - 1] || r;
+    }
+
+    function normalizarImagenesConfig(data) {
+        if (!data) return;
+        const claves = ['portadaDBList','modalidadDBList','caminatasDBList','registroDBList','alimentosDB','diosasDB','practicasDB','infusionesDB','novedadesDB','podcastsDB','actividadesDB'];
+        const normalizarItem = (item) => {
+            if (!item || typeof item !== 'object') return;
+            if (Array.isArray(item.imagenes)) item.imagenes = item.imagenes.map(nombreArchivoImagen);
+            if (typeof item.imgUrl === 'string') item.imgUrl = nombreArchivoImagen(item.imgUrl);
+        };
+        claves.forEach(k => { if (Array.isArray(data[k])) data[k].forEach(normalizarItem); });
+        if (data.modalidadDB) normalizarItem(data.modalidadDB);
+    }
+
     function aplicarObjetoConfig(data) {
         if (!data) return;
+        normalizarImagenesConfig(data);
         if (data.portadaDBList) portadaDBList = data.portadaDBList;
         if (data.modalidadDBList) modalidadDBList = data.modalidadDBList;
         else if (data.modalidadDB) modalidadDBList = [data.modalidadDB];
