@@ -74,15 +74,57 @@
         }
 
         .btn-back {
-            background: var(--pastel-green);
-            border: 2px solid #a3d99b;
+            background: transparent;
+            border: none;
             color: #2b6d2e;
-            width: 42px; height: 42px;
-            border-radius: 50%; cursor: pointer;
-            font-weight: 900; font-size: 1.5rem;
+            width: 46px; height: 42px;
+            border-radius: 10px; cursor: pointer;
+            padding: 0;
             flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
+        .btn-back:active { transform: scale(0.92); }
+        .btn-back-ico {
+            width: 40px; height: 30px; object-fit: contain; display: block; pointer-events: none;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.12));
+        }
+
+        /* --- Barra de búsqueda global --- */
+        .search-box-wrap { position: relative; width: 100%; margin: 4px 0 10px; }
+        .search-box {
+            width: 100%; box-sizing: border-box; padding: 11px 38px 11px 14px;
+            border: 1px solid var(--salmon); border-radius: 22px; background: #fffdfa;
+            font-size: 0.95rem; color: var(--primary-dark); outline: none;
+        }
+        .search-box:focus { border-color: var(--primary-dark); box-shadow: 0 0 0 3px rgba(244,162,145,0.15); }
+        .search-ico { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 1rem; color: var(--primary); pointer-events: none; }
+        .search-clear { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); border: none; background: transparent; font-size: 1.1rem; color: #b98; cursor: pointer; display: none; }
+        .search-results {
+            margin-top: 6px; background: #fff; border: 1px solid #eedcd6; border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08); overflow: hidden; display: none;
+        }
+        .search-results.open { display: block; }
+        .search-result-item {
+            display: flex; align-items: flex-start; gap: 8px; padding: 9px 12px;
+            border-bottom: 1px solid #f5eae6; cursor: pointer; text-align: left;
+        }
+        .search-result-item:last-child { border-bottom: none; }
+        .search-result-item:hover, .search-result-item:active { background: #fdf3ef; }
+        .sr-ico { font-size: 1.1rem; line-height: 1.3; }
+        .sr-texts { display: flex; flex-direction: column; min-width: 0; }
+        .sr-title { font-weight: bold; color: var(--primary-dark); font-size: 0.9rem; }
+        .sr-sub { font-size: 0.72rem; color: var(--primary); }
+        .sr-snippet { font-size: 0.75rem; color: #777; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .search-empty { padding: 12px; font-size: 0.85rem; color: #999; text-align: center; }
+
+        /* Resaltado del ítem al que lleva un resultado de búsqueda */
+        .buscar-destacado { animation: destacarItem 2.4s ease; }
+        @keyframes destacarItem {
+            0%, 55% { box-shadow: 0 0 0 3px var(--pastel-green); background: #f2fbef; }
+            100% { box-shadow: none; background: transparent; }
+        }
+
+        /* Marca del día de HOY en la agenda (aunque haya otro día seleccionado) */
+        .cal-day.es-hoy { outline: 2px dashed #7cc46f; outline-offset: 1px; }
 
         .screen-body {
             flex: 1; display: flex; flex-direction: column; gap: 8px;
@@ -376,6 +418,12 @@
     <!-- PANTALLA PRINCIPAL CON MI AGENDA DIARIA EN PRIMER LUGAR -->
     <div id="screen-home" class="screen">
         <div class="home-container-full">
+            <div class="search-box-wrap">
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar en todo el sitio..." oninput="onInputBusqueda(this.value)" autocomplete="off">
+                <span class="search-ico" id="search-ico">🔍</span>
+                <button id="search-clear-btn" class="search-clear" onclick="limpiarBusqueda()" title="Limpiar">✕</button>
+                <div class="search-results" id="search-results"></div>
+            </div>
             <div class="menu-grid-full">
                 <div class="menu-row">
                     <div class="menu-card" id="card-btn-agenda" onclick="nav('agenda')" style="background: var(--pastel-pink); border-color: var(--salmon);">
@@ -442,7 +490,7 @@
     <div id="screen-agenda" class="screen">
         <div class="screen-header">
             <h2 class="screen-title" style="font-family: 'Playfair Display', serif;">Mi Agenda Diaria</h2>
-            <button class="btn-back" onclick="nav('home')">←</button>
+            <button class="btn-back" onclick="nav('home')"><img src="flecha_verde.png" alt="Volver" class="btn-back-ico"></button>
         </div>
         <div class="screen-body">
             <button class="toggle-cal-btn" id="btn-toggle-cal" onclick="toggleCalendarioCompleto()">
@@ -476,7 +524,7 @@
     <div id="screen-config" class="screen">
         <div class="screen-header">
             <h2 class="screen-title">Configuración Admin (Anka)</h2>
-            <button class="btn-back" onclick="nav('home')">←</button>
+            <button class="btn-back" onclick="nav('home')"><img src="flecha_verde.png" alt="Volver" class="btn-back-ico"></button>
         </div>
         <div class="screen-body">
 
@@ -1256,27 +1304,27 @@
 
     <!-- PANTALLAS PÚBLICAS -->
     <div id="screen-modalidad" class="screen">
-        <div class="screen-header"><h2 class="screen-title">Modalidad</h2><button class="btn-back" onclick="nav('home')">←</button></div>
+        <div class="screen-header"><h2 class="screen-title">Modalidad</h2><button class="btn-back" onclick="nav('home')"><img src="flecha_verde.png" alt="Volver" class="btn-back-ico"></button></div>
         <div class="screen-body" id="public-modalidad-content"></div>
     </div>
 
     <div id="screen-pocimas" class="screen">
-        <div class="screen-header"><h2 class="screen-title">Pócimas y Yuyos del Bien</h2><button class="btn-back" onclick="nav('home')">←</button></div>
+        <div class="screen-header"><h2 class="screen-title">Pócimas y Yuyos del Bien</h2><button class="btn-back" onclick="nav('home')"><img src="flecha_verde.png" alt="Volver" class="btn-back-ico"></button></div>
         <div class="screen-body" id="public-pocimas-list"></div>
     </div>
 
     <div id="screen-registro" class="screen">
-        <div class="screen-header"><h2 class="screen-title">Registro Fotográfico / Diario</h2><button class="btn-back" onclick="nav('home')">←</button></div>
+        <div class="screen-header"><h2 class="screen-title">Registro Fotográfico / Diario</h2><button class="btn-back" onclick="nav('home')"><img src="flecha_verde.png" alt="Volver" class="btn-back-ico"></button></div>
         <div class="screen-body" id="public-registro-list"></div>
     </div>
 
-    <div id="screen-alimentos" class="screen"><div class="screen-header"><h2 class="screen-title">Alimentos</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-alimentos-list"></div></div>
-    <div id="screen-diosas" class="screen"><div class="screen-header"><h2 class="screen-title">Diosas</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-diosas-list"></div></div>
-    <div id="screen-actividades" class="screen"><div class="screen-header"><h2 class="screen-title">Actividades</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-actividades-list"></div></div>
-    <div id="screen-practicas" class="screen"><div class="screen-header"><h2 class="screen-title">Prácticas</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="practicas-dynamic-list"></div></div>
-    <div id="screen-caminatas" class="screen"><div class="screen-header"><h2 class="screen-title">Propuesta Diaria y Caminatas</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-caminatas-list"></div></div>
-    <div id="screen-novedades" class="screen"><div class="screen-header"><h2 class="screen-title">Novedades del Día ❗️</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-novedades-list"></div></div>
-    <div id="screen-podcasts" class="screen"><div class="screen-header"><h2 class="screen-title">Podcasts</h2><button class="btn-back" onclick="nav('home')">←</button></div><div class="screen-body" id="public-podcasts-list"></div></div>
+    <div id="screen-alimentos" class="screen"><div class="screen-header"><h2 class="screen-title">Alimentos</h2><button class="btn-back" onclick="nav('home')"><img src="flecha_verde.png" alt="Volver" class="btn-back-ico"></button></div><div class="screen-body" id="public-alimentos-list"></div></div>
+    <div id="screen-diosas" class="screen"><div class="screen-header"><h2 class="screen-title">Diosas</h2><button class="btn-back" onclick="nav('home')"><img src="flecha_verde.png" alt="Volver" class="btn-back-ico"></button></div><div class="screen-body" id="public-diosas-list"></div></div>
+    <div id="screen-actividades" class="screen"><div class="screen-header"><h2 class="screen-title">Actividades</h2><button class="btn-back" onclick="nav('home')"><img src="flecha_verde.png" alt="Volver" class="btn-back-ico"></button></div><div class="screen-body" id="public-actividades-list"></div></div>
+    <div id="screen-practicas" class="screen"><div class="screen-header"><h2 class="screen-title">Prácticas</h2><button class="btn-back" onclick="nav('home')"><img src="flecha_verde.png" alt="Volver" class="btn-back-ico"></button></div><div class="screen-body" id="practicas-dynamic-list"></div></div>
+    <div id="screen-caminatas" class="screen"><div class="screen-header"><h2 class="screen-title">Propuesta Diaria y Caminatas</h2><button class="btn-back" onclick="nav('home')"><img src="flecha_verde.png" alt="Volver" class="btn-back-ico"></button></div><div class="screen-body" id="public-caminatas-list"></div></div>
+    <div id="screen-novedades" class="screen"><div class="screen-header"><h2 class="screen-title">Novedades del Día ❗️</h2><button class="btn-back" onclick="nav('home')"><img src="flecha_verde.png" alt="Volver" class="btn-back-ico"></button></div><div class="screen-body" id="public-novedades-list"></div></div>
+    <div id="screen-podcasts" class="screen"><div class="screen-header"><h2 class="screen-title">Podcasts</h2><button class="btn-back" onclick="nav('home')"><img src="flecha_verde.png" alt="Volver" class="btn-back-ico"></button></div><div class="screen-body" id="public-podcasts-list"></div></div>
 
 </div>
 
@@ -1395,6 +1443,20 @@
         return `${year}-${month}-${day}`;
     }
 
+    function getDiaRetoHoy() {
+        let strFecha = (cfgCalendario && cfgCalendario.fechaInicio) ? cfgCalendario.fechaInicio : "2026-08-31";
+        let inicio = new Date(strFecha + 'T00:00:00');
+        if (isNaN(inicio.getTime())) inicio = new Date();
+        inicio.setHours(0, 0, 0, 0);
+        const hoy = new Date();
+        hoy.setHours(0, 0, 0, 0);
+        const totalDias = (cfgCalendario && cfgCalendario.duracionDias) ? cfgCalendario.duracionDias : 28;
+        const diff = Math.floor((hoy - inicio) / 86400000) + 1; // Día 1 = fecha de inicio del reto
+        if (diff < 1) return 1;
+        if (diff > totalDias) return totalDias;
+        return diff;
+    }
+
     function getInfoDiaReto(numDiaReto) {
         const d = getFechaObjetoDia(numDiaReto);
         const nombreDia = NOMBRES_DIAS_SEMANA[d.getDay()] || "Día";
@@ -1427,9 +1489,10 @@
         }
 
         if (fileInputEl && fileInputEl.files && fileInputEl.files.length > 0) {
-            readInputImage(fileInputEl, (base64Array) => {
-                callback(base64Array);
-            });
+            // Guardar SÓLO el camino (nombre del archivo elegido), nunca la imagen embebida.
+            // El archivo debe ubicarse al mismo nivel que index.html (o en la ruta que se indique).
+            const nombres = Array.from(fileInputEl.files).map(f => f.name).filter(n => n);
+            callback(nombres);
             return;
         }
 
@@ -1450,14 +1513,14 @@
                     item.imagenes = item.imagenes.map((img, idx) => {
                         if (typeof img === 'string' && img.startsWith('data:image')) {
                             contadorLimpiadas++;
-                            return `${(item.nombre || 'foto').toLowerCase().replace(/[^a-z0-9]/g, '_')}_${idx + 1}.jpg`;
+                            return `imagenes/${(item.nombre || 'foto').toLowerCase().replace(/[^a-z0-9]/g, '_')}_${idx + 1}.jpg`;
                         }
                         return img;
                     });
                 }
                 if (item.imgUrl && item.imgUrl.startsWith('data:image')) {
                     contadorLimpiadas++;
-                    item.imgUrl = `${(item.nombre || 'foto').toLowerCase().replace(/[^a-z0-9]/g, '_')}.jpg`;
+                    item.imgUrl = `imagenes/${(item.nombre || 'foto').toLowerCase().replace(/[^a-z0-9]/g, '_')}.jpg`;
                 }
             });
         });
@@ -1641,6 +1704,8 @@
         
         if (screenId === 'agenda') {
             document.getElementById('app-viewport').classList.add('wide-view');
+            diaSeleccionadoActual = getDiaRetoHoy();
+            renderBarra3Dias(diaSeleccionadoActual);
             cargarDiaAgendaInline(diaSeleccionadoActual);
         } else {
             document.getElementById('app-viewport').classList.remove('wide-view');
@@ -1688,7 +1753,8 @@
             diasAmostrar.push({ num: diaCentro - 1, label: "Anterior" });
         }
 
-        diasAmostrar.push({ num: diaCentro, label: "Día Seleccionado" });
+        const diaHoy = getDiaRetoHoy();
+        diasAmostrar.push({ num: diaCentro, label: diaCentro === diaHoy ? "Hoy" : "Día Seleccionado" });
 
         if (diaCentro < totalDias) {
             diasAmostrar.push({ num: diaCentro + 1, label: "Siguiente" });
@@ -1697,7 +1763,7 @@
         diasAmostrar.forEach(d => {
             const info = getInfoDiaReto(d.num);
             const dayCard = document.createElement('div');
-            dayCard.className = `cal-day ${d.num === diaCentro ? 'today-card' : ''}`;
+            dayCard.className = `cal-day ${d.num === diaCentro ? 'today-card' : ''} ${d.num === diaHoy ? 'es-hoy' : ''}`;
             dayCard.innerHTML = `
                 <span style="font-size:0.7rem; color:var(--primary); font-weight:bold;">${d.label}</span>
                 <span style="font-size:1.1rem; color:var(--primary-dark);">Día ${d.num}</span>
@@ -1718,12 +1784,16 @@
         if (!grid) return;
         grid.innerHTML = '';
 
+        // Por defecto, la agenda queda posicionada en el día de HOY según la fecha de inicio del reto.
+        diaSeleccionadoActual = getDiaRetoHoy();
+        const diaHoy = getDiaRetoHoy();
+
         let totalDias = (cfgCalendario && cfgCalendario.duracionDias) ? cfgCalendario.duracionDias : 28;
 
         for (let i = 1; i <= totalDias; i++) {
             const info = getInfoDiaReto(i);
             const dayBox = document.createElement('div');
-            dayBox.className = `cal-day ${i === diaSeleccionadoActual ? 'today-card' : ''}`;
+            dayBox.className = `cal-day ${i === diaSeleccionadoActual ? 'today-card' : ''} ${i === diaHoy ? 'es-hoy' : ''}`;
             dayBox.innerHTML = `<span>D${i}</span><small style="font-size:0.75rem;">${info.labelCorto}</small>`;
             dayBox.onclick = () => seleccionarDiaDesdeCalendarioCompleto(i);
             grid.appendChild(dayBox);
@@ -2041,6 +2111,13 @@
         return lista.sort((a, b) => (parseInt(a.orden) || 1) - (parseInt(b.orden) || 1));
     }
 
+    function normalizarTexto(t) {
+        return (t || '').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+    function claveBusqueda(txt) {
+        return normalizarTexto(txt).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    }
+
     function renderSeccionAgrupada(lista, prefixId, autoAdvance = false) {
         if (!lista || lista.length === 0) return '<i style="font-size:0.85rem; color:#888;">No hay registros cargados.</i>';
 
@@ -2072,7 +2149,7 @@
             const mediaHTML = renderCarouselHTML(`${prefixId}-carrousel-${numC}`, imagenesCarrousel, autoAdvance);
 
             htmlFinal += `
-                <div class="practica-card-item">
+                <div class="practica-card-item" data-item-key="${claveBusqueda(primerItem.nombre || primerItem.titulo || '')}">
                     <h2 style="margin:0 0 6px 0; color:var(--primary-dark);">${primerItem.nombre || primerItem.titulo}</h2>
                     <p style="margin:0; font-size:0.8rem; color:var(--primary);">
                         ${primerItem.diareto ? `<b>Día Reto:</b> ${primerItem.diareto} ` : ''}
@@ -2096,7 +2173,7 @@
             }
 
             htmlFinal += `
-                <div class="practica-card-item">
+                <div class="practica-card-item" data-item-key="${claveBusqueda(item.nombre || item.titulo || '')}">
                     <h2 style="margin:0 0 6px 0; color:var(--primary-dark);">${item.nombre || item.titulo}</h2>
                     <p style="margin:0; font-size:0.8rem; color:var(--primary);">
                         ${item.diareto ? `<b>Día Reto:</b> ${item.diareto} ` : ''}
@@ -3454,6 +3531,113 @@
         container.innerHTML = renderSeccionAgrupada(podcastsDB, 'podcast');
     }
 
+    // ===== BÚSQUEDA GLOBAL EN TODO EL SITIO =====
+    const SECCIONES_BUSQUEDA = [
+        { screen: 'portada',     icon: '🖼️',  nombre: 'Portada',               db: () => portadaDBList },
+        { screen: 'modalidad',   icon: '🌸',  nombre: 'Modalidad',             db: () => modalidadDBList },
+        { screen: 'pocimas',     icon: '🍵',  nombre: 'Pócimas y Yuyos',       db: () => infusionesDB },
+        { screen: 'caminatas',   icon: '🚶‍♀️', nombre: 'Propuesta y Caminatas',  db: () => caminatasDBList },
+        { screen: 'practicas',   icon: '🧘‍♀️', nombre: 'Prácticas',             db: () => practicasDB },
+        { screen: 'actividades', icon: '✨',  nombre: 'Actividades',           db: () => actividadesDB },
+        { screen: 'alimentos',   icon: '🥗',  nombre: 'Alimentos',             db: () => alimentosDB },
+        { screen: 'diosas',      icon: '👑',  nombre: 'Diosas',                db: () => diosasDB },
+        { screen: 'registro',    icon: '📷',  nombre: 'Registro / Diario',     db: () => registroDBList },
+        { screen: 'novedades',   icon: '📢',  nombre: 'Novedades',             db: () => novedadesDB },
+        { screen: 'podcasts',    icon: '🎧',  nombre: 'Podcasts',              db: () => podcastsDB }
+    ];
+
+    function onInputBusqueda(valor) {
+        const clearBtn = document.getElementById('search-clear-btn');
+        const ico = document.getElementById('search-ico');
+        const hayTexto = !!(valor && valor.length);
+        if (clearBtn) clearBtn.style.display = hayTexto ? 'block' : 'none';
+        if (ico) ico.style.display = hayTexto ? 'none' : 'block';
+        ejecutarBusqueda(valor);
+    }
+
+    function ejecutarBusqueda(termino) {
+        const cont = document.getElementById('search-results');
+        if (!cont) return;
+        const q = normalizarTexto(termino).trim();
+        if (q.length < 2) { cont.classList.remove('open'); cont.innerHTML = ''; return; }
+
+        const resultados = [];
+        SECCIONES_BUSQUEDA.forEach(sec => {
+            if (normalizarTexto(sec.nombre).includes(q)) {
+                resultados.push({ screen: sec.screen, icon: sec.icon, seccion: sec.nombre, titulo: 'Ir a ' + sec.nombre, snippet: 'Sección', key: '' });
+            }
+            (sec.db() || []).forEach(item => {
+                const titulo = item.nombre || item.titulo || '';
+                const campos = [titulo, item.desc, item.observacion].map(normalizarTexto).join(' ');
+                if (campos.includes(q)) {
+                    let snippet = (item.desc || item.observacion || '').toString().replace(/\s+/g, ' ').trim();
+                    if (snippet.length > 70) snippet = snippet.slice(0, 70) + '…';
+                    resultados.push({ screen: sec.screen, icon: sec.icon, seccion: sec.nombre, titulo: titulo || '(sin título)', snippet, key: claveBusqueda(titulo) });
+                }
+            });
+        });
+
+        renderResultadosBusqueda(resultados);
+    }
+
+    function renderResultadosBusqueda(resultados) {
+        const cont = document.getElementById('search-results');
+        if (!cont) return;
+        if (resultados.length === 0) {
+            cont.innerHTML = '<div class="search-empty">Sin resultados</div>';
+            cont.classList.add('open');
+            return;
+        }
+        const vistos = new Set();
+        const html = resultados.filter(r => {
+            const id = r.screen + '|' + r.key + '|' + r.titulo;
+            if (vistos.has(id)) return false;
+            vistos.add(id);
+            return true;
+        }).slice(0, 25).map(r => {
+            const keyEsc = (r.key || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+            return `
+            <div class="search-result-item" onclick="irAResultado('${r.screen}','${keyEsc}')">
+                <span class="sr-ico">${r.icon}</span>
+                <span class="sr-texts">
+                    <span class="sr-title">${r.titulo}</span>
+                    <span class="sr-sub">${r.seccion}</span>
+                    ${r.snippet ? `<span class="sr-snippet">${r.snippet}</span>` : ''}
+                </span>
+            </div>`;
+        }).join('');
+        cont.innerHTML = html;
+        cont.classList.add('open');
+    }
+
+    function limpiarBusqueda() {
+        const input = document.getElementById('search-input');
+        if (input) input.value = '';
+        const clearBtn = document.getElementById('search-clear-btn');
+        if (clearBtn) clearBtn.style.display = 'none';
+        const ico = document.getElementById('search-ico');
+        if (ico) ico.style.display = 'block';
+        const cont = document.getElementById('search-results');
+        if (cont) { cont.classList.remove('open'); cont.innerHTML = ''; }
+    }
+
+    function irAResultado(screen, key) {
+        limpiarBusqueda();
+        nav(screen);
+        if (!key) return;
+        setTimeout(() => {
+            const scr = document.getElementById('screen-' + screen);
+            if (!scr) return;
+            const el = scr.querySelector(`[data-item-key="${key}"]`);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                el.classList.remove('buscar-destacado');
+                void el.offsetWidth;
+                el.classList.add('buscar-destacado');
+            }
+        }, 120);
+    }
+
     function renderButtonsCustomizer() {
         const container = document.getElementById('buttons-customizer-container');
         if (!container) return;
@@ -3466,6 +3650,7 @@
                     <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:4px;">
                         <label style="font-size:0.8rem;">Fondo: <input type="color" value="${btn.bg}" onchange="botonesConfig['${key}'].bg=this.value; aplicarEstilosBotones();"></label>
                         <label style="font-size:0.8rem;">Letra: <input type="color" value="${btn.color}" onchange="botonesConfig['${key}'].color=this.value; aplicarEstilosBotones();"></label>
+                        <label style="font-size:0.8rem;">Borde: <input type="color" value="${btn.borde || '#f4a291'}" onchange="botonesConfig['${key}'].borde=this.value; aplicarEstilosBotones();"></label>
                         <label style="font-size:0.8rem;">Visible: 
                             <select onchange="botonesConfig['${key}'].visible=this.value; aplicarEstilosBotones(); syncCheckboxesVisibilidad();">
                                 <option value="Si" ${isVis ? 'selected' : ''}>Sí</option>
@@ -3485,6 +3670,7 @@
             const titleEl = document.getElementById(`title-btn-${key}`);
             if (cardEl) {
                 cardEl.style.backgroundColor = btn.bg;
+                if (btn.borde) cardEl.style.borderColor = btn.borde;
                 if (btn.visible === "No") cardEl.classList.add('hidden-btn');
                 else cardEl.classList.remove('hidden-btn');
             }
@@ -3492,8 +3678,48 @@
         });
     }
 
+    /* Genera un camino de texto para una imagen base64 residual (nombre a mismo nivel del HTML) */
+    function _rutaImagenExport(nombreItem, idx) {
+        const slug = (nombreItem || 'foto').toLowerCase().replace(/[^a-z0-9]/g, '_');
+        return `${slug}_${idx + 1}.jpg`;
+    }
+
+    /* Devuelve una copia de la lista con las imágenes reducidas SÓLO a caminos (sin base64) */
+    function _soloCaminosImagenes(lista) {
+        if (!Array.isArray(lista)) return lista;
+        return lista.map(item => {
+            if (!item || typeof item !== 'object') return item;
+            const copia = { ...item };
+            if (Array.isArray(copia.imagenes)) {
+                copia.imagenes = copia.imagenes.map((img, idx) =>
+                    (typeof img === 'string' && img.startsWith('data:'))
+                        ? _rutaImagenExport(copia.nombre, idx)
+                        : img
+                );
+            }
+            if (typeof copia.imgUrl === 'string' && copia.imgUrl.startsWith('data:')) {
+                copia.imgUrl = _rutaImagenExport(copia.nombre, 0);
+            }
+            return copia;
+        });
+    }
+
     function descargarConfigJSON() {
-        const configData = { portadaDBList, modalidadDBList, caminatasDBList, registroDBList, alimentosDB, diosasDB, practicasDB, infusionesDB, novedadesDB, podcastsDB, actividadesDB, cfgCalendario, botonesConfig, configVisual, whatsappNumber };
+        // El config.json guarda SÓLO los caminos de las imágenes, nunca la imagen embebida.
+        const configData = {
+            portadaDBList: _soloCaminosImagenes(portadaDBList),
+            modalidadDBList: _soloCaminosImagenes(modalidadDBList),
+            caminatasDBList: _soloCaminosImagenes(caminatasDBList),
+            registroDBList: _soloCaminosImagenes(registroDBList),
+            alimentosDB: _soloCaminosImagenes(alimentosDB),
+            diosasDB: _soloCaminosImagenes(diosasDB),
+            practicasDB: _soloCaminosImagenes(practicasDB),
+            infusionesDB: _soloCaminosImagenes(infusionesDB),
+            novedadesDB: _soloCaminosImagenes(novedadesDB),
+            podcastsDB: _soloCaminosImagenes(podcastsDB),
+            actividadesDB: _soloCaminosImagenes(actividadesDB),
+            cfgCalendario, botonesConfig, configVisual, whatsappNumber
+        };
         const blob = new Blob([JSON.stringify(configData, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -3532,36 +3758,8 @@
         }
     }
 
-    /* NORMALIZACIÓN DE RUTAS DE IMÁGENES
-       Las imágenes se leen desde archivos ubicados AL MISMO NIVEL que este index.html.
-       El config sólo indica el nombre del archivo: se descarta cualquier carpeta previa
-       (ej: "imagenes/bienvenida_1.jpg"  ->  "bienvenida_1.jpg").
-       Se preservan tal cual las data: URIs y las URLs http(s) por si se usaran. */
-    function nombreArchivoImagen(ruta) {
-        if (typeof ruta !== 'string') return ruta;
-        const r = ruta.trim();
-        if (!r) return r;
-        if (r.startsWith('data:') || /^https?:\/\//i.test(r) || r.startsWith('//')) return r;
-        const limpio = r.split('#')[0].split('?')[0];
-        const partes = limpio.split(/[\\/]/);
-        return partes[partes.length - 1] || r;
-    }
-
-    function normalizarImagenesConfig(data) {
-        if (!data) return;
-        const claves = ['portadaDBList','modalidadDBList','caminatasDBList','registroDBList','alimentosDB','diosasDB','practicasDB','infusionesDB','novedadesDB','podcastsDB','actividadesDB'];
-        const normalizarItem = (item) => {
-            if (!item || typeof item !== 'object') return;
-            if (Array.isArray(item.imagenes)) item.imagenes = item.imagenes.map(nombreArchivoImagen);
-            if (typeof item.imgUrl === 'string') item.imgUrl = nombreArchivoImagen(item.imgUrl);
-        };
-        claves.forEach(k => { if (Array.isArray(data[k])) data[k].forEach(normalizarItem); });
-        if (data.modalidadDB) normalizarItem(data.modalidadDB);
-    }
-
     function aplicarObjetoConfig(data) {
         if (!data) return;
-        normalizarImagenesConfig(data);
         if (data.portadaDBList) portadaDBList = data.portadaDBList;
         if (data.modalidadDBList) modalidadDBList = data.modalidadDBList;
         else if (data.modalidadDB) modalidadDBList = [data.modalidadDB];
