@@ -55,6 +55,7 @@
             cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             display: flex; align-items: center; gap: 4px;
         }
+        .icon-btn.activo { background: var(--pastel-green); border-color: #a3d99b; }
 
         .screen {
             display: none; width: 100%; height: 100%;
@@ -132,9 +133,10 @@
         }
         .screen-body::-webkit-scrollbar { display: none; }
 
-        .home-container-full { flex: 1; display: flex; flex-direction: column; gap: 8px; height: 100%; }
-        .menu-grid-full { flex: 1; display: flex; flex-direction: column; gap: 8px; width: 100%; }
-        .menu-row { flex: 1; display: flex; gap: 8px; width: 100%; }
+        .home-container-full { flex: 1; display: flex; flex-direction: column; gap: 8px; height: 100%; overflow-y: auto; scrollbar-width: none; }
+        .home-container-full::-webkit-scrollbar { display: none; }
+        .menu-grid-full { flex: 1 0 auto; display: flex; flex-direction: column; gap: 8px; width: 100%; }
+        .menu-row { flex: 1 1 auto; min-height: 76px; display: flex; gap: 8px; width: 100%; }
 
         .menu-card {
             flex: 1; background: var(--card-bg-color); padding: 8px; border-radius: var(--border-radius);
@@ -300,7 +302,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .practica-card-item { background: #fff; padding: 10px; border-radius: var(--border-radius); border: 1px solid rgba(244, 162, 145, 0.4); margin-bottom: 8px; display: flex; flex-direction: column; gap: 4px; }
+        .practica-card-item { background: var(--card-tema-bg, #fff); padding: 10px; border-radius: var(--border-radius); border: 1px solid rgba(244, 162, 145, 0.4); margin-bottom: 8px; display: flex; flex-direction: column; gap: 4px; }
         .practica-link-btn { display: inline-block; margin-top: 4px; margin-bottom: 6px; padding: 6px 12px; background: var(--pastel-green); color: var(--primary-dark); border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.85rem; border: 1px solid #b8e0a8; text-align: center; }
 
         .user-photo-upload-box {
@@ -404,7 +406,10 @@
 <div class="app-viewport" id="app-viewport">
 
     <div class="top-admin-bar">
-        <button class="icon-btn" onclick="solicitarAccesoAdmin()">⚙️ Config</button>
+        <div style="display:flex; gap:6px; align-items:center;">
+            <button class="icon-btn" onclick="solicitarAccesoAdmin()">⚙️ Config</button>
+            <button class="icon-btn" id="btn-toggle-busqueda" onclick="toggleBusqueda()" title="Buscar">🔍</button>
+        </div>
         <button class="icon-btn" onclick="openWhatsApp()" style="color:#25D366; font-weight:bold;">💬 WhatsApp</button>
     </div>
 
@@ -418,7 +423,7 @@
     <!-- PANTALLA PRINCIPAL CON MI AGENDA DIARIA EN PRIMER LUGAR -->
     <div id="screen-home" class="screen">
         <div class="home-container-full">
-            <div class="search-box-wrap">
+            <div class="search-box-wrap" id="search-box-wrap" style="display:none;">
                 <input type="text" id="search-input" class="search-box" placeholder="Buscar en todo el sitio..." oninput="onInputBusqueda(this.value)" autocomplete="off">
                 <span class="search-ico" id="search-ico">🔍</span>
                 <button id="search-clear-btn" class="search-clear" onclick="limpiarBusqueda()" title="Limpiar">✕</button>
@@ -3546,6 +3551,26 @@
         { screen: 'podcasts',    icon: '🎧',  nombre: 'Podcasts',              db: () => podcastsDB }
     ];
 
+    function toggleBusqueda() {
+        // La barra vive en la pantalla principal: si estamos en otra, volvemos al home.
+        const home = document.getElementById('screen-home');
+        if (home && !home.classList.contains('active')) nav('home');
+        const wrap = document.getElementById('search-box-wrap');
+        const btn = document.getElementById('btn-toggle-busqueda');
+        if (!wrap) return;
+        const oculta = (wrap.style.display === 'none' || wrap.style.display === '');
+        if (oculta) {
+            wrap.style.display = 'block';
+            if (btn) btn.classList.add('activo');
+            const input = document.getElementById('search-input');
+            if (input) { input.focus(); }
+        } else {
+            wrap.style.display = 'none';
+            if (btn) btn.classList.remove('activo');
+            limpiarBusqueda();
+        }
+    }
+
     function onInputBusqueda(valor) {
         const clearBtn = document.getElementById('search-clear-btn');
         const ico = document.getElementById('search-ico');
@@ -3675,6 +3700,9 @@
                 else cardEl.classList.remove('hidden-btn');
             }
             if (titleEl) titleEl.style.color = btn.color;
+            // Los cards internos de cada pantalla toman el mismo color de fondo que su botón.
+            const screenEl = document.getElementById(`screen-${key}`);
+            if (screenEl && btn.bg) screenEl.style.setProperty('--card-tema-bg', btn.bg);
         });
     }
 
