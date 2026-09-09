@@ -593,6 +593,17 @@
                         <label style="font-size:0.75rem;">📂 Cargar config.json manualmente:</label>
                         <input type="file" accept=".json" onchange="cargarConfigDesdeArchivoLocal(this)">
                     </div>
+
+                    <hr style="border:none; border-top:1px dashed #e0d0cc; margin:12px 0 8px;">
+                    <label style="font-size:0.78rem; font-weight:bold; color:var(--primary-dark);">🔒 Copia de seguridad de anotaciones (Mi Agenda + fotos)</label>
+                    <p style="font-size:0.68rem; color:#888; margin:2px 0 6px;">Las anotaciones ya quedan guardadas en el teléfono y se mantienen aunque actualices el index.html. Descargá esta copia antes de cambiar de teléfono o de borrar los datos del navegador.</p>
+                    <button class="btn-submit" style="background:#6b5b7b; margin-bottom:6px;" onclick="descargarAnotaciones()">
+                        ⬇️ Descargar copia de anotaciones
+                    </button>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label style="font-size:0.75rem;">📂 Restaurar anotaciones desde una copia:</label>
+                        <input type="file" accept=".json" onchange="restaurarAnotaciones(this)">
+                    </div>
                 </div>
             </div>
 
@@ -2082,6 +2093,7 @@
         if (!agendaGuardadaBD[fechaKey].seleccionados[horaStr]) agendaGuardadaBD[fechaKey].seleccionados[horaStr] = [];
 
         agendaGuardadaBD[fechaKey].seleccionados[horaStr].push(valor);
+        guardarAgendaEnLocal();
         selectEl.value = ""; 
         cargarDiaAgendaInline(diaSeleccionadoActual);
     }
@@ -2089,7 +2101,16 @@
     function quitarActividadSeleccionada(fechaKey, horaStr, index) {
         if (agendaGuardadaBD[fechaKey] && agendaGuardadaBD[fechaKey].seleccionados && agendaGuardadaBD[fechaKey].seleccionados[horaStr]) {
             agendaGuardadaBD[fechaKey].seleccionados[horaStr].splice(index, 1);
+            guardarAgendaEnLocal();
             cargarDiaAgendaInline(diaSeleccionadoActual);
+        }
+    }
+
+    function guardarAgendaEnLocal() {
+        try {
+            localStorage.setItem('agenda_registros_bd', JSON.stringify(agendaGuardadaBD));
+        } catch (e) {
+            console.log('No se pudo guardar la agenda en el dispositivo:', e);
         }
     }
 
@@ -2108,6 +2129,7 @@
         if (!agendaGuardadaBD[currentFechaKeyModal]) agendaGuardadaBD[currentFechaKeyModal] = { horarios: {}, notas: "", seleccionados: {} };
         agendaGuardadaBD[currentFechaKeyModal].notas = document.getElementById('inline-modal-text').value;
 
+        guardarAgendaEnLocal();
         alert('¡Agenda guardada con éxito!');
         cargarDiaAgendaInline(diaSeleccionadoActual);
     }
@@ -3775,6 +3797,9 @@
             const usrFotosSaved = localStorage.getItem('usuario_fotos_historial_bd');
             if (usrFotosSaved) usuarioFotosHistorialBD = JSON.parse(usrFotosSaved);
 
+            const agendaSaved = localStorage.getItem('agenda_registros_bd');
+            if (agendaSaved) agendaGuardadaBD = JSON.parse(agendaSaved);
+
             const resp = await fetch('config.json?v=' + Date.now());
             if (resp.ok) {
                 const data = await resp.json();
@@ -3833,6 +3858,53 @@
         renderPracticasScreen();
         renderPublicNovedades();
         renderPublicPodcasts();
+    }
+
+    function descargarAnotaciones() {
+        const backup = {
+            _tipo: 'anotaciones_comunidad28',
+            fecha: new Date().toISOString(),
+            agenda_registros_bd: agendaGuardadaBD,
+            usuario_fotos_historial_bd: usuarioFotosHistorialBD
+        };
+        const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'mis_anotaciones_' + new Date().toISOString().split('T')[0] + '.json';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function restaurarAnotaciones(fileInput) {
+        if (!fileInput.files || fileInput.files.length === 0) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const data = JSON.parse(e.target.result);
+                let ok = 0;
+                if (data.agenda_registros_bd && typeof data.agenda_registros_bd === 'object') {
+                    // Se fusiona con lo existente (no borra lo que ya haya en el teléfono).
+                    agendaGuardadaBD = { ...agendaGuardadaBD, ...data.agenda_registros_bd };
+                    guardarAgendaEnLocal();
+                    ok++;
+                }
+                if (data.usuario_fotos_historial_bd && typeof data.usuario_fotos_historial_bd === 'object') {
+                    usuarioFotosHistorialBD = { ...usuarioFotosHistorialBD, ...data.usuario_fotos_historial_bd };
+                    localStorage.setItem('usuario_fotos_historial_bd', JSON.stringify(usuarioFotosHistorialBD));
+                    ok++;
+                }
+                if (ok === 0) { alert('El archivo no contiene anotaciones reconocibles.'); return; }
+                if (document.getElementById('screen-agenda').classList.contains('active')) {
+                    cargarDiaAgendaInline(diaSeleccionadoActual);
+                }
+                alert('¡Anotaciones restauradas con éxito!');
+            } catch (err) {
+                alert('Error al leer la copia: ' + err.message);
+            }
+            fileInput.value = '';
+        };
+        reader.readAsText(fileInput.files[0]);
     }
 
     function cargarConfigDesdeArchivoLocal(fileInput) {
