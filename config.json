@@ -380,6 +380,23 @@
       "imagenes": [
         "JugosNaturalesZanahoriaCarvacol.png"
       ]
+    },
+    {
+      "nombre": "Aceite herbal para diosas",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/xnz4pxe136Q",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "AceiteHerbalParaDiosas.png"
+      ]
     }
   ],
   "diosasDB": [
@@ -449,6 +466,23 @@
       "agenda": "Si",
       "imagenes": [
         "artemisa.png"
+      ]
+    },
+    {
+      "nombre": "Afrodita",
+      "desc": "",
+      "diareto": "11",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 5,
+      "carrousel": 0,
+      "link": "https://youtu.be/tNhNsmdFokg",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "Afrodita.png"
       ]
     }
   ],
