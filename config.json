@@ -726,43 +726,47 @@
       "id": "portada",
       "titulo": "Portada",
       "bg": "#ffffff",
-      "color": "#f4a291",
+      "color": "#0c0d27",
       "icon": "🖼️",
-      "visible": "Si"
+      "visible": "Si",
+      "borde": "#686564"
     },
     "modalidad": {
       "id": "modalidad",
       "titulo": "Modalidad",
       "bg": "#ecdfdf",
-      "color": "#b92a0e",
+      "color": "#210803",
       "icon": "🌸",
       "visible": "Si",
-      "borde": "#9d9695"
+      "borde": "#9d9695",
+      "texto": "Flyers"
     },
     "pocimas": {
       "id": "pocimas",
       "titulo": "Pócimas y Yuyos del Bien",
       "bg": "#f0e0e0",
-      "color": "#2941f5",
+      "color": "#030517",
       "icon": "🍵",
       "visible": "Si",
-      "borde": "#282525"
+      "borde": "#646262"
     },
     "caminatas": {
       "id": "caminatas",
       "titulo": "Propuesta Diaria y Caminatas",
       "bg": "#dad2d2",
-      "color": "#17b061",
+      "color": "#09061e",
       "icon": "🚶‍♀️",
-      "visible": "No"
+      "visible": "No",
+      "borde": "#665e5c"
     },
     "practicas": {
       "id": "practicas",
       "titulo": "Prácticas",
       "bg": "#f1e0e0",
-      "color": "#d75023",
+      "color": "#0a042a",
       "icon": "🧘‍♀️",
-      "visible": "Si"
+      "visible": "Si",
+      "borde": "#67615f"
     },
     "actividades": {
       "id": "actividades",
@@ -770,23 +774,27 @@
       "bg": "#d5bebe",
       "color": "#2b2727",
       "icon": "✨",
-      "visible": "Si"
+      "visible": "Si",
+      "borde": "#676565"
     },
     "alimentos": {
       "id": "alimentos",
       "titulo": "Alimentos",
       "bg": "#e5d7d7",
-      "color": "#8b5dd0",
+      "color": "#19181b",
       "icon": "🥗",
-      "visible": "Si"
+      "visible": "Si",
+      "texto": "Nutricion",
+      "borde": "#6d6a69"
     },
     "diosas": {
       "id": "diosas",
       "titulo": "Diosas",
       "bg": "#e8dede",
-      "color": "#a8c63f",
+      "color": "#1f1f1e",
       "icon": "👑",
-      "visible": "Si"
+      "visible": "Si",
+      "borde": "#676565"
     },
     "registro": {
       "id": "registro",
@@ -794,15 +802,17 @@
       "bg": "#e0e0e0",
       "color": "#5f6459",
       "icon": "📷",
-      "visible": "Si"
+      "visible": "Si",
+      "borde": "#666160"
     },
     "agenda": {
       "id": "agenda",
       "titulo": "Mi Agenda Diaria y Sensaciones",
       "bg": "#e1dfdf",
-      "color": "#268687",
+      "color": "#1e1f20",
       "icon": "📅",
-      "visible": "Si"
+      "visible": "Si",
+      "borde": "#524d4c"
     },
     "novedades": {
       "id": "novedades",
@@ -810,15 +820,17 @@
       "bg": "#e0d7d9",
       "color": "#2b2727",
       "icon": "📢",
-      "visible": "Si"
+      "visible": "No",
+      "borde": "#8d8686"
     },
     "podcasts": {
       "id": "podcasts",
       "titulo": "Podcast",
       "bg": "#efebeb",
-      "color": "#18168d",
+      "color": "#0f0f10",
       "icon": "🎧",
-      "visible": "Si"
+      "visible": "Si",
+      "borde": "#6b6766"
     }
   },
   "configVisual": {
