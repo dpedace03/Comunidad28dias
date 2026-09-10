@@ -165,7 +165,7 @@
         .card-icon { font-size: calc(var(--card-title-size) * 1.8); display: flex; align-items: center; justify-content: center; }
 
         .featured-days-container {
-            display: flex; gap: 8px; margin-bottom: 4px; width: 100%;
+            display: flex; gap: 8px; margin-bottom: 4px; width: 100%; touch-action: pan-y;
         }
 
         .cal-day {
@@ -1563,6 +1563,25 @@
         modal.style.display = 'flex';
     }
 
+    // Si el ítem tiene link, al tocar la imagen se abre el link; si no, se amplía la imagen.
+    function escArg(s) {
+        return (s == null ? '' : s.toString()).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    }
+    function abrirImagenOLink(src, link) {
+        if (link) {
+            const win = window.open(link, '_blank');
+            if (!win) window.location.href = link;
+        } else {
+            openImageViewer(src);
+        }
+    }
+    function imgClickable(src, cssClass, link) {
+        const oc = link ? `abrirImagenOLink('${escArg(src)}','${escArg(link)}')` : `openImageViewer('${escArg(src)}')`;
+        const title = link ? 'Toca para abrir el enlace' : 'Toca para ampliar';
+        const cursor = link ? 'pointer' : 'zoom-in';
+        return `<img src="${src}" class="${cssClass}" onclick="${oc}" title="${title}" style="cursor:${cursor};">`;
+    }
+
     function closeImageViewer() {
         document.getElementById('image-viewer-modal').style.display = 'none';
     }
@@ -1608,16 +1627,17 @@
     /* CARROUSEL DINÁMICO */
     let carouselState = {};
 
-    function renderCarouselHTML(carouselId, imgList, autoAdvanceToHome = false) {
+    function renderCarouselHTML(carouselId, imgList, autoAdvanceToHome = false, links = '') {
         if (!imgList || imgList.length === 0) return '';
+        const getLink = (idx) => Array.isArray(links) ? (links[idx] || '') : (links || '');
         if (imgList.length === 1) {
-            return `<img src="${imgList[0]}" class="item-attached-img" onclick="openImageViewer('${imgList[0]}')" title="Toca para ampliar">`;
+            return imgClickable(imgList[0], 'item-attached-img', getLink(0));
         }
 
         carouselState[carouselId] = 0;
 
-        const slidesHTML = imgList.map((imgUrl) => 
-            `<img src="${imgUrl}" class="carousel-img" onclick="openImageViewer('${imgUrl}')" title="Toca para ampliar">`
+        const slidesHTML = imgList.map((imgUrl, idx) =>
+            imgClickable(imgUrl, 'carousel-img', getLink(idx))
         ).join('');
 
         const dotsHTML = imgList.map((_, idx) => 
@@ -1795,6 +1815,39 @@
         });
     }
 
+    function cambiarDiaAgenda(delta) {
+        const totalDias = (cfgCalendario && cfgCalendario.duracionDias) ? cfgCalendario.duracionDias : 28;
+        let nuevo = diaSeleccionadoActual + delta;
+        if (nuevo < 1) nuevo = 1;
+        if (nuevo > totalDias) nuevo = totalDias;
+        if (nuevo === diaSeleccionadoActual) return;
+        diaSeleccionadoActual = nuevo;
+        renderBarra3Dias(nuevo);
+        cargarDiaAgendaInline(nuevo);
+        renderPublicNovedades();
+    }
+
+    function initSwipeAgenda() {
+        const cont = document.getElementById('featured-days-container');
+        if (!cont || cont._swipeInit) return;
+        cont._swipeInit = true;
+        let x0 = null, y0 = null;
+        cont.addEventListener('touchstart', (e) => {
+            const t = e.changedTouches[0];
+            x0 = t.clientX; y0 = t.clientY;
+        }, { passive: true });
+        cont.addEventListener('touchend', (e) => {
+            if (x0 === null) return;
+            const t = e.changedTouches[0];
+            const dx = t.clientX - x0, dy = t.clientY - y0;
+            // Deslizar a la izquierda => día siguiente; a la derecha => día anterior.
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+                cambiarDiaAgenda(dx < 0 ? 1 : -1);
+            }
+            x0 = null; y0 = null;
+        }, { passive: true });
+    }
+
     function initCalendar() {
         const grid = document.getElementById('calendar-grid');
         if (!grid) return;
@@ -1932,16 +1985,16 @@
                 headerItems.map((it, idx) => {
                     let mediaHTML = '';
                     if (it.imagenes.length > 1) {
-                        mediaHTML = renderCarouselHTML(`header-res-${diaNumero}-${idx}`, it.imagenes);
+                        mediaHTML = renderCarouselHTML(`header-res-${diaNumero}-${idx}`, it.imagenes, false, it.link || '');
                     } else if (it.imagenes.length === 1) {
-                        mediaHTML = `<img src="${it.imagenes[0]}" class="item-attached-img" onclick="openImageViewer('${it.imagenes[0]}')" title="Toca para ampliar">`;
+                        mediaHTML = imgClickable(it.imagenes[0], 'item-attached-img', it.link || '');
                     }
 
                     return `
                         <div class="agenda-attached-card">
                             <div><b>${it.tipo}:</b> ${it.nombre} ${(it.turno && it.turno !== "Ninguno") ? `<span class="badge-turno">${it.turno}</span>` : ''}</div>
                             ${it.desc ? `<div style="font-size:0.85rem; color:#555; white-space:pre-line;">${it.desc}</div>` : ''}
-                            ${it.link ? `<a href="${it.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
+                            ${(it.link && !mediaHTML) ? `<a href="${it.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
                             ${mediaHTML}
                         </div>
                     `;
@@ -2008,9 +2061,9 @@
             attachedHTML = itemsEnHora.map((it, idx) => {
                 let mediaHTML = '';
                 if (it.imagenes && it.imagenes.length > 1) {
-                    mediaHTML = renderCarouselHTML(`hour-res-${horaStr}-${idx}`, it.imagenes);
+                    mediaHTML = renderCarouselHTML(`hour-res-${horaStr}-${idx}`, it.imagenes, false, it.link || '');
                 } else if (it.imagenes && it.imagenes.length === 1) {
-                    mediaHTML = `<img src="${it.imagenes[0]}" class="item-attached-img" onclick="openImageViewer('${it.imagenes[0]}')" title="Toca para ampliar">`;
+                    mediaHTML = imgClickable(it.imagenes[0], 'item-attached-img', it.link || '');
                 }
 
                 return `
@@ -2020,7 +2073,7 @@
                             ${(it.turno && it.turno !== "Ninguno") ? `<span class="badge-turno">${it.turno}</span>` : ''}
                         </div>
                         ${it.desc ? `<div style="font-size:0.8rem; color:#555;">${it.desc}</div>` : ''}
-                        ${it.link ? `<a href="${it.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
+                        ${(it.link && !mediaHTML) ? `<a href="${it.link}" target="_blank" class="practica-link-btn">🔗 Abrir Enlace / Recurso</a>` : ''}
                         ${mediaHTML}
                     </div>
                 `;
@@ -2167,13 +2220,14 @@
         Object.keys(carrouselsMap).forEach(numC => {
             const grupo = carrouselsMap[numC];
             let imagenesCarrousel = [];
+            let linksCarrousel = [];
             grupo.forEach(g => {
-                if (g.imagenes && g.imagenes.length > 0) imagenesCarrousel.push(...g.imagenes);
-                else if (g.imgUrl) imagenesCarrousel.push(g.imgUrl);
+                const gImgs = (g.imagenes && g.imagenes.length > 0) ? g.imagenes : (g.imgUrl ? [g.imgUrl] : []);
+                gImgs.forEach(im => { imagenesCarrousel.push(im); linksCarrousel.push(g.link || ''); });
             });
 
             const primerItem = grupo[0];
-            const mediaHTML = renderCarouselHTML(`${prefixId}-carrousel-${numC}`, imagenesCarrousel, autoAdvance);
+            const mediaHTML = renderCarouselHTML(`${prefixId}-carrousel-${numC}`, imagenesCarrousel, autoAdvance, linksCarrousel);
 
             htmlFinal += `
                 <div class="practica-card-item" data-item-key="${claveBusqueda(primerItem.nombre || primerItem.titulo || '')}">
@@ -2184,7 +2238,7 @@
                     </p>
                     <p style="white-space: pre-line; line-height: 1.4;">${primerItem.desc || ''}</p>
                     ${primerItem.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${primerItem.observacion}</p>` : ''}
-                    ${primerItem.link ? `<a href="${primerItem.link}" target="_blank" class="practica-link-btn">🔗 Enlace / Información</a>` : ''}
+                    ${(primerItem.link && !mediaHTML) ? `<a href="${primerItem.link}" target="_blank" class="practica-link-btn">🔗 Enlace / Información</a>` : ''}
                     ${mediaHTML}
                 </div>
             `;
@@ -2194,9 +2248,9 @@
             let imagenesTotales = (item.imagenes && item.imagenes.length > 0) ? item.imagenes : (item.imgUrl ? [item.imgUrl] : []);
             let mediaHTML = '';
             if (imagenesTotales.length > 1) {
-                mediaHTML = renderCarouselHTML(`${prefixId}-${originalIdx}`, imagenesTotales, autoAdvance);
+                mediaHTML = renderCarouselHTML(`${prefixId}-${originalIdx}`, imagenesTotales, autoAdvance, item.link || '');
             } else if (imagenesTotales.length === 1) {
-                mediaHTML = `<img src="${imagenesTotales[0]}" class="item-attached-img" onclick="openImageViewer('${imagenesTotales[0]}')" title="Toca para ampliar">`;
+                mediaHTML = imgClickable(imagenesTotales[0], 'item-attached-img', item.link || '');
             }
 
             htmlFinal += `
@@ -2208,7 +2262,7 @@
                     </p>
                     <p style="white-space: pre-line; line-height: 1.4;">${item.desc || ''}</p>
                     ${item.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${item.observacion}</p>` : ''}
-                    ${item.link ? `<a href="${item.link}" target="_blank" class="practica-link-btn">🔗 Enlace / Información</a>` : ''}
+                    ${(item.link && !mediaHTML) ? `<a href="${item.link}" target="_blank" class="practica-link-btn">🔗 Enlace / Información</a>` : ''}
                     ${mediaHTML}
                 </div>
             `;
@@ -3291,9 +3345,9 @@
             let imagenesTotales = (item.imagenes && item.imagenes.length > 0) ? item.imagenes : (item.imgUrl ? [item.imgUrl] : []);
             let mediaHTML = '';
             if (imagenesTotales.length > 1) {
-                mediaHTML = renderCarouselHTML(`registro-pub-${idx}`, imagenesTotales);
+                mediaHTML = renderCarouselHTML(`registro-pub-${idx}`, imagenesTotales, false, item.link || '');
             } else if (imagenesTotales.length === 1) {
-                mediaHTML = `<img src="${imagenesTotales[0]}" class="item-attached-img" onclick="openImageViewer('${imagenesTotales[0]}')" title="Toca para ampliar">`;
+                mediaHTML = imgClickable(imagenesTotales[0], 'item-attached-img', item.link || '');
             }
 
             const tempKey = `idx_${idx}`;
@@ -3311,7 +3365,7 @@
                     </p>
                     <p style="white-space: pre-line; line-height: 1.4; margin-top:4px;">${item.desc || ''}</p>
                     ${item.observacion ? `<p style="font-size:0.85rem; color:#666;"><b>Observación:</b> ${item.observacion}</p>` : ''}
-                    ${item.link ? `<a href="${item.link}" target="_blank" class="practica-link-btn">🔗 Enlace / Información</a>` : ''}
+                    ${(item.link && !mediaHTML) ? `<a href="${item.link}" target="_blank" class="practica-link-btn">🔗 Enlace / Información</a>` : ''}
                     ${mediaHTML}
 
                     <div class="user-photo-upload-box">
@@ -3704,6 +3758,9 @@
                                 <option value="No" ${!isVis ? 'selected' : ''}>No</option>
                             </select>
                         </label>
+                        <label style="font-size:0.8rem; width:100%; display:block; margin-top:4px;">Texto del botón (reemplaza el título):
+                            <input type="text" value="${(btn.texto || '').replace(/"/g, '&quot;')}" placeholder="Dejar vacío para usar el título original" oninput="botonesConfig['${key}'].texto=this.value; aplicarEstilosBotones();" style="width:100%; box-sizing:border-box; padding:4px 6px;">
+                        </label>
                     </div>
                 </div>
             `;
@@ -3721,7 +3778,12 @@
                 if (btn.visible === "No") cardEl.classList.add('hidden-btn');
                 else cardEl.classList.remove('hidden-btn');
             }
-            if (titleEl) titleEl.style.color = btn.color;
+            if (titleEl) {
+                if (titleEl.dataset.orig === undefined) titleEl.dataset.orig = titleEl.textContent;
+                titleEl.textContent = (btn.texto && btn.texto.trim() !== "") ? btn.texto : titleEl.dataset.orig;
+                titleEl.style.color = btn.color;
+            }
+
             // Los cards internos de cada pantalla toman el mismo color de fondo que su botón.
             const screenEl = document.getElementById(`screen-${key}`);
             if (screenEl && btn.bg) screenEl.style.setProperty('--card-tema-bg', btn.bg);
@@ -3927,6 +3989,7 @@
     initCalendar();
     aplicarEstilosBotones();
     renderPublicPortada();
+    initSwipeAgenda();
 </script>
 
 </body>
