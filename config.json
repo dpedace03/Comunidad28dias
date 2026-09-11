@@ -697,20 +697,37 @@
       ]
     },
     {
-      "nombre": "Iniciando Caminatas",
+      "nombre": "Drenaje linfatico",
       "desc": "",
-      "diareto": "2",
+      "diareto": "12",
       "fecha": "",
       "hora": "",
       "dias": "Ninguno",
       "turno": "Ninguno",
-      "orden": 1,
+      "orden": 3,
+      "carrousel": 0,
+      "link": "",
+      "observacion": " Seguimos activando nuestra sensibilidad masajeando nuestro cuerpo con amor y haciendo circular lo estancando para que se drene, elimine y desintoxique nuestro sistema linfático tan fundamental para el bienestar. 🌸",
+      "agenda": "Si",
+      "imagenes": [
+        "DrenajeConAutomasajeLinfatico.jpeg"
+      ]
+    },
+    {
+      "nombre": "Drenaje linfatico, cabeza y cuerpo",
+      "desc": "",
+      "diareto": "12",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 4,
       "carrousel": 0,
       "link": "",
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
-        "IniciandoCaminatas.png"
+        "DrenajeLinfaticoCabezaCuerpo.jpeg"
       ]
     }
   ],
