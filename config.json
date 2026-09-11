@@ -537,6 +537,23 @@
       "imagenes": [
         "MovimientoConIntencion.png"
       ]
+    },
+    {
+      "nombre": "Automasaje del amor",
+      "desc": "",
+      "diareto": "12",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 4,
+      "carrousel": 0,
+      "link": "https://youtu.be/5RWurgmjDAI",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "AutomasajeDelAmor.png"
+      ]
     }
   ],
   "infusionesDB": [
