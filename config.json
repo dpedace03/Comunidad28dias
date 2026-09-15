@@ -431,6 +431,23 @@
       "imagenes": [
         "BudinDulceTentacion.png"
       ]
+    },
+    {
+      "nombre": "Pickles y Conservas",
+      "desc": "",
+      "diareto": "13",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/jU_gT-wodbs",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "PicklesYconservas.png"
+      ]
     }
   ],
   "diosasDB": [
@@ -534,6 +551,23 @@
       "agenda": "Si",
       "imagenes": [
         "Hestia.png"
+      ]
+    },
+    {
+      "nombre": "Demeter",
+      "desc": "",
+      "diareto": "13",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/PEuHkLGD1Jo",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "Demeter.png"
       ]
     }
   ],
