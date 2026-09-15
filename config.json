@@ -484,6 +484,23 @@
       "imagenes": [
         "Afrodita.png"
       ]
+    },
+    {
+      "nombre": "Hestia",
+      "desc": "Muy buen dia queridas mujeres acá recordándo la importancia de no bajar la conexión y motivación del recorrido.\nMuchas veces fracasan nuestros propósitos no porque no estén bien aspectados sino porque les quitamos la energía antes de tiempo.\nA renovar el compromiso con nuestra transformación en este cuerpo y nuestra imagen de nosotras mismas.\nPara ello esta Diosa nos lo recuerda.\nBonita caminata.",
+      "diareto": "16",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 6,
+      "carrousel": 0,
+      "link": "https://youtu.be/EcArP90g1gk",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "Hestia.png"
+      ]
     }
   ],
   "practicasDB": [
@@ -553,6 +570,23 @@
       "agenda": "Si",
       "imagenes": [
         "AutomasajeDelAmor.png"
+      ]
+    },
+    {
+      "nombre": "Vaciamiento y Activacion ",
+      "desc": "",
+      "diareto": "15",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 5,
+      "carrousel": 0,
+      "link": "https://youtu.be/jd4wqE2ECHs",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "VaciamientoYActivacion.png"
       ]
     }
   ],
