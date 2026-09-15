@@ -154,6 +154,23 @@
       "imagenes": [
         "MovimientoConElCuerpo.png"
       ]
+    },
+    {
+      "nombre": "Vacio Fertil",
+      "desc": "",
+      "diareto": "14",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 5,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "VacioFertil.jpeg"
+      ]
     }
   ],
   "caminatasDBList": [],
@@ -397,6 +414,23 @@
       "imagenes": [
         "AceiteHerbalParaDiosas.png"
       ]
+    },
+    {
+      "nombre": "Budin, dulce tentacion",
+      "desc": "",
+      "diareto": "13",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "BudinDulceTentacion.png"
+      ]
     }
   ],
   "diosasDB": [
@@ -487,7 +521,7 @@
     },
     {
       "nombre": "Hestia",
-      "desc": "Muy buen dia queridas mujeres acá recordándo la importancia de no bajar la conexión y motivación del recorrido.\nMuchas veces fracasan nuestros propósitos no porque no estén bien aspectados sino porque les quitamos la energía antes de tiempo.\nA renovar el compromiso con nuestra transformación en este cuerpo y nuestra imagen de nosotras mismas.\nPara ello esta Diosa nos lo recuerda.\nBonita caminata.",
+      "desc": "Muy buen dia queridas mujeres acá recordándo la importancia de no bajar la conexión y motivación del recorrido.\nMuchas veces fracasan nuestros propósitos no porque no estén bien aspectados sino porque les quitamos la energía antes de tiempo.\nA renovar el compromiso con nuestra transformación en este cuerpo y nuestra imagen de nosotras mismas.\nPara ello esta Diosa nos lo recuerda.\nBonita caminata!!",
       "diareto": "16",
       "fecha": "",
       "hora": "",
@@ -573,14 +607,14 @@
       ]
     },
     {
-      "nombre": "Vaciamiento y Activacion ",
-      "desc": "",
+      "nombre": "Vaciamiento y Activacion",
+      "desc": "Muy buen día queridas mujeres!!! 🌸💃🌟 completamos la segunda semana y llegamos a la mitad de nuestro recorrido.\n\nSeguimos tomando la manzanilla, el suico o artemisia y la pasionaria..\n\nSeguimos con nuestros jugos y comiditas del buen nutrir y del amor.\n\nDurante estas dos semanas estuvimos observando y moviendo para soltar las toxinas. \nAhora inicia nuestro camino hacia el llenar lo que vaciamos desde nuevas percepción, practicas. Nuevas conexiones neuronales para crear en conciencia la nueva imagen corporal de nosotras mismas. \n\nBienvenidas a la curva ascendente!!! 🌈💃",
       "diareto": "15",
       "fecha": "",
       "hora": "",
       "dias": "Ninguno",
       "turno": "Ninguno",
-      "orden": 5,
+      "orden": 6,
       "carrousel": 0,
       "link": "https://youtu.be/jd4wqE2ECHs",
       "observacion": "",
