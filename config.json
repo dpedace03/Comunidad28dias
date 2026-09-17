@@ -171,6 +171,23 @@
       "imagenes": [
         "VacioFertil.jpeg"
       ]
+    },
+    {
+      "nombre": "Darle un tiempo a  mi mundo",
+      "desc": "",
+      "diareto": "17",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "DarleUnTiempo.png"
+      ]
     }
   ],
   "caminatasDBList": [],
@@ -569,6 +586,23 @@
       "imagenes": [
         "Demeter.png"
       ]
+    },
+    {
+      "nombre": "Persefone",
+      "desc": "",
+      "diareto": "18",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 7,
+      "carrousel": 0,
+      "link": "https://youtu.be/bixr8_J89gE",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "Persefone.png"
+      ]
     }
   ],
   "practicasDB": [
@@ -778,6 +812,23 @@
       "imagenes": [
         "Meditacion_Amarnos.png"
       ]
+    },
+    {
+      "nombre": "Meditacion Activa tu fuego interior",
+      "desc": "",
+      "diareto": "17",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 4,
+      "carrousel": 0,
+      "link": "https://youtu.be/Sb2EcBwW9qw",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "ActivarNuestroFuego.png"
+      ]
     }
   ],
   "actividadesDB": [
@@ -847,6 +898,40 @@
       "agenda": "Si",
       "imagenes": [
         "DrenajeLinfaticoCabezaCuerpo.jpeg"
+      ]
+    },
+    {
+      "nombre": "2 reunion con ZOOM",
+      "desc": "Bienvenidas a nuestro primer fogón de mujeres en estos 28 días \n\nJueves 3 de septiembre \n20hs Argentina \n17hs Guadalajara México\nLas espero\nAnka 🌟💐🌸💃\n\nUnirse a la reunión Zoom\nhttps://us02web.zoom.us/j/8578581730?pwd=M0NyNzRsUmlKeEMrbC9IYnlITFQwdz09\n\nID de reunión: 857 858 1730\nCódigo de acceso: 399162",
+      "diareto": "18",
+      "fecha": "2026-09-17",
+      "hora": "20:00",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 5,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "zoom_1709.png"
+      ]
+    },
+    {
+      "nombre": "Bolsita de Herramientas energeticas",
+      "desc": "",
+      "diareto": "17",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "BolsitaHerramientasEnergeticas.png"
       ]
     }
   ],
