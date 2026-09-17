@@ -293,6 +293,43 @@
         }
         .img-preview-box img { max-height: 70px; border-radius: 4px; margin-top: 4px; display: block; }
 
+        /* Contenedor relativo para cada imagen de la vista previa con su botón de eliminar */
+        .preview-img-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        .preview-img-wrapper img {
+            display: block;
+            max-height: 70px;
+            border-radius: 4px;
+            border: 1px solid #f2c6be;
+        }
+        .preview-img-delete-btn {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: #e06d53;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 5;
+        }
+        .preview-img-delete-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+
         .portada-full-mode {
             width: 100%; height: 100%; display: flex; flex-direction: column;
             justify-content: space-between; align-items: center;
@@ -1725,11 +1762,51 @@
         if (!previewBox || !previewImgsContainer) return;
 
         if (imagenes && imagenes.length > 0) {
-            previewImgsContainer.innerHTML = imagenes.map(img => `<img src="${img}" alt="Preview">`).join('');
+            previewImgsContainer.innerHTML = imagenes.map((img, imgIdx) => `
+                <div class="preview-img-wrapper">
+                    <img src="${img}" alt="Preview">
+                    <button type="button" class="preview-img-delete-btn" onclick="eliminarImagenIndividual('${prefix}', ${imgIdx})" title="Eliminar esta imagen">✕</button>
+                </div>
+            `).join('');
             previewBox.style.display = 'block';
         } else {
             previewBox.style.display = 'none';
             previewImgsContainer.innerHTML = '';
+        }
+    }
+
+    function eliminarImagenIndividual(prefix, imgIdx) {
+        const mapaColecciones = {
+            'por': { db: portadaDBList, renderPublic: renderPublicPortada },
+            'mod': { db: modalidadDBList, renderPublic: renderPublicModalidad },
+            'cam': { db: caminatasDBList, renderPublic: renderPublicCaminatas },
+            'reg': { db: registroDBList, renderPublic: renderPublicRegistro },
+            'ali': { db: alimentosDB, renderPublic: renderPublicAlimentos },
+            'dio': { db: diosasDB, renderPublic: renderPublicDiosas },
+            'inf': { db: infusionesDB, renderPublic: renderPublicPocimas },
+            'pod': { db: podcastsDB, renderPublic: renderPublicPodcasts },
+            'act': { db: actividadesDB, renderPublic: renderPublicActividades },
+            'nov': { db: novedadesDB, renderPublic: renderPublicNovedades },
+            'pra': { db: practicasDB, renderPublic: renderPracticasScreen }
+        };
+
+        const config = mapaColecciones[prefix];
+        const idxEdicion = editIndices[prefix];
+
+        if (config && idxEdicion >= 0 && config.db[idxEdicion]) {
+            const item = config.db[idxEdicion];
+            if (item.imagenes && item.imagenes.length > imgIdx) {
+                item.imagenes.splice(imgIdx, 1);
+                
+                const rutaInput = document.getElementById(`${prefix}-ruta-input`);
+                if (rutaInput) {
+                    rutaInput.value = item.imagenes.filter(r => !r.startsWith('data:')).join(', ');
+                }
+
+                mostrarVistaPreviaEdicion(prefix, item.imagenes);
+                if (config.renderPublic) config.renderPublic();
+                renderConfigLists();
+            }
         }
     }
 
