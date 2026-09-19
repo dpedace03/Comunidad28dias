@@ -620,6 +620,23 @@
       "imagenes": [
         "Persefone.png"
       ]
+    },
+    {
+      "nombre": "Hecate",
+      "desc": "",
+      "diareto": "20",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 8,
+      "carrousel": 0,
+      "link": "https://youtu.be/PPl6UQkgldI",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "Hecate.png"
+      ]
     }
   ],
   "practicasDB": [
