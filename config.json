@@ -205,6 +205,23 @@
       "imagenes": [
         "DiaParaAgradecer.png"
       ]
+    },
+    {
+      "nombre": "Contemplar la Naturaleza",
+      "desc": "",
+      "diareto": "21",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 12,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "ContemplarLaNAturaleza.png"
+      ]
     }
   ],
   "caminatasDBList": [],
@@ -481,6 +498,23 @@
       "agenda": "Si",
       "imagenes": [
         "PicklesYconservas.png"
+      ]
+    },
+    {
+      "nombre": "Emplatando sabores",
+      "desc": "Y para las que tengan ganas acá les muestro mi estilo de cocinar.\nLos fideos son de arroz fino que solo se hidratan con agua hirviendo",
+      "diareto": "21",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/JIlG9mgumxw",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "EmplatandoSabores.png"
       ]
     }
   ],
@@ -838,7 +872,7 @@
       "hora": "",
       "dias": "Ninguno",
       "turno": "Ninguno",
-      "orden": 1,
+      "orden": 4,
       "carrousel": 0,
       "link": "https://youtu.be/t5Ml-L4yhfg",
       "observacion": "",
@@ -855,13 +889,30 @@
       "hora": "",
       "dias": "Ninguno",
       "turno": "Ninguno",
-      "orden": 4,
+      "orden": 5,
       "carrousel": 0,
       "link": "https://youtu.be/Sb2EcBwW9qw",
       "observacion": "",
       "agenda": "Si",
       "imagenes": [
         "ActivarNuestroFuego.png"
+      ]
+    },
+    {
+      "nombre": "Los cuatro elementos",
+      "desc": "",
+      "diareto": "21",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 6,
+      "carrousel": 0,
+      "link": "https://youtu.be/K1e7fkYv7HI",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "LosCuatroElementos.png"
       ]
     }
   ],
