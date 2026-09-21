@@ -95,7 +95,7 @@
       "hora": "",
       "dias": "Ninguno",
       "turno": "Ninguno",
-      "orden": 1,
+      "orden": 5,
       "carrousel": 0,
       "link": "",
       "observacion": "",
@@ -112,7 +112,7 @@
       "hora": "",
       "dias": "Ninguno",
       "turno": "Ninguno",
-      "orden": 1,
+      "orden": 6,
       "carrousel": 0,
       "link": "",
       "observacion": "",
@@ -129,7 +129,7 @@
       "hora": "",
       "dias": "Ninguno",
       "turno": "Ninguno",
-      "orden": 1,
+      "orden": 7,
       "carrousel": 0,
       "link": "",
       "observacion": "",
@@ -146,7 +146,7 @@
       "hora": "",
       "dias": "Ninguno",
       "turno": "Ninguno",
-      "orden": 1,
+      "orden": 8,
       "carrousel": 0,
       "link": "",
       "observacion": "",
@@ -163,7 +163,7 @@
       "hora": "",
       "dias": "Ninguno",
       "turno": "Ninguno",
-      "orden": 5,
+      "orden": 9,
       "carrousel": 0,
       "link": "",
       "observacion": "",
@@ -180,7 +180,7 @@
       "hora": "",
       "dias": "Ninguno",
       "turno": "Ninguno",
-      "orden": 1,
+      "orden": 10,
       "carrousel": 0,
       "link": "",
       "observacion": "",
@@ -197,7 +197,7 @@
       "hora": "",
       "dias": "Ninguno",
       "turno": "Ninguno",
-      "orden": 1,
+      "orden": 11,
       "carrousel": 0,
       "link": "",
       "observacion": "",
@@ -221,6 +221,23 @@
       "agenda": "Si",
       "imagenes": [
         "ContemplarLaNAturaleza.png"
+      ]
+    },
+    {
+      "nombre": "Equinoccio",
+      "desc": "Feliz EQUINOCCIO queridas mujeres!!!\n\nLa invitación en el día de hoy es a observar todos los lugares en donde la energia fluye en desequilibrio ya sea por dar o cargar de más. O por bloqueo estar demasiado para adentro.\nEn cualquier aspecto de nuestra vida.\n\nEscribilo en una columna y alado a cada situación tratar de llevarla a un mayor equilibrio. \n¿Como sería equilibrar eso que esta en desequilibrio?. \n¿Cual seria la solución posible.? Y escriban opciones.\n\nEste ejercicio nos saca del circuito repetitivo y comienza a tener un camino de salida.\n\nPorque lo que no equilibramos nosotras el cuerpo y el universo lo resolverá y ahí es donde sucede lo que no elegimos.\n\nEntonces comencemos a elegir...que todas las Diosas nos acompañen!!!\n\nOrden, equilibrio y balance= salud y bienestar ",
+      "diareto": "22",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 13,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "Equinoccio.png"
       ]
     }
   ],
@@ -757,6 +774,23 @@
       "agenda": "Si",
       "imagenes": [
         "VaciamientoYActivacion.png"
+      ]
+    },
+    {
+      "nombre": "Mujeres Multifucion",
+      "desc": "",
+      "diareto": "22",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 7,
+      "carrousel": 0,
+      "link": "https://youtu.be/_qKq3QFxA5o",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "Practica3_Mujeres_Multifuncion.png"
       ]
     }
   ],
