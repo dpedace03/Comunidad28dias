@@ -239,6 +239,23 @@
       "imagenes": [
         "Equinoccio.png"
       ]
+    },
+    {
+      "nombre": "Bolsita de Herramientas energeticas",
+      "desc": "",
+      "diareto": "17",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "BolsitaHerramientasEnergeticas.png"
+      ]
     }
   ],
   "caminatasDBList": [],
@@ -246,7 +263,7 @@
     {
       "nombre": "Registro fotografico",
       "desc": "",
-      "diareto": "1",
+      "diareto": "2",
       "fecha": "",
       "hora": "",
       "dias": "Todos",
@@ -350,7 +367,7 @@
     {
       "nombre": "Alimentos Fitoestrogenos",
       "desc": "",
-      "diareto": "6",
+      "diareto": "7",
       "fecha": "",
       "hora": "",
       "dias": "Ninguno",
@@ -383,7 +400,7 @@
     },
     {
       "nombre": "Kefir de Agua",
-      "desc": "",
+      "desc": "Aquí un probiótico super para seguir ordenando nuestro bioma intestinal, desinflamando y recuperando nuestra vitalidad. Hoy en día si no desean prepararlo se consigue en dietéticas.",
       "diareto": "8",
       "fecha": "",
       "hora": "",
@@ -533,6 +550,23 @@
       "imagenes": [
         "EmplatandoSabores.png"
       ]
+    },
+    {
+      "nombre": "Agua solar",
+      "desc": "Elijan una botella que acompañe el recorrido para el agua sagrada de cada día. Si pueden la cargan al sol. 1 litro",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "agua.jpeg"
+      ]
     }
   ],
   "diosasDB": [
@@ -556,7 +590,7 @@
     {
       "nombre": "Athenea",
       "desc": "",
-      "diareto": "1",
+      "diareto": "2",
       "fecha": "2026-08-31",
       "hora": "",
       "dias": "Ninguno",
@@ -842,6 +876,40 @@
       "agenda": "Si",
       "imagenes": [
         "InfusionesQueAcompañan.png"
+      ]
+    },
+    {
+      "nombre": "Infusiones que acompañan",
+      "desc": "",
+      "diareto": "1",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "https://youtu.be/ENW0bbo_82I",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "InfusionesQueAcompañan.png"
+      ]
+    },
+    {
+      "nombre": "Pasiflora",
+      "desc": "",
+      "diareto": "10",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "Pasiflora.png"
       ]
     }
   ],
