@@ -72,7 +72,23 @@
         .screen-title {
             margin: 0; font-size: 1.1rem; color: var(--primary-dark);
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            display: flex; align-items: center; gap: 8px;
         }
+
+        .btn-diskette {
+            background: #fff;
+            border: 1px solid var(--salmon);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 2px 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.1s;
+        }
+        .btn-diskette:active { transform: scale(0.92); }
 
         .btn-back {
             background: transparent;
@@ -527,10 +543,13 @@
         </div>
     </div>
 
-    <!-- PANTALLA AGENDA -->
+    <!-- PANTALLA AGENDA CON BOTÓN DISKETTE -->
     <div id="screen-agenda" class="screen">
         <div class="screen-header">
-            <h2 class="screen-title" style="font-family: 'Playfair Display', serif;">Mi Agenda Diaria</h2>
+            <h2 class="screen-title" style="font-family: 'Playfair Display', serif;">
+                <span>Mi Agenda Diaria</span>
+                <button class="btn-diskette" onclick="descargarAgendaExcel()" title="Descargar Notas de la Agenda en Excel">💾</button>
+            </h2>
             <button class="btn-back" onclick="nav('home')"><img src="flecha_verde.png" alt="Volver" class="btn-back-ico"></button>
         </div>
         <div class="screen-body">
@@ -1575,6 +1594,62 @@
         localStorage.removeItem('app_config_json');
         renderConfigLists();
         alert(`¡Limpieza completada! Se convirtieron ${contadorLimpiadas} imágenes pesadas a rutas de texto. Ahora al hacer clic en "Descargar config.json" pesará menos de 50 KB.`);
+    }
+
+    /* --- FUNCIÓN PARA EXPORTAR EXCLUSIVAMENTE LAS NOTAS/INCORPORACIONES A EXCEL (CSV) --- */
+    function descargarAgendaExcel() {
+        const totalDias = (cfgCalendario && cfgCalendario.duracionDias) ? cfgCalendario.duracionDias : 28;
+        let csvContent = "\uFEFF"; // BOM para asegurar caracteres en español en Excel
+        csvContent += "Día Reto;Fecha;Día Semana;Hora / Sección;Incorporaciones / Actividades Seleccionadas;Notas y Sensaciones\n";
+
+        let filasExportadas = 0;
+
+        for (let dia = 1; dia <= totalDias; dia++) {
+            const info = getInfoDiaReto(dia);
+            const fechaKey = info.fechaKey;
+            const nombreDia = info.nombreDia;
+            const registroPrevio = agendaGuardadaBD[fechaKey];
+
+            if (!registroPrevio) continue;
+
+            const notaPersonalGeneral = (registroPrevio.notas || "").replace(/"/g, '""').replace(/\r?\n/g, ' ');
+
+            // 1. Revisar los 24 horarios por notas o propuestas incorporadas
+            for (let h = 0; h < 24; h++) {
+                const horaStr = `${h < 10 ? '0' + h : h}:00 hs`;
+                const seleccionados = (registroPrevio.seleccionados && registroPrevio.seleccionados[horaStr]) || [];
+                const textoLibreHora = (registroPrevio.horarios && registroPrevio.horarios[horaStr]) || '';
+
+                if (seleccionados.length > 0 || textoLibreHora.trim() !== '') {
+                    const incStr = seleccionados.join(' | ').replace(/"/g, '""');
+                    const notaHoraStr = textoLibreHora.trim().replace(/"/g, '""').replace(/\r?\n/g, ' ');
+                    csvContent += `"${dia}";"${fechaKey}";"${nombreDia}";"${horaStr}";"${incStr}";"${notaHoraStr}"\n`;
+                    filasExportadas++;
+                }
+            }
+
+            // 2. Si no hubo anotaciones por hora pero sí una nota personal general en el día
+            const tieneNotasPorHora = Object.values(registroPrevio.horarios || {}).some(txt => txt && txt.trim() !== '') ||
+                                      Object.values(registroPrevio.seleccionados || {}).some(arr => arr && arr.length > 0);
+
+            if (!tieneNotasPorHora && notaPersonalGeneral.trim() !== '') {
+                csvContent += `"${dia}";"${fechaKey}";"${nombreDia}";"Notas Generales del Día";"";"${notaPersonalGeneral}"\n`;
+                filasExportadas++;
+            }
+        }
+
+        if (filasExportadas === 0) {
+            alert("Aún no has incorporado notas ni actividades personales en la agenda.");
+            return;
+        }
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Notas_Agenda_28_Dias_${new Date().toISOString().split('T')[0]}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
     }
 
     let currentScale = 1;
