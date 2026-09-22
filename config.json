@@ -722,6 +722,23 @@
       "imagenes": [
         "Hecate.png"
       ]
+    },
+    {
+      "nombre": "Iemanja",
+      "desc": "",
+      "diareto": "23",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 9,
+      "carrousel": 0,
+      "link": "https://youtu.be/VqQqlGPEfqU",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "iemanja.png"
+      ]
     }
   ],
   "practicasDB": [
@@ -1015,6 +1032,23 @@
       "agenda": "Si",
       "imagenes": [
         "LosCuatroElementos.png"
+      ]
+    },
+    {
+      "nombre": "Paloma del cerro",
+      "desc": "Les dejo para acompañar bien lindo este caminar y conexión con esta diosa esta canción de Paloma del Cerro que también esta haciendo el recorrido con nosotras. \nInvito a que sigan su música medicina.",
+      "diareto": "23",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 7,
+      "carrousel": 0,
+      "link": "https://youtu.be/ckctd2yJuE4",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "PalomaDelCerro.png"
       ]
     }
   ],
