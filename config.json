@@ -1050,6 +1050,40 @@
       "imagenes": [
         "PalomaDelCerro.png"
       ]
+    },
+    {
+      "nombre": "Activando mi fuego interior",
+      "desc": "",
+      "diareto": "24",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 8,
+      "carrousel": 0,
+      "link": "https://youtu.be/Sb2EcBwW9qw",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "ActivandoFuegoInterior.png"
+      ]
+    },
+    {
+      "nombre": "Manifestando mi nueva imagen",
+      "desc": "Muy buen día queridas mujeres desde hoy hasta que terminemos el domingo el recorrido invito a que todos los días nos tomemos el tiempo para hacer estas dos Meditaciones.\nEl poder de manifestar empieza en tener una imagen clara y vivida de como quiero verme y vivir. \nLa imagen hasta ahora la creo el afuera pero este recorrido nos fue ayudando a cambiar el punto de percepción y es tiempo de ponernos en acción manifestación.\nFeliz primavera al hemisferio sur y otoño al hemisferio norte!!! ",
+      "diareto": "24",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 9,
+      "carrousel": 0,
+      "link": "https://youtu.be/2vUuZi3Os8E",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "MeditacionNuevaImagen.png"
+      ]
     }
   ],
   "actividadesDB": [
