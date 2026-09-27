@@ -273,6 +273,40 @@
       "imagenes": [
         "MiMision.png"
       ]
+    },
+    {
+      "nombre": "Ritual luna llena",
+      "desc": "Buen dia queridas mujeres \nHoy Luna llena, luna de la cosecha \n\nQue mejor cierre de recorrido que con la energía de hoy!!!\n\nLa luna en su mayor brillo, luz y fertilidad...\n\nAquí para este cierre del viaje les dejo esta ritual para que anclemos y enraicemos el nuevo ciclo de transformación\n\n💃💕🌔✨",
+      "diareto": "27",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 15,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "RitualLunaLlena.png"
+      ]
+    },
+    {
+      "nombre": "Ritual luna llena - cosecha",
+      "desc": "",
+      "diareto": "",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 16,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "RitualLunaLlena2.png"
+      ]
     }
   ],
   "caminatasDBList": [],
