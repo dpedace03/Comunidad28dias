@@ -640,9 +640,19 @@
                         🧹 Limpiar Imágenes Base64 (Reducir peso de 32MB a 50KB)
                     </button>
 
-                    <button class="btn-submit" style="background:#52b788; margin-bottom:8px;" onclick="descargarConfigJSON()">
-                        Descargar config.json Actualizado
-                    </button>
+                    <!-- BOTÓN CON CHECKBOX GITHUB DE SINCRONIZACIÓN AUTOMÁTICA -->
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap;">
+                        <button class="btn-submit" id="btnDescargarConfig" style="background:#52b788; flex: 1; margin-bottom: 0;" onclick="descargarConfigJSON()">
+                            Descargar config.json Actualizado
+                        </button>
+                        <label style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.85rem; font-weight: bold; color: var(--primary-dark); cursor: pointer; user-select: none; background: #fff; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--salmon);">
+                            <input type="checkbox" id="chk-github-sync" style="width: 16px; height: 16px; cursor: pointer;">
+                            GitHub
+                        </label>
+                        <button type="button" onclick="cambiarTokenGitHub()" style="background: #6e7681; color: #fff; border: none; padding: 8px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; cursor: pointer;" title="Configurar Token de GitHub">
+                            🔑 Token
+                        </button>
+                    </div>
 
                     <div class="form-group" style="margin-bottom:0;">
                         <label style="font-size:0.75rem;">📂 Cargar config.json manualmente:</label>
@@ -3939,7 +3949,98 @@
         });
     }
 
-    function descargarConfigJSON() {
+    /* --- GESTIÓN DE TOKEN Y SUBCIÓN AUTOMÁTICA A GITHUB --- */
+    const STORAGE_TOKEN_KEY = "github_pat_comunidad28dias";
+
+    function obtenerTokenGitHub() {
+        let token = localStorage.getItem(STORAGE_TOKEN_KEY);
+        if (!token) {
+            token = prompt("Por favor, ingresa tu GitHub Personal Access Token (PAT):");
+            if (token && token.trim() !== "") {
+                token = token.trim();
+                localStorage.setItem(STORAGE_TOKEN_KEY, token);
+                alert("Token de GitHub guardado en este navegador.");
+            } else {
+                alert("Se requiere un Token válido para sincronizar con GitHub.");
+                return null;
+            }
+        }
+        return token;
+    }
+
+    function cambiarTokenGitHub() {
+        const tokenActual = localStorage.getItem(STORAGE_TOKEN_KEY);
+        const nuevoToken = prompt("Ingresa el nuevo GitHub Token (o déjalo vacío para borrar el actual):", tokenActual || "");
+        if (nuevoToken === null) return;
+
+        if (nuevoToken.trim() === "") {
+            localStorage.removeItem(STORAGE_TOKEN_KEY);
+            alert("Token de GitHub eliminado.");
+        } else {
+            localStorage.setItem(STORAGE_TOKEN_KEY, nuevoToken.trim());
+            alert("Token de GitHub actualizado correctamente.");
+        }
+    }
+
+    async function subirConfigAGitHub(configData) {
+        const token = obtenerTokenGitHub();
+        if (!token) return false;
+
+        const owner = "dpedace03";
+        const repo = "Comunidad28dias";
+        const path = "config.json";
+        const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
+        const jsonString = JSON.stringify(configData, null, 2);
+        const contentBase64 = btoa(unescape(encodeURIComponent(jsonString)));
+
+        try {
+            const getRes = await fetch(url, {
+                headers: {
+                    "Authorization": `token ${token}`,
+                    "Accept": "application/vnd.github.v3+json"
+                }
+            });
+
+            let sha = "";
+            if (getRes.ok) {
+                const fileData = await getRes.json();
+                sha = fileData.sha;
+            } else if (getRes.status === 401) {
+                alert("Error 401: El Token de GitHub ingresado no es válido o expiró.");
+                localStorage.removeItem(STORAGE_TOKEN_KEY);
+                return false;
+            }
+
+            const putRes = await fetch(url, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `token ${token}`,
+                    "Content-Type": "application/json",
+                    "Accept": "application/vnd.github.v3+json"
+                },
+                body: JSON.stringify({
+                    message: "Actualización automática de config.json desde Panel Admin",
+                    content: contentBase64,
+                    sha: sha !== "" ? sha : undefined
+                })
+            });
+
+            if (putRes.ok) {
+                return true;
+            } else {
+                const errData = await putRes.json();
+                alert("Error al actualizar en GitHub: " + (errData.message || putRes.statusText));
+                return false;
+            }
+        } catch (e) {
+            console.error("Error al sincronizar con GitHub:", e);
+            alert("Error de conexión al intentar subir a GitHub.");
+            return false;
+        }
+    }
+
+    async function descargarConfigJSON() {
         const configData = {
             portadaDBList: _soloCaminosImagenes(portadaDBList),
             modalidadDBList: _soloCaminosImagenes(modalidadDBList),
@@ -3954,6 +4055,8 @@
             actividadesDB: _soloCaminosImagenes(actividadesDB),
             cfgCalendario, botonesConfig, configVisual, whatsappNumber
         };
+
+        // 1. Descarga local del archivo config.json
         const blob = new Blob([JSON.stringify(configData, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -3961,6 +4064,28 @@
         a.download = 'config.json';
         a.click();
         URL.revokeObjectURL(url);
+
+        // 2. Si el checkbox GitHub está marcado, se sube automáticamente
+        const chkGithub = document.getElementById('chk-github-sync');
+        if (chkGithub && chkGithub.checked) {
+            const btn = document.getElementById('btnDescargarConfig');
+            const textoOriginal = btn ? btn.innerText : '';
+            if (btn) {
+                btn.innerText = '🚀 Subiendo a GitHub...';
+                btn.disabled = true;
+            }
+
+            const subidaExitosa = await subirConfigAGitHub(configData);
+
+            if (btn) {
+                btn.innerText = textoOriginal;
+                btn.disabled = false;
+            }
+
+            if (subidaExitosa) {
+                alert('¡config.json descargado localmente y publicado con éxito en GitHub!');
+            }
+        }
     }
 
     function guardarNumeroWhatsApp() {
