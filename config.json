@@ -307,23 +307,6 @@
       "imagenes": [
         "RitualLunaLlena2.png"
       ]
-    },
-    {
-      "nombre": "luna en el mar",
-      "desc": "",
-      "diareto": "27",
-      "fecha": "",
-      "hora": "",
-      "dias": "Ninguno",
-      "turno": "Ninguno",
-      "orden": 1,
-      "carrousel": 0,
-      "link": "",
-      "observacion": "",
-      "agenda": "Si",
-      "imagenes": [
-        "lunaEnelmar.jpeg"
-      ]
     }
   ],
   "caminatasDBList": [],
