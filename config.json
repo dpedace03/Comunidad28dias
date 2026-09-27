@@ -307,6 +307,23 @@
       "imagenes": [
         "RitualLunaLlena2.png"
       ]
+    },
+    {
+      "nombre": "luna en el mar",
+      "desc": "",
+      "diareto": "27",
+      "fecha": "",
+      "hora": "",
+      "dias": "Ninguno",
+      "turno": "Ninguno",
+      "orden": 1,
+      "carrousel": 0,
+      "link": "",
+      "observacion": "",
+      "agenda": "Si",
+      "imagenes": [
+        "WhatsApp Image 2026-09-26 at 20.03.34.jpeg"
+      ]
     }
   ],
   "caminatasDBList": [],
